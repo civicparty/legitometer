@@ -1,0 +1,69 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dashboard {
+  border-style: solid;
+  border-width: thin;
+  padding:20px;
+
+}
+
+.dashboardButton {
+  float: right;
+}
+
+.dashboardTitle {
+  float: left;
+  padding-left: 20px;
+}
+
+.gameList {
+
+  padding: 50px 50px 0 50px;
+}
+
+.reviewButton {
+
+}
+
+.gameName {
+
+}
+
+.header {
+  display: inline;
+}
+
+.logo {
+  float: left;
+}
+
+.header-name {
+  float: right;
+}
+
+.avatar {
+  float: right;
+}

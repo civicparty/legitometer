@@ -1,0 +1,31 @@
+{
+  "name": "legit-o-meter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.15.2",
+    "knex": "^0.12.8",
+    "pg": "^6.1.4",
+    "re-base": "^2.6.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-google-login-component": "^0.5.2",
+    "react-router": "^4.0.0-beta.8"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.10",
+    "http-server": "^0.9.0",
+    "react-scripts": "0.9.5",
+    "webpack": "^1.13.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}
