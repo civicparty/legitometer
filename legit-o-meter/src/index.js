@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import {
   Route,
@@ -9,7 +9,6 @@ import {
 import './index.css';
 import App from './App';
 import Game from './components/Game';
-import NotFound from './components/NotFound';
 
 const Root = () => {
   return (
