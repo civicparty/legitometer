@@ -10,7 +10,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-google-login-component": "^0.5.2",
-    "react-router": "^4.0.0-beta.8"
+    "react-router": "^4.0.0-beta.8",
+    "react-router-dom": "^4.0.0"
   },
   "devDependencies": {
     "babel-loader": "^6.2.10",

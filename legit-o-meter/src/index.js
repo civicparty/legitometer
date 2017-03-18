@@ -8,7 +8,7 @@ import {
 
 import './index.css';
 import App from './App';
-import Game from './components/Game';
+import NewGame from './components/NewGame';
 
 const Root = () => {
   return (
@@ -16,7 +16,7 @@ const Root = () => {
       <div>
         <Switch>
           <Route exact pattern="/" component={App} />
-          <Route pattern="/game/:teacherId" component={Game} />
+          <Route pattern="/game/new" component={NewGame}/>
         </Switch>
       </div>
     </Router>

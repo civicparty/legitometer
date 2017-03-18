@@ -12,7 +12,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      teacherLoggedIn: false,
+      teacherLoggedIn: true,
       studentLoggedIn: false,
     }
   }
