@@ -6,12 +6,12 @@ import {
   Switch
 } from 'react-router-dom';
 import './index.css';
-import App from './App';
+//import App from './App';
 import NewGame from './components/NewGame';
 import Login from './components/Login'
 import TeacherDashboard from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
-import StudentForm from './components/StudentForm';
+//  import StudentForm from './components/StudentForm';
 import Game from './components/Game';
 
 

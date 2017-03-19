@@ -22,10 +22,13 @@ export const userData = {
 export const collections = [{
   id: 0,
   name: 'Climate Change',
+  createdBy: 'MozFund',
 }, {
   id: 1,
   name: 'Vaccines',
+  createdBy: 'Austin Monitor',
 }, {
   id: 2,
-  name: 'Russia Hacking'
+  name: 'Russia Hacking',
+  createdBy: 'You',
 }]
