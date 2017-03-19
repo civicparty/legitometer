@@ -5,19 +5,21 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom';
-
 import './index.css';
 import App from './App';
 import NewGame from './components/NewGame';
 import Login from './components/Login'
 import TeacherDashboard from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
+import StudentForm from './components/StudentForm';
+import Game from './components/Game';
 
 
 
 class Root extends Component {
   constructor() {
     super();
+    this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
       teacherLoggedIn: true,
       studentLoggedIn: false,
@@ -42,16 +44,21 @@ class Root extends Component {
 
   render(){
     return (
+
       <Router>
         <div>
           <Switch>
-            <Route exact pattern="/" render={this.toggleExperience.bind(this)} />
-            <Route pattern="/game/new" component={NewGame}/>
+            <Route exact path="/" render={this.toggleExperience} />
+            <Route path="/new" component={NewGame} />
+            <Route path="/game/:id" component={Game} />
+
           </Switch>
         </div>
       </Router>
     )
   }
 }
+
+
 
 render(<Root/>, document.querySelector('#root'));

@@ -6,11 +6,11 @@ import { Link, Route, Switch } from 'react-router-dom';
 import { userData, collections } from '../seedData'
 
 const TeacherHome = ({ match }) => {
-  debugger
+  // debugger
   return (
     <div>
       <h1>Teacher Dashboard</h1>
-      <Link to={`${match.url}new`}>New Game</Link>
+      <Link to='new'>New Game</Link>
       <h3 className="dashboardTitle">Your Games</h3>
       <table className="gameList">
         <tbody>
@@ -20,7 +20,7 @@ const TeacherHome = ({ match }) => {
               <GameListItem
                 name={game.name}
                 collection={collections[game.collectionId]}
-                key={game.id}
+                id={game.id}
               />
             )
           })}
