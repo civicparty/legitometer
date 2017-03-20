@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class CollectionItem extends React.Component {
   render() {
@@ -6,7 +7,9 @@ class CollectionItem extends React.Component {
       <tr key={this.props.id}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
-        <td><button>SELECT</button></td>
+        <td><Link to='create'>SELECT</Link></td>
+        <td><button>edit</button></td>
+        <td><button>delete</button></td>
       </tr>
     )
   }
@@ -14,5 +17,6 @@ class CollectionItem extends React.Component {
 
 export default CollectionItem;
 
-// <td>{this.props.collection.name}</td>
-// <td>Created by {this.props.collection.createdBy}</td>
+
+// the name entered in input will need to go to the seeddata/database and then
+// show up in the dashboard games list first with its collection

@@ -10,9 +10,6 @@ class NewGame extends React.Component {
     return (
       <div>
         <Header />
-        <p>Hi I'm a new game</p>
-        <p>you can select a collection</p>
-        <p>and give it a name</p>
         <button>Create Your Own Collection</button>
         <h4>Choose a Collection:</h4>
         <table>

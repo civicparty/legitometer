@@ -1,17 +1,20 @@
 const express = require('express');
-const path = require('path');
+const logger = require('morgan');
 const bodyParser = require('body-parser');
+
+// Set up the express app
 const app = express();
 
-app.use(express.static(path.join('public')));
+// Log requests to the console.
+app.use(logger('dev'));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-});
+// Parse incoming requests data (https://github.com/expressjs/body-parser)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-const port = process.env.PORT || 9000;
+// Setup a default catch-all route that sends back a welcome message in JSON format.
+app.get('*', (req, res) => res.status(200).send({
+  message: 'Welcome to the beginning of nothingness.',
+}));
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}!`);
-});
 module.exports = app;
