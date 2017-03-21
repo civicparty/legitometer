@@ -13,7 +13,6 @@ import TeacherDashboard from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
 //  import StudentForm from './components/StudentForm';
 import Game from './components/Game';
-import CreateGame from './components/CreateGame';
 
 
 
@@ -21,7 +20,6 @@ class Root extends Component {
   constructor() {
     super();
     this.toggleExperience = this.toggleExperience.bind(this);
-    this.addGame = this.addGame.bind(this);
     this.state = {
       teacherLoggedIn: true,
       studentLoggedIn: false,
@@ -44,16 +42,7 @@ class Root extends Component {
       </div>
     );
   }
-  addGame(game) {
-    // update state
-      // make a copy of the state
-    const games = {...this.state.games};
-      //add in game
-    games[`name`] = game;
-    // set state
-    this.setState({ games })
-    console.log(games);
-  }
+
 
   render(){
     return (
@@ -64,7 +53,6 @@ class Root extends Component {
             <Route exact path="/" render={this.toggleExperience} />
             <Route path="/new" component={NewGame} />
             <Route path="/game/:id" component={Game} />
-            <Route path="/create" component={CreateGame} />
           </Switch>
         </div>
       </Router>

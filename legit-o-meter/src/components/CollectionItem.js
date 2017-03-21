@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 class CollectionItem extends React.Component {
   render() {
@@ -7,7 +7,7 @@ class CollectionItem extends React.Component {
       <tr key={this.props.id}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
-        <td><Link to='create'>SELECT</Link></td>
+        <td><button>SELECT</button></td>
         <td><button>edit</button></td>
         <td><button>delete</button></td>
       </tr>

@@ -5,9 +5,29 @@ import Header from './Header';
 import { Link } from 'react-router-dom';
 import { userData, collections } from '../seedData'
 
-const TeacherHome = () => {
+class TeacherHome extends React.Component {
+  constructor() {
+    super();
+    this.addGame = this.addGame.bind(this);
+    this.state = {
+      games: {},
+    }
+  }
+//const TeacherHome = () => {
+  addGame(game) {
+    console.log("addGame function");
+    // update state
+      // make a copy of the state
+    const games = {...this.state.games};
+      //add in game
+    games[`name`] = game;
+    // set state
+    this.setState({ games })
+    console.log(games);
+  }
   // debugger
-  return (
+  render() {
+   return (
     <div>
     <Header/>
       <h1>Teacher Dashboard</h1>
@@ -30,6 +50,7 @@ const TeacherHome = () => {
       </table>
     </div>
   )
+}
 }
 
 // class TeacherDashboard extends React.Component {
