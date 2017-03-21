@@ -4,6 +4,7 @@ class Game extends React.Component {
   render() {
     return (
       <div>
+        <p>{this.props.test}</p>
         <h3>Here you can view each game</h3>
         <p>rendered when the url is /game/:id ... </p>
         <p>so this component needs to take the id and </p>
@@ -11,6 +12,11 @@ class Game extends React.Component {
       </div>
     )
   }
+}
+
+Game.defaultProps = {
+  test: "well, so we'll try this"
+  //so defaultProps could be... linked to routes somehow?
 }
 
 export default Game;

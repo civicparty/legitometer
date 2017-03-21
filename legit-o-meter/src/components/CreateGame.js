@@ -3,12 +3,24 @@ import Header from './Header';
 import { Link } from 'react-router-dom';
 
 class CreateGame extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      collection_id: undefined,
+      user_id: undefined,
+    }
+  }
+
   createNewGame(e) {
     e.preventDefault();
     const game = {
       name: this.name.value,
+      // collection_id: ,
+      // user_id: ,
     }
-    this.props.addGame(game);
+    console.log(game);
+    //  this.props.addGame(game);
   }
   render() {
     return (
