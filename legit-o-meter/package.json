@@ -21,7 +21,7 @@
     "webpack": "^1.13.3"
   },
   "scripts": {
-    "start:dev": "nodemon ./bin/www",
+    "start:dev": "nodemon ./src/server",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -1,7 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-
+const path = require('path');
 // Set up the express app
 const app = express();
 
@@ -12,9 +12,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Setup a default catch-all route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the beginning of nothingness.',
-}));
+app.use(express.static(path.join(__dirname, 'public')));
+
+const users = require('./routes/users');
+const games = require('./routes/games');
+const collections = require('./routes/collections')
+
+app.use(users);
+app.use(games);
+app.use(collections);
+
+const port = process.env.PORT || 8888;
+
+app.listen(port, () => {
+  if (app.get('env') !== 'test') {
+    console.log('Listening on port', port);
+  }
+});
+
 
 module.exports = app;

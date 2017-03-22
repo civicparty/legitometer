@@ -11,7 +11,7 @@ import NewGame from './components/NewGame';
 import Login from './components/Login'
 import TeacherDashboard from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
-//  import StudentForm from './components/StudentForm';
+import StudentForm from './components/StudentForm';
 import Game from './components/Game';
 
 
@@ -22,6 +22,7 @@ class Root extends Component {
     this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
       teacherLoggedIn: true,
+      user_id: 1,
       studentLoggedIn: false,
       games: {},
     }
@@ -53,6 +54,7 @@ class Root extends Component {
             <Route exact path="/" render={this.toggleExperience} />
             <Route path="/new" component={NewGame} />
             <Route path="/game/:id" component={Game} />
+            <Route path="/form" component={StudentForm} />
           </Switch>
         </div>
       </Router>
