@@ -1,5 +1,4 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import Header from './Header';
 import { collections } from '../seedData';
 import CollectionItem from './CollectionItem';
@@ -11,32 +10,43 @@ class NewGame extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.addNewPost = this.addNewPost.bind(this);
+    this.updateCollectionID = this.updateCollectionID.bind(this);
     this.state = {
       name: '',
       collection_id: undefined,
-      user_id: this.props.user_id,
+      user_id: undefined,
       showElement: true,
     }
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    this.addNewPost();
+  updateCollectionID(collection_id) {
+    console.log("update", collection_id);
     this.setState({
-      name: this.name.value,
-      collection_id: 0, // TODO this will come from the collection selection
-      user_id: 0, // TODO this will come from the session
-      showElement: false,
-
+      collection_id: collection_id
+    }, () => {
+      console.log(this.state);
     })
   }
 
-  handleClick(e) {
-    console.log("um, now what?");
-    this.setState( {showElement : true} );
-    // TODO
-    //change <span> to back to <input value="this.state.name">
-    //change button back to SAVE
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      name: this.name.value,
+      // collection_id: undefined, // TODO this will come from the collection selection
+      // user_id: 0, // TODO this will come from the session
+      showElement: false,
+    })
   }
+
+  //sets showElement to true to display editable input box
+  handleClick(e) {
+    this.setState( {showElement : true} );
+  }
+
+  handleFinalSubmit(e) {
+    e.preventDefault();
+    this.addNewPost();
+  }
+
   addNewPost() {
     console.log("addNewPost() function, fetching...?")
     fetch('/api/addgame', {
@@ -52,23 +62,10 @@ class NewGame extends React.Component {
     // - api/addgame/ here
   }
 
-  //     render : function() {
-  //         if(this.state.showMe) {
-  //             return (<div> one div </div>);
-  //         } else {
-  //             return (<a onClick={this.onClick}> press me </a>);
-  //         }
-  //     }
-  // })
   render() {
-    let display = <div><form ref={(input) => this.gameForm = input} onSubmit={(e) => this.handleSubmit(e)}><input ref={(input) => this.name = input} type="text" placeholder="Enter name of new game" defaultValue={this.state.name}></input><br/><button type="submit">Save name</button> </form></div>;
+    let display = <div><form ref={(input) => this.nameForm = input} onSubmit={(e) => this.handleSubmit(e)}><input ref={(input) => this.name = input} type="text" placeholder="Enter name of new game" defaultValue={this.state.name}></input><br/><button type="submit">Save name</button> </form></div>;
 
     let edit = <div><span>{this.state.name}</span><button onClick={this.handleClick}>Edit</button></div>
-
-
-    // TODO --- form/handlesubmit on SELECT button not SAVE NAME???
-        // <form ref={(input) => this.gameForm = input} onSubmit={(e) => this.handleSubmit(e)}></form>
-        // <div>{this.state.showElement ? <InputBox /> : <p>hi</p>}</div>
 
     return (
       <div>
@@ -76,6 +73,7 @@ class NewGame extends React.Component {
         <button>Create Your Own Collection</button>
         <div>{this.state.showElement ? display : edit}</div>
         <h4>Choose a Collection:</h4>
+        <form ref={(input) => this.gameForm = input} onSubmit={(e) => this.handleFinalSubmit(e)}>
         <table>
           <tbody>
             {collections.map((collection) => {
@@ -84,40 +82,20 @@ class NewGame extends React.Component {
                   name={collection.name}
                   createdBy={collection.createdBy}
                   key={collection.id}
+                  id={collection.id}
+                  updateCollectionID={this.updateCollectionID}
                 />
               )
             })}
           </tbody>
         </table>
+        <button type="submit">SAVE NEW GAME</button>
+        </form>
       </div>
     )
   }
 }
-
-//make display component for input box
-const InputBox = () => {
-  return (
-    <div>
-      <p>here we are in the input box</p>
-      <input ref={(input) => this.name = input} type="text" placeholder="Enter name of new game"></input>
-      <br/>
-      <button type="submit">Save name</button>
-    </div>
-  )
-}
-
-//make display component for span with name
-const DisplayNewName = (name) => {
-  return (
-    <div>
-      <span>{name}</span>
-      <button>edit</button>
-    </div>
-  )
-}
-//      <button onClick={this.handleClick}>Edit</button>
-
-// then you can do if ? <comp /> : <comp2 />
+//
 
 export default NewGame;
 
