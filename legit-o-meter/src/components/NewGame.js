@@ -31,7 +31,6 @@ class NewGame extends React.Component {
     e.preventDefault();
     this.setState({
       name: this.name.value,
-      // collection_id: undefined, // TODO this will come from the collection selection
       // user_id: 0, // TODO this will come from the session
       showElement: false,
     })
@@ -49,10 +48,19 @@ class NewGame extends React.Component {
 
   addNewPost() {
     console.log("addNewPost() function, fetching...?")
-    fetch('/api/addgame', {
+    fetch('http://localhost:8888/api/addgame', {
       method: 'POST',
-      headers: new Headers({ 'Content-Type': 'text/plain'}),
+      body: {
+        name: this.state.name,
+        collection_id: this.state.collection_id,
+        user_id: 1
+      },
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'text/plain',
+      }),
       mode: 'cors',
+      cache: 'default',
       redirect: 'follow'
     }).then((res) => {
       console.log("so, this worked. yay?", res, "new name:", this.state.name);

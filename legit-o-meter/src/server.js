@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 // Set up the express app
 const app = express();
 
@@ -11,16 +12,28 @@ app.use(logger('dev'));
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
-const users = require('./routes/users');
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+  next();
+})
+
+//const users = require('./routes/users');
 const games = require('./routes/games');
-const collections = require('./routes/collections')
+//const collections = require('./routes/collections')
+// TODO
+// app.use('/games', gamesRouter);
+//
+// something like that. so in your games router file the route get('/' ...) will actually be at /games/
 
-app.use(users);
+//app.use(users);
 app.use(games);
-app.use(collections);
+//app.use(collections);
 
 const port = process.env.PORT || 8888;
 

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.15.2",
     "knex": "^0.12.8",
     "pg": "^6.1.4",
