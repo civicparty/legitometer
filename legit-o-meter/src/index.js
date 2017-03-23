@@ -14,8 +14,6 @@ import StudentDashboard from './components/StudentDashboard';
 import StudentForm from './components/StudentForm';
 import Game from './components/Game';
 
-
-
 class Root extends Component {
   constructor() {
     super();

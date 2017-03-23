@@ -24,10 +24,11 @@ router.post('/api/addgame', (req, res, next) => {
     user_id: 1,
     //user_id: knex.select('id').from('users').where('id', req.session.user.id),
     name: req.body.name,
-    collection_id: 1,
+    collection_id: req.body.collection_id,
   }, '*')
-  .then(() => {
-    res.redirect('/');
+  .then((data) => {
+    console.log("data from router.post", data);
+    res.sendStatus(200);
   })
   .catch((err) => {
     next(err);

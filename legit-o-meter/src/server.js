@@ -10,8 +10,9 @@ const app = express();
 app.use(logger('dev'));
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
+app.use(bodyParser.urlencoded({ extended: false })); //the internet says this should be true
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cors());
 
 //app.use(express.static(path.join(__dirname, 'public')));

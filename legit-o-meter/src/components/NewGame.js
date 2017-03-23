@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import { collections } from '../seedData';
 import CollectionItem from './CollectionItem';
+import axios from 'axios';
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -47,27 +48,18 @@ class NewGame extends React.Component {
   }
 
   addNewPost() {
-    console.log("addNewPost() function, fetching...?")
-    fetch('http://localhost:8888/api/addgame', {
-      method: 'POST',
-      body: {
-        name: this.state.name,
-        collection_id: this.state.collection_id,
-        user_id: 1
-      },
-      headers: new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'text/plain',
-      }),
-      mode: 'cors',
-      cache: 'default',
-      redirect: 'follow'
-    }).then((res) => {
-      console.log("so, this worked. yay?", res, "new name:", this.state.name);
-    }).catch((err) => {
-      console.error("you suck and here is why: ", err);
+    console.log("addNewPost() function, fetching...?", this.state.name)
+    axios.post('http://localhost:8888/api/addgame', {
+      name: this.state.name,
+      collection_id: this.state.collection_id,
+      user_id: 1
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
     });
-    // - api/addgame/ here
   }
 
   render() {
