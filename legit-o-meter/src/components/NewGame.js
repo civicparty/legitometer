@@ -45,12 +45,13 @@ class NewGame extends React.Component {
 
   handleFinalSubmit(e) {
     e.preventDefault();
+    console.log("thanks for selecting a collection");
     this.addNewPost();
   }
 
   addNewPost() {
     console.log("addNewPost() function, fetching...?", this.state.name)
-    axios.post('http://localhost:8888/games/api/addgame', {
+    axios.post('http://localhost:8888/api/addgame', {
       name: this.state.name,
       collection_id: this.state.collection_id,
       user_id: 1
@@ -63,7 +64,7 @@ class NewGame extends React.Component {
     //
     // })
     .catch((err) => {
-      console.log(err);
+      console.log("you are not going to space today", err);
     });
   }
 

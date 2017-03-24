@@ -19,21 +19,21 @@ componentDidMount() {
     //get user data from database
   axios.get('http://localhost:8888/games/api')
       .then((res) => {
-        console.log("get", res.data);
+        //console.log("get", res.data);
         this.setState({
           games: res.data[0],
           collections: res.data[1]
         })
       })
       .then(() => {
-        console.log("louis is needy", this.state.collections);
+        //console.log("louis is needy", this.state.collections);
         for (let key in this.state.collections) {
-          console.log(this.state.collections[key].name );
+          //console.log(this.state.collections[key].name );
           // can i add this to games??? - can't mutate state directly
           //make a copy...
           const games = {...this.state.games}
           games[key].coll_name = this.state.collections[key].name
-          console.log("games", games[key]);
+          //console.log("games", games[key]);
           this.setState( games );
         }
       })

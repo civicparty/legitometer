@@ -35,7 +35,8 @@ router.get('/games/api', function(req, res, next) {
     })
 });
 
-router.post('games/api/addgame', (req, res, next) => {
+router.post('/api/addgame', (req, res, next) => {
+  console.log("woo, post route, one step closing to actually fucking posting like it was yesterday");
   knex('games').insert({
     user_id: 1,
     //user_id: knex.select('id').from('users').where('id', req.session.user.id),
