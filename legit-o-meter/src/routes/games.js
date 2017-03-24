@@ -17,14 +17,19 @@ router.get('/games/api', function(req, res, next) {
   // res.send('the games route, it has been gotten');
   req.session.user = 1;
 //select collections.name from collections inner join games ON collections.id = games.collection_id;
-  console.log(req.session);
+  let payload = [];
   knex('games')
     .where('user_id', req.session.user)
     .then((mygames) => {
-      knex('games').innerJoin('collections', 'games.collection_id', 'collections.id').where('user_id', req.session.user).select('collections.name').then((collections) => {
+        payload.push(mygames);
+      knex('games')
+      .innerJoin('collections', 'games.collection_id', 'collections.id')
+      .where('user_id', req.session.user).select('collections.name').then((collections) => {
         // here want collections.name where collections.id === games.collection_id
         // and how to send it back
-        res.send(mygames);
+        payload.push(collections);
+        res.send(payload);
+        //res.send(mygames);
         console.log("collections", collections, "games", mygames);
       })
     })

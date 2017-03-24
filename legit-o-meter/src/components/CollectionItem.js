@@ -2,10 +2,10 @@ import React from 'react';
 //import { Link } from 'react-router-dom';
 
 class CollectionItem extends React.Component {
-  constructor(props) {
-    super(props);
-    // this.onClick = this.onClick.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // this.onClick = this.onClick.bind(this);
+  // }
   collectionItemClicked() {
     console.log("clicked!!!", this.props.id);
     this.props.updateCollectionID(this.props.id)

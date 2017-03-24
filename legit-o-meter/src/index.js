@@ -9,7 +9,7 @@ import './index.css';
 //import App from './App';
 import NewGame from './components/NewGame';
 import Login from './components/Login'
-import TeacherDashboard from './components/TeacherDashboard';
+import TeacherHome from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
 import StudentForm from './components/StudentForm';
 import Game from './components/Game';
@@ -31,7 +31,7 @@ class Root extends Component {
     const student = this.state.studentLoggedIn;
     let display = <Login />;
     if (teacher) {
-      display = <TeacherDashboard />;
+      display = <TeacherHome />;
      } else if (student){
       display = <StudentDashboard />;
     }

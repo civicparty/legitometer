@@ -7,7 +7,7 @@ class GameListItem extends React.Component {
     return (
       <tr key={this.props.id}>
         <td><Link to={`/game/${this.props.id}`} className="reviewButton">Review</Link></td>
-        <td><h5 className="gameName">{this.props.name} - collection name here </h5></td>
+        <td><h5 className="gameName">{this.props.name} - {this.props.collection} </h5></td>
         <td><button className="deleteButton">Delete</button></td>
       </tr>
     )
@@ -16,4 +16,4 @@ class GameListItem extends React.Component {
 
 export default GameListItem;
 
-//{this.props.collection.name}
+//{this.props.collection.name}{this.props.collection}

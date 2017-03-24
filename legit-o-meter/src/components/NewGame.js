@@ -3,7 +3,7 @@ import Header from './Header';
 import { collections } from '../seedData';
 import CollectionItem from './CollectionItem';
 import axios from 'axios';
-import TeacherHome from './TeacherDashboard'
+//import TeacherHome from './TeacherDashboard'
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -59,9 +59,9 @@ class NewGame extends React.Component {
       //redirect to TeacherDashboard and display new data at top of list
       console.log("response", res);
     })
-    .then(() => {
-
-    })
+    // .then(() => {
+    //
+    // })
     .catch((err) => {
       console.log(err);
     });
