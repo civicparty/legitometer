@@ -3,29 +3,34 @@ import GameListItem from './GameListItem';
 import Header from './Header';
 // import NewGame from './NewGame';
 import { Link } from 'react-router-dom';
-import { userData, collections } from '../seedData'
+//import { collections } from '../seedData';
+import axios from 'axios';
 
 class TeacherHome extends React.Component {
   constructor() {
     super();
-    this.addGame = this.addGame.bind(this);
     this.state = {
-      games: {},
+      games: [],
     }
   }
-//const TeacherHome = () => {
-  addGame(game) {
-    console.log("addGame function");
-    // update state
-      // make a copy of the state
-    const games = {...this.state.games};
-      //add in game
-    games[`name`] = game;
-    // set state
-    this.setState({ games })
-    console.log(games);
+
+componentDidMount() {
+    //get user data from database
+  axios.get('http://localhost:8888/games/api')
+      .then((res) => {
+        console.log("get", res.data);
+        this.setState({
+          games: res.data,
+        })
+      })
+      .then(() => {
+        console.log("louis is needy", this.state);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
-  // debugger
+
   render() {
    return (
     <div>
@@ -35,12 +40,13 @@ class TeacherHome extends React.Component {
       <h3 className="dashboardTitle">Your Games</h3>
       <table className="gameList">
         <tbody>
-          {userData.user.games.map((game) => {
+
+          {this.state.games.map((game) => {
             // TODO - Change collection to get object by ID not index
             return(
               <GameListItem
                 name={game.name}
-                collection={collections[game.collectionId]}
+                collection={game.collections_id}
                 id={game.id}
                 key={game.id}
               />
@@ -52,26 +58,5 @@ class TeacherHome extends React.Component {
   )
 }
 }
-
-// class TeacherDashboard extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//
-//     }
-//   }
-//
-//   render() {
-//     return (
-//       <div className="dashboard">
-//         <Header />
-//           <Switch>
-//             <Route pattern="/" exact component={TeacherHome}/>
-//             <Route pattern="/game/new" component={NewGame}/>
-//           </Switch>
-//       </div>
-//     )
-//   }
-// }
 
 export default TeacherHome;

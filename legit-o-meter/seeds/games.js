@@ -19,5 +19,7 @@ exports.seed = knex =>
           collection_id: 1,
           user_id: 2,
         },
-          knex.raw('SELECT setval(\'games_id_seq\', (SELECT MAX(id) FROM games))'),
       ]))
+
+// "TypeError: Converting circular structure to JSON" when using:
+// knex.raw('SELECT setval(\'games_id_seq\', (SELECT MAX(id) FROM games))'),

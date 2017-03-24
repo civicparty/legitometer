@@ -1,6 +1,8 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
 // Set up the express app
@@ -12,6 +14,10 @@ app.use(logger('dev'));
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.urlencoded({ extended: false })); //the internet says this should be true
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cookieSession({
+  secret: "squirrel"
+}))
 
 app.use(cors());
 

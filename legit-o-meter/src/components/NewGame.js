@@ -3,6 +3,7 @@ import Header from './Header';
 import { collections } from '../seedData';
 import CollectionItem from './CollectionItem';
 import axios from 'axios';
+import TeacherHome from './TeacherDashboard'
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -49,13 +50,17 @@ class NewGame extends React.Component {
 
   addNewPost() {
     console.log("addNewPost() function, fetching...?", this.state.name)
-    axios.post('http://localhost:8888/api/addgame', {
+    axios.post('http://localhost:8888/games/api/addgame', {
       name: this.state.name,
       collection_id: this.state.collection_id,
       user_id: 1
     })
     .then((res) => {
-      console.log(res);
+      //redirect to TeacherDashboard and display new data at top of list
+      console.log("response", res);
+    })
+    .then(() => {
+
     })
     .catch((err) => {
       console.log(err);

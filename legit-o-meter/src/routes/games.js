@@ -13,13 +13,24 @@ function authorizedUser(req, res, next) {
   }
 }
 
-router.get('/', function(req, res, next) {
-  res.send('the games route, it has been gotten');
+router.get('/games/api', function(req, res, next) {
+  // res.send('the games route, it has been gotten');
+  req.session.user = 1;
+//select collections.name from collections inner join games ON collections.id = games.collection_id;
+  console.log(req.session);
+  knex('games')
+    .where('user_id', req.session.user)
+    .then((mygames) => {
+      knex('games').innerJoin('collections', 'games.collection_id', 'collections.id').where('user_id', req.session.user).select('collections.name').then((collections) => {
+        // here want collections.name where collections.id === games.collection_id
+        // and how to send it back
+        res.send(mygames);
+        console.log("collections", collections, "games", mygames);
+      })
+    })
 });
 
-router.post('/api/addgame', (req, res, next) => {
-  console.log("hiiiiiiiiiiiiiiiiiii");
-  console.log(req.body);
+router.post('games/api/addgame', (req, res, next) => {
   knex('games').insert({
     user_id: 1,
     //user_id: knex.select('id').from('users').where('id', req.session.user.id),
@@ -27,7 +38,6 @@ router.post('/api/addgame', (req, res, next) => {
     collection_id: req.body.collection_id,
   }, '*')
   .then((data) => {
-    console.log("data from router.post", data);
     res.sendStatus(200);
   })
   .catch((err) => {
