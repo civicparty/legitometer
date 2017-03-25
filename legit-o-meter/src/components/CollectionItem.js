@@ -15,6 +15,7 @@ class CollectionItem extends React.Component {
       <tr key={this.props.id}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
+        <td>id {this.props.id}</td>
         <td><button onClick={this.collectionItemClicked.bind(this)}>SELECT </button></td>
         <td><button>edit</button></td>
         <td><button>delete</button></td>

@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
 
 //const users = require('./routes/users');
 const games = require('./routes/games');
-//const collections = require('./routes/collections')
+const collections = require('./routes/collections')
 // TODO
 // app.use('/games', gamesRouter);
 //
@@ -40,7 +40,7 @@ const games = require('./routes/games');
 
 //app.use(users);
 app.use(games);
-//app.use(collections);
+app.use(collections);
 
 const port = process.env.PORT || 8888;
 

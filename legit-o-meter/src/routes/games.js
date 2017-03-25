@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-console.log(__dirname);
+//console.log(__dirname);
 const knex = require('../../db/knex')
 
 

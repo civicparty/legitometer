@@ -13,12 +13,32 @@ class NewGame extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.addNewPost = this.addNewPost.bind(this);
     this.updateCollectionID = this.updateCollectionID.bind(this);
+    //this is games...
     this.state = {
       name: '',
       collection_id: undefined,
       user_id: undefined,
       showElement: true,
+      collections: [],
     }
+  }
+
+  componentDidMount() {
+    console.log("the component, it did mount");
+    axios.get('http://localhost:8888/collections/api')
+      .then((res) => {
+        console.log('this is doing something. response:', res);
+        this.setState({
+          collections: res.data,
+        })
+      })
+      .then(() => {
+        console.log("yay, shit worked, probably", this.state.collections);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
   }
   updateCollectionID(collection_id) {
     console.log("update", collection_id);
@@ -50,19 +70,18 @@ class NewGame extends React.Component {
   }
 
   addNewPost() {
-    console.log("addNewPost() function, fetching...?", this.state.name)
+    console.log("addNewPost() function, fetching...?", this.state.name, this.state.collection_id)
+    // collection id is 0 here... but it is 1 in the seed file...
+
     axios.post('http://localhost:8888/api/addgame', {
       name: this.state.name,
       collection_id: this.state.collection_id,
       user_id: 1
     })
     .then((res) => {
-      //redirect to TeacherDashboard and display new data at top of list
+      // TODO redirect to TeacherDashboard and display new data at top of list
       console.log("response", res);
     })
-    // .then(() => {
-    //
-    // })
     .catch((err) => {
       console.log("you are not going to space today", err);
     });
@@ -82,13 +101,13 @@ class NewGame extends React.Component {
         <form ref={(input) => this.gameForm = input} onSubmit={(e) => this.handleFinalSubmit(e)}>
         <table>
           <tbody>
-            {collections.map((collection) => {
+            {this.state.collections.map((collection) => {
               return(
                 <CollectionItem
                   name={collection.name}
                   createdBy={collection.createdBy}
-                  key={collection.id}
                   id={collection.id}
+                  key={collection.id}
                   updateCollectionID={this.updateCollectionID}
                 />
               )

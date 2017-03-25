@@ -12,4 +12,6 @@ exports.seed = knex => knex('collections').del()
           name: 'Russia Hacking',
         createdBy: 'You',
         }
-      ]))
+      ]),
+knex.raw('SELECT setval(\'collections_id_seq\', (SELECT MAX(id) FROM collections))')
+);
