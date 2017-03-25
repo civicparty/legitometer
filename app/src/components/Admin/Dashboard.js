@@ -1,10 +1,9 @@
 import React from 'react';
 import GameListItem from './GameListItem';
-import Header from './Header';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class TeacherHome extends React.Component {
+class AdminDashboard extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -39,7 +38,6 @@ class TeacherHome extends React.Component {
   render() {
     return (
       <div>
-        <Header/>
         <h1>Teacher Dashboard</h1>
         <Link to='new'>New Game</Link>
         <h3 className="dashboardTitle">Your Games</h3>
@@ -62,4 +60,4 @@ class TeacherHome extends React.Component {
   }
 }
 
-export default TeacherHome;
+export default AdminDashboard;
