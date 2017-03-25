@@ -4,7 +4,11 @@ Legit-o-Meter is an interactive digital learning tool for students and teachers 
 
 ## Roadmap
 
-TODO
+**Current Status:** Our team is activiely developing a working prototype led by @rallyjinx and supported by @mateoclarke.
+
+**Milestones:**
+
+- March 28, 2017: Galvanize Capstone Presentation
 
 ## Contributing
 
@@ -12,4 +16,32 @@ TODO
 
 ## Tech Stack
 
-TBD
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). It uses the Express.js with knex providing a query building for a Postgres datastore.
+
+To get setup:
+
+1. Download Node
+   - `npm install`
+
+
+2. Download Postgres
+   - We used the Postgress Mac app. Once you open it for the first time, initalize it.
+   - You will probably need to add this to your bash or zsh config
+   - `export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin`
+
+
+3. Create a database
+   - Install knex.js
+   - `npm install knex -g`
+   - Create the database
+   - `createdb legit-o-meterdb`
+   - Migrate and Seed the database
+   - `knex migrate:latest`
+   - `knex seed:run `
+4. Run both the front end React server and the backend Node server
+
+- React
+  - `npm start`
+- Node
+  - `npm run start:dev`
+

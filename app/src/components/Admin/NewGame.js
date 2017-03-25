@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from './Header';
-//import { collections } from '../seedData';
 import CollectionItem from './CollectionItem';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -91,7 +89,6 @@ class NewGame extends React.Component {
 
     return (
       <div>
-        <Header />
         <button>Create Your Own Collection</button>
         <div>{this.state.showElement ? display : edit}</div>
         <h4>Choose a Collection:</h4>

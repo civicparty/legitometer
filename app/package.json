@@ -16,11 +16,18 @@
     "react-dom": "^15.4.2",
     "react-google-login-component": "^0.5.2",
     "react-router": "^4.0.0-beta.8",
-    "react-router-dom": "^4.0.0"
+    "react-router-dom": "^4.0.0",
+    "semantic-ui-react": "^0.67.2"
   },
   "devDependencies": {
+    "axios": "^0.15.3",
     "babel-loader": "^6.2.10",
+    "body-parser": "^1.17.1",
     "http-server": "^0.9.0",
+    "knex": "^0.12.9",
+    "morgan": "^1.8.1",
+    "node-sass": "^4.5.1",
+    "nodemon": "^1.11.0",
     "react-router-dom": "^4.0.0",
     "react-scripts": "0.9.5",
     "webpack": "^1.13.3"
@@ -28,6 +35,8 @@
   "scripts": {
     "start:dev": "nodemon ./src/server",
     "start": "react-scripts start",
+    "build-css": "node-sass src/ -o src/",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -44,18 +44,6 @@
   padding: 50px 50px 0 50px;
 }
 
-.reviewButton {
-
-}
-
-.gameName {
-
-}
-
-.header {
-  display: inline;
-}
-
 .logo {
   float: left;
 }
@@ -67,3 +55,5 @@
 .avatar {
   float: right;
 }
+
+@import "./components/Shared/header";

@@ -1,10 +1,10 @@
 import React from 'react';
 import GameListItem from './GameListItem';
-import Header from './Header';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Header } from 'semantic-ui-react';
 
-class TeacherHome extends React.Component {
+class AdminDashboard extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -39,8 +39,8 @@ class TeacherHome extends React.Component {
   render() {
     return (
       <div>
-        <Header/>
-        <h1>Teacher Dashboard</h1>
+        <Header as="h1">Teacher Dashboard</Header>
+        <h1></h1>
         <Link to='new'>New Game</Link>
         <h3 className="dashboardTitle">Your Games</h3>
         <table className="gameList">
@@ -62,4 +62,4 @@ class TeacherHome extends React.Component {
   }
 }
 
-export default TeacherHome;
+export default AdminDashboard;
