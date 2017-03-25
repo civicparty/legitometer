@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from './Header';
-import { collections } from '../seedData';
+//import { collections } from '../seedData';
 import CollectionItem from './CollectionItem';
 import axios from 'axios';
-//import TeacherHome from './TeacherDashboard'
+import { Link } from 'react-router-dom';
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -13,7 +13,6 @@ class NewGame extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.addNewPost = this.addNewPost.bind(this);
     this.updateCollectionID = this.updateCollectionID.bind(this);
-    //this is games...
     this.state = {
       name: '',
       collection_id: undefined,
@@ -24,16 +23,14 @@ class NewGame extends React.Component {
   }
 
   componentDidMount() {
-    console.log("the component, it did mount");
     axios.get('http://localhost:8888/collections/api')
       .then((res) => {
-        console.log('this is doing something. response:', res);
         this.setState({
           collections: res.data,
         })
       })
       .then(() => {
-        console.log("yay, shit worked, probably", this.state.collections);
+        console.log("but really what should go here?");
       })
       .catch((err) => {
         console.log(err);
@@ -65,8 +62,8 @@ class NewGame extends React.Component {
 
   handleFinalSubmit(e) {
     e.preventDefault();
-    console.log("thanks for selecting a collection");
     this.addNewPost();
+    //redirect to dashboard...how?
   }
 
   addNewPost() {
@@ -114,34 +111,11 @@ class NewGame extends React.Component {
             })}
           </tbody>
         </table>
-        <button type="submit">SAVE NEW GAME</button>
+        <Link to='/'>SAVE NEW GAME</Link>
         </form>
       </div>
     )
   }
 }
-//
 
 export default NewGame;
-
-
-
-// <CollectionItem
-//   name={collection.name}
-//   createdBy={collection.createdBy}
-//   key={collection.id}
-// />
-
-// return (
-//   <span>{this.state.name}</span>
-// )
-
-// const game = {
-
-//   name: this.name.value,
-//   // collection_id: ,
-//   // user_id: ,
-// }
-// this.setState(game);
-// console.log(this.state);
-//this.props.addGame(game);

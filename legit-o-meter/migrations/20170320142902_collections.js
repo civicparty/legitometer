@@ -4,7 +4,7 @@ exports.up = knex =>
     table.increments();
     table.string('name');
     table.string('createdBy');
-    table.timestamps('created_at')
+    table.timestamps(true, true);
   })
 
 exports.down = knex => knex.schema.dropTable('collections');

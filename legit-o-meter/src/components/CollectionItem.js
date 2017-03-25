@@ -2,12 +2,7 @@ import React from 'react';
 //import { Link } from 'react-router-dom';
 
 class CollectionItem extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.onClick = this.onClick.bind(this);
-  // }
   collectionItemClicked() {
-    console.log("clicked!!!", this.props.id);
     this.props.updateCollectionID(this.props.id)
   }
   render() {
@@ -15,7 +10,6 @@ class CollectionItem extends React.Component {
       <tr key={this.props.id}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
-        <td>id {this.props.id}</td>
         <td><button onClick={this.collectionItemClicked.bind(this)}>SELECT </button></td>
         <td><button>edit</button></td>
         <td><button>delete</button></td>

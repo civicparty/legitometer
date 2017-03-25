@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from './Header';
 
 class Game extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <p>{this.props.test}</p>
         <h3>Here you can view each game</h3>
         <p>rendered when the url is /game/:id ... </p>

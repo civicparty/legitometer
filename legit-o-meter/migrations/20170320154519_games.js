@@ -5,7 +5,7 @@ knex.schema.createTable('games', (table) => {
   table.string('name');
   table.integer('collection_id').references('collections.id').onDelete('CASCADE');
   table.integer('user_id').references('users.id').onDelete('CASCADE');
-  table.timestamps('created at');
+  table.timestamps(true, true);
 
 })
 

@@ -1,9 +1,7 @@
 import React from 'react';
 import GameListItem from './GameListItem';
 import Header from './Header';
-// import NewGame from './NewGame';
 import { Link } from 'react-router-dom';
-//import { collections } from '../seedData';
 import axios from 'axios';
 
 class TeacherHome extends React.Component {
@@ -15,25 +13,21 @@ class TeacherHome extends React.Component {
     }
   }
 
-componentDidMount() {
-    //get user data from database
-  axios.get('http://localhost:8888/games/api')
+  componentDidMount() {
+    axios.get('http://localhost:8888/games/api')
       .then((res) => {
-        //console.log("get", res.data);
         this.setState({
           games: res.data[0],
           collections: res.data[1]
         })
       })
       .then(() => {
-        //console.log("louis is needy", this.state.collections);
         for (let key in this.state.collections) {
-          //console.log(this.state.collections[key].name );
-          // can i add this to games??? - can't mutate state directly
-          //make a copy...
+          // make a copy of games
           const games = {...this.state.games}
+          // add collection name to game object
           games[key].coll_name = this.state.collections[key].name
-          //console.log("games", games[key]);
+          // set state of games
           this.setState( games );
         }
       })
@@ -43,30 +37,29 @@ componentDidMount() {
   }
 
   render() {
-   return (
-    <div>
-    <Header/>
-      <h1>Teacher Dashboard</h1>
-      <Link to='new'>New Game</Link>
-      <h3 className="dashboardTitle">Your Games</h3>
-      <table className="gameList">
-        <tbody>
-          {this.state.games.map((game) => {
-            // TODO - Change collection to get object by ID not index
-            return(
-              <GameListItem
-                name={game.name}
-                collection={game.coll_name}
-                id={game.id}
-                key={game.id}
-              />
-            )
-          })}
-        </tbody>
-      </table>
-    </div>
-  )
-}
+    return (
+      <div>
+        <Header/>
+        <h1>Teacher Dashboard</h1>
+        <Link to='new'>New Game</Link>
+        <h3 className="dashboardTitle">Your Games</h3>
+        <table className="gameList">
+          <tbody>
+            {this.state.games.map((game) => {
+              return(
+                <GameListItem
+                  name={game.name}
+                  collection={game.coll_name}
+                  id={game.id}
+                  key={game.id}
+                />
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
 
 export default TeacherHome;
