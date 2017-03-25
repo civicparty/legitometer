@@ -36,7 +36,7 @@ class Root extends Component {
       display = <StudentDashboard />;
     }
     return (
-      <div className="App">
+      <div className="App ui text container">
         {display}
       </div>
     );
@@ -45,7 +45,6 @@ class Root extends Component {
 
   render(){
     return (
-
       <Router>
         <div>
           <Header />

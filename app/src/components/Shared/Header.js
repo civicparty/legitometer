@@ -10,7 +10,7 @@ class Header extends Component {
     const { activeItem } = this.state
 
     return (
-      <header>
+      <header className="header">
         <Menu pointing secondary>
           <Menu.Item name='legit-o-meter' active={activeItem === 'legit-o-meter'} onClick={this.handleItemClick} />
           <Menu.Menu position='right'>

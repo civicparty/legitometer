@@ -44,10 +44,6 @@
   padding: 50px 50px 0 50px;
 }
 
-.header {
-  display: inline;
-}
-
 .logo {
   float: left;
 }
@@ -59,3 +55,5 @@
 .avatar {
   float: right;
 }
+
+@import "./components/Shared/header";

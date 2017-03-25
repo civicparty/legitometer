@@ -2,6 +2,7 @@ import React from 'react';
 import GameListItem from './GameListItem';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Header } from 'semantic-ui-react';
 
 class AdminDashboard extends React.Component {
   constructor() {
@@ -38,7 +39,8 @@ class AdminDashboard extends React.Component {
   render() {
     return (
       <div>
-        <h1>Teacher Dashboard</h1>
+        <Header as="h1">Teacher Dashboard</Header>
+        <h1></h1>
         <Link to='new'>New Game</Link>
         <h3 className="dashboardTitle">Your Games</h3>
         <table className="gameList">
