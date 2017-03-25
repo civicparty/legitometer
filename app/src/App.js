@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './components/Login'
-import StudentForm from './components/StudentForm';
-//import Header from './components/Header';
-import TeacherDashboard from './components/TeacherDashboard';
-import StudentDashboard from './components/StudentDashboard';
-// import Game from './components/Game'
+import Login from './components/Shared/Login'
+import StudentForm from './components/Reviewer/StudentForm';
+import TeacherDashboard from './components/Admin/Dashboard';
+import StudentDashboard from './components/Reviewer/Dashboard';
 import base from './base';
 
 class App extends Component {
