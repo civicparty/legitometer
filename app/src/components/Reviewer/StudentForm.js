@@ -1,10 +1,11 @@
 import React from 'react';
+import ArticleLink from './ArticleLink';
 
 class StudentForm extends React.Component {
   render() {
     return (
       <div>
-        <h3>Read this article: ARTICLE LINK FROM GAME COMPONENT</h3>
+        <h3>Read this article: </h3><ArticleLink />
         <h6>Reflect on the credibility of this article:</h6>
         <form>
           <input type="text" placeholder="Name of Publisher" />
@@ -40,7 +41,7 @@ class StudentForm extends React.Component {
           <h2>STARS HERE</h2>
           <label htmlFor="">How accurately do you think the headline reflects the story?</label>
           <h2>STARS HERE</h2>
-
+          <button>Submit Your Reflection and Rating</button>
         </form>
       </div>
     )

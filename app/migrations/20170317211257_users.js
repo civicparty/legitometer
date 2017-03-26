@@ -4,6 +4,7 @@ exports.up = knex =>
     table.increments();
     table.string('displayName');
     table.string('userName');
+    table.boolean('isAdmin');
     table.timestamp(true, true);
   })
 
