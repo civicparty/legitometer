@@ -17,7 +17,9 @@ class ArticleLink extends React.Component {
     axios.get('http://localhost:8888/articles/api')
       .then((res) => {
         console.log("gotten!", res.data);
-        this.setState({ articles: res.data });
+        this.setState({ articles: res.data }, function chooseArticle() {
+
+        });
       })
       .then(() => {
         console.log("then...", this.state);
@@ -35,20 +37,21 @@ class ArticleLink extends React.Component {
     let x = 0;
     let y = this.state.articles.length-1;
     let randomNum = Math.floor(Math.random() * ((y-x)+1) + x);
-    this.setState({ link:this.state.articles[randomNum].url });
-    console.log(randomNum, this.state, this.state.articles[randomNum].url);
+    this.setState({ link:this.state.articles[randomNum].article.url });
+    console.log(randomNum, this.state, this.state.articles[randomNum].article.url);
     return randomNum;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("wtf", this.state.link, nextState.link);
-    return (this.state.link !== nextState.link)
-  }
+  componentWillUpdate(nextProps, nextState) {
+        //you'll see the changing state value in here
+        console.log('Your prev state: ' + this.state.link);
+        console.log('Your next state: ' + nextState.link);
+    }
 
   render() {
 
     return (
-        <h4>{this.link}</h4>
+        <h5><a href={this.state.link}>{this.state.link}</a></h5>
     )
   }
 }
