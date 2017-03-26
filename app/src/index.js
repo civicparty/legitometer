@@ -13,6 +13,7 @@ import StudentDashboard from './components/Reviewer/Dashboard';
 import StudentForm from './components/Reviewer/StudentForm';
 import Game from './components/Admin/Game';
 import Header from './components/Shared/Header';
+import CreateCollection from './components/Admin/CreateCollection';
 
 class Root extends Component {
   constructor() {
@@ -53,6 +54,7 @@ class Root extends Component {
             <Route path="/new" component={NewGame} />
             <Route path="/game/:id" component={Game} />
             <Route path="/form" component={StudentForm} />
+            <Route path="/collection/new" component={CreateCollection} />
           </Switch>
         </div>
       </Router>

@@ -1,5 +1,6 @@
 
-exports.seed = knex => knex('collections').del()
+exports.seed = knex =>
+  knex('collections').del()
     .then(() =>
      knex('collections').insert([
         {id: 1,
