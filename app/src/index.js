@@ -20,9 +20,9 @@ class Root extends Component {
     super();
     this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
-      teacherLoggedIn: true,
+      teacherLoggedIn: false,
       user_id: 1,
-      studentLoggedIn: false,
+      studentLoggedIn: true,
       games: {},
     }
   }
@@ -30,6 +30,7 @@ class Root extends Component {
   toggleExperience() {
     const teacher = this.state.teacherLoggedIn;
     const student = this.state.studentLoggedIn;
+    // TODO change to get isAdmin from user database
     let display = <Login />;
     if (teacher) {
       display = <TeacherDashboard />;
@@ -56,6 +57,8 @@ class Root extends Component {
                 <Route path="/game/:id" component={Game} />
                 <Route path="/form" component={StudentForm} />
                 <Route path="/collection/new" component={CreateCollection} />
+                <Route path="/collection/new" component={CreateCollection} />
+                <Route path="/mstestteacher/1" component={StudentForm} />
             </Switch>
           </div>
         </div>
@@ -63,7 +66,5 @@ class Root extends Component {
     )
   }
 }
-
-
 
 render(<Root/>, document.querySelector('#root'));

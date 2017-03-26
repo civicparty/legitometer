@@ -1,18 +1,20 @@
 import React from 'react';
 
 class FormInput extends React.Component {
-  constructor(props) {
-    super(props);
-
+//const FormInput = () => {
+  handleChange() {
+    //pass props
+    console.log("formInput handleChange()");
   }
   render() {
-      return (
-    <div>
-      <input type="text" placeholder="Article Name" ref={(input) => this.articleName = input}/>
-      <input type="text" placeholder="Article URL" ref={(input) => this.articleURL = input}/>
-    </div>
-  )
+    return (
+      <div>
+        <input type="text" placeholder="Article Name" onChange={this.handleInput} />
+        <input type="text" placeholder="Article URL" onChange={this.handleInput}/>
+      </div>
+    )
+  }
 }
-}
+
 
 export default FormInput;

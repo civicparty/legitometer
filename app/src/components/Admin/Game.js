@@ -16,7 +16,7 @@ class Game extends React.Component {
 
 Game.defaultProps = {
   test: "well, so we'll try this"
-  //so defaultProps could be... linked to routes somehow?
+  //so defaultProps could be... from database?
 }
 
 export default Game;

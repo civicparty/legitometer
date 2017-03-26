@@ -5,6 +5,7 @@ exports.up = knex =>
     table.string('name');
     table.integer('collection_id').references('collections.id').onDelete('CASCADE');
     table.integer('user_id').references('users.id').onDelete('CASCADE');
+    table.string('url');
     table.timestamps(true, true);
   })
 

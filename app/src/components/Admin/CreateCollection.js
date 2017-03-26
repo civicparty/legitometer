@@ -13,27 +13,34 @@ class CreateCollection extends React.Component {
       inputs: [],
     }
   }
+  handleInput() {
+    console.log("handling input");
+  }
 
   addInput(event) {
     event.preventDefault();
     const inputList = this.state.inputs;
     this.setState({
-      inputList: inputList.push(<FormInput key={inputList.length} />)
+      inputList: inputList.push(<FormInput key={inputList.length} handleInput={this.handleInput}/>)
     });
   }
 
+  handleChange() {
+    console.log("making changes");
+    this.setState({collectionName: this.collectionName.value})
+  }
 
   handleSubmit(e) {
     //e.preventDefault();
     console.log("submitted!", this.collectionName.value);
   }
-//ref={(input) => this.collectionForm = input}
+
   render() {
     return(
       <div>
         <form onSubmit={(e) => this.handleSubmit()}>
-          <input ref={(input) => this.collectionName = input} type="text" placeholder="Collection Name" value={this.collectionName} /><br/><br/>
-          <FormInput />
+          <input type="text" placeholder="Collection Name" value={this.collectionName} onChange={this.handleChange}/><br/><br/>
+          <FormInput handleInput={this.handleInput}/>
           {this.state.inputs}
           <button onClick={this.addInput}>Add Article</button><br/><br/>
           <button type="submit">Save Collection</button>
