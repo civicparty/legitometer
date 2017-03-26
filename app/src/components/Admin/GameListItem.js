@@ -15,7 +15,7 @@ class GameListItem extends React.Component {
           <Link to={`/game/${this.props.id}`} className="ui button blue">
             Review
           </Link>
-          <Button floated right basic color="red">
+          <Button basic color="red">
             Delete
           </Button>
         </td>

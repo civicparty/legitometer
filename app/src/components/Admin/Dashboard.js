@@ -1,8 +1,8 @@
 import React from 'react';
-import GameListItem from './GameListItem';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Header, Table, Icon, Button } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
+import GameListItem from './GameListItem';
 
 class AdminDashboard extends React.Component {
   constructor() {
@@ -53,7 +53,7 @@ class AdminDashboard extends React.Component {
           </Table.Header>
             <Table.Body>
               {this.state.games.map((game) => {
-                return(
+                return (
                   <GameListItem
                     name={game.name}
                     collection={game.coll_name}
