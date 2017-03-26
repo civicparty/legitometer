@@ -20,8 +20,8 @@ router.get('/games/api', function(req, res, next) {
   let payload = [];
   knex('games')
     .where('user_id', req.session.user)
-    .then((mygames) => {
-        payload.push(mygames);
+    .then((games) => {
+        payload.push(games);
       knex('games')
       .innerJoin('collections', 'games.collection_id', 'collections.id')
       .where('user_id', req.session.user).select('collections.name').then((collections) => {

@@ -1,35 +1,17 @@
 import React from 'react';
-import Header from '../Shared/Header'
-import axios from 'axios'
+//import Header from '../Shared/Header'
+
 
 class StudentDashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: [],
-    }
-  }
 
-  componentDidMount() {
-    axios.get('http://localhost:8888/articles/api')
-      .then((res) => {
-        this.setState({ articles: res.data })
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
   render() {
     return (
       <div>
-        <Header as="h1">Student Dashboard</Header>
         <h1></h1>
-        <h6>Directions or something</h6>
-        <table>
-          <tbody>
+        <h2>Assignments</h2>
+        <h4><a href="http://localhost:3000/mstestteacher/1">Game 1</a></h4>
+        <h4><a href="http://localhost:3000/mstestteacher/2">Game 2</a></h4>
 
-          </tbody>
-        </table>
       </div>
     )
   }

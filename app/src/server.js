@@ -30,17 +30,17 @@ app.use(function(req, res, next) {
   next();
 })
 
-//const users = require('./routes/users');
 const games = require('./routes/games');
-const collections = require('./routes/collections')
+const collections = require('./routes/collections');
+const articles = require('./routes/articles');
+
 // TODO
 // app.use('/games', gamesRouter);
-//
 // something like that. so in your games router file the route get('/' ...) will actually be at /games/
 
-//app.use(users);
 app.use(games);
 app.use(collections);
+app.use(articles);
 
 const port = process.env.PORT || 8888;
 
