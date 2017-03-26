@@ -1,7 +1,9 @@
 import React from 'react';
-import CollectionItem from './CollectionItem';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Header, Input, Label, Form, Table } from 'semantic-ui-react';
+import CollectionItem from './CollectionItem';
+
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -78,14 +80,36 @@ class NewGame extends React.Component {
   }
 
   render() {
-    let display = <div><form ref={(input) => this.nameForm = input} onSubmit={(e) => this.handleSubmit(e)}><input ref={(input) => this.name = input} type="text" placeholder="Enter name of new game" defaultValue={this.state.name}></input><br/><button type="submit">Save name</button> </form></div>;
+    let display = (
+      <div>
+        <form ref={(input) => this.nameForm = input}
+          onSubmit={(e) => this.handleSubmit(e)}
+          className="ui form"
+        >
+          <label htmlFor="gameTitle">Game Title</label>
+          <input ref={(input) => this.name = input}
+            type="text" placeholder="Enter name of new game"
+            defaultValue={this.state.name}>
+          </input>
 
-    let edit = <div><span>{this.state.name}</span><button onClick={this.handleClick}>Edit</button></div>
+          <button className="ui button" type="submit">Save name</button>
+        </form>
+      </div>
+    );
+
+    let edit = (
+      <div>
+        <span>{this.state.name}</span>
+        <button onClick={this.handleClick}>Edit</button>
+      </div>
+    );
 
     return (
       <div>
-        <Link to='collection/new'>Create Your Own Collection</Link>
+        <Header as="h1">New Game</Header>
         <div>{this.state.showElement ? display : edit}</div>
+
+        <Link to='collection/new'>New Collection</Link>
         <h4>Choose a Collection:</h4>
         <form ref={(input) => this.gameForm = input} onSubmit={(e) => this.handleFinalSubmit(e)}>
         <table>
