@@ -37,7 +37,7 @@ class Root extends Component {
       display = <StudentDashboard />;
     }
     return (
-      <div className="App ui text container">
+      <div>
         {display}
       </div>
     );
@@ -49,13 +49,15 @@ class Root extends Component {
       <Router>
         <div>
           <Header />
-          <Switch>
-            <Route exact path="/" render={this.toggleExperience} />
-            <Route path="/new" component={NewGame} />
-            <Route path="/game/:id" component={Game} />
-            <Route path="/form" component={StudentForm} />
-            <Route path="/collection/new" component={CreateCollection} />
-          </Switch>
+          <div className="App ui text container">
+            <Switch>
+                <Route exact path="/" render={this.toggleExperience} />
+                <Route path="/new" component={NewGame} />
+                <Route path="/game/:id" component={Game} />
+                <Route path="/form" component={StudentForm} />
+                <Route path="/collection/new" component={CreateCollection} />
+            </Switch>
+          </div>
         </div>
       </Router>
     )
