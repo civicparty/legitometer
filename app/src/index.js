@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom';
-import './index.css';
+import './scss/index.css';
 import NewGame from './components/Admin/NewGame';
 import Login from './components/Shared/Login'
 import TeacherDashboard from './components/Admin/Dashboard';
@@ -20,9 +20,9 @@ class Root extends Component {
     super();
     this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
-      teacherLoggedIn: false,
+      teacherLoggedIn: true,
       user_id: 1,
-      studentLoggedIn: true,
+      studentLoggedIn: false,
       games: {},
     }
   }
@@ -38,7 +38,7 @@ class Root extends Component {
       display = <StudentDashboard />;
     }
     return (
-      <div className="App ui text container">
+      <div>
         {display}
       </div>
     );
@@ -50,14 +50,17 @@ class Root extends Component {
       <Router>
         <div>
           <Header />
-          <Switch>
-            <Route exact path="/" render={this.toggleExperience} />
-            <Route path="/new" component={NewGame} />
-            <Route path="/game/:id" component={Game} />
-            <Route path="/form" component={StudentForm} />
-            <Route path="/collection/new" component={CreateCollection} />
-            <Route path="/mstestteacher/1" component={StudentForm} />
-          </Switch>
+          <div className="App ui text container">
+            <Switch>
+                <Route exact path="/" render={this.toggleExperience} />
+                <Route path="/new" component={NewGame} />
+                <Route path="/game/:id" component={Game} />
+                <Route path="/form" component={StudentForm} />
+                <Route path="/collection/new" component={CreateCollection} />
+                <Route path="/collection/new" component={CreateCollection} />
+                <Route path="/mstestteacher/1" component={StudentForm} />
+            </Switch>
+          </div>
         </div>
       </Router>
     )

@@ -1,5 +1,6 @@
 import React from 'react';
 import FormInput from './FormInput';
+import { Header, Icon } from 'semantic-ui-react';
 
 class CreateCollection extends React.Component {
   constructor(props) {
@@ -38,12 +39,26 @@ class CreateCollection extends React.Component {
   render() {
     return(
       <div>
-        <form onSubmit={(e) => this.handleSubmit()}>
-          <input type="text" placeholder="Collection Name" value={this.collectionName} onChange={this.handleChange}/><br/><br/>
-          <FormInput handleInput={this.handleInput}/>
-          {this.state.inputs}
-          <button onClick={this.addInput}>Add Article</button><br/><br/>
-          <button type="submit">Save Collection</button>
+        <form onSubmit={(e) => this.handleSubmit()} className="ui form section">
+
+          <div className="section">
+            <Header as="h1">New Collection</Header>
+            <label htmlFor="collectionName">Collection Title</label>
+            <input type="text" name="collectionName" placeholder="Collection Title" value={this.collectionName} onChange={this.handleChange}/>
+          </div>
+
+          <div className="section">
+            <Header as="h2">Add Articles</Header>
+            <FormInput handleInput={this.handleInput}/>
+            {this.state.inputs}
+            <button onClick={this.addInput} className="ui button primary tiny">
+              <Icon name="plus"/> Add Another Article
+            </button>
+          </div>
+
+          <button type="submit" className="ui button positive huge">
+            Save Collection
+          </button>
         </form>
       </div>
     )

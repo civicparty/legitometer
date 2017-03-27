@@ -1,8 +1,8 @@
 import React from 'react';
-import GameListItem from './GameListItem';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Header } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
+import GameListItem from './GameListItem';
 
 class AdminDashboard extends React.Component {
   constructor() {
@@ -39,14 +39,23 @@ class AdminDashboard extends React.Component {
   render() {
     return (
       <div>
-        <Header as="h1">Teacher Dashboard</Header>
-        <h1></h1>
-        <Link to='new'>New Game</Link>
-        <h3 className="dashboardTitle">Your Games</h3>
-        <table className="gameList">
-          <tbody>
+        <Header as="h1" className="floated left">
+          Teacher Dashboard
+        </Header>
+
+        <Link to="new" className="ui button positive right floated">
+          New Game
+        </Link>
+
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell colSpan='3'>Your Games</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {this.state.games.map((game) => {
-              return(
+              return (
                 <GameListItem
                   name={game.name}
                   collection={game.coll_name}
@@ -55,8 +64,8 @@ class AdminDashboard extends React.Component {
                 />
               )
             })}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table>
       </div>
     )
   }
