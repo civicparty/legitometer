@@ -1,18 +1,36 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
 
 class CollectionItem extends React.Component {
-  collectionItemClicked() {
-    this.props.updateCollectionID(this.props.id)
+  constructor(props) {
+    super(props);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
-  render() {
+
+  handleUpdate (e) {
+    e.preventDefault();
+    this.props.updateCollection(this.props.id);
+  }
+
+  render () {
+    const { activeCollectionId, id } = this.props;
+    const isActive = activeCollectionId === id;
+    const rowColorClasses = isActive ? 'blue inverted ui table' : '';
+    const baseButtonClasses = 'ui button CollectionItem__centered-button';
+    const buttonClasses = isActive ? 'inverted white ' + baseButtonClasses : baseButtonClasses;
+    const buttonText = isActive ? 'Selected' : 'Choose';
+
     return (
-      <tr key={this.props.id}>
+      <tr key={this.props.id} className={rowColorClasses}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
-        <td><button onClick={this.collectionItemClicked.bind(this)}>SELECT </button></td>
-        <td><button>edit</button></td>
-        <td><button>delete</button></td>
+        <td>
+          <button
+            onClick={(e) => this.handleUpdate(e)}
+            className={buttonClasses}
+          >
+            {buttonText}
+          </button>
+        </td>
       </tr>
     )
   }

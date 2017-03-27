@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -39,11 +35,6 @@
   padding-left: 20px;
 }
 
-.gameList {
-
-  padding: 50px 50px 0 50px;
-}
-
 .logo {
   float: left;
 }
@@ -56,4 +47,12 @@
   float: right;
 }
 
-@import "./components/Shared/header";
+.strong {
+  font-weight: bold;
+}
+
+@import "./flexbox";
+@import "./utility";
+@import "../components/Admin/NewGame";
+@import "../components/Admin/CollectionItem";
+@import "../components/Shared/header";
