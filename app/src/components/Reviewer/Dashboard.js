@@ -1,5 +1,6 @@
 import React from 'react';
-//import Header from '../Shared/Header'
+import { Header, Table } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 
 class StudentDashboard extends React.Component {
@@ -7,10 +8,31 @@ class StudentDashboard extends React.Component {
   render() {
     return (
       <div>
-        <h1></h1>
-        <h2>Assignments</h2>
-        <h4><a href="http://localhost:3000/mstestteacher/1">Game 1</a></h4>
-        <h4><a href="http://localhost:3000/mstestteacher/2">Game 2</a></h4>
+        <Header as="h1" className="center">
+          Student Dashboard
+        </Header>
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell colSpan='3' textAlign='center'>Assignments</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>Ms. TestTeacher</Table.Cell>
+              <Table.Cell>Game 1</Table.Cell>
+              <Table.Cell><Link to="/mstestteacher/1" className="ui button blue">Start Game</Link></Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>Mr. TeacherTest</Table.Cell>
+              <Table.Cell>Game 2</Table.Cell>
+              <Table.Cell><Link to="/" className="ui button blue">Start Game</Link></Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+
+        <h4></h4>
+        <h4></h4>
 
       </div>
     )
