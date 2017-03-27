@@ -145,6 +145,7 @@ class NewGame extends React.Component {
                     return (
                       <CollectionItem
                         name={collection.name}
+                        activeCollectionId={this.state.collection_id}
                         createdBy={collection.createdBy}
                         id={collection.id}
                         key={collection.id}

@@ -12,15 +12,23 @@ class CollectionItem extends React.Component {
   }
 
   render () {
+    const { activeCollectionId, id } = this.props;
+    const isActive = activeCollectionId === this.props.id;
+    const rowColorClasses = isActive ? 'blue inverted ui table' : '';
+    const baseButtonClasses = 'ui button CollectionItem__centered-button';
+    const buttonClasses = isActive ? 'inverted white ' + baseButtonClasses : baseButtonClasses;
+    const buttonText = isActive ? 'Selected' : 'Choose';
+
     return (
-      <tr key={this.props.id}>
+      <tr key={this.props.id} className={rowColorClasses}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
         <td>
-          <button onClick={(e) => this.handleUpdate(e)}
-            className="ui button CollectionItem__centered-button"
+          <button
+            onClick={(e) => this.handleUpdate(e)}
+            className={buttonClasses}
           >
-            Choose
+            {buttonText}
           </button>
         </td>
       </tr>
