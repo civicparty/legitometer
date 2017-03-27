@@ -16,7 +16,7 @@ TODO
 
 ## Tech Stack
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). It uses the Express.js with [Knex](http://knexjs.org/) providing a query building for a Postgres datastore. The project uses [Semantic UI](https://semantic-ui.com/) framework for styling UI components.
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). It uses [Node.js](https://nodejs.org/en/) and [Express.js](https://expressjs.com/) with [Knex](http://knexjs.org/) providing a query building for a Postgres datastore. The project uses [Semantic UI](https://semantic-ui.com/) framework for styling UI components.
 
 To get setup:
 
