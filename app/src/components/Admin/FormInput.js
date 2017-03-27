@@ -8,7 +8,7 @@ class FormInput extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="flex article-new-inputs">
         <input type="text" placeholder="Article Name" onChange={this.handleInput} />
         <input type="text" placeholder="Article URL" onChange={this.handleInput}/>
       </div>

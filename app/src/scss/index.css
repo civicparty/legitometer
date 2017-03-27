@@ -63,6 +63,9 @@
   margin: auto !important;
   display: block !important; }
 
+.article-new-inputs:last-of-type {
+  margin-bottom: 10px !important; }
+
 .header {
   margin-bottom: 20px;
   display: block; }
