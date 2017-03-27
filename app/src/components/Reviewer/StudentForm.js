@@ -7,14 +7,21 @@ class StudentForm extends React.Component {
     return (
       <div>
         <h3>Read this article: </h3><ArticleLink />
-        <h6>Reflect on the credibility of this article:</h6>
+        <h3>Reflect on the credibility of the article:</h3>
         <Form>
-          <Input type="text" placeholder="Name of Publisher" />
-          <Input type="text" placeholder="Who wrote this?" />
-          <Input type="text" placeholder="Headline" />
-          <Input type="text" placeholder="When was it published?"/>
-          <textarea rows="10" placeholder="Summarize the article"></textarea>
-          <textarea rows="10" placeholder="Where did the writer get their information?"></textarea>
+          <label for="publisher">Name of Publisher: </label>
+          <Input type="text" name="publisher" placeholder="Name of Publisher" /><br/>
+          <label for="author">Who wrote this? </label>
+          <Input type="text" name="author" placeholder="Who wrote this?"/><br/>
+          <label for="headline">Headline: </label>
+          <Input type="text" name="headline" placeholder="Headline" /><br/>
+          <label for="publishDate">When was it published? </label>
+          <Input type="text" name="publishDate" placeholder="When was it published?"/><br/><br/>
+          <label for="summary">Summarize the article</label>
+          <textarea rows="10" name="summary" placeholder="Summarize the article"></textarea>
+          <label for="infoSrc">Where did the writer get their information?</label>
+          <textarea rows="10" name="infoSrc" placeholder="Where did the writer get their information?"></textarea>
+          <lable for="ads"></lable>
           <textarea rows="10" placeholder="What kind of advertisements appear on the page?"></textarea>
           <textarea rows="10" placeholder="Is the article objective? Is there bias?  Is the author trying to make you believe something?"></textarea><br/>
           <label htmlFor="question1">Is the page well-designed?</label>
