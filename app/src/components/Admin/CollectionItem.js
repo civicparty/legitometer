@@ -13,7 +13,7 @@ class CollectionItem extends React.Component {
 
   render () {
     const { activeCollectionId, id } = this.props;
-    const isActive = activeCollectionId === this.props.id;
+    const isActive = activeCollectionId === id;
     const rowColorClasses = isActive ? 'blue inverted ui table' : '';
     const baseButtonClasses = 'ui button CollectionItem__centered-button';
     const buttonClasses = isActive ? 'inverted white ' + baseButtonClasses : baseButtonClasses;

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import { Header, Input, Label, Form, Table } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
 import CollectionItem from './CollectionItem';
 
 
