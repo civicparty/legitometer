@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom';
-import './index.css';
+import './scss/index.css';
 import NewGame from './components/Admin/NewGame';
 import Login from './components/Shared/Login'
 import TeacherDashboard from './components/Admin/Dashboard';
@@ -20,9 +20,9 @@ class Root extends Component {
     super();
     this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
-      teacherLoggedIn: false,
+      teacherLoggedIn: true,
       user_id: 1,
-      studentLoggedIn: true,
+      studentLoggedIn: false,
       games: {},
     }
   }

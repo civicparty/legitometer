@@ -39,7 +39,9 @@ class AdminDashboard extends React.Component {
   render() {
     return (
       <div>
-        <Header as="h1" className="floated left">Teacher Dashboard</Header>
+        <Header as="h1" className="floated left">
+          Teacher Dashboard
+        </Header>
 
         <Link to="new" className="ui button positive right floated">
           New Game
@@ -51,18 +53,18 @@ class AdminDashboard extends React.Component {
               <Table.HeaderCell colSpan='3'>Your Games</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-            <Table.Body>
-              {this.state.games.map((game) => {
-                return (
-                  <GameListItem
-                    name={game.name}
-                    collection={game.coll_name}
-                    id={game.id}
-                    key={game.id}
-                  />
-                )
-              })}
-            </Table.Body>
+          <Table.Body>
+            {this.state.games.map((game) => {
+              return (
+                <GameListItem
+                  name={game.name}
+                  collection={game.coll_name}
+                  id={game.id}
+                  key={game.id}
+                />
+              )
+            })}
+          </Table.Body>
         </Table>
       </div>
     )

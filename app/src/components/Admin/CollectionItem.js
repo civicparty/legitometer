@@ -1,18 +1,28 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
 
 class CollectionItem extends React.Component {
-  collectionItemClicked() {
-    this.props.updateCollectionID(this.props.id)
+  constructor(props) {
+    super(props);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
-  render() {
+
+  handleUpdate (e) {
+    e.preventDefault();
+    this.props.updateCollection(this.props.id);
+  }
+
+  render () {
     return (
       <tr key={this.props.id}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
-        <td><button onClick={this.collectionItemClicked.bind(this)}>SELECT </button></td>
-        <td><button>edit</button></td>
-        <td><button>delete</button></td>
+        <td>
+          <button onClick={(e) => this.handleUpdate(e)}
+            className="ui button CollectionItem__centered-button"
+          >
+            Choose
+          </button>
+        </td>
       </tr>
     )
   }

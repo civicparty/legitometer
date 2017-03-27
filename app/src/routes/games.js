@@ -29,8 +29,6 @@ router.get('/games/api', function(req, res, next) {
         // and how to send it back
         payload.push(collections);
         res.send(payload);
-        //res.send(mygames);
-        console.log("collections", collections, "games", mygames);
       })
     })
 });

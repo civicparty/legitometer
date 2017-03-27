@@ -47,4 +47,12 @@
   float: right;
 }
 
-@import "./components/Shared/header";
+.strong {
+  font-weight: bold;
+}
+
+@import "./flexbox";
+@import "./utility";
+@import "../components/Admin/NewGame";
+@import "../components/Admin/CollectionItem";
+@import "../components/Shared/header";

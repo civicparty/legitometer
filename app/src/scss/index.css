@@ -38,6 +38,31 @@
 .avatar {
   float: right; }
 
+.strong {
+  font-weight: bold; }
+
+.flex {
+  display: flex; }
+
+.flex-right {
+  margin-left: auto !important; }
+
+.bump-right {
+  margin-right: 5px !important; }
+
+.section {
+  padding-bottom: 40px; }
+
+.text-center {
+  text-align: center; }
+
+.NewGame__title {
+  margin: 10px 15px; }
+
+.CollectionItem__centered-button {
+  margin: auto !important;
+  display: block !important; }
+
 .header {
   margin-bottom: 20px;
   display: block; }

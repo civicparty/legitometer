@@ -6,11 +6,8 @@ class GameListItem extends React.Component {
   render() {
     return (
       <tr key={this.props.id}>
-        <td>
-          <h5 className="gameName">
-            {this.props.name} - {this.props.collection}
-          </h5>
-        </td>
+        <td className="strong">{this.props.name}</td>
+        <td>{this.props.collection}</td>
         <td className="collapsing">
           <Link to={`/game/${this.props.id}`} className="ui button blue">
             Review
