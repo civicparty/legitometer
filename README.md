@@ -39,11 +39,11 @@ To get setup:
    - `knex migrate:latest`
    - `knex seed:run `
 
-4. Run both the front end React server and the backend Node server
-  - React
+4. Run both the front-end React client app and the back-end Node server
+  - React Front-End Client App
     - `npm start`
-  - Node
-    - `npm run start:dev`
-    
+  - Node/Express Back-end Server
+    - `npm run server`
+
  ## Entity Relationship
 [Link to image of object_model](https://cloud.githubusercontent.com/assets/5697474/24621501/4915c122-1867-11e7-960f-3a37c635f47b.JPG)
