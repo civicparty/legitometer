@@ -42,3 +42,6 @@ To get setup:
     - `npm start`
   - Node
     - `npm run start:dev`
+    
+ ## Entity Relationship
+![object_model](https://cloud.githubusercontent.com/assets/5697474/24621501/4915c122-1867-11e7-960f-3a37c635f47b.JPG)
