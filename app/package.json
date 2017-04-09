@@ -33,7 +33,7 @@
     "webpack": "^1.13.3"
   },
   "scripts": {
-    "start:dev": "nodemon ./src/server",
+    "server": "nodemon ./src/server",
     "start": "react-scripts start",
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
