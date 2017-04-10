@@ -81,7 +81,7 @@ class NewGame extends React.Component {
     let editTitle = (
         <div className="flex">
           <input ref="input"
-            type="text" placeholder="Enter name of new game"
+            type="text" placeholder="Enter name of new mission"
             defaultValue={this.state.name}
             className="bump-right"
           />
@@ -97,7 +97,7 @@ class NewGame extends React.Component {
             {this.state.name}
           </span>
           <button className="ui button flex-right" type="submit">
-            Edit Title
+            Edit Mission Name
           </button>
         </div>
     );
@@ -106,14 +106,14 @@ class NewGame extends React.Component {
       <div>
         { this.state.submitResult ? <Redirect to="/" /> : "" }
 
-        <Header as="h1">New Game</Header>
+        <Header as="h1">Create a New Mission</Header>
 
         <form
           ref={(input) => this.nameForm = input}
           onSubmit={(e) => this.updateTitle(e)}
           className="ui form section"
         >
-          <label htmlFor="gameTitle">Game Title</label>
+          <label htmlFor="gameTitle">Mission Name</label>
           { this.state.showEditTitle ? editTitle : displayTitle }
         </form>
 
@@ -123,19 +123,24 @@ class NewGame extends React.Component {
               ref={(input) => this.gameForm = input}
               onSubmit={(e) => this.submitNewPost(e)}
             >
-              <Header as="h2" className="floated left">
-                Choose a Collection
+              <Header as="h2">
+                Choose a Case File
               </Header>
+
+              <Header.Subheader>
+                <p>A Case File is a collection of articles that your Team of Agents will investigate.</p>
+              </Header.Subheader>
+
 
               <Table celled>
                 <Table.Header>
                   <Table.Row>
                     <Table.HeaderCell colSpan="2">
-                      Choose an Exisiting Collection... OR
+                      Choose an Exisiting Case File... OR
                     </Table.HeaderCell>
                     <Table.HeaderCell className="collapsing">
                       <Link to='collection/new' className="ui button primary right floated">
-                        Create a New Collection
+                        Create a New Case File
                       </Link>
                     </Table.HeaderCell>
                   </Table.Row>
@@ -156,7 +161,7 @@ class NewGame extends React.Component {
                 </Table.Body>
               </Table>
               <button className="ui button positive" type="submit">
-                Save New Game
+                Save New Mission
               </button>
             </form>
             : ""

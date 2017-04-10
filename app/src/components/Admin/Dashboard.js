@@ -40,17 +40,17 @@ class AdminDashboard extends React.Component {
     return (
       <div>
         <Header as="h1" className="floated left">
-          Teacher Dashboard
+          Operation Legit-o-Meter
         </Header>
 
         <Link to="new" className="ui button positive right floated">
-          New Game
+          Create a New Mission
         </Link>
 
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan='3'>Your Games</Table.HeaderCell>
+              <Table.HeaderCell colSpan='3'>Your Existing Missions</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
