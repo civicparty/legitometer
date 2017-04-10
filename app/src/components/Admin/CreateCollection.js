@@ -1,17 +1,17 @@
 import React from 'react';
+import axios from 'axios';
 import { Header, Icon } from 'semantic-ui-react';
 
 import ArticleInput from './ArticleInput';
+
 class CreateCollection extends React.Component {
   constructor(props) {
     super(props);
     this.addInput = this.addInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitNewCollection = this.submitNewCollection.bind(this);
     this.state = {
       collectionName: '',
-      headlines: [],
-      urls: [],
-      inputs: [],
+      articles: [],
     }
   }
   handleInput() {
@@ -20,9 +20,14 @@ class CreateCollection extends React.Component {
 
   addInput(event) {
     event.preventDefault();
-    const inputList = this.state.inputs;
+
     this.setState({
-      inputList: inputList.push(<FormInput key={inputList.length} handleInput={this.handleInput}/>)
+      inputList: this.state.inputs.push(
+        <ArticleInput
+          key={this.state.inputs.length}
+          handleInput={this.handleInput}
+        />
+      )
     });
   }
 
@@ -31,25 +36,26 @@ class CreateCollection extends React.Component {
     this.setState({collectionName: this.collectionName.value})
   }
 
-  handleSubmit(e) {
-    //e.preventDefault();
+  submitNewCollection(e) {
+    e.preventDefault();
+    debugger
     console.log("submitted!", this.collectionName.value);
   }
 
   render() {
     return(
       <div>
-        <form onSubmit={(e) => this.handleSubmit()} className="ui form section">
+        <form onSubmit={(e) => this.submitNewCollection()} className="ui form section">
 
           <div className="section">
-            <Header as="h1">New Collection</Header>
-            <label htmlFor="collectionName">Collection Title</label>
-            <input type="text" name="collectionName" placeholder="Collection Title" value={this.collectionName} onChange={this.handleChange}/>
+            <Header as="h1">New Case File</Header>
+            <label htmlFor="collectionName">Case File Title</label>
+            <input type="text" name="collectionName" placeholder="Case File Title" value={this.collectionName} onChange={this.handleChange}/>
           </div>
 
           <div className="section">
             <Header as="h2">Add Articles</Header>
-            <FormInput handleInput={this.handleInput}/>
+            <ArticleInput handleInput={this.handleInput}/>
             {this.state.inputs}
             <button onClick={this.addInput} className="ui button primary tiny">
               <Icon name="plus"/> Add Another Article
@@ -57,7 +63,7 @@ class CreateCollection extends React.Component {
           </div>
 
           <button type="submit" className="ui button positive huge">
-            Save Collection
+            Save Case File
           </button>
         </form>
       </div>
