@@ -1,7 +1,7 @@
 import React from 'react';
-import FormInput from './FormInput';
 import { Header, Icon } from 'semantic-ui-react';
 
+import ArticleInput from './ArticleInput';
 class CreateCollection extends React.Component {
   constructor(props) {
     super(props);
