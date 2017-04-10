@@ -14,7 +14,7 @@ class Header extends Component {
       <header className="header">
         <Menu pointing secondary>
           <Link to="/">
-            <Menu.Item name='legit-o-meter' active={activeItem === 'legit-o-meter'} onClick={this.handleItemClick} />
+            <Menu.Item name='Mission Fake News' active={activeItem === 'legit-o-meter'} onClick={this.handleItemClick} />
           </Link>
           <Menu.Menu position='right'>
             <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
