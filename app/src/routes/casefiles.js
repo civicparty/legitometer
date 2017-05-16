@@ -14,15 +14,18 @@ router.get('/api/casefiles', function(req, res, next) {
 
 router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile");
-  knex('casefiles').insert({
-    name: req.body.name,
-    createdBy: req.body.createdBy,
-  }, '*')
-  .then((data) => {
-    res.sendStatus(200);
-  })
-  .catch((err) => {
-    next(err);
+  knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles))')
+  .then(() => {
+    knex('casefiles').insert({
+      name: req.body.name,
+      createdBy: req.body.createdBy,
+    }, '*')
+    .then((data) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      next(err);
+    });
   });
 });
 

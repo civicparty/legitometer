@@ -6,4 +6,6 @@ var router = express.Router();
 // router.get('/users/login', function(req, res, next) {
 // });
 
+// knex.raw('SELECT setval(\'users_id_seq\', (SELECT MAX(id) FROM users))')
+
 module.exports = router;

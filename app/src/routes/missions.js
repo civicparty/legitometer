@@ -35,17 +35,21 @@ router.get('/api/missions', function(req, res, next) {
 
 router.post('/api/add-mission', (req, res, next) => {
   console.log("woohoo, post route add a mission!!!");
-  knex('missions').insert({
-    user_id: 1,
-    //user_id: knex.select('id').from('users').where('id', req.session.user.id),
-    name: req.body.name,
-    casefile_id: req.body.casefile_id,
-  }, '*')
-  .then((data) => {
-    res.sendStatus(200);
-  })
-  .catch((err) => {
-    next(err);
+  knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions))')
+  .then(() => {
+    knex('missions').insert({
+      user_id: 1,
+      //user_id: knex.select('id').from('users').where('id', req.session.user.id),
+      name: req.body.name,
+      casefile_id: req.body.casefile_id,
+    }, '*')
+
+    .then((data) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      next(err);
+    });
   });
 });
 

@@ -13,7 +13,10 @@ router.get('/api/articles', function(req, res, next) {
 });
 
 router.post('/api/add-article', function(req, res, next) {
-  
-})
+  knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles))')
+  .then(() => {
+    // knex insert here
+  });
+});
 
 module.exports = router;

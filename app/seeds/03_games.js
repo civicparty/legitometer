@@ -22,5 +22,4 @@ exports.seed = knex =>
           user_id: 2,
           url: 'http://localhost:3000/mrteachertest/3'
         }]),
-        knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)')
 );
