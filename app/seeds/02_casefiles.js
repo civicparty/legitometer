@@ -1,8 +1,8 @@
 
 exports.seed = knex =>
-  knex('collections').del()
+  knex('casefiles').del()
     .then(() =>
-     knex('collections').insert([
+     knex('casefiles').insert([
         {id: 1,
           name: 'Climate Change',
           createdBy: 'MozFund',
@@ -12,7 +12,6 @@ exports.seed = knex =>
         }, {id: 3,
           name: 'Russia Hacking',
         createdBy: 'You',
-        }
-      ]),
-knex.raw('SELECT setval(\'collections_id_seq\', (SELECT MAX(id) FROM collections))')
+        }]),
+        knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)')
 );

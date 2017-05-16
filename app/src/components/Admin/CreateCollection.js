@@ -7,20 +7,21 @@ import ArticleInput from './ArticleInput';
 class CreateCollection extends React.Component {
   constructor(props) {
     super(props);
+    this.handleInput = this.handleInput.bind(this);
     this.addInput = this.addInput.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.submitNewCollection = this.submitNewCollection.bind(this);
     this.state = {
-      collectionName: '',
+      caseFileName: '',
       articles: [],
+      inputList: [],
+      inputs: [],
     }
   }
-  handleInput() {
-    console.log("handling input");
-  }
 
+  // adds an input field to the page
   addInput(event) {
     event.preventDefault();
-
     this.setState({
       inputList: this.state.inputs.push(
         <ArticleInput
@@ -31,26 +32,45 @@ class CreateCollection extends React.Component {
     });
   }
 
-  handleChange() {
-    console.log("making changes");
-    this.setState({collectionName: this.collectionName.value})
+
+  // save article info
+  handleInput() {
+    console.log("handling input", this.state.inputs);
+    // TODO handle input - add article info to this.articles[]
+  }
+
+  // save casefile name
+  handleChange(e) {
+    this.setState({caseFileName: e.target.value})
   }
 
   submitNewCollection(e) {
     e.preventDefault();
-    debugger
-    console.log("submitted!", this.collectionName.value);
+
+    console.log("submitted!", this.state);
+
+    // post new casefile
+    axios.post('http://localhost:8888/api/add-casefile', {
+      // id, name, createdBy
+      // createdBy - user_id => name
+      name: this.state.caseFileName,
+      createdBy: 'trained squirrels - P.S. change this',
+    })
+    // post new articles
+    axios.post('http://localhost:8888/api/add-article', {
+      // id, casefile_id, article: {headline, url}
+    })
   }
 
   render() {
     return(
       <div>
-        <form onSubmit={(e) => this.submitNewCollection()} className="ui form section">
+        <form onSubmit={(e) => this.submitNewCollection(e)} className="ui form section">
 
           <div className="section">
             <Header as="h1">New Case File</Header>
-            <label htmlFor="collectionName">Case File Title</label>
-            <input type="text" name="collectionName" placeholder="Case File Title" value={this.collectionName} onChange={this.handleChange}/>
+            <label htmlFor="caseFileName">Case File Title</label>
+            <input type="text" name="caseFileName" placeholder="Case File Title" value={this.caseFileName} onChange={this.handleChange}/>
           </div>
 
           <div className="section">

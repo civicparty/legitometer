@@ -14,8 +14,9 @@ class AdminDashboard extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8888/games/api')
+    axios.get('http://localhost:8888/api/missions')
       .then((res) => {
+        console.log("this is the result", res);
         this.setState({
           games: res.data[0],
           collections: res.data[1]
