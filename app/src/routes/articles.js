@@ -12,11 +12,27 @@ router.get('/api/articles', function(req, res, next) {
 
 });
 
+// it is never getting here
 router.post('/api/add-article', function(req, res, next) {
-  knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles))')
-  .then(() => {
-    // knex insert here
-  });
-});
+  console.log("add article route", req.body);
+  // knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles))')
+
+  // .then(() => {
+  //   console.log("add article", req.body);
+  //   // knex insert here
+  //   // knex('articles').insert({
+  //   //   casefile_id: ,
+  //   //   article: {headline: ,
+  //   //             url: ,
+  //   //             type: }
+  //   // }, '*')
+  //   .then(() => {
+  //     res.sendStatus(200);
+  //   })
+  //   .catch((err) => {
+  //     next(err);
+  //   })
+  // }); //end then
+}); //end post
 
 module.exports = router;

@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
+const Promise = require('bluebird'); //is this necessary?
+const bookshelf = require('../../db/knex'); // TODO is this right?
 // Set up the express app
 const app = express();
 
@@ -29,6 +31,11 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
   next();
 })
+
+// TODO
+app.set('bookshelf', bookshelf);
+
+const bookshelf = app.get('bookshelf');
 
 const missions = require('./routes/missions');
 const casefiles = require('./routes/casefiles');

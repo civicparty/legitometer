@@ -1,6 +1,6 @@
-// TODO is this table necessary?
+
 exports.up = knex =>
-  knex.schema.createTable('users', table => {
+  knex.schema.createTable('teachers', table => {
     table.increments();
     table.string('name');
     table.boolean('isAdmin');
@@ -9,4 +9,4 @@ exports.up = knex =>
 
 
 exports.down = knex =>
-  knex.schema.dropTable('users')
+  knex.schema.dropTable('teachers')
