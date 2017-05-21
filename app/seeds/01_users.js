@@ -4,17 +4,14 @@ exports.seed = knex =>
     .then(() =>
   knex('users').insert([{
     id: 1,
-    displayName: 'Ms. Testteacher',
-    userName: 'mstestteacher',
+    name: 'Ms. Testteacher',
     isAdmin: true,
     }, {
     id: 2,
-    displayName: 'Mr. Teachertest',
-    userName: 'mrteachertest',
+    name: 'Mr. Teachertest',
     isAdmin: true,
     }, {
     id: 3,
-    displayName: 'Student1',
-    userName: 'student1',
+    name: 'Student1',
     isAdmin: false,
     }]))

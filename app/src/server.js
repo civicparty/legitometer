@@ -6,7 +6,6 @@ const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
 const Promise = require('bluebird'); //is this necessary?
-const bookshelf = require('../../db/knex'); // TODO is this right?
 // Set up the express app
 const app = express();
 
@@ -32,10 +31,8 @@ app.use(function(req, res, next) {
   next();
 })
 
-// TODO
+const bookshelf = app.get('../../db/knex')
 app.set('bookshelf', bookshelf);
-
-const bookshelf = app.get('bookshelf');
 
 const missions = require('./routes/missions');
 const casefiles = require('./routes/casefiles');

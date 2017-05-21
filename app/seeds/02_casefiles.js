@@ -1,19 +1,3 @@
-//
-// exports.seed = knex =>
-//   knex('casefiles').del()
-//     .then(() =>
-//      knex('casefiles').insert([
-//         {id: 1,
-//           name: 'Climate Change',
-//           createdBy: 'MozFund',
-//         }, {id: 2,
-//           name: 'Vaccines',
-//           createdBy: 'Austin Monitor',
-//         }, {id: 3,
-//           name: 'Russia Hacking',
-//         createdBy: 'You',
-//         }]),
-//     );
 
     exports.seed = function(knex, Promise) {
       return Promise.join(

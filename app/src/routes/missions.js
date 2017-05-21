@@ -3,6 +3,8 @@ var router = express.Router();
 //console.log(__dirname);
 const knex = require('../../db/knex')
 
+let Article = require('../Models/Article.js');
+let Mission = require('../Models/Mission.js');
 
 function authorizedUser(req, res, next) {
   const userID = req.session.user;
@@ -12,8 +14,16 @@ function authorizedUser(req, res, next) {
     res.render('restricted');
   }
 }
-// mission
+
+router.get('/api/missions/:id', function(req, res, next) {
+  Article.where({casefile_id: req.params.id}).fetchAll()
+    .then((articles) => {
+      res.json({error: false, data: articles.toJSON()});
+    })
+})
+
 router.get('/api/missions', function(req, res, next) {
+  console.log("hi's");
   // res.send('the missions route, it has been gotten');
   req.session.user = 1;
 //select collections.name from collections inner join missions ON collections.id = missions.collection_id;
