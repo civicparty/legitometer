@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import ReviewList from './ReviewList'
+//import ReviewList from './ReviewList'
 
 class ArticleLink extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class ArticleLink extends React.Component {
 
   componentDidMount() {
     console.log("component, mounted");
-    axios.get('http://localhost:8888/articles/api')
+    axios.get('http://localhost:8888/api/articles')
       .then((res) => {
         console.log("gotten!", res.data);
         this.setState({ articles: res.data }, function chooseArticle() {

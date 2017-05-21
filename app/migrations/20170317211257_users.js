@@ -1,11 +1,11 @@
+// TODO is this table necessary?
 
 exports.up = knex =>
   knex.schema.createTable('users', table => {
-    table.increments();
-    table.string('displayName');
-    table.string('userName');
+    table.increments('id');
+    table.string('name');
     table.boolean('isAdmin');
-    table.timestamp(true, true);
+    table.timestamps(true, true);
   })
 
 

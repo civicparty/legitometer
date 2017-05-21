@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
+const Promise = require('bluebird'); //is this necessary?
 // Set up the express app
 const app = express();
 
@@ -30,16 +31,19 @@ app.use(function(req, res, next) {
   next();
 })
 
-const games = require('./routes/games');
-const collections = require('./routes/collections');
+const bookshelf = app.get('../../db/knex')
+app.set('bookshelf', bookshelf);
+
+const missions = require('./routes/missions');
+const casefiles = require('./routes/casefiles');
 const articles = require('./routes/articles');
 
 // TODO
 // app.use('/games', gamesRouter);
 // something like that. so in your games router file the route get('/' ...) will actually be at /games/
 
-app.use(games);
-app.use(collections);
+app.use(missions);
+app.use(casefiles);
 app.use(articles);
 
 const port = process.env.PORT || 8888;

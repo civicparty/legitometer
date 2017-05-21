@@ -4,7 +4,17 @@ import { Link } from 'react-router-dom'
 
 
 class StudentDashboard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      missions: []
+    }
+  }
 
+  componentDidMount() {
+    // GET missions assigned to student user
+    
+  }
   render() {
     return (
       <div>
@@ -14,20 +24,11 @@ class StudentDashboard extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan='3' textAlign='center'>Assignments</Table.HeaderCell>
+              <Table.HeaderCell colSpan='3' textAlign='center'>Your Missions</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>Ms. TestTeacher</Table.Cell>
-              <Table.Cell>Game 1</Table.Cell>
-              <Table.Cell><Link to="/mstestteacher/1" className="ui button blue">Start Game</Link></Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Mr. TeacherTest</Table.Cell>
-              <Table.Cell>Game 2</Table.Cell>
-              <Table.Cell><Link to="/" className="ui button blue">Start Game</Link></Table.Cell>
-            </Table.Row>
+
           </Table.Body>
         </Table>
 
@@ -40,3 +41,15 @@ class StudentDashboard extends React.Component {
 }
 
 export default StudentDashboard;
+
+
+// <Table.Row>
+//   <Table.Cell>Ms. TestTeacher</Table.Cell>
+//   <Table.Cell>Game 1</Table.Cell>
+//   <Table.Cell><Link to="/mstestteacher/1" className="ui button blue">Start Game</Link></Table.Cell>
+// </Table.Row>
+// <Table.Row>
+//   <Table.Cell>Mr. TeacherTest</Table.Cell>
+//   <Table.Cell>Game 2</Table.Cell>
+//   <Table.Cell><Link to="/" className="ui button blue">Start Game</Link></Table.Cell>
+// </Table.Row>

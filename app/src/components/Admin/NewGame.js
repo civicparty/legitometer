@@ -23,14 +23,14 @@ class NewGame extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8888/collections/api')
+    axios.get('http://localhost:8888/api/casefiles')
       .then((res) => {
         this.setState({
           collections: res.data,
         })
       })
       .then(() => {
-        console.log("but really what should go here?");
+        console.log("component mounted! casefile data retrieved!");
       })
       .catch((err) => {
         console.log(err);
@@ -56,17 +56,17 @@ class NewGame extends React.Component {
     this.setState({
       showEditTitle: !this.state.showEditTitle,
       name: newName(),
-      // user_id: 0, // TODO this will come from the session
+      user_id: 1, // TODO this will come from the session
     })
   }
 
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;
-    axios.post('http://localhost:8888/api/addgame', {
+    axios.post('http://localhost:8888/api/add-mission', {
       name: this.state.name,
-      collection_id: this.state.collection_id,
-      user_id: 1
+      casefile_id: this.state.collection_id,
+      user_id: this.state.user_id,
     })
     .then((res) => {
       console.log("response", res);
