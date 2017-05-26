@@ -11,13 +11,13 @@ const User = bookshelf.Model.extend({
   hasTimestamps: true,
   missions: function() {
     return this.hasMany('Mission');
-  }
+  },
   reviews: function() {
     return this.hasMany('Review');
-  }
+  },
   casefiles: function() {
     return this.hasMany('Casefile').through('Mission');
-  } //i think this is right. users have many casefiles, but casefiles don't necessarily have users (is that true?)
+  }, //i think this is right. users have many casefiles, but casefiles don't necessarily have users (is that true?)
 });
 
 module.exports = bookshelf.model('User', User);

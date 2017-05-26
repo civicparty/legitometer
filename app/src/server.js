@@ -37,6 +37,7 @@ app.set('bookshelf', bookshelf);
 const missions = require('./routes/missions');
 const casefiles = require('./routes/casefiles');
 const articles = require('./routes/articles');
+const reviews = require('./routes/reviews');
 
 // TODO
 // app.use('/games', gamesRouter);
@@ -45,6 +46,7 @@ const articles = require('./routes/articles');
 app.use(missions);
 app.use(casefiles);
 app.use(articles);
+app.use(reviews);
 
 const port = process.env.PORT || 8888;
 

@@ -17,7 +17,7 @@ const Mission = bookshelf.Model.extend({
   },
   user: function() {
     return this.hasOne('User');
-  }
+  },
 
 });
 

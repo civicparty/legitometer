@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 //console.log(__dirname);
-const knex = require('../../db/knex')
+const bookshelf = require('../../db/knex')
 
-let Article = require('../Models/Article.js');
-let Mission = require('../Models/Mission.js');
+const Mission = require('../Models/Mission');
 
 function authorizedUser(req, res, next) {
   const userID = req.session.user;
@@ -16,9 +15,9 @@ function authorizedUser(req, res, next) {
 }
 
 router.get('/api/missions/:id', function(req, res, next) {
-  Article.where({casefile_id: req.params.id}).fetchAll()
-    .then((articles) => {
-      res.json({error: false, data: articles.toJSON()});
+  Mission.where({id: req.params.id}).fetchAll()
+    .then((mission) => {
+      res.json({error: false, data: mission.toJSON()});
     })
 })
 

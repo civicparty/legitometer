@@ -13,7 +13,7 @@ const Review = bookshelf.Model.extend({
   },
   user: function() {
     return this.belongsTo('User');
-  }
+  },
 });
 
 module.exports = bookshelf.model('Review', Review);

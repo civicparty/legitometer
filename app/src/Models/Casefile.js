@@ -14,10 +14,10 @@ const Casefile = bookshelf.Model.extend({
   },
   mission: function() {
     return this.belongsTo('Mission');
-  }
+  },
   user: function() {
     return this.belongsTo('User').through('Mission');
-  } //yes?
+  }, //yes?
 });
 
 module.exports = bookshelf.model('Casefile', Casefile);

@@ -1,15 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const knex = require('../../db/knex')
+const bookshelf = require('../../db/knex')
 
-//case file
+const Casefile = require('../Models/Casefile')
+
 router.get('/api/casefiles', function(req, res, next) {
-  console.log("hello from the casefiles get route");
-  req.session.user = 1;
-  knex('casefiles')
+  Casefile.fetchAll()
     .then((casefiles) => {
-      res.send(casefiles)
-    });
+      res.json({error: false, data: casefiles.toJSON()});
+    })
 })
 
 router.post('/api/add-casefile', function(req, res, next) {

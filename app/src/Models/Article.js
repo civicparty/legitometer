@@ -18,7 +18,7 @@ const Article = bookshelf.Model.extend({
   },
   casefile: function() {
     return this.belongsTo('Casefile');
-  }
+  },
 });
 
 module.exports = bookshelf.model('Article', Article);
