@@ -2,7 +2,8 @@
 
 const bookshelf = require('../../db/knex');
 
-const Article = require('./Article');
+require('./Article');
+require('./User');
 
 const Review = bookshelf.Model.extend({
   tableName: 'reviews',
@@ -10,6 +11,9 @@ const Review = bookshelf.Model.extend({
   article: function() {
     return this.belongsTo('Article')
   },
+  user: function() {
+    return this.belongsTo('User');
+  }
 });
 
 module.exports = bookshelf.model('Review', Review);

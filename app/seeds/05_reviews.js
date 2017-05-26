@@ -7,6 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex('reviews').insert([
         {id: 1,
           student_id: 2,
+          mission_id: 1,
           answers: {
             publisher_name: 'Sprocket', // references to questions rather than "publisher_name, etc"
             author: 'your mom',

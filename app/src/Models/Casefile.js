@@ -2,14 +2,22 @@
 
 const bookshelf = require('../../db/knex');
 
-const Article = require('./Article');
+require('./User');
+require('./Article');
+require('./Mission');
 
 const Casefile = bookshelf.Model.extend({
   tableName: 'casefiles',
   hasTimestamps: true,
   articles: function() {
-    this.hasMany('Article');
+    return this.hasMany('Article');
   },
+  mission: function() {
+    return this.belongsTo('Mission');
+  }
+  user: function() {
+    return this.belongsTo('User').through('Mission');
+  } //yes?
 });
 
 module.exports = bookshelf.model('Casefile', Casefile);
