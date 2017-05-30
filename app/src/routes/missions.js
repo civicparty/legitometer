@@ -14,8 +14,56 @@ function authorizedUser(req, res, next) {
   }
 }
 
+// need to display existing missions + casefiles (if any) when user logs in
+router.get('/api/missions', (req, res, next) => {
+  let files = [];
+  // user_id: req.session.user
+  // where user_id === logged_in user
+  Mission.forge().where({user_id: 1}).fetchAll({withRelated: ['casefile']})
+
+  .then((mission) => {
+    let cf = mission.related('casefile');
+    console.log(cf);
+
+  })
+  //Unhandled rejection error: column casefiles.mission_id does not exist
+
+  // .then((casefile) => console.log("casefile maybe?", casefile))
+  // .catch((err) => console.error("no bad", err))
+
+
+  // new Photo({id: 1}).fetch({
+  //   withRelated: ['account']
+  // }).then(function(photo) {
+  //   if (photo) {
+  //     var account = photo.related('account');
+  //     if (account.id) {
+  //        return account.related('trips').fetch();
+  //     }
+  //   }
+  // });
+  // Mission.forge().where({user_id: 1}).fetchAll()
+  // .then((mission) => {
+  //   //get missions
+  //   res.json({error: false, data: mission.toJSON()});
+  //   // save mission table data to array
+  //   files.push(mission.toJSON());
+  //   // console.log(files);
+  // })
+  // .catch((err) => {
+  //   res.send(err);
+  // })
+});
+
+
+  // where user_id === loggind_in user && mission/casefiles inner join
+  // get casefiles
+  // send missions + casefiles
+
+
+// get mission by id
 router.get('/api/missions/:id', function(req, res, next) {
-  Mission.where({id: req.params.id}).fetchAll()
+  Mission.forge().where({id: req.params.id}).fetchAll()
     .then((mission) => {
       res.json({error: false, data: mission.toJSON()});
     })

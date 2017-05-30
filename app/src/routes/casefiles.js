@@ -5,7 +5,7 @@ const bookshelf = require('../../db/knex')
 const Casefile = require('../Models/Casefile')
 
 router.get('/api/casefiles', function(req, res, next) {
-  Casefile.fetchAll()
+  Casefile.forge().fetchAll()
     .then((casefiles) => {
       res.json({error: false, data: casefiles.toJSON()});
     })

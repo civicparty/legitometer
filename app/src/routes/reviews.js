@@ -5,11 +5,8 @@ const bookshelf = require('../../db/knex');
 const Review = require('../Models/Review.js');
 
 router.get('/api/reviews', function(req, res, next) {
-  console.log("partial success, yeah?");
-  Review.fetchAll()
+  Review.forge().fetchAll() // create a new Review object and fetch all from the table
   .then((reviews) => {
-    console.log("hello");
-    //res.send(reviews)
     res.json({error: false, data: reviews.toJSON()});
   })
   .catch((err) => {

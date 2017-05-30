@@ -4,11 +4,8 @@ const bookshelf = require('../../db/knex');
 
 const Article = require('../Models/Article.js');
 
-// Unhandled rejection Error: Undefined binding(s) detected when compiling SELECT query: select "articles".* from "articles" where "mission_id" = ?
-// Article.where({mission_id: req.body.mission_id}).fetchAll()
-
 router.get('/api/articles', function(req, res, next) {
-  Article.fetchAll()
+  Article.forge().fetchAll()
   .then((articles) => {
      res.json({error: false, data: articles.toJSON()});
    })
