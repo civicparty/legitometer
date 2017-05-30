@@ -4,6 +4,7 @@ var router = express.Router();
 const bookshelf = require('../../db/knex')
 
 const Mission = require('../Models/Mission');
+const Casefile = require('../Models/Casefile');
 
 function authorizedUser(req, res, next) {
   const userID = req.session.user;
@@ -19,29 +20,18 @@ router.get('/api/missions', (req, res, next) => {
   let files = [];
   // user_id: req.session.user
   // where user_id === logged_in user
-  Mission.forge().where({user_id: 1}).fetchAll({withRelated: ['casefile']})
-
+  let user = 1;
+  Mission.forge().where({user_id: user}).fetch({withRelated: ['casefile']})
   .then((mission) => {
+    console.log("mission: ", mission.attributes.name); //mission name
     let cf = mission.related('casefile');
-    console.log(cf);
+    console.log("casefile: ", cf.attributes.name); //casefile name
 
   })
   //Unhandled rejection error: column casefiles.mission_id does not exist
 
-  // .then((casefile) => console.log("casefile maybe?", casefile))
-  // .catch((err) => console.error("no bad", err))
 
 
-  // new Photo({id: 1}).fetch({
-  //   withRelated: ['account']
-  // }).then(function(photo) {
-  //   if (photo) {
-  //     var account = photo.related('account');
-  //     if (account.id) {
-  //        return account.related('trips').fetch();
-  //     }
-  //   }
-  // });
   // Mission.forge().where({user_id: 1}).fetchAll()
   // .then((mission) => {
   //   //get missions

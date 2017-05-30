@@ -10,7 +10,7 @@ const Mission = bookshelf.Model.extend({
   tableName: 'missions',
   hasTimestamps: true,
   casefile: function() {
-    return this.hasOne('Casefile');
+    return this.hasOne('Casefile', 'id');
   },
   articles: function() {
     return this.hasMany('Article').through('Casefile');
