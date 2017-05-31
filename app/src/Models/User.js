@@ -10,7 +10,7 @@ const User = bookshelf.Model.extend({
   tableName: 'users',
   hasTimestamps: true,
   missions: function() {
-    return this.hasMany('Mission');
+    return this.hasMany('Mission', 'id');
   },
   reviews: function() {
     return this.hasMany('Review');

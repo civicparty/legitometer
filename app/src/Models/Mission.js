@@ -8,15 +8,19 @@ require('./User');
 
 const Mission = bookshelf.Model.extend({
   tableName: 'missions',
-  hasTimestamps: true,
+  hasTimestamps: ['created_at', 'updated_at'],
   casefile: function() {
-    return this.hasOne('Casefile', 'id');
+    return this.belongsTo('Casefile', 'id')
+    // .query({
+    //     select: ['casefile.id', 'casefile.name','casefile.created_at'],
+    //     orderBy: ['casefile.created_at', 'DESC']
+    //   });
   },
   articles: function() {
     return this.hasMany('Article').through('Casefile');
   },
   user: function() {
-    return this.hasOne('User');
+    return this.hasOne('User'); //is this true?
   },
 
 });

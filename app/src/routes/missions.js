@@ -3,9 +3,13 @@ var router = express.Router();
 //console.log(__dirname);
 const bookshelf = require('../../db/knex')
 
+// models
 const Mission = require('../Models/Mission');
 const Casefile = require('../Models/Casefile');
+// collections
+const Missions = require('../Collections/missions');
 
+// check if user authorized
 function authorizedUser(req, res, next) {
   const userID = req.session.user;
   if (userID) {
@@ -18,20 +22,51 @@ function authorizedUser(req, res, next) {
 // need to display existing missions + casefiles (if any) when user logs in
 router.get('/api/missions', (req, res, next) => {
   let files = [];
-  // user_id: req.session.user
-  // where user_id === logged_in user
+  // where user_id === logged_in user (req.session.user)
   let user = 1;
-  Mission.forge().where({user_id: user}).fetch({withRelated: ['casefile']})
+  // this works but only for ONE ROW ***********************************************
+  Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug: true})
   .then((mission) => {
-    console.log("mission: ", mission.attributes.name); //mission name
-    let cf = mission.related('casefile');
-    console.log("casefile: ", cf.attributes.name); //casefile name
+    //send missions + casefiles
+  //  console.log(mission.models); // need to loop over mission.models object
+    console.log("and now the loop because i really need this to work now");
+    mission = mission.toJSON();
+    console.log("no wait really this is what i needed", mission);
+    for (var i = 0; i < mission.length; i++) {
+      console.log("hi, mission!", mission[i].name, mission[i].casefile.name);
+    }
 
+    // console.log("mission: ", mission.attributes.name); //mission name
+    // let cf = mission.related('casefile');
+    // console.log("casefile: ", cf.attributes.name); //casefile name
   })
-  //Unhandled rejection error: column casefiles.mission_id does not exist
+  // ***********************************************************
 
+  // ***********************************************************
+  // select * from missions where user_id = logged in user
+  // select * from casefiles where id = missions.casefile_id
+  // THIS ALSO WORKSish... but does not select all even though the docs say it should...
+  // Mission.where({user_id: 1}).fetch({withRelated: ['casefile']}).then(function(mission) {
+  //   // prints one row from 'casefiles' table:
+  //   // {"id":1,"name":"Climate Change","createdBy":"MozFund","created_at":"2017-05-26T22:12:19.029Z","updated_at":"2017-05-26T22:12:19.029Z"}
+  // 	console.log(JSON.stringify(mission.related('casefile')));
+  // });
+// ***********************************************
 
+// *** THIS IS NOT WORKING ***********************************************
+// use Missions collection to fetch all?
+  // Missions.forge().where({user_id: 1}).fetchAll({withRelated: ['casefile'], debug: true,})
+  // .then((mission) => {
+  //   console.log("mission: ", mission);
+  //   let cf = mission.related('casefile');
+  //   console.log("casefile: ", cf);
+  // })
+  // .catch((err) => {
+  //   console.log('err', err);
+  // });
+// ***********************************************
 
+// *** I don't think this works either... but can't remember anymore... ***
   // Mission.forge().where({user_id: 1}).fetchAll()
   // .then((mission) => {
   //   //get missions
@@ -43,12 +78,11 @@ router.get('/api/missions', (req, res, next) => {
   // .catch((err) => {
   //   res.send(err);
   // })
+// ***********************************************
 });
 
 
-  // where user_id === loggind_in user && mission/casefiles inner join
-  // get casefiles
-  // send missions + casefiles
+
 
 
 // get mission by id
