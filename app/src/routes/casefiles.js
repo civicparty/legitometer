@@ -4,10 +4,18 @@ const bookshelf = require('../../db/knex')
 
 const Casefile = require('../Models/Casefile')
 
-router.get('/api/casefiles', function(req, res, next) {
+router.get('/api/casefiles', (req, res, next) => {
   Casefile.forge().fetchAll()
     .then((casefiles) => {
-      res.json({error: false, data: casefiles.toJSON()});
+      let files = [];
+      casefiles = casefiles.toJSON();
+      for (var i = 0; i < casefiles.length; i++) {
+        // get id, name, and createdBy from table
+        files.push([casefiles[i].id, casefiles[i].name, casefiles[i].createdBy]);
+      }
+      console.log("send this", files);
+      // TODO but we're also going to need a link to the articles associated with that casefile...
+      res.send(files);
     })
 })
 

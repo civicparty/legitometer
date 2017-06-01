@@ -11,10 +11,6 @@ const Mission = bookshelf.Model.extend({
   hasTimestamps: ['created_at', 'updated_at'],
   casefile: function() {
     return this.belongsTo('Casefile', 'id')
-    // .query({
-    //     select: ['casefile.id', 'casefile.name','casefile.created_at'],
-    //     orderBy: ['casefile.created_at', 'DESC']
-    //   });
   },
   articles: function() {
     return this.hasMany('Article').through('Casefile');
