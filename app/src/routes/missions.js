@@ -21,7 +21,7 @@ function authorizedUser(req, res, next) {
 
 // need to display existing missions + casefiles (if any) when user logs in
 router.get('/api/missions', (req, res, next) => {
-  let files = [];
+  let files = {};
   // where user_id === logged_in user (req.session.user)
   let user = 1;
   // this works but only for ONE ROW ***********************************************
@@ -29,13 +29,16 @@ router.get('/api/missions', (req, res, next) => {
   .then((mission) => {
     //send missions + casefiles
   //  console.log(mission.models); // need to loop over mission.models object
-    console.log("and now the loop because i really need this to work now");
+  //  console.log("and now the loop because i really need this to work now");
     mission = mission.toJSON();
-    console.log("no wait really this is what i needed", mission);
+  //  console.log("no wait really this is what i needed", mission);
     for (var i = 0; i < mission.length; i++) {
-      console.log("hi, mission!", mission[i].name, mission[i].casefile.name);
+      //console.log("hi, mission!", mission[i].name, mission[i].casefile.name);
+      files[mission[i].name] = mission[i].casefile.name;
     }
-
+    console.log(files);
+    // send files object... somewhere... to component?
+    res.send(files)
     // console.log("mission: ", mission.attributes.name); //mission name
     // let cf = mission.related('casefile');
     // console.log("casefile: ", cf.attributes.name); //casefile name
