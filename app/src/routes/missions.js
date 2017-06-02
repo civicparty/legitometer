@@ -66,8 +66,8 @@ router.get('/api/missions/:id', function(req, res, next) {
 
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
-  //console.log("woohoo, post route add a mission!!!", req.body);
   let username, new_url, next_id;
+
   bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions))')
 
   // TODO I don't think this is the correct way to do this AT ALL
@@ -84,19 +84,22 @@ router.post('/api/add-mission', (req, res, next) => {
       username = username.replace(/[.\-`'\s]/g,"").toLowerCase();
       new_url = '/' + username + '/' + next_id;
     })
+    .then(() => {
+      Mission.forge({name: req.body.name, casefile_id: req.body.collection_id, user_id: req.body.user_id, url: new_url})
+      .save()
+      .then((mission) => {
+        console.log("toast?", new_url);
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        next(err);
+      })
+    })
     .catch((err) => {
-      console.log("User.fetch() error: ", err);
+      next(err);
     })
 
-  Mission.forge({name: req.body.name, casefile_id: req.body.collection_id, user_id: req.body.user_id, url: new_url})
-  .save()
-  .then((mission) => {
-    console.log("toast?", new_url);
-    res.sendStatus(200);
-  })
-  .catch((err) => {
-    console.log("Mission.save() error: ", err);
-  })
+
 
 })
 
