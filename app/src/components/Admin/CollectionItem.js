@@ -8,7 +8,7 @@ class CollectionItem extends React.Component {
 
   handleUpdate (e) {
     e.preventDefault();
-    this.props.updateCollection(this.props.id);
+    this.props.updateCollection(this.props.activeCollectionId);
   }
 
   render () {

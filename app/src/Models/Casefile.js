@@ -13,7 +13,7 @@ const Casefile = bookshelf.Model.extend({
     return this.hasMany('Article');
   },
   missions: function() {
-    return this.hasMany('Mission'); //a casefile has many missions
+    return this.hasMany('Mission', 'id'); //a casefile has many missions
   },
   user: function() {
     return this.belongsTo('User').through('Mission');

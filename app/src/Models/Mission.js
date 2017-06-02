@@ -10,7 +10,7 @@ const Mission = bookshelf.Model.extend({
   tableName: 'missions',
   hasTimestamps: ['created_at', 'updated_at'],
   casefile: function() {
-    return this.belongsTo('Casefile', 'id')
+    return this.belongsTo('Casefile') //removed 'id' and GET /api/missions worked ...
   },
   articles: function() {
     return this.hasMany('Article').through('Casefile');
