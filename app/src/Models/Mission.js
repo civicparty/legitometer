@@ -16,7 +16,7 @@ const Mission = bookshelf.Model.extend({
     return this.hasMany('Article').through('Casefile');
   },
   user: function() {
-    return this.hasOne('User'); //is this true?
+    return this.hasOne('User', 'id'); //is this true?
   },
 
 });
