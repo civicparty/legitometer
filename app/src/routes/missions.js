@@ -24,26 +24,15 @@ function authorizedUser(req, res, next) {
 router.get('/api/missions', (req, res, next) => {
   let files = {};
   // where user_id === logged_in user (req.session.user)
-  let user = 1;
-  //doesn't work...
-  // Casefile.forge().fetchAll({withRelated: ['missions'], debug:true})
-  // .then((casefile) => {
-  //   cf = casefile.toJSON();
-  //   console.log("what about this?", cf);
-  // })
-  //get data from mission and casefile tables
+  let user = 1; // TODO temp thing
 
   Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug:true})
   .then((mission) => {
     // convert data to JSON
     mission = mission.toJSON();
-    console.log("heeeello there", mission);
     // loop over data to get mission and casefile names
-    // well, clearly this doesn't work. TODO
     for (var i = 0; i < mission.length; i++) {
       // save to files object
-      console.log("mission name", mission[i].name, "casefile name", mission[i].casefile.name);
-      //undefined for newly created missions
       files[mission[i].name] = mission[i].casefile.name;
     }
     // send files object
@@ -60,19 +49,6 @@ router.get('/api/missions/:id', function(req, res, next) {
     })
 })
 
-// axios.post('http://localhost:8888/api/add-mission', {
-//   name: this.state.name,
-//   casefile_id: this.state.collection_id,
-//   user_id: this.state.user_id,
-// also, id - how to select the right one - and url /teachername/id
-// mission.user_id -> user.id -> user.name
-// })
-// model
-//   .query('where', 'other_id', '=', '5')
-//   .fetch()
-//   .then(function(model) {
-//     // ...
-//   });
 
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {

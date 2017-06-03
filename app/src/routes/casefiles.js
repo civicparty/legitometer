@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const bookshelf = require('../../db/knex')
+const bookshelf = require('../../db/knex');
 
-const Casefile = require('../Models/Casefile')
+const Casefile = require('../Models/Casefile');
+const User = require('../Models/User');
 
 router.get('/api/casefiles', (req, res, next) => {
   Casefile.forge().fetchAll()
@@ -20,21 +21,32 @@ router.get('/api/casefiles', (req, res, next) => {
 })
 
 router.post('/api/add-casefile', function(req, res, next) {
-  console.log("posting new casefile");
-  knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles))')
+  console.log("posting new casefile", req.body.name);
+  let username;
+
+  bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)')
+
+  //User.forge().where({id: req.session.user}).fetch()
+  User.forge().where({id: 1}).fetch()
+  .then((user) => {
+    user = user.toJSON();
+    username = user.name;
+  })
   .then(() => {
-    knex('casefiles').insert({
-      name: req.body.name,
-      createdBy: req.body.createdBy,
-    }, '*')
-    .then((data) => {
-      res.sendStatus(200);
+    Casefile.forge({name: req.body.name, createdBy: username})
+    .save()
+    .then((casefile) => {
+      console.log(casefile.toJSON());
     })
-    .catch((err) => {
-      next(err);
-    });
-  });
-});
+  })
+  .then(() => {
+    // TODO loop over req.body.articles and add to articles table?
+  })
+  .catch((err) => {
+    console.log("all the things are bad", err);
+  })
+
+ });
 
 /* GET collections listing. */
 // router.get('/', function(req, res, next) {

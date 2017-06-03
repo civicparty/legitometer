@@ -38,6 +38,7 @@ const missions = require('./routes/missions');
 const casefiles = require('./routes/casefiles');
 const articles = require('./routes/articles');
 const reviews = require('./routes/reviews');
+const users = require('./routes/users');
 
 // TODO
 // app.use('/games', gamesRouter);
@@ -47,6 +48,7 @@ app.use(missions);
 app.use(casefiles);
 app.use(articles);
 app.use(reviews);
+app.use(users);
 
 const port = process.env.PORT || 8888;
 

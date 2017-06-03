@@ -53,7 +53,6 @@ class CreateCollection extends React.Component {
       // id, name, createdBy
       // createdBy - user_id => name
       name: this.state.caseFileName,
-      createdBy: 'trained squirrels - P.S. change this',
     })
     // post new articles
     // so this works... TODO ... how to get the actual typed info
