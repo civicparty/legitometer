@@ -47,22 +47,31 @@ class CreateCollection extends React.Component {
     e.preventDefault();
 
     console.log("submitted!", this.state);
-
     // post new casefile
     axios.post('http://localhost:8888/api/add-casefile', {
       // id, name, createdBy
       // createdBy - user_id => name
       name: this.state.caseFileName,
+      // TODO get the data from the state
+      articles: [{headline: "news happened", url: "https://stackoverflow.com", type: "analysis"},
+			{headline: "ducks!", url: "ducks.com", type: "satire"},
+			{headline: "bunch of flowers", url: "bees.com", type: "analysis"}]
+    })
+    .then((res) => {
+      console.log("success?");
+    })
+    .catch((err) => {
+      console.log("ERROR!!! :p !!!", err);
     })
     // post new articles
     // so this works... TODO ... how to get the actual typed info
     // from the form HERE
-    axios.post('http://localhost:8888/api/add-article', {
-      // id, casefile_id, article: {headline, url, type}
-      casefile_id: 1, // but, like, no
-      article: {name: "headline stuff", url: "stuff.com", type: "Analysis" }
-    })
-    console.log("here now after");
+    // axios.post('http://localhost:8888/api/add-article', {
+    //   // id, casefile_id, article: {headline, url, type}
+    //   casefile_id: 1, // but, like, no
+    //   article: {name: "headline stuff", url: "stuff.com", type: "Analysis" }
+    // })
+    //console.log("here now after");
 
   }
 
@@ -86,7 +95,7 @@ class CreateCollection extends React.Component {
             </button>
           </div>
 
-          <button type="submit" className="ui button positive huge">
+          <button className="ui button positive huge" type="submit">
             Save Case File
           </button>
         </form>

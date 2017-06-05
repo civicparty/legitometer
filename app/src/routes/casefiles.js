@@ -4,6 +4,7 @@ const bookshelf = require('../../db/knex');
 
 const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
+const Article = require('../Models/Article');
 
 router.get('/api/casefiles', (req, res, next) => {
   Casefile.forge().fetchAll()
@@ -21,12 +22,16 @@ router.get('/api/casefiles', (req, res, next) => {
 })
 
 router.post('/api/add-casefile', function(req, res, next) {
-  console.log("posting new casefile", req.body.name);
-  let username;
+  console.log("posting new casefile", req.body);
+  let username, new_casefile;
 
-  bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)')
+  bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)');
 
-  //User.forge().where({id: req.session.user}).fetch()
+  Casefile.count('id').
+  then((count) => {
+    new_casefile = parseInt(count)+1;
+  })
+  // TODO change to: User.forge().where({id: req.session.user}).fetch()
   User.forge().where({id: 1}).fetch()
   .then((user) => {
     user = user.toJSON();
@@ -36,11 +41,22 @@ router.post('/api/add-casefile', function(req, res, next) {
     Casefile.forge({name: req.body.name, createdBy: username})
     .save()
     .then((casefile) => {
-      console.log(casefile.toJSON());
+      console.log("casefile", casefile.toJSON());
     })
   })
   .then(() => {
-    // TODO loop over req.body.articles and add to articles table?
+    console.log("then the articles!", req.body.articles);
+    console.log("loop over the articles");
+    // TODO get last casefile_id
+    console.log("new casefile id", new_casefile);
+    for (var i = 0; i < req.body.articles.length; i++) {
+      console.log(req.body.articles[i].headline, req.body.articles[i].url, req.body.articles[i].type);
+      bookshelf.knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles)+1)');
+
+      Article.forge({casefile_id: new_casefile, article: {headline: req.body.articles[i].headline, url: req.body.articles[i].url, type: req.body.articles[i].type, }})
+      .save()
+
+    }
   })
   .catch((err) => {
     console.log("all the things are bad", err);
