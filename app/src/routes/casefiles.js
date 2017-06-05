@@ -15,8 +15,7 @@ router.get('/api/casefiles', (req, res, next) => {
         // get id, name, and createdBy from table
         files.push([casefiles[i].id, casefiles[i].name, casefiles[i].createdBy]);
       }
-      console.log("send this", files);
-      // TODO but we're also going to need a link to the articles associated with that casefile...
+      // console.log("send this", files);
       res.send(files);
     })
 })
@@ -27,17 +26,20 @@ router.post('/api/add-casefile', function(req, res, next) {
 
   bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)');
 
+  // get last id in table and add 1 for the next id
   Casefile.count('id').
   then((count) => {
     new_casefile = parseInt(count)+1;
   })
   // TODO change to: User.forge().where({id: req.session.user}).fetch()
+  // get user name from user id
   User.forge().where({id: 1}).fetch()
   .then((user) => {
     user = user.toJSON();
     username = user.name;
   })
   .then(() => {
+    // save name and createdBy to casefile table
     Casefile.forge({name: req.body.name, createdBy: username})
     .save()
     .then((casefile) => {
@@ -47,8 +49,7 @@ router.post('/api/add-casefile', function(req, res, next) {
   .then(() => {
     console.log("then the articles!", req.body.articles);
     console.log("loop over the articles");
-    // TODO get last casefile_id
-    console.log("new casefile id", new_casefile);
+    // save the casefile_id and article data for each input article
     for (var i = 0; i < req.body.articles.length; i++) {
       console.log(req.body.articles[i].headline, req.body.articles[i].url, req.body.articles[i].type);
       bookshelf.knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles)+1)');
@@ -61,12 +62,6 @@ router.post('/api/add-casefile', function(req, res, next) {
   .catch((err) => {
     console.log("all the things are bad", err);
   })
-
  });
-
-/* GET collections listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 
 module.exports = router;

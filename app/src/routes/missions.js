@@ -7,7 +7,7 @@ const bookshelf = require('../../db/knex')
 const Mission = require('../Models/Mission');
 const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
-// collections - TODO not used
+// collections - TODO not used??? - when is it good to use?
 const Missions = require('../Collections/missions');
 
 // check if user authorized
@@ -54,23 +54,27 @@ router.get('/api/missions/:id', function(req, res, next) {
 router.post('/api/add-mission', (req, res, next) => {
   let username, new_url, next_id;
 
+  // set the value of the next id in the mission table, avoiding duplicate key errors
   bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)')
 
   // TODO I don't think this is the correct way to do this AT ALL
+  // get last mission id
   Mission.count('id').
   then((count) => {
     next_id = parseInt(count)+1;
   })
-
+  // get user name from user id for mission url
   User.forge().where({id: req.body.user_id}).fetch()
     .then((user) => {
       user = user.toJSON();
       username = user.name;
       // strip punctuation, capitals, and spaces
       username = username.replace(/[.\-`'\s]/g,"").toLowerCase();
+      // create the url students will use to access the mission
       new_url = '/' + username + '/' + next_id;
     })
     .then(() => {
+      // save mission name, casefile_id, user_id, and url to mission table
       Mission.forge({name: req.body.name, casefile_id: req.body.casefile_id, user_id: req.body.user_id, url: new_url})
       .save()
       .then((mission) => {
@@ -83,9 +87,6 @@ router.post('/api/add-mission', (req, res, next) => {
     .catch((err) => {
       next(err);
     })
-
-
-
 })
 
 
