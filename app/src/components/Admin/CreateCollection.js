@@ -13,7 +13,7 @@ class CreateCollection extends React.Component {
     this.submitNewCollection = this.submitNewCollection.bind(this);
     this.state = {
       caseFileName: '',
-      articles: [],
+      articles: [{headline: '', url: '', type: ''}],
       inputList: [],
       inputs: [],
     }
@@ -36,6 +36,7 @@ class CreateCollection extends React.Component {
   handleInput() {
     console.log("handling input", this.state.inputs);
     // TODO handle input - add article info to this.articles[]
+
   }
 
   // save casefile name
@@ -53,9 +54,10 @@ class CreateCollection extends React.Component {
       // createdBy - user_id => name
       name: this.state.caseFileName,
       // TODO get the data from the state
-      articles: [{headline: "news happened", url: "https://stackoverflow.com", type: "analysis"},
-			{headline: "ducks!", url: "ducks.com", type: "satire"},
-			{headline: "bunch of flowers", url: "bees.com", type: "analysis"}]
+      articles: this.state.articles,
+      // articles: [{headline: "news happened", url: "https://stackoverflow.com", type: "analysis"},
+			// {headline: "ducks!", url: "ducks.com", type: "satire"},
+			// {headline: "bunch of flowers", url: "bees.com", type: "analysis"}]
     })
     .then((res) => {
       console.log("success?");
