@@ -2,4 +2,9 @@ In this folder are:
 
 Three initial style tiles designed by @seandellis
 
-![](/legitometer/designs/mozilla bright.png)
+![mozilla bright](https://github.com/civicparty/legitometer/blob/master/designs/mozilla%20bright.png?raw=true)
+
+![mozilla](https://github.com/civicparty/legitometer/blob/master/designs/mozilla%20updated.png.png?raw=true)
+
+![spy](https://github.com/civicparty/legitometer/blob/master/designs/spy.png?raw=true)
+
