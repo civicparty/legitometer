@@ -7,7 +7,7 @@ import ArticleInput from './ArticleInput';
 class CreateCollection extends React.Component {
   constructor(props) {
     super(props);
-    this.handleInput = this.handleInput.bind(this);
+    this.handleArticleInputChange = this.handleArticleInputChange.bind(this);
     this.addInput = this.addInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitNewCollection = this.submitNewCollection.bind(this);
@@ -26,14 +26,22 @@ class CreateCollection extends React.Component {
       inputList: this.state.inputs.push(
         <ArticleInput
           key={this.state.inputs.length}
-          handleInput={this.handleInput}
+          index={this.state.inputs.length + 1}
+          handleArticleInputChange={this.handleArticleInputChange}
         />
       )
     });
   }
 
   // save article info
-  handleInput() {
+  handleArticleInputChange(index,  fieldName, value) {
+    const articleState = this.state.articles
+    articleState[Number(index)][fieldName] = value
+
+    console.log("will update articleState to", articleState)
+    this.setState({
+      articles: articleState
+    })
     console.log("handling input", this.state.inputs);
     // TODO handle input - add article info to this.articles[]
 
@@ -77,7 +85,7 @@ class CreateCollection extends React.Component {
 
           <div className="section">
             <Header as="h2">Add Articles</Header>
-            <ArticleInput handleInput={this.handleInput}/>
+            <ArticleInput index={0} handleArticleInputChange={this.handleArticleInputChange} />
             {this.state.inputs}
             <button onClick={this.addInput} className="ui button primary tiny">
               <Icon name="plus"/> Add Another Article
