@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const knex = require('../../db/knex');
+const bookshelf = require('../../db/knex');
 
-let Article = require('../Models/Article.js');
+const Article = require('../Models/Article.js');
+
 router.get('/api/articles', function(req, res, next) {
-  Article.where({mission_id: req.body.mission_id}).fetchAll()
-  .then(function (collection) {
-     res.json({error: false, data: collection.toJSON()});
+  Article.forge().fetchAll()
+  .then((articles) => {
+     res.json({error: false, data: articles.toJSON()});
    })
+
   // knex('articles')
   //   .where('casefile_id', 1)   // where casefile_id === the one we want
   //   .then((articles) => {
@@ -16,7 +18,7 @@ router.get('/api/articles', function(req, res, next) {
 
 });
 
-
+// EXAMPLE
 // let User = require('./user');
 // app.get('/example/?', function(req, res, next) {
 //   var userId = req.session.userId; // assume the User ID is stored in a session variable

@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
 //console.log(__dirname);
-const knex = require('../../db/knex')
+const bookshelf = require('../../db/knex')
 
-let Article = require('../Models/Article.js');
-let Mission = require('../Models/Mission.js');
+// models
+const Mission = require('../Models/Mission');
+const Casefile = require('../Models/Casefile');
+const User = require('../Models/User');
+// collections - TODO not used??? - when is it good to use?
+const Missions = require('../Collections/missions');
 
+// check if user authorized
 function authorizedUser(req, res, next) {
   const userID = req.session.user;
   if (userID) {
@@ -15,52 +20,74 @@ function authorizedUser(req, res, next) {
   }
 }
 
+// need to display user-specific missions + casefiles when user is logged in
+router.get('/api/missions', (req, res, next) => {
+  let files = {};
+  // where user_id === logged_in user (req.session.user)
+  let user = 1; // TODO temp thing
+
+  Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug:true})
+  .then((mission) => {
+    // convert data to JSON
+    mission = mission.toJSON();
+    // loop over data to get mission and casefile names
+    for (var i = 0; i < mission.length; i++) {
+      // save to files object
+      files[mission[i].name] = mission[i].casefile.name;
+    }
+    // send files object
+    res.send(files)
+  })
+
+});
+
+// TODO when is this needed? - get mission by id
 router.get('/api/missions/:id', function(req, res, next) {
-  Article.where({casefile_id: req.params.id}).fetchAll()
-    .then((articles) => {
-      res.json({error: false, data: articles.toJSON()});
+  Mission.forge().where({id: req.params.id}).fetchAll()
+    .then((mission) => {
+      res.json({error: false, data: mission.toJSON()});
     })
 })
 
-router.get('/api/missions', function(req, res, next) {
-  console.log("hi's");
-  // res.send('the missions route, it has been gotten');
-  req.session.user = 1;
-//select collections.name from collections inner join missions ON collections.id = missions.collection_id;
-  let payload = [];
-  knex('missions')
-    .where('user_id', req.session.user)
-    .then((missions) => {
-        payload.push(missions);
-      knex('missions')
-      .innerJoin('casefiles', 'missions.casefile_id', 'casefiles.id')
-      .where('user_id', req.session.user).select('casefiles.name').then((casefiles) => {
-        // here want collections.name where collections.id === missions.collection_id
-        // and how to send it back
-        payload.push(casefiles);
-        res.send(payload);
-      })
-    })
-});
 
+// create a new mission
 router.post('/api/add-mission', (req, res, next) => {
-  console.log("woohoo, post route add a mission!!!");
-  knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions))')
-  .then(() => {
-    knex('missions').insert({
-      user_id: 1,
-      //user_id: knex.select('id').from('users').where('id', req.session.user.id),
-      name: req.body.name,
-      casefile_id: req.body.casefile_id,
-    }, '*')
+  let username, new_url, next_id;
 
-    .then((data) => {
-      res.sendStatus(200);
+  // set the value of the next id in the mission table, avoiding duplicate key errors
+  bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)')
+
+  // TODO I don't think this is the correct way to do this AT ALL
+  // get last mission id
+  Mission.count('id').
+  then((count) => {
+    next_id = parseInt(count)+1;
+  })
+  // get user name from user id for mission url
+  User.forge().where({id: req.body.user_id}).fetch()
+    .then((user) => {
+      user = user.toJSON();
+      username = user.name;
+      // strip punctuation, capitals, and spaces
+      username = username.replace(/[.\-`'\s]/g,"").toLowerCase();
+      // create the url students will use to access the mission
+      new_url = '/' + username + '/' + next_id;
+    })
+    .then(() => {
+      // save mission name, casefile_id, user_id, and url to mission table
+      Mission.forge({name: req.body.name, casefile_id: req.body.casefile_id, user_id: req.body.user_id, url: new_url})
+      .save()
+      .then((mission) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        next(err);
+      })
     })
     .catch((err) => {
       next(err);
-    });
-  });
-});
+    })
+})
+
 
 module.exports = router;

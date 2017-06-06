@@ -16,20 +16,20 @@ class AdminDashboard extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:8888/api/missions')
       .then((res) => {
-        console.log("this is the result", res);
-        this.setState({
-          games: res.data[0],
-          collections: res.data[1]
-        })
-      })
-      .then(() => {
-        for (let key in this.state.collections) {
-          // make a copy of games
-          const games = {...this.state.games}
-          // add collection name to game object
-          games[key].coll_name = this.state.collections[key].name
-          // set state of games
-          this.setState( games );
+        //res.data is an object of objects
+        //loop through the object and set the state
+        for(let key in res.data) {
+          // assign state to temporary arrays
+          let temp_mission = this.state.games.slice();
+          let temp_casefile = this.state.collections.slice();
+          // push data to arrays
+          temp_mission.push(key);
+          temp_casefile.push(res.data[key]);
+          // set the state
+          this.setState({
+            games: temp_mission,
+            collections: temp_casefile,
+          })
         }
       })
       .catch((err) => {
@@ -47,7 +47,6 @@ class AdminDashboard extends React.Component {
         <Link to="new" className="ui button positive right floated">
           Create a New Mission
         </Link>
-
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -55,13 +54,13 @@ class AdminDashboard extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {this.state.games.map((game) => {
+            {Object.keys(this.state.games).map((key, id) => {
               return (
                 <GameListItem
-                  name={game.name}
-                  collection={game.coll_name}
-                  id={game.id}
-                  key={game.id}
+                  name={this.state.games[key]}
+                  collection={this.state.collections[key]}
+                  id={id}
+                  key={id}
                 />
               )
             })}

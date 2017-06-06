@@ -25,12 +25,13 @@ class NewGame extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:8888/api/casefiles')
       .then((res) => {
+        console.log("api requesting", res.data);
         this.setState({
           collections: res.data,
         })
       })
       .then(() => {
-        console.log("component mounted! casefile data retrieved!");
+        console.log("component mounted! casefile data retrieved!", this.state.collections);
       })
       .catch((err) => {
         console.log(err);
@@ -63,6 +64,7 @@ class NewGame extends React.Component {
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;
+    console.log("it should be here", this.state.collection_id); //it is
     axios.post('http://localhost:8888/api/add-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
@@ -146,14 +148,14 @@ class NewGame extends React.Component {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {this.state.collections.map((collection) => {
+                  {Object.keys(this.state.collections).map((key, id) => {
                     return (
                       <CollectionItem
-                        name={collection.name}
-                        activeCollectionId={this.state.collection_id}
-                        createdBy={collection.createdBy}
-                        id={collection.id}
-                        key={collection.id}
+                        name={this.state.collections[key][1]}
+                        activeCollectionId={this.state.collections[key][0]}
+                        createdBy={this.state.collections[key][2]}
+                        id={id}
+                        key={id}
                         updateCollection={this.updateCollectionID}
                       />
                     )

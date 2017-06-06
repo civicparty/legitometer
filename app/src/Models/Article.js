@@ -4,7 +4,7 @@ const bookshelf = require('../../db/knex');
 
 require('./Review');
 require('./Mission');
-require('./Casefile')
+require('./Casefile');
 
 
 const Article = bookshelf.Model.extend({
@@ -16,21 +16,9 @@ const Article = bookshelf.Model.extend({
   mission: function() {
     return this.belongsTo('Mission').through('Casefile');
   },
+  casefile: function() {
+    return this.belongsTo('Casefile');
+  },
 });
 
 module.exports = bookshelf.model('Article', Article);
-
-// z.B.
-// require('./favorite');
-// require('./subscriber');
-//
-// var User = Bookshelf.Model.extend({
-//   tableName: 'users',
-//   hasTimestamps: true,
-//   favorites: function() {
-//     return this.hasMany('Favorite');
-//   },
-//   profile: function() {
-//     return this.hasOne('Subscriber');
-//   }
-// });
