@@ -20,9 +20,9 @@ class Root extends Component {
     super();
     this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
-      teacherLoggedIn: true,
+      teacherLoggedIn: false,
       user_id: 1,
-      studentLoggedIn: false,
+      studentLoggedIn: true,
       games: {},
     }
   }
