@@ -13,7 +13,7 @@ class CreateCollection extends React.Component {
     this.submitNewCollection = this.submitNewCollection.bind(this);
     this.state = {
       caseFileName: '',
-      articles: [{headline: '', url: '', type: ''}],
+      articles: [{name: '', url: '', type: ''}],
       inputList: [],
       inputs: [],
     }
@@ -36,14 +36,27 @@ class CreateCollection extends React.Component {
   // save article info
   handleArticleInputChange(index,  fieldName, value) {
     const articleState = this.state.articles
-    articleState[Number(index)][fieldName] = value
+  //  console.log("beginning", articleState);
+    // console.log(typeof articleState, typeof articleState[0]);
+    // the second article adding gets here, and then errors
+    // Uncaught TypeError: Cannot set property 'name' of undefined
+    //console.log("this.state.articles before change", articleState, typeof articleState);
+    // so this.state.articles is an OBJECT instead of an ARRAY
+    if (!articleState[Number(index)]) {
+        articleState[Number(index)] = {};
+    }
+    //console.log("things", index, fieldName, value);
 
-    console.log("will update articleState to", articleState)
+    articleState[Number(index)][fieldName] = value;
+    // now only saving TYPE, even though all the things are HERE
+    //console.log("it should all be here", articleState, articleState[Number(index)], articleState[Number(index)][fieldName], fieldName);
+
+    // but they are overwriting each other...
+
+    //console.log("will update articleState to", articleState)
     this.setState({
       articles: articleState
     })
-    console.log("handling input", this.state.inputs);
-    // TODO handle input - add article info to this.articles[]
 
   }
 
@@ -54,15 +67,12 @@ class CreateCollection extends React.Component {
 
   submitNewCollection(e) {
     e.preventDefault();
-    console.log("new casefile submitted!", this.state);
+    console.log("new casefile submitted!", this.state.articles, this.state.caseFileName);
     // post new casefile
     axios.post('http://localhost:8888/api/add-casefile', {
       name: this.state.caseFileName,
-      // TODO get the data from the state
       articles: this.state.articles,
-      // articles: [{headline: "news happened", url: "https://stackoverflow.com", type: "analysis"},
-			// {headline: "ducks!", url: "ducks.com", type: "satire"},
-			// {headline: "bunch of flowers", url: "bees.com", type: "analysis"}]
+
     })
     .then((res) => {
       console.log("success?");
