@@ -21,6 +21,7 @@ router.get('/api/casefiles', (req, res, next) => {
 })
 
 router.post('/api/add-casefile', function(req, res, next) {
+  console.log("hello");
   console.log("posting new casefile", req.body);
   let username, new_casefile;
 
