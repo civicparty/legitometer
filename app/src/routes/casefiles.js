@@ -21,7 +21,6 @@ router.get('/api/casefiles', (req, res, next) => {
 })
 
 router.post('/api/add-casefile', function(req, res, next) {
-  console.log("hello");
   console.log("posting new casefile", req.body);
   let username, new_casefile;
 
@@ -48,14 +47,11 @@ router.post('/api/add-casefile', function(req, res, next) {
     })
   })
   .then(() => {
-    console.log("then the articles!", req.body.articles);
-    console.log("loop over the articles");
     // save the casefile_id and article data for each input article
     for (var i = 0; i < req.body.articles.length; i++) {
-      console.log(req.body.articles[i].headline, req.body.articles[i].url, req.body.articles[i].type);
       bookshelf.knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles)+1)');
 
-      Article.forge({casefile_id: new_casefile, article: {headline: req.body.articles[i].headline, url: req.body.articles[i].url, type: req.body.articles[i].type, }})
+      Article.forge({casefile_id: new_casefile, article: {headline: req.body.articles[i].name, url: req.body.articles[i].url, type: req.body.articles[i].type, }})
       .save()
 
     }
