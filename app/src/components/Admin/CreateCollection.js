@@ -35,25 +35,18 @@ class CreateCollection extends React.Component {
 
   // save article info
   handleArticleInputChange(index,  fieldName, value) {
+    // make a copy of this.state.articles
     const articleState = this.state.articles
-  //  console.log("beginning", articleState);
-    // console.log(typeof articleState, typeof articleState[0]);
-    // the second article adding gets here, and then errors
-    // Uncaught TypeError: Cannot set property 'name' of undefined
-    //console.log("this.state.articles before change", articleState, typeof articleState);
-    // so this.state.articles is an OBJECT instead of an ARRAY
+
+    // check if the index exists, if not, create it
     if (!articleState[Number(index)]) {
         articleState[Number(index)] = {};
     }
-    //console.log("things", index, fieldName, value);
 
+    // add the article data to the articleState object
     articleState[Number(index)][fieldName] = value;
-    // now only saving TYPE, even though all the things are HERE
-    //console.log("it should all be here", articleState, articleState[Number(index)], articleState[Number(index)][fieldName], fieldName);
 
-    // but they are overwriting each other...
-
-    //console.log("will update articleState to", articleState)
+    // set the new state
     this.setState({
       articles: articleState
     })
