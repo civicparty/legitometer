@@ -64,7 +64,8 @@ class NewGame extends React.Component {
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;
-    console.log("it should be here", this.state.collection_id); //it is
+    //console.log("it should be here", this.state.collection_id); //it is
+    console.log("about to ad dmission", this.state);
     axios.post('http://localhost:8888/api/add-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,

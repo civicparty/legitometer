@@ -52,6 +52,7 @@ router.get('/api/missions/:id', function(req, res, next) {
 
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
+  console.log("hi, adding mission", req.body);
   let username, new_url, next_id;
 
   // set the value of the next id in the mission table, avoiding duplicate key errors
