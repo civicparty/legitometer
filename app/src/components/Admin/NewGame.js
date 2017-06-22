@@ -65,7 +65,7 @@ class NewGame extends React.Component {
     e.preventDefault();
     let thiz = this;
     //console.log("it should be here", this.state.collection_id); //it is
-    console.log("about to ad dmission", this.state);
+    console.log("about to add mission", this.state);
     axios.post('http://localhost:8888/api/add-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
@@ -153,7 +153,7 @@ class NewGame extends React.Component {
                     return (
                       <CollectionItem
                         name={this.state.collections[key][1]}
-                        activeCollectionId={this.state.collections[key][0]}
+                        activeCollectionId={this.state.collection_id}
                         createdBy={this.state.collections[key][2]}
                         id={id}
                         key={id}
