@@ -18,6 +18,7 @@ import CreateCollection from './components/Admin/CreateCollection';
 class Root extends Component {
   constructor() {
     super();
+    this.renderExperience = this.renderExperience.bind(this);
     this.toggleExperience = this.toggleExperience.bind(this);
     this.state = {
       teacherLoggedIn: false,
@@ -28,6 +29,13 @@ class Root extends Component {
   }
 
   toggleExperience() {
+    this.setState({
+      teacherLoggedIn: !this.state.teacherLoggedIn,
+      studentLoggedIn: !this.state.studentLoggedIn,
+    })
+  }
+
+  renderExperience() {
     const teacher = this.state.teacherLoggedIn;
     const student = this.state.studentLoggedIn;
     // TODO change to get isAdmin from user database
@@ -49,10 +57,10 @@ class Root extends Component {
     return (
       <Router>
         <div>
-          <Header />
+          <Header toggleExperience={this.toggleExperience} isTeacher={this.state.teacherLoggedIn} />
           <div className="App ui text container">
             <Switch>
-                <Route exact path="/" render={this.toggleExperience} />
+                <Route exact path="/" render={this.renderExperience} />
                 <Route path="/new" component={NewGame} />
                 <Route path="/game/:id" component={Game} />
                 <Route path="/form" component={StudentForm} />
