@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Table } from 'semantic-ui-react'
+import { Header, Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 
@@ -28,7 +28,11 @@ class StudentDashboard extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-
+            <Link to="/start">              
+              <Button basic color="red">
+                Legit-o-Meter
+              </Button>
+            </Link>
           </Table.Body>
         </Table>
 

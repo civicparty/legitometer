@@ -59,10 +59,6 @@
 .NewGame__title {
   margin: 10px 15px; }
 
-.CollectionItem__centered-button {
-  margin: auto !important;
-  display: block !important; }
-
 .article-new-inputs:last-of-type {
   margin-bottom: 10px !important; }
 
@@ -72,6 +68,14 @@
 
 .StudentForm-input {
   width: 200px; }
+
+.Button {
+  border: none;
+  padding: 5px;
+  background: #5ECDF8;
+  color: #FFFFFF;
+  padding: 10px 50px;
+  border-radius: 4px; }
 
 body {
   margin: 0;

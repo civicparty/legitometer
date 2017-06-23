@@ -1,4 +1,12 @@
+@import "./colors";
 @import "App";
+@import "./flexbox";
+@import "./utility";
+@import "../components/Admin/NewGame";
+@import "../components/Admin/FormInput";
+@import "../components/Shared/header";
+@import "../components/Reviewer/StudentForm";
+@import "../components/Shared/Button";
 
 body {
   margin: 0;
