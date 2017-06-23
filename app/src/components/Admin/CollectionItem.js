@@ -8,9 +8,9 @@ class CollectionItem extends React.Component {
 
   handleUpdate (e) {
     e.preventDefault();
-    console.log("handling update", this.props.activeCollectionId);
-    // can isActive be set here somehow?
-    this.props.updateCollection(this.props.activeCollectionId);
+
+    // Update which row is highlighted
+    this.props.updateCollection(this.props.id);
   }
 
   render () {

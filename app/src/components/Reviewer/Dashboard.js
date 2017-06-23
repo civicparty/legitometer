@@ -13,7 +13,7 @@ class StudentDashboard extends React.Component {
 
   componentDidMount() {
     // GET missions assigned to student user
-    
+
   }
   render() {
     return (
@@ -31,9 +31,6 @@ class StudentDashboard extends React.Component {
 
           </Table.Body>
         </Table>
-
-        <h4></h4>
-        <h4></h4>
 
       </div>
     )
