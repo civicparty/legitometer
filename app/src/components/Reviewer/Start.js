@@ -8,11 +8,14 @@ import legitCatImage from '../../images/legit-cat.png';
 
 class Start extends Component {
   render() {
-    const bodyStyles = { marginBottom: "50px" }
-    
+    const bodyStyles = { marginBottom: '50px' }
+    const headerStyles = { position: 'absolute', top: '120px', left: '60%' }
+    const divStyles = { position: 'relative' }
+
     return (
-      <div className="text-center">
+      <div className="text-center" style={divStyles}>
         <div style={bodyStyles}>
+          <h1 style={headerStyles}>Legit-o-Meter</h1>
           <img src={legitCatImage} alt="Legit Cat Welcomes You" />
           <h1>You'll evaluate 3 different articles and figure out which ones are legit.</h1>
           <p>We'll ask you questins to help you determine the answer.</p>
