@@ -16,7 +16,6 @@ class AdminDashboard extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:8888/api/missions')
       .then((res) => {
-        //res.data is an object of objects
         //loop through the object and set the state
         for(let key in res.data) {
           // assign state to temporary arrays

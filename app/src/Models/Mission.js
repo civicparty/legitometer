@@ -8,7 +8,7 @@ require('./User');
 
 const Mission = bookshelf.Model.extend({
   tableName: 'missions',
-  hasTimestamps: ['created_at', 'updated_at'],
+  hasTimestamps: true,
   casefile: function() {
     return this.belongsTo('Casefile', 'casefile_id');
   },
