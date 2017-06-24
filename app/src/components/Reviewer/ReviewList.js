@@ -7,7 +7,9 @@ class ReviewList extends React.Component {
       <tr key={this.props.id}>
         <td><h5 className="strong">{this.props.name} - {this.props.collection}</h5></td>
         <td><h5><Link to="/form">{this.props.url}</Link></h5></td>
-        <Link to={`/form`} className='ui button blue'>Start</Link>
+        <td className="collapsing">
+          <Link to={`/form`} className='ui button blue'>Start</Link>
+        </td>
       </tr>
 
     )
