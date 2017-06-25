@@ -7,11 +7,14 @@ $font-primary-alternate: "ZillaSlab-Highlight";
 $font-secondary: "Open Sans", sans-serif;
 
 $font-button: "LeagueGothic";
+$font-tip: "ZillaSlab-Italic";
 
 h1, .h1 {
   font-family: $font-primary;
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 1.6rem;
+  margin-bottom: .5rem;
+  line-height: 120%;
 }
 
 h2, .h2 {
@@ -30,4 +33,14 @@ h4, .h4 {
 p, .p {
   font-family: $font-primary;
   font-size: 1.4rem;
+}
+
+.tip {
+  color: $gray;
+  font-family: $font-tip;
+  font-size: 1.2rem;
+}
+
+.article {
+  font-size: 1.6rem;
 }
