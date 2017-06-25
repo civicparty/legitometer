@@ -64,9 +64,9 @@ class Root extends Component {
   render(){
     return (
       <Router>
-        <div>
+        <div className="flex-parent">
           <Header toggleExperience={this.toggleExperience} isTeacher={this.state.teacherLoggedIn} />
-          <div className="App ui text container">
+          <div className="App text container">
             {/*
               I'm not feeling sure about this pattern. But the idea here is that
               when you land on the / path, we render your dashboard based on
