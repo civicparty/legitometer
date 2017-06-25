@@ -4,7 +4,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button className="Button">
+      <button className="button">
         {this.props.text}
       </button>
     );
