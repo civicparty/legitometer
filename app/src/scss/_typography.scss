@@ -1,0 +1,46 @@
+// # Colors
+
+@import "fonts";
+
+$font-primary: "ZillaSlab-Regular";
+$font-primary-alternate: "ZillaSlab-Highlight";
+$font-secondary: "Open Sans", sans-serif;
+
+$font-button: "LeagueGothic";
+$font-tip: "ZillaSlab-Italic";
+
+h1, .h1 {
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-bottom: .5rem;
+  line-height: 120%;
+}
+
+h2, .h2 {
+  font-family: $font-secondary;
+  font-size: 1.714rem;
+}
+
+h3, .h3 {
+  font-size: 1.28rem;
+}
+
+h4, .h4 {
+  font-size: 1rem;
+}
+
+p, .p {
+  font-family: $font-primary;
+  font-size: 1.4rem;
+}
+
+.tip {
+  color: $gray;
+  font-family: $font-tip;
+  font-size: 1.2rem;
+}
+
+.article {
+  font-size: 1.6rem;
+}

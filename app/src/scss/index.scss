@@ -1,7 +1,44 @@
+//# Handy bit for debugging CSS layouts
+
+// *:nth-child(n) {  background-color: rgba(255,0,0,0.1); }
+
+//# Imports
+
+@import "mixins";
+@import "colors";
 @import "App";
+@import "typography";
+@import "flexbox";
+@import "utility";
+@import "buttons";
+@import "../components/Admin/NewGame";
+@import "../components/Admin/FormInput";
+@import "../components/Shared/header";
+@import "../components/Reviewer/StudentForm";
 
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: $font-primary;
+  color: $color-text;
+}
+
+p a {
+  font-family  : $font-primary;
+  color        : $color-secondary-dark;
+  border-bottom: 0px solid $transparent;
+  transition: all 0.1s ease-in-out;
+  font-weight: 500;
+  &:hover {
+    border-bottom: 1px solid $color-secondary;
+    color        : $color-secondary-dark;
+    transition: all 0.2s ease-out;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
