@@ -9,16 +9,17 @@ class Article extends Component {
     const articleName = "Example Article Name";
 
     return (
-      <div>
-        <div className="text-center">
-          <h1>Start by opening this article</h1>
-          <p>We'll open it in a new window so you can refer back to it.</p>
+      <div className="container">
 
-          <a href={articleLink} target="_blank">{articleName}</a>
-        </div>
+        <h1>Start by opening the article below</h1>
+        <p className="tip">We’ll open it in a new window so you can refer back to it.</p>
 
-        <Button text="I'm ready to go" />
+        <p><a className="article" href={articleLink} target="_blank">{articleName}</a></p>
+
+        <Button text="Done! I’m ready to go" />
+
       </div>
+
     );
   }
 
