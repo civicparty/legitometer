@@ -7,12 +7,13 @@
   letter-spacing: 1px;
   border        : none;
   color         : $white;
+  margin-top: 3rem;
 }
 
 .button {
   @include button;
   @include button-background($color-secondary-dark);
-  
+
   &-dark {
     @include button;
     @include button-background($black);
