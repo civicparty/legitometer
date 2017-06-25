@@ -1,2 +1,31 @@
-$maya_blue: #5ECDF8;
-$white: #FFFFFF;
+// # Colors
+
+// Monochromatic Colors
+
+$black                : rgba(23, 23, 23, 1);
+$white                : #FFFFFF;
+
+$gray-darker          : lighten($black, 15%);
+$gray-dark            : lighten($black, 24%);
+$gray                 : lighten($black, 38%);
+$gray-light           : lighten($black, 60%);
+$gray-lighter         : lighten($black, 82%);
+
+// Primary Colors
+
+$color-primary        : #82D1F5;
+$color-primary-light  : lighten($color-primary, 10%);
+$color-primary-dark   : darken($color-primary, 20%);
+
+$color-secondary      : #FA8CFF;
+$color-secondary-light: lighten($color-secondary, 10%);
+$color-secondary-dark : darken($color-secondary, 24%);
+
+// Special Colors
+
+$color-text           : $black;
+$color-link           : $color-secondary-dark;
+$color-background     : $white;
+
+$transparent          : rgba(0,0,0,0);
+$translucent-light    : transparentize($white, .5);
