@@ -50,6 +50,10 @@
   src: url("../fonts/web/ZillaSlab-Regular.woff") format("woff"); }
 
 @font-face {
+  font-family: 'ZillaSlab-Italic';
+  src: url("../fonts/web/ZillaSlab-Italic.woff") format("woff"); }
+
+@font-face {
   font-family: 'ZillaSlab-Bold';
   src: url("../fonts/web/ZillaSlab-Bold.woff") format("woff"); }
 
@@ -64,7 +68,9 @@
 h1, .h1 {
   font-family: "ZillaSlab-Regular";
   font-weight: 400;
-  font-size: 2rem; }
+  font-size: 1.6rem;
+  margin-bottom: .5rem;
+  line-height: 120%; }
 
 h2, .h2 {
   font-family: "Open Sans", sans-serif;
@@ -79,6 +85,14 @@ h4, .h4 {
 p, .p {
   font-family: "ZillaSlab-Regular";
   font-size: 1.4rem; }
+
+.tip {
+  color: #787878;
+  font-family: "ZillaSlab-Italic";
+  font-size: 1.2rem; }
+
+.article {
+  font-size: 1.6rem; }
 
 .flex {
   display: flex; }
@@ -104,6 +118,7 @@ p, .p {
   letter-spacing: 1px;
   border: none;
   color: #FFFFFF;
+  margin-top: 3rem;
   background: #f512ff;
   transition: all 0.1s ease-in-out; }
   .button:hover {
@@ -120,6 +135,7 @@ p, .p {
     letter-spacing: 1px;
     border: none;
     color: #FFFFFF;
+    margin-top: 3rem;
     background: #171717;
     transition: all 0.1s ease-in-out; }
     .button-dark:hover {
@@ -136,6 +152,7 @@ p, .p {
     letter-spacing: 1px;
     border: none;
     color: #FFFFFF;
+    margin-top: 3rem;
     background: #FFFFFF;
     transition: all 0.1s ease-in-out;
     color: #171717;
@@ -165,13 +182,19 @@ body {
   font-family: "ZillaSlab-Regular";
   color: #171717; }
 
-p a, .text-center a {
+p a {
   font-family: "ZillaSlab-Regular";
   color: #f512ff;
   border-bottom: 0px solid transparent;
   transition: all 0.1s ease-in-out;
   font-weight: 500; }
-  p a:hover, .text-center a:hover {
+  p a:hover {
     border-bottom: 1px solid #FA8CFF;
     color: #f512ff;
     transition: all 0.2s ease-out; }
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; }

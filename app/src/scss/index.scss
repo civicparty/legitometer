@@ -23,7 +23,7 @@ body {
   color: $color-text;
 }
 
-p a, .text-center a {
+p a {
   font-family  : $font-primary;
   color        : $color-secondary-dark;
   border-bottom: 0px solid $transparent;
@@ -34,4 +34,11 @@ p a, .text-center a {
     color        : $color-secondary-dark;
     transition: all 0.2s ease-out;
   }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
