@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Button from '../Shared/Button';
 import Footer from './Footer';
+import Questions from './Questions';
 
 
 class Article extends Component {
@@ -36,7 +37,6 @@ class Article extends Component {
   }
 
   render() {
-    const { headline, url } = this.state;
     const bodyStyles = {
       flexGrow: 1,
       justifyContent: 'center',
@@ -49,24 +49,34 @@ class Article extends Component {
       flexDirection: 'column',
     }
 
+    const previewProps = this.state
+
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
-          <div className="text-center">
-
-            <h1>Start by opening the article below</h1>
-            <p className="tip">We’ll open it in a new window so you can refer back to it.</p>
-
-            <p><a className="article" href={url} target="_blank">{headline}</a></p>
-
-            <Button text="Done! I’m ready to go" />
-          </div>
+          <Route path="/article/:id" exact render={(previewProps) => <Preview />} />
+          <Route path="/article/:article_id/question/:id" exact component={Questions} />
         </div>
         <Footer />
       </div>
     );
   }
 
+}
+
+const Preview = (props) => {
+  const { headline, url } = props;
+
+  return (
+    <div className="text-center">
+      <h1>Start by opening the article below</h1>
+      <p className="tip">We’ll open it in a new window so you can refer back to it.</p>
+      <p><a className="article" href={url} target="_blank">{headline}</a></p>
+      <Link to="article/1/question/1">
+        <Button text="Done! I’m ready to go" />
+      </Link>
+    </div>
+  )
 }
 
 export default Article;
