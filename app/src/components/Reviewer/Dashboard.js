@@ -17,25 +17,16 @@ class StudentDashboard extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Header as="h1" className="center">
-          Student Dashboard
+      <div className="text-center">
+        <Header as="h1">
+          Your Missions
         </Header>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell colSpan='3' textAlign='center'>Your Missions</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Link to="/start">              
-              <Button basic color="red">
-                Legit-o-Meter
-              </Button>
-            </Link>
-          </Table.Body>
-        </Table>
 
+        <Link to="/start">
+          <Button basic color="red">
+            Legit-o-Meter
+          </Button>
+        </Link>
       </div>
     )
   }
