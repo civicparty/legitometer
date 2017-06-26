@@ -5,17 +5,20 @@ import Button from '../Shared/Button';
 import legitCatImage from '../../images/legit-cat.png';
 
 class Start extends Component {
+
   render() {
+    const bodyStyles = { marginBottom: '50px' }
+    const headerStyles = { position: 'absolute', top: '120px', left: '60%' }
+    const divStyles = { position: 'relative' }
 
     return (
-
-      <div className="container">
-
-        <img src={legitCatImage} alt="Legit Cat Welcomes You" />
-        <h1>You’ll read 3 different articles and figure out which ones are legit.</h1>
-        <p className="tip">We’ll ask questions to help you figure out the answer.</p>
-
-        <Link to="/article/1">
+      <div className="text-center" style={divStyles}>
+        <div style={bodyStyles}>
+          <h1 style={headerStyles}>Legit-o-Meter</h1>
+          <img src={legitCatImage} alt="Legit Cat Welcomes You" />
+          <h1>You’ll read 3 different articles and figure out which ones are legit.</h1>
+          <p className="tip">We'll ask you questins to help you determine the answer.</p>
+        </div>        <Link to="/article/1">
           <Button text="Let’s Get Started" />
         </Link>
 

@@ -97,8 +97,24 @@ p, .p {
 .flex {
   display: flex; }
 
+.flex-parent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* align items in Main Axis */
+  align-items: stretch;
+  /* align items in Cross Axis */
+  align-content: stretch;
+  /* Extra space in Cross Axis */ }
+
 .flex-right {
   margin-left: auto !important; }
+
+.flex-column {
+  display: flex;
+  flex-direction: column; }
 
 .bump-right {
   margin-right: 5px !important; }
@@ -170,17 +186,23 @@ p, .p {
   margin-bottom: 10px !important; }
 
 .header {
-  margin-bottom: 20px;
   display: block; }
 
 .StudentForm-input {
   width: 200px; }
 
-body {
+html, body {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0; }
+
+body {
   font-family: "ZillaSlab-Regular";
   color: #171717; }
+
+#root {
+  height: 100%; }
 
 p a {
   font-family: "ZillaSlab-Regular";
@@ -197,4 +219,5 @@ p a {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; }
+  flex-direction: column;
+  height: 100%; }
