@@ -29,6 +29,9 @@ class Footer extends Component {
       flex: 1
     }
 
+    const currentPath = this.props.location.pathname.split('/')
+    const currentId = Number(currentPath[currentPath.length - 1])
+
     return (
       <div className="flex" style={barStyles}>
         <div style={footerTitleCss}>
@@ -39,7 +42,7 @@ class Footer extends Component {
           <ProgressBar x={0} y={10} />
         </div>
         <div style={navigationCss}>
-          <QuestionPagingArrows previous={null} next={2} />
+          <QuestionPagingArrows currentId={currentId} />
         </div>
       </div>
     );
