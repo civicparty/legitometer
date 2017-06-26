@@ -57,7 +57,7 @@ class Article extends Component {
           <Route path="/article/:id" exact render={(previewProps) => <Preview />} />
           <Route path="/article/:article_id/question/:id" exact component={Questions} />
         </div>
-        <Footer />
+        <Footer {...this.props} />
       </div>
     );
   }
