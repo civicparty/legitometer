@@ -107,7 +107,7 @@ const QuestionSet = [
     type: 'yesNo',
   }, {
     id: 19,
-    questionText: 'WWould you share this article with a friend?',
+    questionText: 'Would you share this article with a friend?',
     type: 'yesNo',
   }
 ]
