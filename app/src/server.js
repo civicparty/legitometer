@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
-const Promise = require('bluebird'); //is this necessary?
 // Set up the express app
 const app = express();
 
