@@ -31,7 +31,7 @@ class StudentForm extends React.Component {
   submitNewReview(e) {
     e.preventDefault();
     console.log("submitting...", this.state);
-    axios.post('/api/add-review', {
+    axios.post('http://localhost:8888/api/add-review', {
        user_id: 1,
        mission_id: 1,
        answers: this.state.answers

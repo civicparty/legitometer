@@ -14,7 +14,7 @@ class ArticleLink extends React.Component {
 
   componentDidMount() {
     console.log("component, mounted");
-    axios.get('/api/articles')
+    axios.get('http://localhost:8888/api/articles')
       .then((res) => {
         console.log("gotten!", res.data);
         this.setState({ articles: res.data }, function chooseArticle() {
