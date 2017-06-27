@@ -24,7 +24,7 @@ class StudentDashboard extends React.Component {
 
         <Link to="/start">
           <Button basic color="red">
-            Legit-o-Meter
+            Legit-o-Meter: Vaccines
           </Button>
         </Link>
       </div>
