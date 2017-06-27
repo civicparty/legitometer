@@ -10,7 +10,7 @@ class Questions extends Component {
     return (
       <div className="text-center">
         <h1>{question.questionText}</h1>
-        <input type="text"/>
+        <input type="text" className="question--short" />
       </div>
     );
   }
