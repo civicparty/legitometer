@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      database: process.env.DATABASE_URL || 'tacoplanet',
+      database: process.env.DATABASE_URL || 'legit-o-meterdb',
     },
     debug: true,
   },
@@ -13,7 +13,10 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: process.env.DATABASE_URL,
+      host : '127.0.0.1',
+      user : process.env.DB_USER,
+      password : process.env.DB_PASS,
+      database : process.env.DB_NAME
     },
     pool: {
       min: 2,

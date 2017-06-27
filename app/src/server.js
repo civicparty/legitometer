@@ -5,8 +5,10 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config()
 // Set up the express app
 const app = express();
+
 
 // Log requests to the console.
 app.use(logger('dev'));
