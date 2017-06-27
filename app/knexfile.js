@@ -1,5 +1,8 @@
 // Update with your config settings.
 
+console.log(process.env)
+console.log(process.env.DB_STRING)
+
 module.exports = {
 
   development: {
@@ -12,12 +15,11 @@ module.exports = {
 
   production: {
     client: 'pg',
-    // connection: {
-    //   database: process.env.DATABASE_URL,
-    //   user:     process.env.DB_USER,
-    //   password: process.env.DB_PASS
-    // },
-    connection: process.env.DB_STRING,
+    connection: {
+      database: process.env.DATABASE_URL,
+      user:     process.env.DB_USER,
+      password: process.env.DB_PASS
+    },
     pool: {
       min: 2,
       max: 10
