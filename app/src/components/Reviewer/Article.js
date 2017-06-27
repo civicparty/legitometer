@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Button from '../Shared/Button';
 import Footer from './Footer';
 import Questions from './Questions';
+import ArticlePreview from './ArticlePreview';
 
 
 class Article extends Component {
@@ -54,7 +54,7 @@ class Article extends Component {
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
-          <Route path="/article/:id" exact render={(previewProps) => <Preview />} />
+          <Route path="/article/:id" exact render={() => <ArticlePreview {...previewProps} />} />
           <Route path="/article/:article_id/question/:id" exact component={Questions} />
         </div>
         <Footer {...this.props} />
@@ -62,21 +62,6 @@ class Article extends Component {
     );
   }
 
-}
-
-const Preview = (props) => {
-  const { headline, url } = props;
-
-  return (
-    <div className="text-center">
-      <h1>Start by opening the article below</h1>
-      <p className="tip">We’ll open it in a new window so you can refer back to it.</p>
-      <p><a className="article" href={url} target="_blank">{headline}</a></p>
-      <Link to="/article/1/question/1">
-        <Button text="Done! I’m ready to go" />
-      </Link>
-    </div>
-  )
 }
 
 export default Article;

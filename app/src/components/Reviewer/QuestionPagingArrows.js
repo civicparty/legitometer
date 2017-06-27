@@ -8,7 +8,7 @@ class QuestionPagingArrows extends Component {
     const { currentId } = this.props;
     const hasPrevious = currentId <= 1
     const hasNext = currentId >= MAX_QUESTIONS
-    const previousId = hasPrevious ? currentId : currentId - 1
+    const previousId = hasPrevious ? '' : `question/${currentId - 1}`
     const nextId = hasNext ? currentId : currentId + 1
     const disabledColor = '#93D0F1' // light blue
     const enabledColor = '#C5E3F4' // blue
@@ -35,7 +35,7 @@ class QuestionPagingArrows extends Component {
       color: 'white',
     }, buttonCss)
 
-    const previousLink = `/article/1/question/${previousId}`
+    const previousLink = `/article/1/${previousId}`
     const nextLink = `/article/1/question/${nextId}`
 
     return (
