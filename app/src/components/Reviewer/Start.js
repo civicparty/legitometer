@@ -9,7 +9,13 @@ class Start extends Component {
   render() {
     const bodyStyles = { marginBottom: '50px' }
     const headerStyles = { position: 'absolute', top: '120px', left: '60%' }
-    const divStyles = { position: 'relative' }
+    const divStyles = {
+      position: 'relative',
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', 
+    }
 
     return (
       <div className="text-center" style={divStyles}>

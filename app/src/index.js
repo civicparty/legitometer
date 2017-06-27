@@ -53,8 +53,14 @@ class Root extends Component {
      } else if (studentLoggedIn){
       display = <StudentDashboard />;
     }
+    const experienceCss = {
+      flex: 1,
+      justifyContent: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+    }
     return (
-      <div>
+      <div style={experienceCss}>
         {display}
       </div>
     );
