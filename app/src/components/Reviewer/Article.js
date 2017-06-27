@@ -23,7 +23,7 @@ class Article extends Component {
     // EX: "/api/articles/casefile/2"
     //
     // for demonstration purposes, shortcutting to grab a specific one in the array.
-    axios.get('http://localhost:8888/api/articles')
+    axios.get('/api/articles')
       .then((res) => {
         const { headline, url } = res.data.data[27].article
         this.setState({

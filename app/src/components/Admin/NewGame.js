@@ -23,7 +23,7 @@ class NewGame extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8888/api/casefiles')
+    axios.get('/api/casefiles')
       .then((res) => {
         console.log("api requesting", res.data);
         this.setState({
@@ -66,7 +66,7 @@ class NewGame extends React.Component {
     let thiz = this;
     //console.log("it should be here", this.state.collection_id); //it is
     console.log("about to add mission", this.state);
-    axios.post('http://localhost:8888/api/add-mission', {
+    axios.post('/api/add-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
       user_id: this.state.user_id,

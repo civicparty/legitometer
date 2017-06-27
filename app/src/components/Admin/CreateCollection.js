@@ -62,7 +62,7 @@ class CreateCollection extends React.Component {
     e.preventDefault();
     console.log("new casefile submitted!", this.state.articles, this.state.caseFileName);
     // post new casefile
-    axios.post('http://localhost:8888/api/add-casefile', {
+    axios.post('/api/add-casefile', {
       name: this.state.caseFileName,
       articles: this.state.articles,
 
