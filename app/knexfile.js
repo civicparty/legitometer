@@ -13,12 +13,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      host:     'localhost',
-      database: process.env.DATABASE_URL,
-      user:     process.env.DB_USER,
-      password: process.env.DB_PASS
-    },
+    connection: 'postgres://tacoplanet' + process.env.DB_PASS + ':@localhost/' + process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
