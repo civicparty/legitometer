@@ -40,6 +40,7 @@ class NewGame extends React.Component {
   }
 
   updateCollectionID(collection_id) {
+    console.log("updating colleciton id", collection_id);
     this.setState({ collection_id: collection_id });
   }
 
