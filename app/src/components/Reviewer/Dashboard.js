@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Header, Table } from 'semantic-ui-react';
+import { Header, Table, Button } from 'semantic-ui-react';
 import ReviewList from './ReviewList';
+
 
 
 class StudentDashboard extends React.Component {
@@ -65,6 +67,12 @@ class StudentDashboard extends React.Component {
           </Table.Body>
         </Table>
 
+
+        <Link to="/start">
+          <Button basic color="red">
+            Legit-o-Meter: Vaccines
+          </Button>
+        </Link>
       </div>
     )
   }
