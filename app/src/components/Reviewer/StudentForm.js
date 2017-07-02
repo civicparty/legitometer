@@ -37,15 +37,12 @@ class StudentForm extends React.Component {
        answers: this.state.answers
     })
   }
-// this works in POSTMAN:
-	// {"user_id": "1", "mission_id": "1", "answers": {"publisher_name": "squirrel", "author": "foamythesquirrel","headline": "blahblah", "published_date": "5/5/5555"}
-	// }
-// TODO put back: first line after <div> <h3>Read this article: </h3><ArticleLink />
+
   render() {
     return (
       <div>
 
-        <h3>Reflect on the credibility of the article:</h3>
+        <h3>Reflect on the credibility of the article: <ArticleLink /></h3>
         <Form onSubmit={(e) => this.submitNewReview(e)}>
           <Form.Group widths='equal'>
             <Form.Field>
