@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Header, Table } from 'semantic-ui-react';
-import GameListItem from './GameListItem';
+import MissionListItem from './MissionListItem';
 
 class AdminDashboard extends React.Component {
   constructor() {
@@ -42,7 +42,7 @@ class AdminDashboard extends React.Component {
         <Header as="h1" className="floated left">
           Operation Legit-o-Meter
         </Header>
-
+        
         <Link to="new" className="ui button positive right floated">
           Create a New Mission
         </Link>
@@ -55,7 +55,7 @@ class AdminDashboard extends React.Component {
           <Table.Body>
             {Object.keys(this.state.games).map((key, id) => {
               return (
-                <GameListItem
+                <MissionListItem
                   name={this.state.games[key]}
                   collection={this.state.collections[key]}
                   id={id}
