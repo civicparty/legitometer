@@ -30,10 +30,15 @@ router.get('/api/missions', (req, res, next) => {
   .then((mission) => {
     // convert data to JSON
     mission = mission.toJSON();
+    console.log("these are all the missions", mission);
     // loop over data to get mission and casefile names
     for (var i = 0; i < mission.length; i++) {
       // save to files object
-      files[mission[i].name] = mission[i].casefile.name;
+      if (mission[i].casefile.name) {
+        files[mission[i].name] = mission[i].casefile.name;
+      } else {
+        files[mission[i].name] = "no casefile added";
+      }
     }
     // send files object
     res.send(files)
@@ -76,7 +81,9 @@ router.post('/api/add-mission', (req, res, next) => {
     })
     .then(() => {
       // save mission name, casefile_id, user_id, and url to mission table
-      Mission.forge({name: req.body.name, casefile_id: req.body.casefile_id, user_id: req.body.user_id, url: new_url})
+
+      //casefile_id: req.body.casefile_id,
+      Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url})
       .save()
       .then((mission) => {
         res.sendStatus(200);

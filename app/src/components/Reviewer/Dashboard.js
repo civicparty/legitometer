@@ -6,7 +6,6 @@ import { Header, Table, Button } from 'semantic-ui-react';
 import ReviewList from './ReviewList';
 
 
-
 class StudentDashboard extends React.Component {
   constructor() {
     super();

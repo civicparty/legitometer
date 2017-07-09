@@ -12,6 +12,7 @@ class NewGame extends React.Component {
     this.updateTitle = this.updateTitle.bind(this);
     this.submitNewPost = this.submitNewPost.bind(this);
     this.updateCollectionID = this.updateCollectionID.bind(this);
+    this.saveMission = this.saveMission.bind(this);
     this.state = {
       name: null,
       collection_id: null,
@@ -39,6 +40,26 @@ class NewGame extends React.Component {
 
   }
 
+  saveMission(newName) {
+    // e.preventDefault();
+    // add new mission with name (update with casefile_id later)
+    // this to use inside of axios call
+    let thiz = this;
+    axios.post('http://localhost:8888/api/add-mission', {
+      name: newName,
+      user_id: 1,
+    })
+    .then((res) => {
+      console.log("response", res);
+      thiz.setState({ submitResult: false });
+    })
+    .catch((err) => {
+      console.log("you are not going to space today", err);
+    });
+
+
+  }
+
   updateCollectionID(collection_id) {
     console.log("updating colleciton id", collection_id);
     this.setState({ collection_id: collection_id });
@@ -46,20 +67,19 @@ class NewGame extends React.Component {
 
   updateTitle(e) {
     e.preventDefault();
+    const newName = this.refs.input ? this.refs.input.value : this.state.name;
 
-    const newName = () => {
-      if (this.refs.input) {
-        return this.refs.input.value
-      } else {
-        return this.state.name
-      }
-    };
 
     this.setState({
       showEditTitle: !this.state.showEditTitle,
-      name: newName(),
+      name: newName,
       user_id: 1, // TODO this will come from the session
     })
+    this.saveMission(newName);
+    console.log("updating the title", this.state.name, this.refs.input.value);
+
+    console.log("new name", newName);
+
   }
 
   submitNewPost(e) {
@@ -89,7 +109,7 @@ class NewGame extends React.Component {
             defaultValue={this.state.name}
             className="bump-right"
           />
-          <button className="ui button" type="submit">
+        <button className="ui button" type="submit" onClick={(e) => this.updateTitle(e)}>
             Save
           </button>
         </div>
@@ -108,13 +128,11 @@ class NewGame extends React.Component {
 
     return (
       <div>
-        { this.state.submitResult ? <Redirect to="/" /> : "" }
 
         <Header as="h1">Create a New Mission</Header>
 
         <form
           ref={(input) => this.nameForm = input}
-          onSubmit={(e) => this.updateTitle(e)}
           className="ui form section"
         >
           <label htmlFor="gameTitle">Mission Name</label>
@@ -177,3 +195,5 @@ class NewGame extends React.Component {
 }
 
 export default NewGame;
+
+//          onSubmit={(e) => this.updateTitle(e)}

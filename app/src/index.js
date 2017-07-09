@@ -11,7 +11,7 @@ import './scss/index.css';
 // Admin Components
 import NewGame from './components/Admin/NewGame';
 import TeacherDashboard from './components/Admin/Dashboard';
-import Game from './components/Admin/Game';
+import Mission from './components/Admin/Mission';
 import CreateCollection from './components/Admin/CreateCollection';
 
 // Reviewer Components
@@ -68,6 +68,8 @@ class Root extends Component {
 
 
   render(){
+    console.log("hiiiii", this.state.teacherLoggedIn, this.state.studentLoggedIn);
+
     return (
       <Router>
         <div className="flex-parent">
@@ -84,18 +86,19 @@ class Root extends Component {
               See this implementation:
               https://reacttraining.com/react-router/web/example/auth-workflow
             */}
-            <Route exact path="/" render={this.renderExperience} />
             {
               this.state.teacherLoggedIn &&
                 <Switch>
+                  <Route exact path="/" component={TeacherDashboard} />
                   <Route path="/new" component={NewGame} />
-                  <Route path="/game/:id" component={Game} />
+                  <Route path="/mission/:id" component={Mission} />
                   <Route path="/collection/new" component={CreateCollection} />
                 </Switch>
             }
             {
               this.state.studentLoggedIn &&
                 <Switch>
+                  <Route exact path="/" component={StudentDashboard} />
                   <Route path="/start" component={Start} />
                   <Route path="/article/:id" component={Article} />
                   <Route path="/mstestteacher/1" component={StudentForm} />
