@@ -2,6 +2,7 @@
 
 require('dotenv').config()
 
+console.log("testing", process.env)
 console.log("trying to connect to db in environment", process.env.NODE_ENV)
 const env = process.env.NODE_ENV || 'development';
 const knexConfig = require('../knexfile')[env];
