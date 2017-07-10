@@ -1,5 +1,6 @@
 'use strict';
 
+console.log("trying to connect to db in environment", process.env.NODE_ENV)
 const env = process.env.NODE_ENV || 'development';
 const knexConfig = require('../knexfile')[env];
 const knex = require('knex')(knexConfig);
