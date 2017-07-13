@@ -5,6 +5,7 @@ const bookshelf = require('../../db/knex');
 const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
 const Article = require('../Models/Article');
+const Mission = require('../Models/Mission');
 
 router.get('/api/casefiles', (req, res, next) => {
   Casefile.forge().fetchAll()
@@ -26,7 +27,7 @@ router.post('/api/add-casefile', function(req, res, next) {
 
   bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)');
 
-  // get last id in table and add 1 for the next id
+  // get last id in table and add 1 for the next id TODO find another way to do it
   Casefile.count('id').
   then((count) => {
     new_casefile = parseInt(count)+1;
@@ -55,6 +56,26 @@ router.post('/api/add-casefile', function(req, res, next) {
       .save()
 
     }
+  })
+  .then(() => {
+    // update mission table
+    
+    Mission.forge().where({name: req.body.name}).fetch()
+      .then((mission) => {
+        // update mission with selected casefile_id
+        console.log("updating mission after adding casefile", mission);
+        // Mission.forge().where({id: mission.attributes.id})
+        //   .save({casefile_id: req.body.casefile_id}, {patch: true})
+        //   .then((mission) => {
+        //     console.log("mission updated successfully", mission);
+        //   })
+        //   .catch((err) => {
+        //     next(err);
+        //   })
+      })
+      .catch((err) => {
+        next(err);
+      })
   })
   .catch((err) => {
     console.log("all the things are bad", err);

@@ -30,7 +30,7 @@ router.get('/api/missions', (req, res, next) => {
   .then((mission) => {
     // convert data to JSON
     mission = mission.toJSON();
-    console.log("these are all the missions", mission);
+    //console.log("these are all the missions", mission);
     // loop over data to get mission and casefile names
     for (var i = 0; i < mission.length; i++) {
       // save to files object
@@ -77,15 +77,16 @@ router.post('/api/add-mission', (req, res, next) => {
       // strip punctuation, capitals, and spaces
       username = username.replace(/[.\-`'\s]/g,"").toLowerCase();
       // create the url students will use to access the mission
-      new_url = '/' + username + '/' + next_id;
+      new_url = '/' + username + '/' + next_id; // TODO next_id and missions.id are not lining up
     })
     .then(() => {
       // save mission name, casefile_id, user_id, and url to mission table
-
+      // removed casefile_id to save in patch when selected
       //casefile_id: req.body.casefile_id,
       Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url})
       .save()
       .then((mission) => {
+        console.log("mmissioin saved", mission.attributes.id); // TODO can I send this back ...? or hold onto it somehow - YES, IT WOULD BE THE LAST ID IN THE TABLE
         res.sendStatus(200);
       })
       .catch((err) => {
@@ -95,6 +96,31 @@ router.post('/api/add-mission', (req, res, next) => {
     .catch((err) => {
       next(err);
     })
+})
+
+router.patch('/api/update-mission', (req, res, next) => {
+  console.log("patching!", req.body);
+  // NOTE should work with 'Save New Mission' button and TODO 'Save Case File' button
+
+  Mission.forge().where({name: req.body.name}).fetch()
+    .then((mission) => {
+      // update mission with selected casefile_id
+      console.log("fetched mission", mission.attributes);
+      Mission.forge().where({id: mission.attributes.id})
+        .save({casefile_id: req.body.casefile_id}, {patch: true})
+        .then((mission) => {
+          console.log("mission updated successfully", mission);
+        })
+        .catch((err) => {
+          next(err);
+        })
+    })
+    .catch((err) => {
+      next(err);
+    })
+
+  // TODO casefile_id for 'climate change' comes back as '0' - is that right????
+  // TODO the mission & casefile ids are not what I think they should be / look at this
 })
 
 

@@ -50,7 +50,7 @@ class NewGame extends React.Component {
       user_id: 1,
     })
     .then((res) => {
-      console.log("response", res);
+      console.log("response after saving mission name", res);
       thiz.setState({ submitResult: false });
     })
     .catch((err) => {
@@ -86,14 +86,19 @@ class NewGame extends React.Component {
     e.preventDefault();
     let thiz = this;
     //console.log("it should be here", this.state.collection_id); //it is
-    console.log("about to add mission", this.state);
-    axios.post('http://localhost:8888/api/add-mission', {
+    console.log("new post submitted, here is the state: ", this.state);
+    // update mission created above with selected casefile
+    // axios.post('http://localhost:8888/api/add-mission', {
+    //   name: this.state.name,
+    //   casefile_id: this.state.collection_id,
+    //   user_id: this.state.user_id,
+    // })
+    axios.patch('http://localhost:8888/api/update-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
-      user_id: this.state.user_id,
     })
     .then((res) => {
-      console.log("response", res);
+      console.log("response after patch", res);
       thiz.setState({ submitResult: true });
     })
     .catch((err) => {

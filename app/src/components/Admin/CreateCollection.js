@@ -65,7 +65,6 @@ class CreateCollection extends React.Component {
     axios.post('http://localhost:8888/api/add-casefile', {
       name: this.state.caseFileName,
       articles: this.state.articles,
-
     })
     .then((res) => {
       console.log("success?");
@@ -73,6 +72,7 @@ class CreateCollection extends React.Component {
     .catch((err) => {
       console.log("ERROR!!! :p !!!", err);
     })
+
   }
 
   render() {
