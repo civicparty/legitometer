@@ -22,27 +22,26 @@ function authorizedUser(req, res, next) {
 
 // need to display user-specific missions + casefiles when user is logged in
 router.get('/api/missions', (req, res, next) => {
-  let files = {};
   // where user_id === logged_in user (req.session.user)
   let user = 1; // TODO temp thing
 
   Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug:true})
-  .then((mission) => {
-    // convert data to JSON
-    mission = mission.toJSON();
-    console.log("these are all the missions", mission);
-    // loop over data to get mission and casefile names
-    for (var i = 0; i < mission.length; i++) {
-      // save to files object
-      if (mission[i].casefile.name) {
-        files[mission[i].name] = mission[i].casefile.name;
-      } else {
-        files[mission[i].name] = "no casefile added";
+    .then((missions) => {
+      // convert data to JSON
+      missions = missions.toJSON();
+
+      // loop over data to assign a fallback casefile name if necessary
+      for (var i = 0; i < missions.length; i++) {
+        if (missions[i].casefile &&  missions[i].casefile.name) {
+          missions[i].casefile_name = missions[i].casefile.name;
+        } else {
+          missions[i].casefile_name = 'No Casefile';
+        }
       }
-    }
-    // send files object
-    res.send(files)
-  })
+
+      console.log(missions)
+      res.send(missions);
+    })
 
 });
 
