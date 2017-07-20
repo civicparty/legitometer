@@ -5,7 +5,6 @@ const bookshelf = require('../../db/knex');
 const Article = require('../Models/Article.js');
 
 // display articles when casefile selected or send articles to student form
-// TODO get only where casefile_id matches . . . where does that come from???
 router.get('/api/articles', (req, res, next) => {
   Article.forge().fetchAll()
   .then((articles) => {
@@ -19,5 +18,9 @@ router.get('/api/articles', (req, res, next) => {
    })
 });
 
+// TODO get only where casefile_id matches . . . where does that come from???
+router.get('/api/articles/:id', (req, res, next) => {
+  // where :id === casefile_id
+})
 
 module.exports = router;

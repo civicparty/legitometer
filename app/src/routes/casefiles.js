@@ -21,6 +21,7 @@ router.get('/api/casefiles', (req, res, next) => {
     })
 })
 
+// TODO - this is terrible
 router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile", req.body);
   let username, new_casefile;
@@ -58,25 +59,29 @@ router.post('/api/add-casefile', function(req, res, next) {
     }
   })
   .then(() => {
-    // update mission table
-    
-    Mission.forge().where({name: req.body.name}).fetch()
-      .then((mission) => {
-        // update mission with selected casefile_id
-        console.log("updating mission after adding casefile", mission);
-        // Mission.forge().where({id: mission.attributes.id})
-        //   .save({casefile_id: req.body.casefile_id}, {patch: true})
-        //   .then((mission) => {
-        //     console.log("mission updated successfully", mission);
-        //   })
-        //   .catch((err) => {
-        //     next(err);
-        //   })
-      })
-      .catch((err) => {
-        next(err);
-      })
-  })
+    // update mission table TODO - HOW TO ACCESS THE MISSION (not with req.body.name)
+    console.log("here we are trying to add the new casefile to the new mission");
+    Mission.count('id')
+    .then((count) => { // TODO - not this. this is terrible.
+      new_mission = parseInt(count)+1;
+      Mission.forge().where({id: new_mission}).fetch()
+        .then((mission) => {
+          // update mission with selected casefile_id
+          console.log("updating mission after adding casefile", mission.attributes.id);
+          Mission.forge().where({id: mission.attributes.id})
+            .save({casefile_id: new_casefile}, {patch: true})
+            .then((mission) => {
+              console.log("mission updated successfully", mission);
+            })
+            .catch((err) => {
+              next(err);
+            })
+        }) // end then
+        .catch((err) => {
+          next(err);
+        })
+    }) // end then
+  }) // end then
   .catch((err) => {
     console.log("all the things are bad", err);
   })

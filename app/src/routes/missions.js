@@ -123,5 +123,22 @@ router.patch('/api/update-mission', (req, res, next) => {
   // TODO the mission & casefile ids are not what I think they should be / look at this
 })
 
+router.delete('/api/delete-mission/:id', (req, res, next) => {
+  console.log("you are in the mission delete route");
+  Mission.forge().where({id: req.params.id})
+    .fetch({require: true})
+    .then((mission) => {
+      mission.destroy()
+      .then(() => {
+        console.log("mission", req.params.id, "successfully deleted");
+      })
+      .catch((err) => {
+        console.log("nooo, error", err);
+      })
+    })
+    .catch((err) => {
+      console.log("delete error", err);
+    });
+});
 
 module.exports = router;

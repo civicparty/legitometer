@@ -11,3 +11,6 @@ exports.up = knex =>
 
 exports.down = knex =>
   knex.schema.dropTable('reviews')
+
+
+// TODO UPDATE - 'users' [] instead of 'user_id'

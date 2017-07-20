@@ -29,3 +29,5 @@ exports.seed = function(knex, Promise) {
       ]);
     });
 };
+
+// TODO UPDATE - users [] instead of user_id. - nonspecific answer names, question1, question2, etc

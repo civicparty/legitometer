@@ -69,7 +69,6 @@ class NewGame extends React.Component {
     e.preventDefault();
     const newName = this.refs.input ? this.refs.input.value : this.state.name;
 
-
     this.setState({
       showEditTitle: !this.state.showEditTitle,
       name: newName,
@@ -82,6 +81,7 @@ class NewGame extends React.Component {
 
   }
 
+  // 
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;

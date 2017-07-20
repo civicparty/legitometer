@@ -25,7 +25,7 @@ class Article extends Component {
     // for demonstration purposes, shortcutting to grab a specific one in the array.
     axios.get('http://localhost:8888/api/articles')
       .then((res) => {
-        //const { headline, url } = res.data.data[27].article
+        // headline and url for link to display on start page
         const headline = res.data[27].article.headline;
         const url = res.data[27].article.url;
         this.setState({
