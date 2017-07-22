@@ -7,10 +7,8 @@ const bookshelf = require('../../db/knex')
 const Mission = require('../Models/Mission');
 const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
-// collections - TODO not used??? - when is it good to use?
-const Missions = require('../Collections/missions');
 
-// check if user authorized
+// TODO check if user authorized
 function authorizedUser(req, res, next) {
   const userID = req.session.user;
   if (userID) {
@@ -20,17 +18,16 @@ function authorizedUser(req, res, next) {
   }
 }
 
-// need to display user-specific missions + casefiles when user is logged in
+// display user's missions + casefiles when user is logged in
 router.get('/api/missions', (req, res, next) => {
   let files = {};
-  // where user_id === logged_in user (req.session.user)
-  let user = 1; // TODO temp thing
+  // TODO where user_id === logged_in user (req.session.user)
+  let user = 1; // temporary workaround
 
   Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug:true})
   .then((mission) => {
     // convert data to JSON
     mission = mission.toJSON();
-    //console.log("these are all the missions", mission);
     // loop over data to get mission and casefile names
     for (var i = 0; i < mission.length; i++) {
       // save to files object
@@ -54,7 +51,6 @@ router.get('/api/missions/:id', function(req, res, next) {
     })
 })
 
-
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
   console.log("hi, adding mission", req.body);
@@ -63,13 +59,13 @@ router.post('/api/add-mission', (req, res, next) => {
   // set the value of the next id in the mission table, avoiding duplicate key errors
   bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)')
 
-  // TODO I don't think this is the correct way to do this AT ALL
-  // get last mission id
+  // get last mission id - TODO I don't think this is the correct way to do this AT ALL
   Mission.count('id').
   then((count) => {
     next_id = parseInt(count)+1;
   })
-  // get user name from user id for mission url
+
+  // get user name from user id for mission url - TODO is this still necessary??? I don't think it is...
   User.forge().where({id: req.body.user_id}).fetch()
     .then((user) => {
       user = user.toJSON();
@@ -80,13 +76,12 @@ router.post('/api/add-mission', (req, res, next) => {
       new_url = '/' + username + '/' + next_id; // TODO next_id and missions.id are not lining up
     })
     .then(() => {
-      // save mission name, casefile_id, user_id, and url to mission table
-      // removed casefile_id to save in patch when selected
-      //casefile_id: req.body.casefile_id,
+      // save mission name, user_id, and url to mission table
+      // casefile_id will be updated in patch when selected
       Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url})
       .save()
       .then((mission) => {
-        console.log("mmissioin saved", mission.attributes.id); // TODO can I send this back ...? or hold onto it somehow - YES, IT WOULD BE THE LAST ID IN THE TABLE
+        console.log("mmissioin saved", mission.attributes);
         res.sendStatus(200);
       })
       .catch((err) => {
@@ -98,18 +93,20 @@ router.post('/api/add-mission', (req, res, next) => {
     })
 })
 
+// update mission with casefile_id
 router.patch('/api/update-mission', (req, res, next) => {
   console.log("patching!", req.body);
   // NOTE should work with 'Save New Mission' button and TODO 'Save Case File' button
-
+  // I wonder if I can call this method *from* casefiles route rather than trying to recreate it...
+  // this works as desired
   Mission.forge().where({name: req.body.name}).fetch()
     .then((mission) => {
       // update mission with selected casefile_id
       console.log("fetched mission", mission.attributes);
       Mission.forge().where({id: mission.attributes.id})
         .save({casefile_id: req.body.casefile_id}, {patch: true})
-        .then((mission) => {
-          console.log("mission updated successfully", mission);
+        .then((res) => {
+          console.log("mission updated successfully", res);
         })
         .catch((err) => {
           next(err);

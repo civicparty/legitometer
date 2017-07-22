@@ -21,7 +21,7 @@ router.get('/api/casefiles', (req, res, next) => {
     })
 })
 
-// TODO - this is terrible
+// TODO - this is terrible (and duplicating sometimes after 2 seconds)
 router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile", req.body);
   let username, new_casefile;
@@ -29,10 +29,10 @@ router.post('/api/add-casefile', function(req, res, next) {
   bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)');
 
   // get last id in table and add 1 for the next id TODO find another way to do it
-  Casefile.count('id').
-  then((count) => {
-    new_casefile = parseInt(count)+1;
-  })
+  // Casefile.count('id').
+  // then((count) => {
+  //   new_casefile = parseInt(count)+1;
+  // })
   // TODO change to: User.forge().where({id: req.session.user}).fetch()
   // get user name from user id
   User.forge().where({id: 1}).fetch()
@@ -45,7 +45,9 @@ router.post('/api/add-casefile', function(req, res, next) {
     Casefile.forge({name: req.body.name, createdBy: username})
     .save()
     .then((casefile) => {
-      console.log("casefile", casefile.toJSON());
+      // set casefile id here
+      new_casefile = casefile.attributes.id;
+      console.log("casefile", casefile.toJSON(), casefile.attributes.id);
     })
   })
   .then(() => {
@@ -58,29 +60,11 @@ router.post('/api/add-casefile', function(req, res, next) {
 
     }
   })
-  .then(() => {
+  .then(() => { // TODO can access mission .patch here instead of recreating it?
     // update mission table TODO - HOW TO ACCESS THE MISSION (not with req.body.name)
     console.log("here we are trying to add the new casefile to the new mission");
-    Mission.count('id')
-    .then((count) => { // TODO - not this. this is terrible.
-      new_mission = parseInt(count)+1;
-      Mission.forge().where({id: new_mission}).fetch()
-        .then((mission) => {
-          // update mission with selected casefile_id
-          console.log("updating mission after adding casefile", mission.attributes.id);
-          Mission.forge().where({id: mission.attributes.id})
-            .save({casefile_id: new_casefile}, {patch: true})
-            .then((mission) => {
-              console.log("mission updated successfully", mission);
-            })
-            .catch((err) => {
-              next(err);
-            })
-        }) // end then
-        .catch((err) => {
-          next(err);
-        })
-    }) // end then
+
+    
   }) // end then
   .catch((err) => {
     console.log("all the things are bad", err);
