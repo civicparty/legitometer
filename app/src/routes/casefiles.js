@@ -21,13 +21,13 @@ router.get('/api/casefiles', (req, res, next) => {
     })
 })
 
-// TODO - this is terrible (and duplicating sometimes after 2 seconds)
+// TODO - this is terrible
 router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile", req.body);
   let username, new_casefile;
 
   bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)');
-
+  console.log("next casefile val", bookshelf.knex.raw('SELECT nextval(\'casefiles_id_seq\''));
   // get last id in table and add 1 for the next id TODO find another way to do it
   // Casefile.count('id').
   // then((count) => {
@@ -54,6 +54,8 @@ router.post('/api/add-casefile', function(req, res, next) {
     // save the casefile_id and article data for each input article
     for (var i = 0; i < req.body.articles.length; i++) {
       bookshelf.knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles)+1)');
+      console.log("next article val", bookshelf.knex.raw('SELECT nextval(\'articles_id_seq\''));
+
 
       Article.forge({casefile_id: new_casefile, article: {headline: req.body.articles[i].name, url: req.body.articles[i].url, type: req.body.articles[i].type, }})
       .save()
@@ -61,10 +63,38 @@ router.post('/api/add-casefile', function(req, res, next) {
     }
   })
   .then(() => { // TODO can access mission .patch here instead of recreating it?
-    // update mission table TODO - HOW TO ACCESS THE MISSION (not with req.body.name)
-    console.log("here we are trying to add the new casefile to the new mission");
+    // update mission table TODO - HOW TO ACCESS THE MISSION (not with req.body.name) - WITH LAST ID IN TABLE???
+    console.log("NEW CASEFILE ADDED. HERE we are trying to add the new casefile to the new mission");
+    Mission.fetchAll()
+      .then((missions) => {
+        console.log("well, fine, i've fetched all the missions", missions.length); //icky but works
+        Mission.forge().where({id: missions.length})
+          .save({casefile_id: new_casefile}, {patch: true})
+          .then((res) => {
+            console.log("updated missions table with new casefile id", res);
+          })
+          .catch((err) => {
+            next(err);
+          })
+      })
+    //
+    // Mission.forge().where({id: req.body.name}).fetch()
+    //   .then((mission) => {
+    //     // update mission with selected casefile_id
+    //     console.log("fetched mission", mission); //this is null...
+    //     Mission.forge().where({id: mission.attributes.id})
+    //       .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
+    //       .then((res) => {
+    //         console.log("mission updated successfully", res);
+    //       })
+    //       .catch((err) => {
+    //         next(err);
+    //       })
+    //   })
+    //   .catch((err) => {
+    //     next(err);
+    //   })
 
-    
   }) // end then
   .catch((err) => {
     console.log("all the things are bad", err);

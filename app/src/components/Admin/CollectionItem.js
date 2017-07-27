@@ -11,7 +11,7 @@ class CollectionItem extends React.Component {
 
     // Update which row is highlighted
     console.log("hEY LOOK HERE", this.props.id, "what it waS: ", this.props.activeCollectionId);
-    // this.props.id is zero (activeCollectionId is 1)
+    // this.props.id is zero (activeCollectionId is 1) : hEY LOOK HERE 8 what it waS:  null // neither of these...
     // why is id 0???
     console.log("props", this.props);
  // this works and saves the correct id BUT DOES NOT ACTIVATE THE SELECTED BUTTON
