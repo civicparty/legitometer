@@ -12,10 +12,9 @@ class MissionListItem extends React.Component {
 
   handleDelete(e) {
     e.preventDefault;
-    console.log("handle delete function", this.props.id); // this ID is NOT RIGHT
-    axios.delete('http://localhost:8888/api/delete-mission', {
-      // delete mission where id=req.params.id
-      id: this.props.id,
+    console.log("handle delete function", this.props.id); // TODO this ID is NOT RIGHT
+    axios.delete('http://localhost:8888/api/delete-mission/' + this.props.id, {  
+      params: {id: this.props.id},
     })
     .then((res) => {
       console.log("delete success response", res);

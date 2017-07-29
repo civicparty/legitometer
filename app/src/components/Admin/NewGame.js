@@ -45,6 +45,7 @@ class NewGame extends React.Component {
     // add new mission with name (update with casefile_id later)
     // this to use inside of axios call
     let thiz = this;
+    console.log("saving mission name", newName);
     axios.post('http://localhost:8888/api/add-mission', {
       name: newName,
       user_id: 1,
@@ -81,12 +82,12 @@ class NewGame extends React.Component {
 
   }
 
-  // 
+  //
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;
     //console.log("it should be here", this.state.collection_id); //it is
-    console.log("new post submitted, here is the state: ", this.state);
+    console.log("here is the state, about to update mission: ", this.state);
     // update mission created above with selected casefile
     // axios.post('http://localhost:8888/api/add-mission', {
     //   name: this.state.name,
@@ -100,6 +101,7 @@ class NewGame extends React.Component {
     .then((res) => {
       console.log("response after patch", res);
       thiz.setState({ submitResult: true });
+
     })
     .catch((err) => {
       console.log("you are not going to space today", err);

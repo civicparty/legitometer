@@ -53,12 +53,12 @@ router.get('/api/missions/:id', function(req, res, next) {
 
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
-  console.log("hi, adding mission", req.body); // hi, adding mission { name: 'I LIKE LEMURS', user_id: 1 }
+  console.log("hi, adding new mission", req.body); // hi, adding mission { name: 'I LIKE LEMURS', user_id: 1 }
   let username, new_url, next_id;
 
   // set the value of the next id in the mission table, avoiding duplicate key errors
   bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)');
-  console.log("next value", bookshelf.knex.raw('SELECT nextval(\'missions_id_seq\''));
+  //console.log("next value", bookshelf.knex.raw('SELECT nextval(\'missions_id_seq\''));
   // get last mission id - TODO I don't think this is the correct way to do this AT ALL
   Mission.count('id').
   then((count) => {
@@ -81,7 +81,7 @@ router.post('/api/add-mission', (req, res, next) => {
       Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url})
       .save()
       .then((mission) => {
-        console.log("mmissioin saved", mission.attributes);
+        console.log("new mmissioin name saved", mission.attributes);
         res.sendStatus(200);
       })
       .catch((err) => {
@@ -102,7 +102,7 @@ router.patch('/api/update-mission', (req, res, next) => {
   Mission.forge().where({name: req.body.name}).fetch()
     .then((mission) => {
       // update mission with selected casefile_id
-      console.log("fetched mission", mission); //this is null...
+      console.log("fetched mission to patch", mission); //this is null...
       Mission.forge().where({id: mission.attributes.id})
         .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
         .then((res) => {
@@ -121,7 +121,7 @@ router.patch('/api/update-mission', (req, res, next) => {
 })
 
 router.delete('/api/delete-mission/:id', (req, res, next) => {
-  console.log("you are in the mission delete route");
+  console.log("you are in the mission delete route", req.params.id);
   Mission.forge().where({id: req.params.id})
     .fetch({require: true})
     .then((mission) => {
