@@ -12,12 +12,13 @@ class MissionListItem extends React.Component {
 
   handleDelete(e) {
     e.preventDefault;
-    console.log("handle delete function", this.props.id); // TODO this ID is NOT RIGHT
-    axios.delete('http://localhost:8888/api/delete-mission/' + this.props.id, {  
-      params: {id: this.props.id},
+    console.log("handle delete function", this.props.id, this.props.name); // TODO this ID is the casefile id not the mission id - the mission name is in props, but not the id
+    axios.delete('http://localhost:8888/api/delete-mission/' + this.props.name, {
+      params: {name: this.props.name},
     })
     .then((res) => {
       console.log("delete success response", res);
+      // TODO redirect to dashboard
     })
     .catch((err) => {
       console.log("delete error response", err);
