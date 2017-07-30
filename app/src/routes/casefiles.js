@@ -24,7 +24,6 @@ router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile", req.body);
   let username, new_casefile;
 
-
   // TODO change to: User.forge().where({id: req.session.user}).fetch()
   // get username from session user for casefile
   User.forge().where({id: 1}).fetch()
@@ -35,9 +34,7 @@ router.post('/api/add-casefile', function(req, res, next) {
   })
   .then(() => {
     // save name and createdBy to casefile table
-    console.log("add casefile then #2");
     bookshelf.knex.raw('SELECT setval(\'casefiles_id_seq\', (SELECT MAX(id) FROM casefiles)+1)');
-    console.log("next value", bookshelf.knex.raw('SELECT nextval(\'casefiles_id_seq\''));
 
     Casefile.forge({name: req.body.name, createdBy: username})
     .save()
@@ -49,23 +46,16 @@ router.post('/api/add-casefile', function(req, res, next) {
       console.log("adding articles");
       for (var i = 0; i < req.body.articles.length; i++) {
         bookshelf.knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles)+1)');
-        console.log("next value", bookshelf.knex.raw('SELECT nextval(\'articles_id_seq\''));
-
 
         Article.forge({casefile_id: new_casefile, article: {headline: req.body.articles[i].name, url: req.body.articles[i].url, type: req.body.articles[i].type, }})
         .save()
       }
-      // add casefile id to mission
-      console.log("add the new casefile to the new mission");
       // add casefile_id (new_casefile) to the mission created earlier
-
       Mission.fetchAll()
         .then((missions) => {
-          console.log("well, fine, i've fetched all the missions. last id: ", missions.length); //icky but works ... until you delete some...
           Mission.forge().where({last_id:true})
             .save({casefile_id: new_casefile}, {patch: true})
             .then((res) => {
-
               console.log("updated missions table with new casefile id", res);
             })
             .catch((err) => {
@@ -80,6 +70,25 @@ router.post('/api/add-casefile', function(req, res, next) {
   .catch((err) => {
     console.log("all the things are bad", err);
   })
+ });
+
+ // delete a casefile - TODO - this is not hooked up yet
+ router.delete('/api/delete-casefile/:name', (req, res, next) => {
+   console.log("you are in the casefile delete route and you are deleting casefile: ", req.params.name);
+   Casefile.forge().where({name: req.params.name})
+     .fetch({require: true})
+     .then((casefile) => {
+       casefile.destroy()
+       .then(() => {
+         console.log("casefile", req.params.name, "successfully deleted");
+       })
+       .catch((err) => {
+         console.log("nooo, error", err);
+       })
+     })
+     .catch((err) => {
+       console.log("delete error", err);
+     });
  });
 
 module.exports = router;

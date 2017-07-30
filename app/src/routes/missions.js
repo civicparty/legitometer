@@ -43,7 +43,7 @@ router.get('/api/missions', (req, res, next) => {
 
 });
 
-// TODO when is this needed? - get mission by id
+// get mission by id - TODO finish for 'review mission' button
 router.get('/api/missions/:id', function(req, res, next) {
   Mission.forge().where({id: req.params.id}).fetchAll()
     .then((mission) => {
@@ -58,7 +58,7 @@ router.post('/api/add-mission', (req, res, next) => {
 
   // set the value of the next id in the mission table, avoiding duplicate key errors
   bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)');
-  console.log("next value", bookshelf.knex.raw('SELECT nextval(\'missions_id_seq\''));
+
   // get last mission id - TODO I don't think this is the correct way to do this AT ALL
   Mission.count('id').
   then((count) => {
@@ -99,14 +99,11 @@ router.post('/api/add-mission', (req, res, next) => {
 
 // update mission with casefile_id
 router.patch('/api/update-mission', (req, res, next) => {
-  console.log("patching!", req.body); // TODO the casefile_id is wrong here...
-  // NOTE should work with 'Save New Mission' button and TODO 'Save Case File' button
-  // I wonder if I can call this method *from* casefiles route rather than trying to recreate it...
-  // this works as desired ====== patching! { name: 'new mission', casefile_id: 2 }
+  console.log("patching!", req.body);
   Mission.forge().where({name: req.body.name}).fetch()
     .then((mission) => {
       // update mission with selected casefile_id
-      console.log("fetched mission to patch", mission); //this is null...
+      console.log("fetched mission to patch", mission);
       Mission.forge().where({id: mission.attributes.id})
         .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
         .then((res) => {
@@ -120,8 +117,6 @@ router.patch('/api/update-mission', (req, res, next) => {
       next(err);
     })
 
-  // TODO casefile_id for 'climate change' comes back as '0' - is that right????
-  // TODO the mission & casefile ids are not what I think they should be / look at this
 })
 
 router.delete('/api/delete-mission/:name', (req, res, next) => {

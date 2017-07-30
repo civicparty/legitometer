@@ -12,7 +12,7 @@ class MissionListItem extends React.Component {
 
   handleDelete(e) {
     e.preventDefault;
-    console.log("handle delete function", this.props.id, this.props.name); // TODO this ID is the casefile id not the mission id - the mission name is in props, but not the id
+    // delete mission (by name, as ids were not matching up, TODO - fix this)
     axios.delete('http://localhost:8888/api/delete-mission/' + this.props.name, {
       params: {name: this.props.name},
     })
