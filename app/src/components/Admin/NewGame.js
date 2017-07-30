@@ -86,14 +86,7 @@ class NewGame extends React.Component {
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;
-    //console.log("it should be here", this.state.collection_id); //it is
     console.log("here is the state, about to update mission: ", this.state);
-    // update mission created above with selected casefile
-    // axios.post('http://localhost:8888/api/add-mission', {
-    //   name: this.state.name,
-    //   casefile_id: this.state.collection_id,
-    //   user_id: this.state.user_id,
-    // })
     axios.patch('http://localhost:8888/api/update-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,

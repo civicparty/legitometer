@@ -67,7 +67,7 @@ class CreateCollection extends React.Component {
       articles: this.state.articles,
     })
     .then((res) => {
-      console.log("success?"); // this doesn't happen
+      console.log("success?"); // this doesn't happen?
       // redirect to dashboard
 
     })
