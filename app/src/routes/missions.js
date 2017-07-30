@@ -58,7 +58,7 @@ router.post('/api/add-mission', (req, res, next) => {
 
   // set the value of the next id in the mission table, avoiding duplicate key errors
   bookshelf.knex.raw('SELECT setval(\'missions_id_seq\', (SELECT MAX(id) FROM missions)+1)');
-  //console.log("next value", bookshelf.knex.raw('SELECT nextval(\'missions_id_seq\''));
+  console.log("next value", bookshelf.knex.raw('SELECT nextval(\'missions_id_seq\''));
   // get last mission id - TODO I don't think this is the correct way to do this AT ALL
   Mission.count('id').
   then((count) => {
@@ -78,7 +78,11 @@ router.post('/api/add-mission', (req, res, next) => {
     .then(() => {
       // save mission name, user_id, and url to mission table
       // casefile_id will be updated in patch when selected
-      Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url})
+      Mission.forge().where({last_id: true})
+        .save({last_id: false}, {patch: true})
+      })
+    .then(() => {
+      Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url, last_id: true})
       .save()
       .then((mission) => {
         console.log("new mmissioin name saved", mission.attributes);
