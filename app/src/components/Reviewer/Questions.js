@@ -9,8 +9,9 @@ class Questions extends Component {
 
     return (
       <div className="text-center">
-        <h1>{question.questionText}</h1>
+        <h1>{question.text}</h1>
         <input type="text" className="question--short" />
+        <p className="tip" style={{ paddingTop: '10px' }}>{question.helpText}</p>
       </div>
     );
   }
@@ -25,89 +26,106 @@ const find = (id) => QuestionSet.find(p => p.id == id)
 const QuestionSet = [
   {
     id: 0,
-    questionText: 'What is the headline?',
+    text: 'What is the headline?',
     type: 'short',
   }, {
     id: 1,
-    questionText: 'Briefly summarize this article in 1­2 sentences',
+    text: 'Briefly summarize the article in 1 sentence',
     type: 'long',
+    helpText: 'Tip: Use your skim reading skills here! Remember, you want to quickly get a sense of what the article is about. Try reading the first and last paragraphs, take turns reading aloud in your group, or look for a thesis statement.',
+  }, {
+    text: 'Author and Publisher',
+    helpText: 'For these questions you\'ll find out information about the author and publisher. Tip: divide up tasks among the team! One person can write down notes while other conduct research.',
+    type: 'sectionHeader',
   }, {
     id: 2,
-    questionText: 'What is the author\'s name?',
+    text: 'What is the author\'s name?',
     type: 'short',
   }, {
     id: 3,
-    questionText: 'What information can you find about the author?',
+    text: 'What information can you find about the author?',
+    helpText: 'Tip: Look for information about what the author has written before and what their qualifications are. Try a Google search here!',
     type: 'long',
   }, {
     id: 4,
-    questionText: 'Is the author credible?',
+    text: 'Is the author credible?',
     type: 'yesNo',
-    tip: 'Pick only one.',
   }, {
     id: 5,
-    questionText: 'Who published this article?',
+    text: 'Who published this article?',
     type: 'short',
-    tip: 'look for the title of the magazine, newspaper, or website where you found your article',
+    helpText: 'Tip: look for the title of the magazine, newspaper, or website where you found your article',
   }, {
     id: 6,
-    questionText: 'What information can you find about the publisher?',
+    text: 'What information can you find about the publisher?',
+    helpText: 'Tip: Look for information about the publication and its reputation. Has the publication won awards? What do people say about it?',
     type: 'long',
   }, {
     id: 7,
-    questionText: 'Is the publisher credible?',
+    text: 'Is the publisher credible?',
     type: 'yesNo',
-    tip: 'Pick only one.',
+  }, {
+    text: 'Context',
+    helpText: 'Here you will answer some questions about the website and about features of the article.',
+    type: 'sectionHeader',
   }, {
     id: 8,
-    questionText: 'Is the site well designed?',
+    text: 'Is the site well designed?',
     type: 'yesNo',
-    tip: 'Pick only one.',
   }, {
     id: 9,
-    questionText: 'Design information ­ what did you notice?',
+    text: 'Design information -­ what did you notice?',
     type: 'long',
-    tip: 'Were there spelling errors? Layout problems?',
+    helpText: 'Tip: were there spelling errors? Layout problems? Does the site look nice and work well?',
   }, {
     id: 10,
-    questionText: 'Did the author use sources in the article?',
+    text: 'Did the author use sources in the article?',
     type: 'yesNo',
-    tip: 'Pick only one.',
   }, {
     id: 11,
-    questionText: 'Where did the sources come from?',
+    text: 'Where did the sources come from?',
+    helpText: 'Tip: Check out the links, if there are any, in the article. Or see if the article quotes anyone',
     type: 'long',
   }, {
     id: 12,
-    questionText: 'What year was the article published?',
+    text: 'What year was the article published?',
     type: 'short',
   }, {
+    text: 'Bias and Purpose',
+    type: 'sectionHeader',
+    helpText: 'For these questions you\'ll dig into some "why" questions - why did someone write this article? What is the goal of the article? And does the article have bias, or lean a certain way on an issue? Remember, bias isn\'t inherently good or bad!',
+  }, {
     id: 13,
-    questionText: 'Is there bias in your article?',
+    text: 'Is there bias in your article?',
     type: 'yesNo',
   }, {
     id: 14,
-    questionText: 'What did you notice about bias in this article? Is the author trying to make you believe something?',
+    text: 'What did you notice about bias in this article? Is the author trying to make you believe something?',
+    helpText: 'Remember, bias means leaning one way or another on an issue. Is the article for or against something? Is the article trying to convince you to take a side on an issue?',
     type: 'long',
   }, {
     id: 15,
-    questionText: 'What is the purpose of the article? Why was it produced?',
+    text: 'What is the purpose of the article? Why was it produced?',
+    helpText: 'Tip: Think about the article\'s goal. Is the article trying to persuade you to think a certain way, make you laugh, give you facts?',
     type: 'long',
   }, {
+    text: 'Final Scorecard - Rate the article!',
+    type: 'sectionHeader',
+  }, {
     id: 16,
-    questionText: 'Do you think the headline accurately reflects the content in the article?',
+    text: 'Do you think the headline accurately reflects the content in the article?',
     type: 'yesNo',
   }, {
     id: 17,
-    questionText: 'Did the article help you understand the topic better?',
+    text: 'Did the article help you understand the topic better?',
     type: 'yesNo',
   }, {
     id: 18,
-    questionText: 'Would you cite this article in a research paper?',
+    text: 'Would you cite this article in a research paper?',
     type: 'yesNo',
   }, {
     id: 19,
-    questionText: 'Would you share this article with a friend?',
+    text: 'Would you share this article with someone you know or on social media?',
     type: 'yesNo',
   }
 ]
