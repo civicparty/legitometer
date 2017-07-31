@@ -24,6 +24,9 @@
     "react-router-dom": "^4.0.0",
     "semantic-ui-react": "^0.67.2"
   },
+  "engines": {
+    "node":"7.4.0"
+  },
   "devDependencies": {
     "axios": "^0.15.3",
     "babel-loader": "^6.4.1",
