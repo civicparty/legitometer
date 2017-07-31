@@ -20,6 +20,13 @@ router.get('/api/casefiles', (req, res, next) => {
     })
 })
 
+router.get('/api/casefiles/:id', (req, res, next) => {
+  Casefile.forge().where({id: req.params.id}).fetch()
+    .then((casefile) => {
+      console.log("getting casefile by id", casefile);
+      res.send(casefile);
+    })
+})
 router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile", req.body);
   let username, new_casefile;

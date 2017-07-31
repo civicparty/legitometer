@@ -7,6 +7,7 @@ const bookshelf = require('../../db/knex')
 const Mission = require('../Models/Mission');
 const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
+const Article = require('../Models/Article');
 
 // TODO check if user authorized
 function authorizedUser(req, res, next) {
@@ -44,13 +45,48 @@ router.get('/api/missions', (req, res, next) => {
 });
 
 // get mission by id - TODO finish for 'review mission' button
-router.get('/api/missions/:id', function(req, res, next) {
-  Mission.forge().where({id: req.params.id}).fetchAll()
-    .then((mission) => {
-      res.json({error: false, data: mission.toJSON()});
-    })
+// only need to get casefile_id and then articles
+router.get('/api/view-mission/:name', function(req, res, next) {
+  let article_files = [];
+  let missionid, casefileid;
+  console.log("successnesses", req.params.name);
+  let mission_name = req.params.name.replace('_', " \s");
+  console.log("mission name", mission_name);
+  // get the casefile_id
+  Mission.forge().where({name: mission_name}).fetch()
+  .then((mission) => {
+    mission = mission.toJSON();
+    console.log("casefile id",  mission.casefile_id);
+    //console.log(mission[0].casefile.name);
+    //get casefile name from mission.casefile_id
+    //get articles from articles.casefile_id
+    Article.forge().where({casefile_id: mission.casefile_id}).fetchAll()
+      .then((articles) => {
+        console.log("fetching articles", articles.toJSON());
+        console.log("squirrrrrel magic", articles.toJSON()[0].article);
+        for (var i = 0; i < articles.length; i++) {
+          article_files.push(articles.toJSON()[i].article);
+        }
+        //article_files.push(articles.toJSON());
+      })
+      .catch((err) => {
+        console.log("articles error", err);
+      })
+  })
+  .catch((err) => {
+    console.log("mission fetching error", err);
+  })
+  res.send(article_files);
 })
 
+// mission by id { id: 1,
+//   name: 'Period 1',
+//   casefile_id: 1,
+//   user_id: 1,
+//   url: 'http://localhost:3000/mstestteacher/1',
+//   last_id: false,
+//   created_at: 2017-07-30T21:31:29.178Z,
+//   updated_at: 2017-07-30T21:31:29.178Z }
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
   console.log("hi, adding new mission", req.body); // hi, adding mission { name: 'I LIKE LEMURS', user_id: 1 }

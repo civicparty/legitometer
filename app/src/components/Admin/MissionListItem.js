@@ -31,7 +31,7 @@ class MissionListItem extends React.Component {
         <td className="strong">{this.props.name}</td>
         <td>{this.props.collection}</td>
         <td className="collapsing">
-          <Link to={`/mission/${this.props.id}`} className="ui button blue">
+          <Link to={`/mission/${this.props.name}/${this.props.collection}`} className="ui button blue">
             Review
           </Link>
           <Button onClick={(e) => this.handleDelete(e)} basic color="red" type="submit">

@@ -14,7 +14,7 @@ class Start extends Component {
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center', 
+      justifyContent: 'center',
     }
 
     return (
