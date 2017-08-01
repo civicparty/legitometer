@@ -13,7 +13,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: 'postgres://'+ process.env.DB_USER +':'+ process.env.DB_PASS +'@localhost/'+ process.env.DB_NAME + '?ssl=true',
+    connection: 'postgres://'+ process.env.DB_USER +':'+ process.env.DB_PASS +'@localhost/'+ process.env.DB_NAME,
     // TODO add this to production DATABASE_URL?  + '?ssl=true' ???
     // connection: {
     //   host:     'localhost',
