@@ -54,17 +54,15 @@
     "npm": "4.0.5"
   },
   "scripts": {
-    "server": "nodemon ./src/server",
-    "build-css": "node-sass-chokidar app/src/ -o app/src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "server": "nodemon app/src/server",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
+    "start": "npm-run-all -p start-js",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "./src/index.js",
+  "main": "app/src/index.js",
   "author": "",
   "license": "ISC"
 }
