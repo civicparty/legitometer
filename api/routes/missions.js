@@ -34,7 +34,7 @@ router.get('/api/missions', (req, res, next) => {
     // loop over data to get mission and casefile names
     for (var i = 0; i < mission.length; i++) {
       // save to files object
-      if (mission[i].casefile.name) {
+      if (mission[i].casefile && mission[i].casefile.name) {
         files[mission[i].name] = mission[i].casefile.name;
       } else {
         files[mission[i].name] = "no casefile added";

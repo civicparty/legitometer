@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [],
@@ -26,5 +26,8 @@
   "engines": {
     "node": "7.5.0",
     "npm": "4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
