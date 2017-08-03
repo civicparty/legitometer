@@ -1,1 +1,23 @@
-../package.json
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.10"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-google-login-component": "^0.7.0",
+    "react-router-dom": "^4.1.2",
+    "semantic-ui-react": "^0.71.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:8888"
+}
