@@ -8,6 +8,7 @@ exports.seed = function(knex, Promise) {
         {id: 1,
           user_id: 2,
           mission_id: 1,
+          members: 'socks, toast, thing1, thing2',
           answers: {
             publisher_name: 'Sprocket', // references to questions rather than "publisher_name, etc"
             author: 'your mom',
@@ -29,3 +30,5 @@ exports.seed = function(knex, Promise) {
       ]);
     });
 };
+
+// TODO UPDATE - users [] instead of user_id. - nonspecific answer names, question1, question2, etc

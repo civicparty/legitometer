@@ -45,12 +45,13 @@ class NewGame extends React.Component {
     // add new mission with name (update with casefile_id later)
     // this to use inside of axios call
     let thiz = this;
+    console.log("saving mission name", newName);
     axios.post('http://localhost:8888/api/add-mission', {
       name: newName,
       user_id: 1,
     })
     .then((res) => {
-      console.log("response", res);
+      console.log("response after saving mission name", res);
       thiz.setState({ submitResult: false });
     })
     .catch((err) => {
@@ -69,7 +70,6 @@ class NewGame extends React.Component {
     e.preventDefault();
     const newName = this.refs.input ? this.refs.input.value : this.state.name;
 
-
     this.setState({
       showEditTitle: !this.state.showEditTitle,
       name: newName,
@@ -82,19 +82,19 @@ class NewGame extends React.Component {
 
   }
 
+  //
   submitNewPost(e) {
     e.preventDefault();
     let thiz = this;
-    //console.log("it should be here", this.state.collection_id); //it is
-    console.log("about to add mission", this.state);
-    axios.post('http://localhost:8888/api/add-mission', {
+    console.log("here is the state, about to update mission: ", this.state);
+    axios.patch('http://localhost:8888/api/update-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
-      user_id: this.state.user_id,
     })
     .then((res) => {
-      console.log("response", res);
+      console.log("response after patch", res);
       thiz.setState({ submitResult: true });
+
     })
     .catch((err) => {
       console.log("you are not going to space today", err);

@@ -41,30 +41,65 @@ class StudentDashboard extends React.Component {
         <Header as="h1" className="floated left">
           Operation Legit-o-Meter
         </Header>
+        
         <Table celled>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell colSpan='3' textAlign='center'>Your Missions</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
-            {
-              this.state.missions.map((mission, i) => {
-                return (
-                  <ReviewList
-                    name={mission.name}
-                    casefile={mission.casefileName}
-                    id={mission.id}
-                    key={i}
-                  />
-                )
-              })
-            }
-          </Table.Body>
-        </Table>
+
+      </Table>
+
+        <Link to="/start">
+          <Button basic color="red">
+            Legit-o-Meter: Vaccines
+          </Button>
+        </Link>
+
+//           <Table.Body>
+//             {
+//               this.state.missions.map((mission, i) => {
+//                 return (
+//                   <ReviewList
+//                     name={mission.name}
+//                     casefile={mission.casefileName}
+//                     id={mission.id}
+//                     key={i}
+//                   />
+//                 )
+//               })
+//             }
+//           </Table.Body>
+//         </Table>
+
       </div>
     )
   }
 }
 
 export default StudentDashboard;
+
+
+// TODO add this back later
+// <Table celled>
+//   <Table.Header>
+//     <Table.Row>
+//       <Table.HeaderCell colSpan='3' textAlign='center'>Your Missions</Table.HeaderCell>
+//     </Table.Row>
+//   </Table.Header>
+//   <Table.Body>
+//     {Object.keys(this.state.missions).map((key, id) => {
+//       return (
+//         <ReviewList
+//           name={this.state.missions[key]}
+//           collection={this.state.casefiles[key]}
+//           id={id}
+//           key={id}
+//         />
+//       )
+//     })}
+//
+//   </Table.Body>
+// </Table>
+

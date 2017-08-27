@@ -5,7 +5,6 @@ import axios from 'axios'
 class ArticleLink extends React.Component {
   constructor(props) {
     super(props);
-    this.chooseArticle = this.chooseArticle.bind(this);
     this.state = {
       link: '',
       articles: []
@@ -13,34 +12,20 @@ class ArticleLink extends React.Component {
   }
 
   componentDidMount() {
-    console.log("component, mounted");
+    console.log("article component, mounted");
+    // TODO - these need to be fetched based on casefile_id and returned one after the other
     axios.get('http://localhost:8888/api/articles')
       .then((res) => {
-        console.log("gotten!", res.data);
-        this.setState({ articles: res.data }, function chooseArticle() {
-
-        });
+        console.log("articles gotten!", res.data);
+        this.setState({ articles: res.data })
       })
       .then(() => {
         console.log("then...", this.state);
       })
-      .then(() => {
-        this.chooseArticle();
-      })
       .catch((err) => {
         console.error(err);
-      })
-  }
-
-  chooseArticle() {
-    console.log("choose!", this.state);
-    let x = 0;
-    let y = this.state.articles.length-1;
-    let randomNum = Math.floor(Math.random() * ((y-x)+1) + x);
-    this.setState({ link:this.state.articles[randomNum].article.url });
-    console.log(randomNum, this.state, this.state.articles[randomNum].article.url);
-    return randomNum;
-  }
+      });
+  };
 
   componentWillUpdate(nextProps, nextState) {
         //you'll see the changing state value in here

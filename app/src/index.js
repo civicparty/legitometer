@@ -91,7 +91,7 @@ class Root extends Component {
                 <Switch>
                   <Route exact path="/" component={TeacherDashboard} />
                   <Route path="/new" component={NewGame} />
-                  <Route path="/mission/:id" component={Mission} />
+                  <Route path="/mission/:name/:casefile_name" component={Mission} />
                   <Route path="/collection/new" component={CreateCollection} />
                 </Switch>
             }
