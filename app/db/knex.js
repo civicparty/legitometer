@@ -1,6 +1,11 @@
 'use strict';
 
-const env = process.env.NODE_ENV || 'development';
+require('dotenv').config()
+
+console.log("testing", process.env)
+console.log("trying to connect to db in environment", process.env.NODE_ENV)
+const env = process.env.NODE_ENV || 'production';
+console.log('env:', env)
 const knexConfig = require('../knexfile')[env];
 const knex = require('knex')(knexConfig);
 const bookshelf = require('bookshelf')(knex);

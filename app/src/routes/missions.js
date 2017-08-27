@@ -36,11 +36,26 @@ router.get('/api/missions', (req, res, next) => {
         files[mission[i].name] = mission[i].casefile.name;
       } else {
         files[mission[i].name] = "no casefile added";
+
+
+//   Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug:true})
+//     .then((missions) => {
+//       // convert data to JSON
+//       missions = missions.toJSON();
+
+//       // loop over data to assign a fallback casefile name if necessary
+//       for (var i = 0; i < missions.length; i++) {
+//         if (missions[i].casefile &&  missions[i].casefile.name) {
+//           missions[i].casefile_name = missions[i].casefile.name;
+//         } else {
+//           missions[i].casefile_name = 'No Casefile';
+//         }
+
       }
-    }
-    // send files object
-    res.send(files)
-  })
+
+      console.log(missions)
+      res.send(missions);
+    })
 
 });
 

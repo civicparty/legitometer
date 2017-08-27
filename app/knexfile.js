@@ -13,12 +13,13 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      host:     'localhost',
-      database: process.env.DB_NAME,
-      user:     process.env.DB_USER,
-      password: process.env.DB_PASS
-    },
+    connection: 'postgres://'+ process.env.DB_USER +':'+ process.env.DB_PASS +'@localhost/'+ process.env.DB_NAME,
+    // connection: {
+    //   host:     'localhost',
+    //   database: process.env.DB_NAME,
+    //   user:     process.env.DB_USER,
+    //   password: process.env.DB_PASS
+    // },
     pool: {
       min: 2,
       max: 10

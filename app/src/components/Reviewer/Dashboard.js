@@ -19,20 +19,16 @@ class StudentDashboard extends React.Component {
     // GET missions assigned to student user
     axios.get('http://localhost:8888/api/missions')
       .then((res) => {
-        // loop through the result object and set the state
-        for(let key in res.data) {
-          // assign state to temp arrays
-          let temp_mission = this.state.missions.slice();
-          let temp_casefile = this.state.casefiles.slice();
-          // push data to arrays
-          temp_mission.push(key);
-          temp_casefile.push(res.data[key]);
-          // set the state
-          this.setState({
-            missions: temp_mission,
-            casefiles: temp_casefile,
-          })
-        }
+        const missions = res.data.map((mission) => {
+          return {
+            id: mission.id,
+            name: mission.name,
+            casefileId: mission.casefile_id,
+            casefileName: mission.casefile_name,
+          };
+        });
+
+        this.setState({ missions: missions })
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +48,7 @@ class StudentDashboard extends React.Component {
               <Table.HeaderCell colSpan='3' textAlign='center'>Your Missions</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
+
       </Table>
 
         <Link to="/start">
@@ -59,12 +56,30 @@ class StudentDashboard extends React.Component {
             Legit-o-Meter: Vaccines
           </Button>
         </Link>
+
+//           <Table.Body>
+//             {
+//               this.state.missions.map((mission, i) => {
+//                 return (
+//                   <ReviewList
+//                     name={mission.name}
+//                     casefile={mission.casefileName}
+//                     id={mission.id}
+//                     key={i}
+//                   />
+//                 )
+//               })
+//             }
+//           </Table.Body>
+//         </Table>
+
       </div>
     )
   }
 }
 
 export default StudentDashboard;
+
 
 // TODO add this back later
 // <Table celled>
@@ -87,3 +102,4 @@ export default StudentDashboard;
 //
 //   </Table.Body>
 // </Table>
+
