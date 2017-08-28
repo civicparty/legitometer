@@ -52,21 +52,24 @@ app.use(articles);
 app.use(reviews);
 app.use(users);
 
-const port = process.env.PORT || 8888;
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  if (app.get('env') !== 'test') {
-    console.log('Listening on port', port);
-  }
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+
+// Answer API requests.
+app.get('/api', function (req, res) {
+  res.set('Content-Type', 'application/json');
+  res.send('{"message":"Hello from the custom server, Haii!"}');
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+});
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+app.listen(PORT, function () {
+  console.log(`Listening on port ${PORT}`);
 });
 
 
