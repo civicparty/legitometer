@@ -6,8 +6,12 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-google-login-component": "^0.8.0",
+    "react-router-dom": "^4.2.2",
+    "semantic-ui-react": "^0.72.0"
   },
   "scripts": {
     "start": "react-scripts start",

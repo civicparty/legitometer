@@ -1,0 +1,229 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px; }
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white; }
+
+.App-intro {
+  font-size: large; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.dashboard {
+  border-style: solid;
+  border-width: thin;
+  padding: 20px; }
+
+.dashboardButton {
+  float: right; }
+
+.dashboardTitle {
+  float: left;
+  padding-left: 20px; }
+
+.logo {
+  float: left; }
+
+.header-name {
+  float: right; }
+
+.avatar {
+  float: right; }
+
+.strong {
+  font-weight: bold; }
+
+@font-face {
+  font-family: 'LeagueGothic';
+  src: url("../fonts/web/LeagueGothic.woff") format("woff"); }
+
+@font-face {
+  font-family: 'ZillaSlab-Regular';
+  src: url("../fonts/web/ZillaSlab-Regular.woff") format("woff"); }
+
+@font-face {
+  font-family: 'ZillaSlab-Italic';
+  src: url("../fonts/web/ZillaSlab-Italic.woff") format("woff"); }
+
+@font-face {
+  font-family: 'ZillaSlab-Bold';
+  src: url("../fonts/web/ZillaSlab-Bold.woff") format("woff"); }
+
+@font-face {
+  font-family: 'ZillaSlabHighlight-Regular';
+  src: url("../fonts/web/ZillaSlabHighlight-Regular.woff") format("woff"); }
+
+@font-face {
+  font-family: 'ZillaSlabHighlight-Bold';
+  src: url("../fonts/web/ZillaSlabHighlight-Bold.woff") format("woff"); }
+
+h1, .h1 {
+  font-family: "ZillaSlab-Regular";
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-bottom: .5rem;
+  line-height: 120%; }
+
+h2, .h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.714rem; }
+
+h3, .h3 {
+  font-size: 1.28rem; }
+
+h4, .h4 {
+  font-size: 1rem; }
+
+p, .p {
+  font-family: "ZillaSlab-Regular";
+  font-size: 1.4rem; }
+
+.tip {
+  color: #787878;
+  font-family: "ZillaSlab-Italic";
+  font-size: 1.2rem; }
+
+.article {
+  font-size: 1.6rem; }
+
+.question--short {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #757575; }
+
+.flex {
+  display: flex; }
+
+.flex-parent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* align items in Main Axis */
+  align-items: stretch;
+  /* align items in Cross Axis */
+  align-content: stretch;
+  /* Extra space in Cross Axis */ }
+
+.flex-right {
+  margin-left: auto !important; }
+
+.flex-column {
+  display: flex;
+  flex-direction: column; }
+
+.bump-right {
+  margin-right: 5px !important; }
+
+.section {
+  padding-bottom: 40px; }
+
+.text-center {
+  text-align: center; }
+
+.button {
+  min-width: 2rem;
+  padding: .8rem 1.6rem;
+  text-transform: uppercase;
+  font-family: "LeagueGothic";
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  border: none;
+  color: #FFFFFF;
+  margin-top: 3rem;
+  background: #f512ff;
+  transition: all 0.1s ease-in-out; }
+  .button:hover {
+    background: #b700bf;
+    transition: all 0.2s ease-in-out; }
+  .button:active {
+    background: #a300ab; }
+  .button-dark {
+    min-width: 2rem;
+    padding: .8rem 1.6rem;
+    text-transform: uppercase;
+    font-family: "LeagueGothic";
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    border: none;
+    color: #FFFFFF;
+    margin-top: 3rem;
+    background: #171717;
+    transition: all 0.1s ease-in-out; }
+    .button-dark:hover {
+      background: black;
+      transition: all 0.2s ease-in-out; }
+    .button-dark:active {
+      background: black; }
+  .button-light {
+    min-width: 2rem;
+    padding: .8rem 1.6rem;
+    text-transform: uppercase;
+    font-family: "LeagueGothic";
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    border: none;
+    color: #FFFFFF;
+    margin-top: 3rem;
+    background: #FFFFFF;
+    transition: all 0.1s ease-in-out;
+    color: #171717;
+    border: 1px solid #171717; }
+    .button-light:hover {
+      background: #d6d6d6;
+      transition: all 0.2s ease-in-out; }
+    .button-light:active {
+      background: #cccccc; }
+
+.NewGame__title {
+  margin: 10px 15px; }
+
+.article-new-inputs:last-of-type {
+  margin-bottom: 10px !important; }
+
+.header {
+  display: block; }
+
+.StudentForm-input {
+  width: 200px; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: "ZillaSlab-Regular";
+  color: #171717; }
+
+#root {
+  height: 100%; }
+
+p a {
+  font-family: "ZillaSlab-Regular";
+  color: #f512ff;
+  border-bottom: 0px solid transparent;
+  transition: all 0.1s ease-in-out;
+  font-weight: 500; }
+  p a:hover {
+    border-bottom: 1px solid #FA8CFF;
+    color: #f512ff;
+    transition: all 0.2s ease-out; }
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%; }
