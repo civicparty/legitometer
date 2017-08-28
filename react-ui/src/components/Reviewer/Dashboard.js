@@ -17,7 +17,7 @@ class StudentDashboard extends React.Component {
 
   componentDidMount() {
     // GET missions assigned to student user
-    axios.get('http://localhost:8888/api/missions')
+    axios.get('/api/missions')
       .then((res) => {
         // loop through the result object and set the state
         for(let key in res.data) {
