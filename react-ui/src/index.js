@@ -68,7 +68,7 @@ class Root extends Component {
 
 
   render(){
-    console.log("hiiiii", this.state.teacherLoggedIn, this.state.studentLoggedIn);
+    console.log("this is a test");
 
     return (
       <Router>
