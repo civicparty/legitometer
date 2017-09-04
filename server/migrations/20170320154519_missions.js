@@ -6,6 +6,7 @@ exports.up = knex =>
     table.integer('casefile_id').references('casefiles.id').onDelete('CASCADE');
     table.integer('user_id').references('users.id').onDelete('CASCADE');
     table.string('url');
+    table.boolean('last_id');
     table.timestamps(true, true);
   })
 
