@@ -13,6 +13,7 @@ class NewGame extends React.Component {
     this.submitNewPost = this.submitNewPost.bind(this);
     this.updateCollectionID = this.updateCollectionID.bind(this);
     this.saveMission = this.saveMission.bind(this);
+    // this.handleRedirect = this.handleRedirect.bind(this);
     this.state = {
       name: null,
       collection_id: null,
@@ -45,12 +46,13 @@ class NewGame extends React.Component {
     // add new mission with name (update with casefile_id later)
     // this to use inside of axios call
     let thiz = this;
+    console.log("saving mission name");
     axios.post('/api/add-mission', {
       name: newName,
       user_id: 1,
     })
     .then((res) => {
-      console.log("response", res);
+      console.log("response THEN saveMission", res);
       thiz.setState({ submitResult: false });
     })
     .catch((err) => {
@@ -61,7 +63,7 @@ class NewGame extends React.Component {
   }
 
   updateCollectionID(collection_id) {
-    console.log("updating colleciton id", collection_id);
+    console.log("updating colleciton id", collection_id); // THIS WORKS
     this.setState({ collection_id: collection_id });
   }
 
@@ -83,24 +85,38 @@ class NewGame extends React.Component {
   }
 
   submitNewPost(e) {
+    console.log("submit new post", this.state.collection_id);
     e.preventDefault();
+    console.log("prevented default");
     let thiz = this;
     //console.log("it should be here", this.state.collection_id); //it is
     console.log("about to add mission", this.state);
-    axios.post('/api/add-mission', {
+    axios.patch('/api/update-mission', { // TODO axios.post???
       name: this.state.name,
       casefile_id: this.state.collection_id,
       user_id: this.state.user_id,
     })
     .then((res) => {
-      console.log("response", res);
+      console.log("response THEN submitNewPost", res);
       thiz.setState({ submitResult: true });
+      console.log("and hereeee...");
     })
+    // .then(this.handleRedirect) // TODO it is redirecting with all the redirect code commented out... so it is submitting and bypassing the preventDefault() because it is never getting into this function at all...
     .catch((err) => {
       console.log("you are not going to space today", err);
     });
-
   }
+
+    // handleRedirect(res) {
+    //   if( res.status === 200 ){
+    //     //redirect to dashboard
+    //     console.log("redirecting...");
+    //     window.location.href = 'http://localhost:5000';
+    //        } else {
+    //          // Something went wrong here
+    //        }
+    // }
+
   render() {
     let editTitle = (
         <div className="flex">
@@ -138,13 +154,9 @@ class NewGame extends React.Component {
           <label htmlFor="gameTitle">Mission Name</label>
           { this.state.showEditTitle ? editTitle : displayTitle }
         </form>
-
         {
           this.state.name ?
-            <form
-              ref={(input) => this.gameForm = input}
-              onSubmit={(e) => this.submitNewPost(e)}
-            >
+          <div>
               <Header as="h2">
                 Choose a Case File
               </Header>
@@ -182,10 +194,10 @@ class NewGame extends React.Component {
                   })}
                 </Table.Body>
               </Table>
-              <button className="ui button positive" type="submit">
+              <button className="ui button positive" type="button" onClick={(e) => this.submitNewPost(e)}>
                 Save New Mission
               </button>
-            </form>
+              </div>
             : ""
         }
 
@@ -197,3 +209,9 @@ class NewGame extends React.Component {
 export default NewGame;
 
 //          onSubmit={(e) => this.updateTitle(e)}
+
+<form
+  ref={(input) => this.gameForm = input}
+  onSubmit={(e) => this.submitNewPost(e)}
+>
+</form>
