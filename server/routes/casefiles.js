@@ -5,7 +5,7 @@ const bookshelf = require('../db/knex');
 const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
 const Article = require('../Models/Article');
-const Mission = require('../Models/Missions');
+const Mission = require('../Models/Mission');
 
 router.get('/api/casefiles', (req, res, next) => {
   Casefile.forge().fetchAll()
@@ -25,9 +25,9 @@ router.post('/api/add-casefile', function(req, res, next) {
   console.log("posting new casefile", req.body);
   let username, new_casefile;
 
-
   // TODO change to: User.forge().where({id: req.session.user}).fetch()
   // get username from session user for casefile
+  // TODO doesn't seem to get here...no console.logs below here show up
   User.forge().where({id: 1}).fetch()
   .then((user) => {
     console.log("add casefile then #1");
@@ -50,9 +50,6 @@ router.post('/api/add-casefile', function(req, res, next) {
       console.log("adding articles");
       for (var i = 0; i < req.body.articles.length; i++) {
         bookshelf.knex.raw('SELECT setval(\'articles_id_seq\', (SELECT MAX(id) FROM articles)+1)');
-        console.log("next value", bookshelf.knex.raw('SELECT nextval(\'articles_id_seq\''));
-
-
         Article.forge({casefile_id: new_casefile, article: {headline: req.body.articles[i].name, url: req.body.articles[i].url, type: req.body.articles[i].type, }})
         .save()
       }
@@ -62,11 +59,10 @@ router.post('/api/add-casefile', function(req, res, next) {
 
       Mission.fetchAll()
         .then((missions) => {
-          console.log("well, fine, i've fetched all the missions. last id: ", missions.length); //icky but works ... until you delete some...
+          console.log("well, fine, i've fetched all the missions. last id-ish: ", missions.length); //icky but works ... until you delete some...
           Mission.forge().where({last_id:true})
             .save({casefile_id: new_casefile}, {patch: true})
             .then((res) => {
-
               console.log("updated missions table with new casefile id", res);
             })
             .catch((err) => {

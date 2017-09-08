@@ -26,7 +26,7 @@ router.get('/api/missions', (req, res, next) => {
   // TODO where user_id === logged_in user (req.session.user)
   let user = 1; // temporary workaround
 
-  Mission.forge().where({user_id: user}).fetchAll({withRelated: ['casefile'], debug:true})
+  Mission.forge().where({user_id: user}).query('orderBy', 'id', 'asc').fetchAll({withRelated: ['casefile'], debug:true})
   .then((mission) => {
     // convert data to JSON
     mission = mission.toJSON();
