@@ -56,7 +56,7 @@ class NewGame extends React.Component {
       thiz.setState({ submitResult: false });
     })
     .catch((err) => {
-      console.log("you are not going to space today", err);
+      console.log("you are not going to space today (saveMission)", err);
     });
 
 
@@ -103,7 +103,7 @@ class NewGame extends React.Component {
     })
     // .then(this.handleRedirect) // TODO it is redirecting with all the redirect code commented out... so it is submitting and bypassing the preventDefault() because it is never getting into this function at all...
     .catch((err) => {
-      console.log("you are not going to space today", err);
+      console.log("you are not going to space today (submitNewPost)", err);
     });
   }
 

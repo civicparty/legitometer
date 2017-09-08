@@ -27,7 +27,6 @@ router.post('/api/add-casefile', function(req, res, next) {
 
   // TODO change to: User.forge().where({id: req.session.user}).fetch()
   // get username from session user for casefile
-  // TODO doesn't seem to get here...no console.logs below here show up
   User.forge().where({id: 1}).fetch()
   .then((user) => {
     console.log("add casefile then #1");
