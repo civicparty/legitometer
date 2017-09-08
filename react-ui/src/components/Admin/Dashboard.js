@@ -36,13 +36,14 @@ class AdminDashboard extends React.Component {
       })
   }
 
+
+
   render() {
     return (
       <div>
         <Header as="h1" className="floated left">
           Operation Legit-o-Meter
         </Header>
-        
         <Link to="new" className="ui button positive right floated">
           Create a New Mission
         </Link>

@@ -14,9 +14,6 @@ class CollectionItem extends React.Component {
     // this.props.id is zero (activeCollectionId is 1)
     // why is id 0???
     console.log("props", this.props);
- // this works and saves the correct id BUT DOES NOT ACTIVATE THE SELECTED BUTTON
-//    this.props.updateCollection(this.props.activeCollectionId);
-//  this works and updates the selected button BUT DOES NOT SAVE THE CORRECT ID AND CAUSES 500 ERRORS
     this.props.updateCollection(this.props.id);
   }
 

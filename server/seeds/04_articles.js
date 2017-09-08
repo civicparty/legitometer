@@ -4,7 +4,6 @@ exports.seed = function(knex, Promise) {
     knex('articles').del(),
     knex('articles').insert([
       {
-        id: 1,
         casefile_id: 1,
         article: {
           publisher: 'Boston Globe',
@@ -13,7 +12,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 2,
         casefile_id: 1,
         article: {
           publisher: 'New York Times',
@@ -22,7 +20,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 3,
         casefile_id: 1,
         article: {
           publisher: 'EPA',
@@ -31,7 +28,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 4,
         casefile_id: 1,
         article: {
           publisher: 'Scientific American',
@@ -40,7 +36,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 5,
         casefile_id: 1,
         article: {
           publisher: 'Mother Jones',
@@ -49,7 +44,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 6,
         casefile_id: 1,
         article: {
           publisher: 'Smithsonian Tween Tribune',
@@ -58,7 +52,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 7,
         casefile_id: 1,
         article: {
           publisher: 'PBS NewsHour Extra',
@@ -67,7 +60,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 8,
         casefile_id: 1,
         article: {
           publisher: 'New York Times',
@@ -76,7 +68,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 9,
         casefile_id: 1,
         article: {
           publisher: 'CNN',
@@ -85,7 +76,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 10,
         casefile_id: 1,
         article: {
           publisher: 'Washington Post',
@@ -94,7 +84,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 11,
         casefile_id: 1,
         article: {
           publisher: 'Teen Vogue',
@@ -103,7 +92,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 12,
         casefile_id: 1,
         article: {
           publisher: 'Daily Mail',
@@ -112,7 +100,6 @@ exports.seed = function(knex, Promise) {
           type: 'Fake',
         }
       }, {
-        id: 13,
         casefile_id: 1,
         article: {
           publisher: 'The Onion',
@@ -121,7 +108,6 @@ exports.seed = function(knex, Promise) {
           type: 'Satire',
         }
       }, {
-        id: 14,
         casefile_id: 1,
         article: {
           publisher: 'Politico',
@@ -130,7 +116,6 @@ exports.seed = function(knex, Promise) {
           type: 'Sponsored',
         }
       }, {
-        id: 15,
         casefile_id: 1,
         article: {
           publisher: 'Austin Monitor',
@@ -139,7 +124,6 @@ exports.seed = function(knex, Promise) {
           type: 'Local',
         }
       }, {
-        id: 16,
         casefile_id: 2,
         article: {
           publisher: 'Boston Globe',
@@ -148,7 +132,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 17,
         casefile_id: 2,
         article: {
           publisher: 'Scientific American',
@@ -157,7 +140,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 18,
         casefile_id: 2,
         article: {
           publisher: 'New York Times',
@@ -166,7 +148,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 19,
         casefile_id: 2,
         article: {
           publisher: 'The Washington Post',
@@ -175,7 +156,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 20,
         casefile_id: 2,
         article: {
           publisher: 'The Washington Post',
@@ -184,7 +164,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 21,
         casefile_id: 2,
         article: {
           publisher: 'Mother Jones',
@@ -193,7 +172,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 22,
         casefile_id: 2,
         article: {
           publisher: 'Smithsonian Tween Tribune',
@@ -202,7 +180,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 23,
         casefile_id: 2,
         article: {
           publisher: 'PBS NewsHour Extra',
@@ -211,7 +188,6 @@ exports.seed = function(knex, Promise) {
           type: 'Analysis',
         }
       }, {
-        id: 24,
         casefile_id: 2,
         article: {
           publisher: 'The Chicago Tribune',
@@ -220,7 +196,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 25,
         casefile_id: 2,
         article: {
           publisher: 'Nature',
@@ -229,7 +204,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 26,
         casefile_id: 2,
         article: {
           publisher: 'Slate',
@@ -238,7 +212,6 @@ exports.seed = function(knex, Promise) {
           type: 'Opinion',
         }
       }, {
-        id: 27,
         casefile_id: 2,
         article: {
           publisher: 'Dr. William Mount',
@@ -247,7 +220,6 @@ exports.seed = function(knex, Promise) {
           type: 'Fake',
         }
       }, {
-        id: 28,
         casefile_id: 2,
         article: {
           publisher: 'Global Research',
@@ -256,7 +228,6 @@ exports.seed = function(knex, Promise) {
           type: 'Fake',
         }
       }, {
-        id: 29,
         casefile_id: 2,
         article: {
           publisher: 'Health Nut News',
@@ -265,7 +236,6 @@ exports.seed = function(knex, Promise) {
           type: 'Fake',
         }
       }, {
-        id: 30,
         casefile_id: 2,
         article: {
           publisher: 'The Onion',
@@ -274,7 +244,6 @@ exports.seed = function(knex, Promise) {
           type: 'Satire',
         }
       }, {
-        id: 31,
         casefile_id: 2,
         article: {
           publisher: 'io9',
@@ -283,7 +252,6 @@ exports.seed = function(knex, Promise) {
           type: 'Popular/Blog',
         }
       }, {
-        id: 32,
         casefile_id: 2,
         article: {
           publisher: 'Teen Vogue',
@@ -292,7 +260,6 @@ exports.seed = function(knex, Promise) {
           type: 'Popular/Blog',
         }
       }, {
-        id: 33,
         casefile_id: 2,
         article: {
           publisher: 'Biopharma DealMakers',
@@ -301,7 +268,6 @@ exports.seed = function(knex, Promise) {
           type: 'Sponsored',
         }
       }, {
-        id: 34,
         casefile_id: 2,
         article: {
           publisher: 'Austin Chronicle',
