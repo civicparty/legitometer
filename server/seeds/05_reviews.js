@@ -24,8 +24,8 @@ exports.seed = function(knex, Promise) {
             reputablity_rating: 4,
             citation_rating: 2,
             headline_rating: 5
-            }
-          },
+          }
+        },
       ]);
     });
 };
