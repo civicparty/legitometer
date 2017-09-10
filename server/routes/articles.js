@@ -19,5 +19,6 @@ router.get('/api/articles', (req, res, next) => {
    })
 });
 
+// articles are POSTed in routes/casefiles.js 
 
 module.exports = router;
