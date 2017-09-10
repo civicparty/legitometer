@@ -17,12 +17,8 @@ class Article extends Component {
   }
 
   componentWillMount() {
-    console.log("requesting articles");
-    // TODO: This API needs to be refactored. We should write a route that
-    // allows you to grab articles by their casefile id.
-    // EX: "/api/articles/casefile/2"
-    //
-    // for demonstration purposes, shortcutting to grab a specific one in the array.
+    console.log("Requesting Articles from '/api/articles'");
+    
     axios.get('/api/articles')
       .then((res) => {
         //const { headline, url } = res.data.data[27].article

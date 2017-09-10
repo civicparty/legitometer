@@ -8,19 +8,13 @@ import {
 } from 'react-router-dom';
 import './scss/index.css';
 
-// Admin Components
 import Admin from './components/Admin/Admin';
-
-// Reviewer Components
-import Start from './components/Reviewer/Start';
-import GroupNames from './components/Reviewer/GroupNames';
-import StudentDashboard from './components/Reviewer/Dashboard';
-import StudentForm from './components/Reviewer/StudentForm';
-import Article from './components/Reviewer/Article';
+import Student from './components/Reviewer/Student'
 
 // Shared Components
 import Login from './components/Shared/Login'
 import Header from './components/Shared/Header';
+import FourOhFour from './components/FourOhFour';
 
 class Root extends Component {
   constructor() {
@@ -32,8 +26,6 @@ class Root extends Component {
   }
 
   render(){
-    console.log("this is a test");
-
     return (
       <Router>
         <div className="flex-parent">
@@ -46,17 +38,11 @@ class Root extends Component {
               https://reacttraining.com/react-router/web/example/auth-workflow
             */}
             {
-                <Switch>
-                  <Route path="/admin" component={Admin} />
-
-                  <Route exact path="/" component={StudentDashboard} />
-                  <Route path="/start" component={Start} />
-                  <Route path="/enter-names" component={GroupNames} />
-                  <Route path="/article/:id" component={Article} />
-                  <Route path="/mstestteacher/1" component={StudentForm} />
-                  <Route path="/form" component={StudentForm} />
-                  <Redirect to="/" />
-                </Switch>
+              <Switch>
+                <Route path="/admin" component={Admin} />
+                <Route path="/" component={Student} />
+                <Route path="/" component={FourOhFour} />
+              </Switch>
             }
           </div>
         </div>
