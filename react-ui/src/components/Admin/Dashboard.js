@@ -44,7 +44,7 @@ class AdminDashboard extends React.Component {
         <Header as="h1" className="floated left">
           Operation Legit-o-Meter
         </Header>
-        <Link to="new" className="ui button positive right floated">
+        <Link to="/admin/new" className="ui button positive right floated">
           Create a New Mission
         </Link>
         <Table celled>
