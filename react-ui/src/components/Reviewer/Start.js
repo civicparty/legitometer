@@ -14,7 +14,7 @@ class Start extends Component {
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center', 
+      justifyContent: 'center',
     }
 
     return (
@@ -23,7 +23,7 @@ class Start extends Component {
           <h1 style={headerStyles}>Legit-o-Meter</h1>
           <img src={legitCatImage} alt="Legit Cat Welcomes You" />
           <h1>You’ll read 3 different articles and figure out which ones are legit.</h1>
-          <p className="tip">We'll ask you questins to help you determine the answer.</p>
+          <p className="tip">We'll ask you questions to help you determine the answer.</p>
         </div>        <Link to="/article/1">
           <Button text="Let’s Get Started" />
         </Link>
