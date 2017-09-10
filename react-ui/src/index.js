@@ -13,6 +13,7 @@ import Admin from './components/Admin/Admin';
 
 // Reviewer Components
 import Start from './components/Reviewer/Start';
+import GroupNames from './components/Reviewer/GroupNames';
 import StudentDashboard from './components/Reviewer/Dashboard';
 import StudentForm from './components/Reviewer/StudentForm';
 import Article from './components/Reviewer/Article';
@@ -50,6 +51,7 @@ class Root extends Component {
 
                   <Route exact path="/" component={StudentDashboard} />
                   <Route path="/start" component={Start} />
+                  <Route path="/enter-names" component={GroupNames} />
                   <Route path="/article/:id" component={Article} />
                   <Route path="/mstestteacher/1" component={StudentForm} />
                   <Route path="/form" component={StudentForm} />
