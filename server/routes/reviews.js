@@ -29,7 +29,7 @@ router.get('/api/reviews', function(req, res, next) {
 // get reviews by group id (or name?);
 router.get('/api/reviews/:id', function(req, res, next) {
 
-}
+})
 
 router.post('/api/add-review', function(req, res, next) {
   console.log("made it to the review post route, here's the stuff: ", req.body);

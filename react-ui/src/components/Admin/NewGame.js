@@ -89,22 +89,36 @@ class NewGame extends React.Component {
     e.preventDefault();
     console.log("prevented default");
     let thiz = this;
-    //console.log("it should be here", this.state.collection_id); //it is
+    let saveName = this.state.name;
+    let saveId = this.state.collection_id;
+    let saveUser = this.state.user_id;
+
     console.log("about to add mission", this.state);
-    axios.patch('/api/update-mission', { // TODO axios.post???
-      name: this.state.name,
-      casefile_id: this.state.collection_id,
-      user_id: this.state.user_id,
+    axios.post('/api/test', {
+      name: saveName,
+      casefile_id: saveId,
+      user_id: saveUser,
     })
     .then((res) => {
-      console.log("response THEN submitNewPost", res);
-      thiz.setState({ submitResult: true });
-      console.log("and hereeee...");
+      console.log(res);
     })
-    // .then(this.handleRedirect) // TODO it is redirecting with all the redirect code commented out... so it is submitting and bypassing the preventDefault() because it is never getting into this function at all...
     .catch((err) => {
-      console.log("you are not going to space today (submitNewPost)", err);
-    });
+      console.log(err);
+    })
+    // axios.patch('/api/update-mission', {
+    //   name: this.state.name,
+    //   casefile_id: this.state.collection_id,
+    //   user_id: this.state.user_id,
+    // })
+    // .then((res) => {
+    //   console.log("response THEN submitNewPost", res);
+    //   thiz.setState({ submitResult: true });
+    //   console.log("and hereeee...");
+    // })
+    // // .then(this.handleRedirect) // TODO
+    // .catch((err) => {
+    //   console.log("you are not going to space today (submitNewPost)", err);
+    // });
   }
 
     // handleRedirect(res) {
