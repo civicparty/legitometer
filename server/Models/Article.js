@@ -14,10 +14,10 @@ const Article = bookshelf.Model.extend({
     return this.hasMany('Review');
   },
   mission: function() {
-    return this.belongsTo('Mission').through('Casefile');
+    return this.belongsTo('Mission', 'id').through('Casefile');
   },
   casefile: function() {
-    return this.belongsTo('Casefile');
+    return this.belongsTo('Casefile', 'casefile_id');
   },
 });
 

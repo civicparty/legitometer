@@ -10,7 +10,7 @@ const Casefile = bookshelf.Model.extend({
   tableName: 'casefiles',
   hasTimestamps: true,
   articles: function() {
-    return this.hasMany('Article');
+    return this.hasMany('Article', 'id');
   },
   missions: function() {
     return this.hasMany('Mission', 'id');
