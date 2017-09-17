@@ -19,6 +19,16 @@ router.get('/api/articles', (req, res, next) => {
    })
 });
 
+// get one article for student form
+router.get('/api/articles/:id', (req, res, next) => {
+  console.log("getting article with id", req.params.id);
+  Article.forge().where({id: req.params.id}).fetch()
+    .then((article) => {
+      // TODO fill in as needed
+      res.send(article);
+    })
+})
+
 // display articles when casefile selected or send articles to student form
 router.get('/api/articles/:name', (req, res, next) => {
   console.log("woohoo", req.params.name);
