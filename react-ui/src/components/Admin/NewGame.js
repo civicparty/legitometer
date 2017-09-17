@@ -89,9 +89,13 @@ class NewGame extends React.Component {
     e.preventDefault();
     console.log("prevented default");
     let thiz = this;
-    //console.log("it should be here", this.state.collection_id); //it is
+    let saveName = this.state.name;
+    let saveId = this.state.collection_id;
+    let saveUser = this.state.user_id;
+
     console.log("about to add mission", this.state);
-    axios.patch('/api/update-mission', { // TODO axios.post???
+
+    axios.patch('/api/update-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
       user_id: this.state.user_id,
@@ -101,7 +105,7 @@ class NewGame extends React.Component {
       thiz.setState({ submitResult: true });
       console.log("and hereeee...");
     })
-    // .then(this.handleRedirect) // TODO it is redirecting with all the redirect code commented out... so it is submitting and bypassing the preventDefault() because it is never getting into this function at all...
+    // .then(this.handleRedirect) // TODO
     .catch((err) => {
       console.log("you are not going to space today (submitNewPost)", err);
     });

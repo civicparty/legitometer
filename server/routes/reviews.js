@@ -26,8 +26,15 @@ router.get('/api/reviews', function(req, res, next) {
   });
 });
 
+// get reviews by group id (or name?);
+router.get('/api/reviews/:id', function(req, res, next) {
+
+})
+
 router.post('/api/add-review', function(req, res, next) {
   console.log("made it to the review post route, here's the stuff: ", req.body);
+  // each time 'next' is clicked, stuff from that page will be saved
+  // group_id, mission_id, {question id : answer}
 })
 
 module.exports = router;
