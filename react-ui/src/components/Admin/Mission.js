@@ -35,7 +35,7 @@ class Mission extends React.Component {
         console.log("get articles error in Mission.js", err);
       })
   }
-
+// TODO should also display mission and casefile names
   render() {
     console.log("articles in render", this.state.articles);
     return (

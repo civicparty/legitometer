@@ -27,10 +27,10 @@ class MissionListItem extends React.Component {
   render() {
     return (
       <tr key={this.props.id}>
-        <td className="strong">{this.props.name}</td>
+        <td className="strong">{this.props.name} - {this.props.id}</td>
         <td>{this.props.collection}</td>
         <td className="collapsing">
-          <Link to={`/admin/mission/${this.props.id}`} className="ui button blue">{this.props.id}
+          <Link to={`/admin/mission/${this.props.id}`} className="ui button blue">
             Review
           </Link>
           <Button type="button" onClick={this.handleDelete} basic color="red">
