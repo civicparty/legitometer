@@ -17,14 +17,11 @@ class Mission extends React.Component {
       params: {id: this.props.match.params.id}})
       .then((res) => {
         // save relevant article info to state
-        // console.log("yay something worked!", res.data);
-        // res.data = [[0:”headline”, 1:”url”, 2:”type”], [0:,1:,2:], [0:,1:,2:] ]
         for(let key in res.data) {
           // assign state to temporary arrays
           let temp = this.state.articles.slice();
           // push data to arrays
           temp.push(res.data[key]);
-          // console.log("and each piece is", res.data[key]);
           // set the state
           this.setState({
             articles: temp
@@ -37,7 +34,6 @@ class Mission extends React.Component {
   }
 // TODO should also display mission and casefile names
   render() {
-    // console.log("articles in render", this.state.articles);
     return (
       <div>
           <Table celled>
@@ -64,10 +60,5 @@ class Mission extends React.Component {
     )
   }
 }
-
-// Mission.defaultProps = {
-//   test: "well, so we'll try this"
-//   //so defaultProps could be... from database?
-// }
 
 export default Mission;

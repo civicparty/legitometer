@@ -25,7 +25,6 @@ class AdminDashboard extends React.Component {
           temp_mission.push(key);
           temp_casefile.push(res.data[key]);
           // set the state
-          console.log("is there an id here", temp_mission); // no it's only the names TODO GET IDS
           this.setState({
             games: temp_mission,
             collections: temp_casefile,

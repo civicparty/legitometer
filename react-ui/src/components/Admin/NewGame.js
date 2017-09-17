@@ -94,31 +94,21 @@ class NewGame extends React.Component {
     let saveUser = this.state.user_id;
 
     console.log("about to add mission", this.state);
-    axios.post('/api/test', {
-      name: saveName,
-      casefile_id: saveId,
-      user_id: saveUser,
+
+    axios.patch('/api/update-mission', {
+      name: this.state.name,
+      casefile_id: this.state.collection_id,
+      user_id: this.state.user_id,
     })
     .then((res) => {
-      console.log(res);
+      console.log("response THEN submitNewPost", res);
+      thiz.setState({ submitResult: true });
+      console.log("and hereeee...");
     })
+    // .then(this.handleRedirect) // TODO
     .catch((err) => {
-      console.log(err);
-    })
-    // axios.patch('/api/update-mission', {
-    //   name: this.state.name,
-    //   casefile_id: this.state.collection_id,
-    //   user_id: this.state.user_id,
-    // })
-    // .then((res) => {
-    //   console.log("response THEN submitNewPost", res);
-    //   thiz.setState({ submitResult: true });
-    //   console.log("and hereeee...");
-    // })
-    // // .then(this.handleRedirect) // TODO
-    // .catch((err) => {
-    //   console.log("you are not going to space today (submitNewPost)", err);
-    // });
+      console.log("you are not going to space today (submitNewPost)", err);
+    });
   }
 
     // handleRedirect(res) {
