@@ -10,32 +10,44 @@ class Mission extends React.Component {
       articles: []
     }
   }
-
+// TODO add another state var called noArticles that is shown conditionally instead of the Object.keys stuff
   componentDidMount() {
     // get articles
-    axios.get('/api/articles/' + this.props.match.params.id, {
-      params: {id: this.props.match.params.id}})
+    console.log("component mounted", this.props.match.params.id);
+    axios.get('/api/articles/review/' + this.props.match.params.id, {
+      params: {name: this.props.match.params.id} })
       .then((res) => {
+        console.log("artticels retrieved", res.data, typeof res.data);
         // save relevant article info to state
-        for(let key in res.data) {
-          // assign state to temporary arrays
-          let temp = this.state.articles.slice();
-          // push data to arrays
-          temp.push(res.data[key]);
-          // set the state
-          this.setState({
-            articles: temp
-          })
+        if (typeof res.data === 'string') {
+          this.setState({ articles: res.data})
+        } else {
+          for(let key in res.data) {
+            // assign state to temporary arrays
+            let temp = this.state.articles.slice();
+            // push data to arrays
+            temp.push(res.data[key]);
+            // set the state
+            this.setState({
+              articles: temp
+            })
+          }
         }
+
+
       })
       .catch((err) => {
         console.log("get articles error in Mission.js", err);
       })
   }
-// TODO should also display mission and casefile names
+// TODO should also display casefile name
+// name comes from <Link to={`/admin/mission/${missionName}`} - does this.props.collection get passed through too?
   render() {
+    let missionName = this.props.match.params.id.replace(/_/g, ' ');
+
     return (
       <div>
+          <h3>Mission: { missionName }</h3>
           <Table celled>
             <Table.Header>
               <Table.Row>

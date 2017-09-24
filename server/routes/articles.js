@@ -46,7 +46,7 @@ router.get('/api/articles/casefile/:id', (req, res, next) => {
 })
 
 // display articles when casefile selected or send articles to student form
-router.get('/api/articles/:name', (req, res, next) => {
+router.get('/api/articles/review/:name', (req, res, next) => {
   console.log("woohoo", req.params.name);
   let missionName = req.params.name.replace(/_/g, ' ');
   // need to get casefile id from the mission table
@@ -62,7 +62,11 @@ router.get('/api/articles/:name', (req, res, next) => {
       for (var i = 0; i < articles.length; i++) {
         files.push([articles[i].article.headline, articles[i].article.url, articles[i].article.type]);
       }
-      res.send(files);
+      if (files.length > 0) {
+        res.send(files);
+      } else {
+        res.send("No Articles Found")
+      }
     })
   })
 })
