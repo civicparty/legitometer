@@ -13,8 +13,10 @@ class Mission extends React.Component {
 
   componentDidMount() {
     // get articles
-    axios.get('/api/articles/' + this.props.match.params.id, {
-      params: {id: this.props.match.params.id}})
+    console.log("component mounted", this.props.match.params.id);
+    // this.props.match.params.id is the name - why is it id? this worked last week...
+    axios.get('/api/articles/review/' + this.props.match.params.id, {
+      params: {name: this.props.match.params.id}})
       .then((res) => {
         // save relevant article info to state
         for(let key in res.data) {
