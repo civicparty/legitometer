@@ -81,7 +81,6 @@ router.get('/api/missions', (req, res, next) => {
 
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
-  // console.log("hi, adding mission", req.body);
   let username, new_url, next_id;
 
   // set the value of the next id in the mission table, avoiding duplicate key errors
@@ -89,10 +88,7 @@ router.post('/api/add-mission', (req, res, next) => {
 
   // TODO I don't think this is the correct way to do this AT ALL
   // get last mission id
-  Mission.count('id').
-  then((count) => {
-    next_id = parseInt(count)+1;
-  })
+
   // get user name from user id for mission url
   User.forge().where({id: req.body.user_id}).fetch()
     .then((user) => {
@@ -101,7 +97,7 @@ router.post('/api/add-mission', (req, res, next) => {
       // strip punctuation, capitals, and spaces
       username = username.replace(/[.\-`'\s]/g,"").toLowerCase();
       // create the url students will use to access the mission
-      new_url = '/' + username + '/' + next_id; //TODO get rid of this or FIX IT
+      new_url = '/' + username + '/'; // TODO need to add the correct id to this somehow, here or elsewhere
     })
     .then(() => {
       // change last_id to false for current last_id
@@ -109,38 +105,22 @@ router.post('/api/add-mission', (req, res, next) => {
         .save({last_id: false}, {patch: true})
     })
     .then(() => {
-      // save mission name, user_id, url to mission table
-      // casefile_id will be updated in patch when selected
+      // save mission name, user_id, url to mission table - casefile_id will be updated in patch when selected
       Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url, last_id: true})
       .save()
       .then((mission) => {
-        // console.log("new mmissioin name saved", mission.attributes);
         res.sendStatus(200);
       })
-     })
-      // save mission name, casefile_id, user_id, and url to mission table
-
-      //casefile_id: req.body.casefile_id,
-      // Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url})
-      // .save()
-      // .then((mission) => {
-      //   res.sendStatus(200);
-      // })
       .catch((err) => {
         next(err);
       })
-
+     })
     .catch((err) => {
       next(err);
     })
 }) // end post
 
-router.post('/api/test', (req, res, next) => {
-  console.log("MAYBE THIS WILL WORK", req.body);
-})
-
-// when Save button is clicked - submitNewPost() axios.patch comes here
-// update mission with casefile_id
+// update mission with casefile_id on saving
 router.patch('/api/update-mission', (req, res, next) => {
   console.log("patch route reached", req.body);
   Mission.forge().where({name: req.body.name}).fetch()
@@ -151,12 +131,11 @@ router.patch('/api/update-mission', (req, res, next) => {
         .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
         .then((response) => {
           console.log("mission updated successfully", response);
-          res.sendStatus(200); 
+          res.sendStatus(200);
         })
         .catch((err) => {
           next(err);
         })
-        // .send();
     })
     .catch((err) => {
       next(err);
@@ -172,6 +151,7 @@ router.delete('/api/delete-mission/:name', (req, res, next) => {
       mission.destroy()
       .then(() => {
         console.log("mission", req.params.name, "successfully deleted");
+        res.sendStatus(200);
       })
       .catch((err) => {
         console.log("nooo, error", err);
@@ -181,7 +161,5 @@ router.delete('/api/delete-mission/:name', (req, res, next) => {
       console.log("delete error", err);
     });
 })
-
-
 
 module.exports = router;
