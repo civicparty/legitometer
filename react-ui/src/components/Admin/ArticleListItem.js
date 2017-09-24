@@ -11,7 +11,7 @@ class ArticleListItem extends React.Component {
 
 
   render() {
-    console.log("articlelistitem", this.props);
+    // console.log("articlelistitem", this.props);
     return (
       <tr key={this.props.id}>
         <td className="strong">{this.props.headline}</td>

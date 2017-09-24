@@ -61,8 +61,9 @@ router.post('/api/add-casefile', function(req, res, next) {
           console.log("well, fine, i've fetched all the missions. last id-ish: ", missions.length); //icky but works ... until you delete some...
           Mission.forge().where({last_id:true})
             .save({casefile_id: new_casefile}, {patch: true})
-            .then((res) => {
-              console.log("updated missions table with new casefile id", res);
+            .then((response) => {
+              console.log("updated missions table with new casefile id", response);
+              res.sendStatus(200);
             })
             .catch((err) => {
               next(err);

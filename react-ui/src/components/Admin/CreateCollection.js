@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Header, Icon } from 'semantic-ui-react';
+import { Link, Redirect, Route } from 'react-router-dom';
 
 import ArticleInput from './ArticleInput';
 
@@ -16,6 +17,7 @@ class CreateCollection extends React.Component {
       articles: [{name: '', url: '', type: ''}],
       inputList: [],
       inputs: [],
+      submitResult: null,
     }
   }
 
@@ -60,6 +62,7 @@ class CreateCollection extends React.Component {
 
   submitNewCollection(e) {
     e.preventDefault();
+    let thiz = this;
     console.log("new casefile submitted!", this.state.articles, this.state.caseFileName);
     // post new casefile
     axios.post('/api/add-casefile', {
@@ -68,6 +71,8 @@ class CreateCollection extends React.Component {
     })
     .then((res) => {
       console.log("success?");
+      // set redirect variable
+      thiz.setState({ submitResult: true });
     })
     .catch((err) => {
       console.log("ERROR!!! :p !!!", err);
@@ -75,6 +80,8 @@ class CreateCollection extends React.Component {
   }
 
   render() {
+    const { submitResult } = this.state;
+
     return(
       <div>
         <form onSubmit={(e) => this.submitNewCollection(e)} className="ui form section">
@@ -98,6 +105,9 @@ class CreateCollection extends React.Component {
             Save Case File
           </button>
         </form>
+        {submitResult && (
+          <Redirect to={'/admin'}/>
+        )}
       </div>
     )
   }
