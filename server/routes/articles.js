@@ -24,8 +24,24 @@ router.get('/api/articles/:id', (req, res, next) => {
   console.log("getting article with id", req.params.id);
   Article.forge().where({id: req.params.id}).fetch()
     .then((article) => {
-      // TODO fill in as needed
+      // TODO fill in functionality as needed
       res.send(article);
+    })
+})
+
+// get articles by casefile id
+router.get('/api/articles/casefile/:id', (req, res, next) => {
+  console.log("getting articles by casefile id", req.params.id);
+  // get all articles where casefile id is req.params.id
+  Article.forge().where({casefile_id: req.params.id}).fetchAll()
+    .then((articles) => {
+      //TODO fill in functionality as needed
+      let files = [];
+      articles = articles.toJSON();
+      for (var i = 0; i < articles.length; i++) {
+        files.push([articles[i].article.headline, articles[i].article.url, articles[i].article.type]);
+      }
+      res.send(files);
     })
 })
 
