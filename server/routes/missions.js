@@ -135,22 +135,28 @@ router.post('/api/add-mission', (req, res, next) => {
     })
 }) // end post
 
-    // when Save button is pressed - submitNewPost function makes call here
-    // update mission with casefile_id
+router.post('/api/test', (req, res, next) => {
+  console.log("MAYBE THIS WILL WORK", req.body);
+})
+
+// when Save button is clicked - submitNewPost() axios.patch comes here
+// update mission with casefile_id
 router.patch('/api/update-mission', (req, res, next) => {
-  console.log("patching!", req.body);
+  console.log("patch route reached", req.body);
   Mission.forge().where({name: req.body.name}).fetch()
     .then((mission) => {
-      // update mission with selected casefile_id
+      // update mission table with selected casefile_id
       console.log("fetched mission to patch", mission);
       Mission.forge().where({id: mission.attributes.id})
         .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
-        .then((res) => {
-          console.log("mission updated successfully", res);
+        .then((response) => {
+          console.log("mission updated successfully", response);
+          res.sendStatus(200); 
         })
         .catch((err) => {
           next(err);
         })
+        // .send();
     })
     .catch((err) => {
       next(err);

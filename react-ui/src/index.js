@@ -41,7 +41,6 @@ class Root extends Component {
               <Switch>
                 <Route path="/admin" component={Admin} />
                 <Route path="/" component={Student} />
-                <Route path="/" component={FourOhFour} />
               </Switch>
             }
           </div>

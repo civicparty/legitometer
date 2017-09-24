@@ -5,6 +5,8 @@ exports.up = knex =>
     table.increments('id');
     table.string('name');
     table.boolean('isAdmin');
+    table.string('city');
+    table.string('school');
     table.timestamps(true, true);
   })
 

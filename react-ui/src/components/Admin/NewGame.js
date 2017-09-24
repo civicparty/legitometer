@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, Route } from 'react-router-dom';
 import { Header, Table } from 'semantic-ui-react';
 import CollectionItem from './CollectionItem';
-
+import Admin from './Admin';
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -89,19 +89,24 @@ class NewGame extends React.Component {
     e.preventDefault();
     console.log("prevented default");
     let thiz = this;
-    //console.log("it should be here", this.state.collection_id); //it is
+    let saveName = this.state.name;
+    let saveId = this.state.collection_id;
+    let saveUser = this.state.user_id;
+
     console.log("about to add mission", this.state);
-    axios.patch('/api/update-mission', { // TODO axios.post???
+
+    axios.patch('/api/update-mission', {
       name: this.state.name,
       casefile_id: this.state.collection_id,
       user_id: this.state.user_id,
     })
-    .then((res) => {
+    .then((res) => { //TODO it doesn't seem to be getting here...
       console.log("response THEN submitNewPost", res);
       thiz.setState({ submitResult: true });
-      console.log("and hereeee...");
+      console.log("and hereeee...call redirect function...");
+      // this.handleRedirect(res);
     })
-    // .then(this.handleRedirect) // TODO it is redirecting with all the redirect code commented out... so it is submitting and bypassing the preventDefault() because it is never getting into this function at all...
+
     .catch((err) => {
       console.log("you are not going to space today (submitNewPost)", err);
     });
@@ -111,7 +116,8 @@ class NewGame extends React.Component {
     //   if( res.status === 200 ){
     //     //redirect to dashboard
     //     console.log("redirecting...");
-    //     window.location.href = 'http://localhost:5000';
+    //     <Route path="/admin" component={Admin} />
+    //     // how to redirect to Dashboard component?
     //        } else {
     //          // Something went wrong here
     //        }
@@ -141,6 +147,7 @@ class NewGame extends React.Component {
           </button>
         </div>
     );
+    const { submitResult } = this.state;
 
     return (
       <div>
@@ -154,6 +161,9 @@ class NewGame extends React.Component {
           <label htmlFor="gameTitle">Mission Name</label>
           { this.state.showEditTitle ? editTitle : displayTitle }
         </form>
+        {submitResult && (
+          <Redirect to={'/admin'}/>
+        )}
         {
           this.state.name ?
           <div>

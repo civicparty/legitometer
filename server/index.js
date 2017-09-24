@@ -11,9 +11,6 @@ require('dotenv').config()
 // Set up the express app
 const app = express();
 
-// Log requests to the console.
-app.use(logger('dev'));
-
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.urlencoded({ extended: false })); //the internet says this should be true
 app.use(bodyParser.json());
@@ -21,6 +18,9 @@ app.use(cookieParser());
 app.use(cookieSession({
   secret: "squirrel"
 }))
+
+// Log requests to the console.
+app.use(logger('dev'));
 
 app.use(cors());
 
@@ -41,6 +41,7 @@ const casefiles = require('./routes/casefiles');
 const articles = require('./routes/articles');
 const reviews = require('./routes/reviews');
 const users = require('./routes/users');
+const groups = require('./routes/groups');
 
 // TODO
 // app.use('/games', gamesRouter);
@@ -51,6 +52,7 @@ app.use(casefiles);
 app.use(articles);
 app.use(reviews);
 app.use(users);
+app.use(groups);
 
 const PORT = process.env.PORT || 5000;
 
