@@ -136,7 +136,7 @@ router.post('/api/add-mission', (req, res, next) => {
 }) // end post
 
 router.post('/api/test', (req, res, next) => {
-  console.log("MAYBE THIS WILL WORK", req.body); 
+  console.log("MAYBE THIS WILL WORK", req.body);
 })
 
 // when Save button is clicked - submitNewPost() axios.patch comes here
@@ -149,12 +149,14 @@ router.patch('/api/update-mission', (req, res, next) => {
       console.log("fetched mission to patch", mission);
       Mission.forge().where({id: mission.attributes.id})
         .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
-        .then((res) => {
-          console.log("mission updated successfully", res);
+        .then((response) => {
+          console.log("mission updated successfully", response);
+          res.sendStatus(200); // TODO this should send something back so the then in submitNewPost does something
         })
         .catch((err) => {
           next(err);
         })
+        // .send();
     })
     .catch((err) => {
       next(err);
