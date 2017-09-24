@@ -5,10 +5,11 @@ exports.seed = knex =>
   knex('users').insert([{
     name: 'Ms. Testteacher',
     isAdmin: true,
+    city: 'Austin',
+    school: 'X High School'
     }, {
     name: 'Mr. Teachertest',
     isAdmin: true,
-    }, {
-    name: 'Student1',
-    isAdmin: false,
+    city: 'Austin',
+    school: 'X Middle School'
     }]))
