@@ -151,7 +151,7 @@ router.patch('/api/update-mission', (req, res, next) => {
         .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
         .then((response) => {
           console.log("mission updated successfully", response);
-          res.sendStatus(200); // TODO this should send something back so the then in submitNewPost does something
+          res.sendStatus(200); 
         })
         .catch((err) => {
           next(err);
