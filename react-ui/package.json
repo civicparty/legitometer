@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "node-sass-chokidar": "0.0.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-google-login-component": "^0.8.0",
@@ -15,9 +16,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
   },
   "proxy": "http://localhost:5000"
 }

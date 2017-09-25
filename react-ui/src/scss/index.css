@@ -41,6 +41,9 @@
 .strong {
   font-weight: bold; }
 
+.App.container {
+  padding: 40px; }
+
 @font-face {
   font-family: 'LeagueGothic';
   src: url("../fonts/web/LeagueGothic.woff") format("woff"); }
