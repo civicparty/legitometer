@@ -27,10 +27,7 @@ class NewGame extends React.Component {
   componentDidMount() {
     axios.get('/api/casefiles')
       .then((res) => {
-        console.log("api requesting", res.data);
-        this.setState({
-          collections: res.data,
-        })
+        this.setState({ collections: res.data });
       })
       .then(() => {
         console.log("component mounted! casefile data retrieved!", this.state.collections);
@@ -63,7 +60,6 @@ class NewGame extends React.Component {
   }
 
   updateCollectionID(collection_id) {
-    console.log("updating colleciton id", collection_id); // THIS WORKS
     this.setState({ collection_id: collection_id });
   }
 
@@ -131,7 +127,7 @@ class NewGame extends React.Component {
             defaultValue={this.state.name}
             className="bump-right"
           />
-        <button className="ui button" type="submit" onClick={(e) => this.updateTitle(e)}>
+          <button className="ui button" type="submit" onClick={(e) => this.updateTitle(e)}>
             Save
           </button>
         </div>
@@ -217,8 +213,6 @@ class NewGame extends React.Component {
 }
 
 export default NewGame;
-
-//          onSubmit={(e) => this.updateTitle(e)}
 
 <form
   ref={(input) => this.gameForm = input}
