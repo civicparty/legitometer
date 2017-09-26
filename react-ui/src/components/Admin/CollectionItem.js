@@ -22,7 +22,7 @@ class CollectionItem extends React.Component {
     const buttonText = isActive ? 'Selected' : 'Choose';
 
     return (
-      <tr key={this.props.id} className={rowColorClasses}>
+      <tr className={rowColorClasses}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
         <td>

@@ -28,7 +28,7 @@ class AddCollectionToMission extends Component {
 
     axios.patch('/api/update-mission', {
       name: this.state.name,
-      casefile_id: this.state.collection_id,
+      casefile_id: this.state.collection_id - 1,
       user_id: this.state.user_id,
     })
     .then((res) => thiz.setState({ submitResult: true }))
@@ -76,7 +76,7 @@ class AddCollectionToMission extends Component {
                     name={this.state.collections[key][1]}
                     activeCollectionId={this.state.collection_id}
                     createdBy={this.state.collections[key][2]}
-                    id={id}
+                    id={id + 1}
                     key={id}
                     updateCollection={this.updateCollectionID}
                   />
