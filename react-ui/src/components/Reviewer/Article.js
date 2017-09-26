@@ -5,6 +5,7 @@ import axios from 'axios';
 import Footer from './Footer';
 import Questions from './Questions';
 import ArticlePreview from './ArticlePreview';
+import GroupNames from './GroupNames';
 
 
 class Article extends Component {
@@ -18,7 +19,7 @@ class Article extends Component {
 
   componentWillMount() {
     console.log("Requesting Articles from '/api/articles'");
-    
+
     axios.get('/api/articles')
       .then((res) => {
         //const { headline, url } = res.data.data[27].article
@@ -52,7 +53,8 @@ class Article extends Component {
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
-          <Route path="/article/:id" exact render={() => <ArticlePreview {...previewProps} />} />
+          <Route path="/article/0" exact component={GroupNames} />
+          <Route path="/article/1" exact render={() => <ArticlePreview {...previewProps} />} />
           <Route path="/article/:article_id/question/:id" exact component={Questions} />
         </div>
         <Footer {...this.props} />

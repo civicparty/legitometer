@@ -24,7 +24,7 @@ class Start extends Component {
           <img src={legitCatImage} alt="Legit Cat Welcomes You" />
           <h1>You’ll read 3 different articles and figure out which ones are legit.</h1>
           <p className="tip">We'll ask you questions to help you determine the answer.</p>
-        </div>        <Link to="/article/1">
+        </div>        <Link to="/article/0">
           <Button text="Let’s Get Started" />
         </Link>
 
