@@ -10,10 +10,6 @@ class CollectionItem extends React.Component {
     e.preventDefault();
 
     // Update which row is highlighted
-    console.log("hEY LOOK HERE", this.props.id, "what it waS: ", this.props.activeCollectionId);
-    // this.props.id is zero (activeCollectionId is 1)
-    // why is id 0???
-    console.log("props", this.props);
     this.props.updateCollection(this.props.id);
   }
 
@@ -26,7 +22,7 @@ class CollectionItem extends React.Component {
     const buttonText = isActive ? 'Selected' : 'Choose';
 
     return (
-      <tr key={this.props.id} className={rowColorClasses}>
+      <tr className={rowColorClasses}>
         <td>{this.props.name}</td>
         <td>created by {this.props.createdBy}</td>
         <td>

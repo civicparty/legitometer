@@ -26,58 +26,34 @@ router.get('/api/missions', (req, res, next) => {
   // TODO where user_id === logged_in user (req.session.user)
   let user = 1; // temporary workaround
 
-  Mission.forge().where({user_id: user}).query('orderBy', 'id', 'asc').fetchAll({withRelated: ['casefile'], debug:true})
-  .then((mission) => {
-    // convert data to JSON
-    mission = mission.toJSON();
-    //console.log("these are all the missions", mission);
-    // loop over data to get mission and casefile names
-    for (var i = 0; i < mission.length; i++) {
-      // save to files object
-      if (mission[i].casefile && mission[i].casefile.name) {
-        files[mission[i].name] = mission[i].casefile.name;
-      } else {
-        files[mission[i].name] = "no casefile added";
+  Mission.forge().where({user_id: user}).query('orderBy', 'id', 'asc')
+    .fetchAll({withRelated: ['casefile'], debug:true})
+    .then((mission) => {
+      // convert data to JSON
+      mission = mission.toJSON();
+      // loop over data to get mission and casefile names
+      for (var i = 0; i < mission.length; i++) {
+        // save to files object
+        if (mission[i].casefile && mission[i].casefile.name) {
+          files[mission[i].name] = mission[i].casefile.name;
+        } else {
+          files[mission[i].name] = "no casefile added";
+        }
       }
-    }
-    // send files object
-    res.send(files)
-  })
+      // send files object
+      res.send(files)
+    })
 });
 
  // get mission by name / id
  router.get('/api/view-mission/:name', function(req, res, next) {
-   let article_files = [];
-   let missionid, casefileid;
-   console.log("successnesses", req.params.name);
-   let mission_name = req.params.name.replace('_', " \s");
-   console.log("mission name", mission_name);
-   // get the casefile_id
-   Mission.forge().where({name: mission_name}).fetch()
-   .then((mission) => {
-     mission = mission.toJSON();
-     console.log("casefile id",  mission.casefile_id);
-     //console.log(mission[0].casefile.name);
-     //get casefile name from mission.casefile_id
-     //get articles from articles.casefile_id
-     Article.forge().where({casefile_id: mission.casefile_id}).fetchAll()
-       .then((articles) => {
-         console.log("fetching articles", articles.toJSON());
-         console.log("squirrrrrel magic", articles.toJSON()[0].article);
-         for (var i = 0; i < articles.length; i++) {
-           article_files.push(articles.toJSON()[i].article);
-         }
-         //article_files.push(articles.toJSON());
-       })
-       .catch((err) => {
-         console.log("articles error", err);
-       })
-   })
-   .catch((err) => {
-     console.log("mission fetching error", err);
-   })
-   res.send(article_files);
- }) // end get by name
+   let mission_name = req.params.name.split('_').join(' ');
+   let missionJSON;
+
+   Mission.forge().where({ name: mission_name }).fetch()
+   .then((mission) => res.send(mission))
+   .catch((err) => console.log("mission fetching error", err))
+ })
 
 // create a new mission
 router.post('/api/add-mission', (req, res, next) => {
@@ -92,7 +68,7 @@ router.post('/api/add-mission', (req, res, next) => {
   // get user name from user id for mission url
   User.forge().where({id: req.body.user_id}).fetch()
     .then((user) => {
-      user = user.toJSON();
+      user = user.toJSON() || 'testamdmin';
       username = user.name;
       // strip punctuation, capitals, and spaces
       username = username.replace(/[.\-`'\s]/g,"").toLowerCase();
@@ -105,8 +81,14 @@ router.post('/api/add-mission', (req, res, next) => {
         .save({last_id: false}, {patch: true})
     })
     .then(() => {
-      // save mission name, user_id, url to mission table - casefile_id will be updated in patch when selected
-      Mission.forge({name: req.body.name, user_id: req.body.user_id, url: new_url, last_id: true})
+      // save mission name, user_id, url to mission table - casefile_id will be
+      // updated in patch when selected
+      Mission.forge({
+        name: req.body.name,
+        user_id: req.body.user_id,
+        url: new_url,
+        last_id: true
+      })
       .save()
       .then((mission) => {
         res.sendStatus(200);
@@ -128,7 +110,8 @@ router.patch('/api/update-mission', (req, res, next) => {
       // update mission table with selected casefile_id
       console.log("fetched mission to patch", mission);
       Mission.forge().where({id: mission.attributes.id})
-        .save({casefile_id: req.body.casefile_id+1}, {patch: true}) //TODO get casefile_id a better way
+        //TODO get casefile_id a better way
+        .save({casefile_id: req.body.casefile_id+1}, {patch: true})
         .then((response) => {
           console.log("mission updated successfully", response);
           res.sendStatus(200);
