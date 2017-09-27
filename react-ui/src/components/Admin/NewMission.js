@@ -4,15 +4,14 @@ import { Link, Redirect } from 'react-router-dom';
 import { Header, Table } from 'semantic-ui-react';
 import CollectionItem from './CollectionItem';
 
-//make a new game - selecting collection [articles]
-class NewGame extends React.Component {
+class NewMission extends React.Component {
   constructor(props) {
     super(props);
     this.updateTitle = this.updateTitle.bind(this);
     this.submitNewPost = this.submitNewPost.bind(this);
     this.updateCollectionID = this.updateCollectionID.bind(this);
     this.saveMission = this.saveMission.bind(this);
-    // this.handleRedirect = this.handleRedirect.bind(this);
+
     this.state = {
       name: null,
       collection_id: null,
@@ -27,9 +26,6 @@ class NewGame extends React.Component {
     axios.get('/api/casefiles')
       .then((res) => {
         this.setState({ collections: res.data });
-      })
-      .then(() => {
-        console.log("component mounted! casefile data retrieved!", this.state.collections);
       })
       .catch((err) => {
         console.log(err);
@@ -104,17 +100,6 @@ class NewGame extends React.Component {
     });
   }
 
-    // handleRedirect(res) {
-    //   if( res.status === 200 ){
-    //     //redirect to dashboard
-    //     console.log("redirecting...");
-    //     <Route path="/admin" component={Admin} />
-    //     // how to redirect to Dashboard component?
-    //        } else {
-    //          // Something went wrong here
-    //        }
-    // }
-
   render() {
     let editTitle = (
         <div className="flex">
@@ -131,7 +116,7 @@ class NewGame extends React.Component {
 
     let displayTitle = (
         <div className="flex">
-          <span className="NewGame__title">
+          <span className="NewMission__title">
             {this.state.name}
           </span>
           <button className="ui button flex-right" type="submit">
@@ -176,7 +161,7 @@ class NewGame extends React.Component {
                       Choose an Exisiting Case File... OR
                     </Table.HeaderCell>
                     <Table.HeaderCell className="collapsing">
-                      <Link to='collection/new' className="ui button primary right floated">
+                      <Link to='/admin/collection/new' className="ui button primary right floated">
                         Create a New Case File
                       </Link>
                     </Table.HeaderCell>
@@ -209,4 +194,4 @@ class NewGame extends React.Component {
   }
 }
 
-export default NewGame;
+export default NewMission;

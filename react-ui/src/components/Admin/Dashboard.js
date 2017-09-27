@@ -8,9 +8,15 @@ import MissionListItem from './MissionListItem';
 class AdminDashboard extends React.Component {
   constructor() {
     super();
-    this.state = {
-      missions: [],
-    }
+    this.handleRemove = this.handleRemove.bind(this);
+    this.state = { missions: [] };
+  }
+
+  handleRemove(id) {
+    const updatedMissions = this.state.missions.filter((mission) => {
+      return mission.missionId !== id
+    })
+    this.setState({ missions: updatedMissions });
   }
 
   componentWillMount() {
@@ -31,7 +37,7 @@ class AdminDashboard extends React.Component {
         <Header as="h1" className="floated left">
           Operation Legit-o-Meter
         </Header>
-        <Link to="/admin/new" className="ui button positive right floated">
+        <Link to="/admin/new-mission/" className="ui button positive right floated">
           Create a New Mission
         </Link>
         <Table celled>
@@ -49,6 +55,7 @@ class AdminDashboard extends React.Component {
                   mission={mission}
                   id={mission.missionId}
                   key={mission.missionId}
+                  handleRemove={this.handleRemove}
                 />
               )
             })}
