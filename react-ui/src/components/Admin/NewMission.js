@@ -176,7 +176,7 @@ class NewMission extends React.Component {
                       Choose an Exisiting Case File... OR
                     </Table.HeaderCell>
                     <Table.HeaderCell className="collapsing">
-                      <Link to='collection/new' className="ui button primary right floated">
+                      <Link to='/admin/collection/new' className="ui button primary right floated">
                         Create a New Case File
                       </Link>
                     </Table.HeaderCell>
