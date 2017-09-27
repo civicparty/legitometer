@@ -11,12 +11,13 @@ class MissionListItem extends React.Component {
   }
 
   handleDelete() {
-    axios.delete('/api/delete-mission/' + this.props.name, {
-      params: {name: this.props.name},
+    const { missionId } = this.props.mission
+    axios.delete('/api/delete-mission/' + missionId, {
+      params: { id: missionId },
     })
     .then((res) => {
       console.log("delete success response", res);
-      // TODO redirect to dashboard
+      this.props.handleRemove(missionId);
     })
     .catch((err) => {
       console.log("delete error response", err);

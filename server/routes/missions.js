@@ -128,14 +128,12 @@ router.patch('/api/update-mission', (req, res, next) => {
 
 })
 
-router.delete('/api/delete-mission/:name', (req, res, next) => {
-  console.log("you are in the mission delete route and you are deleting mission: ", req.params.name);
-  Mission.forge().where({name: req.params.name})
+router.delete('/api/delete-mission/:id', (req, res, next) => {
+  Mission.forge().where({id: req.params.id})
     .fetch({require: true})
     .then((mission) => {
       mission.destroy()
       .then(() => {
-        console.log("mission", req.params.name, "successfully deleted");
         res.sendStatus(200);
       })
       .catch((err) => {
