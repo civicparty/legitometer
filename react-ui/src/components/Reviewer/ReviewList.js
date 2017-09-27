@@ -5,11 +5,18 @@ import { Button } from 'semantic-ui-react';
 
 class ReviewList extends React.Component {
   render() {
+    const {
+      missionName,
+      missionId,
+      casefileName,
+      casefileId,
+    } = this.props.mission;
+    
     return(
-      <div key={this.props.id}>
-        <Link to={`/article/${this.props.id}/start`}>
+      <div key={missionId}>
+        <Link to={`/article/${missionId}/start`}>
           <Button basic color="red">
-            {this.props.name}: {this.props.collection}
+            {missionName}: {casefileName}
           </Button>
         </Link>
       </div>
