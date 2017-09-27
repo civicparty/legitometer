@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Header, Icon } from 'semantic-ui-react';
-import { Link, Redirect, Route } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import ArticleInput from './ArticleInput';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 
 import Footer from './Footer';
@@ -18,7 +18,7 @@ class Article extends Component {
 
   componentWillMount() {
     console.log("Requesting Articles from '/api/articles'");
-    
+
     axios.get('/api/articles')
       .then((res) => {
         //const { headline, url } = res.data.data[27].article

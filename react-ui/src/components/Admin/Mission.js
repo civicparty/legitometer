@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Header, Table } from 'semantic-ui-react';
-import ArticleListItem from './ArticleListItem';
+
 import AddCollectionToMission from './AddCollectionToMission';
 
 

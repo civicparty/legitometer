@@ -4,17 +4,11 @@ import {
   Route,
   BrowserRouter as Router,
   Switch,
-  Redirect
 } from 'react-router-dom';
 import './scss/index.css';
 
 import Admin from './components/Admin/Admin';
 import Student from './components/Reviewer/Student'
-
-// Shared Components
-import Login from './components/Shared/Login'
-import Header from './components/Shared/Header';
-import FourOhFour from './components/FourOhFour';
 
 class Root extends Component {
   constructor() {
