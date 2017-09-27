@@ -160,6 +160,7 @@ class NewGame extends React.Component {
         {submitResult && (
           <Redirect to={'/admin'}/>
         )}
+        {/* TODO: Refactor this code using AddCollectionToMission component */}
         {
           this.state.name ?
           <div>
