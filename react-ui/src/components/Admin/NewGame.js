@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Link, Redirect, Route } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Header, Table } from 'semantic-ui-react';
 import CollectionItem from './CollectionItem';
-import Admin from './Admin';
 
 //make a new game - selecting collection [articles]
 class NewGame extends React.Component {
@@ -85,9 +84,6 @@ class NewGame extends React.Component {
     e.preventDefault();
     console.log("prevented default");
     let thiz = this;
-    let saveName = this.state.name;
-    let saveId = this.state.collection_id;
-    let saveUser = this.state.user_id;
 
     console.log("about to add mission", this.state);
 
@@ -160,6 +156,7 @@ class NewGame extends React.Component {
         {submitResult && (
           <Redirect to={'/admin'}/>
         )}
+        {/* TODO: Refactor this code using AddCollectionToMission component */}
         {
           this.state.name ?
           <div>
@@ -213,9 +210,3 @@ class NewGame extends React.Component {
 }
 
 export default NewGame;
-
-<form
-  ref={(input) => this.gameForm = input}
-  onSubmit={(e) => this.submitNewPost(e)}
->
-</form>

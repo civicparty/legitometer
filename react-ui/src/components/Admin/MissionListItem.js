@@ -11,7 +11,6 @@ class MissionListItem extends React.Component {
   }
 
   handleDelete() {
-    console.log("heeeelllllooooo?");
     axios.delete('/api/delete-mission/' + this.props.name, {
       params: {name: this.props.name},
     })
@@ -25,15 +24,26 @@ class MissionListItem extends React.Component {
   }
 
   render() {
-    let missionName = this.props.name.replace(/ /g,"_");
+    const missionPath = this.props.mission.missionName.replace(/ /g,"_");
+    const {
+      missionName,
+      missionId,
+      casefileName,
+      casefileId,
+    } = this.props.mission;
+
     return (
-      <tr key={this.props.id}>
-        <td className="strong">{this.props.name}</td>
-        <td>{this.props.collection}</td>
+      <tr key={missionId}>
+        <td className="strong">{missionName}</td>
+        <td>
+          <Link to={`/admin/collection/${casefileId}`}>
+            {casefileName}
+          </Link>
+        </td>
         <td className="collapsing">
           {/* TODO: We should probably replace the mission name with an id in
             this route  unless we are sure the missionName is unique. */}
-          <Link to={`/admin/mission/${missionName}/`} className="ui button blue">
+          <Link to={`/admin/mission/${missionPath}/`} className="ui button blue">
             Edit
           </Link>
           <Button type="button" onClick={this.handleDelete} basic color="red">

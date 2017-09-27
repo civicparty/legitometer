@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Header, Table } from 'semantic-ui-react';
-import ArticleListItem from './ArticleListItem';
+
 import AddCollectionToMission from './AddCollectionToMission';
 
 
@@ -28,10 +27,10 @@ class Mission extends React.Component {
 
     return (
       <div>
-          <h3>Mission: { missionName }</h3>
-          { this.state.mission &&
-            <AddCollectionToMission mission={this.state.mission} />
-          }
+        <h3>Mission: { missionName }</h3>
+        { this.state.mission &&
+          <AddCollectionToMission mission={this.state.mission} />
+        }
       </div>
     )
   }

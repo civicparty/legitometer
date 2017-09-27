@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import { Header, Table } from 'semantic-ui-react';
 import MissionListItem from './MissionListItem';
 
@@ -8,35 +9,21 @@ class AdminDashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      games: [],
-      collections: [],
+      missions: [],
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios.get('/api/missions')
       .then((res) => {
-        //loop through the object and set the state
-        for(let key in res.data) {
-          // assign state to temporary arrays
-          let temp_mission = this.state.games.slice();
-          let temp_casefile = this.state.collections.slice();
-          // push data to arrays
-          temp_mission.push(key);
-          temp_casefile.push(res.data[key]);
-          // set the state
-          this.setState({
-            games: temp_mission,
-            collections: temp_casefile,
-          })
-        }
+        this.setState({
+          missions: res.data,
+        })
       })
       .catch((err) => {
         console.log(err);
       })
   }
-
-
 
   render() {
     return (
@@ -50,17 +37,18 @@ class AdminDashboard extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan='3'>Your Existing Missions</Table.HeaderCell>
+              <Table.HeaderCell>Existing Missions</Table.HeaderCell>
+              <Table.HeaderCell>Mission Casefiles</Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {Object.keys(this.state.games).map((key, id) => {
+            { this.state.missions.map((mission, i) => {
               return (
                 <MissionListItem
-                  name={this.state.games[key]}
-                  collection={this.state.collections[key]}
-                  id={id}
-                  key={id}
+                  mission={mission}
+                  id={mission.missionId}
+                  key={mission.missionId}
                 />
               )
             })}
