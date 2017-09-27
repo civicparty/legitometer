@@ -4,7 +4,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { Header, Table } from 'semantic-ui-react';
 import CollectionItem from './CollectionItem';
 
-//make a new game - selecting collection [articles]
 class NewMission extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +11,7 @@ class NewMission extends React.Component {
     this.submitNewPost = this.submitNewPost.bind(this);
     this.updateCollectionID = this.updateCollectionID.bind(this);
     this.saveMission = this.saveMission.bind(this);
-    // this.handleRedirect = this.handleRedirect.bind(this);
+
     this.state = {
       name: null,
       collection_id: null,
@@ -27,9 +26,6 @@ class NewMission extends React.Component {
     axios.get('/api/casefiles')
       .then((res) => {
         this.setState({ collections: res.data });
-      })
-      .then(() => {
-        console.log("component mounted! casefile data retrieved!", this.state.collections);
       })
       .catch((err) => {
         console.log(err);
@@ -103,17 +99,6 @@ class NewMission extends React.Component {
       console.log("you are not going to space today (submitNewPost)", err);
     });
   }
-
-    // handleRedirect(res) {
-    //   if( res.status === 200 ){
-    //     //redirect to dashboard
-    //     console.log("redirecting...");
-    //     <Route path="/admin" component={Admin} />
-    //     // how to redirect to Dashboard component?
-    //        } else {
-    //          // Something went wrong here
-    //        }
-    // }
 
   render() {
     let editTitle = (
