@@ -5,7 +5,7 @@ import { Header, Table } from 'semantic-ui-react';
 import CollectionItem from './CollectionItem';
 
 //make a new game - selecting collection [articles]
-class NewGame extends React.Component {
+class NewMission extends React.Component {
   constructor(props) {
     super(props);
     this.updateTitle = this.updateTitle.bind(this);
@@ -131,7 +131,7 @@ class NewGame extends React.Component {
 
     let displayTitle = (
         <div className="flex">
-          <span className="NewGame__title">
+          <span className="NewMission__title">
             {this.state.name}
           </span>
           <button className="ui button flex-right" type="submit">
@@ -209,4 +209,4 @@ class NewGame extends React.Component {
   }
 }
 
-export default NewGame;
+export default NewMission;
