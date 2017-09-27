@@ -28,10 +28,10 @@ class Mission extends React.Component {
 
     return (
       <div>
-          <h3>Mission: { missionName }</h3>
-          { this.state.mission &&
-            <AddCollectionToMission mission={this.state.mission} />
-          }
+        <h3>Mission: { missionName }</h3>
+        { this.state.mission &&
+          <AddCollectionToMission mission={this.state.mission} />
+        }
       </div>
     )
   }
