@@ -9,14 +9,31 @@ class GroupNames extends Component {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleAddGroupMember = this.handleAddGroupMember.bind(this);
+    this.handleAddName = this.handleAddName.bind(this);
     this.state = {
       groupName: '',
       names: [],
     }
   }
 
+  // add another line
+  handleAddGroupMember() {
+
+  }
+
+  // save entered name to state
+  handleAddName() {
+    // make a copy of the state
+    // add the new name to it
+    // set state
+  }
+
+
+
+  // save group name to state
   handleChange() {
-    // save group name to state
+
   }
 
   handleSubmit() {
@@ -51,9 +68,18 @@ class GroupNames extends Component {
           <img src={legitCatImage} alt="Legit Cat Welcomes You" />
           <form onSubmit={this.handleSubmit}>
             <h1>Enter your group name: </h1><input type="text" name="groupname" onChange={this.handleChange}></input>
-            {/* save group name to state
-               save each individual name to state and create a new input line when one is filled in */}
-            <p>new lines will appear here to input individual names... Hoooooow?</p>
+
+            {this.state.names.map((name, idx) => (
+            <div>
+              <input
+                type="text"
+                placeholder={`Name #${idx + 1}`}
+                value={this.state.name}
+                onChange={this.handleAddName(idx)}
+              />
+            </div>
+          ))}
+          <button type="button" onClick={this.handleAddGroupMember} className="small">Add Group Member</button>
 
             <Link to="/article/1">
               <Button text="Let’s Go" />
