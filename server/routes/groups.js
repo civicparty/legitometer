@@ -28,7 +28,7 @@ router.post('/api/add-group', (req, res, next) => {
   // mission id, group_name, each individual name - req.body.names will probably be in an array
   for (var i = 0; i < req.body.names.length; i++) {
     bookshelf.knex.raw('SELECT setval(\'groups_id_seq\', (SELECT MAX(id) FROM groups)+1)')
-    Group.forge({mission_id: req.body.mission_id, group_name: req.body.group_name, name: req.body.names[i]})
+    Group.forge({mission_id: req.body.mission_id, group_name: req.body.group, name: req.body.names[i]})
     .save()
   }
 })
