@@ -9,16 +9,30 @@ class CreateCollection extends React.Component {
   constructor(props) {
     super(props);
     this.handleArticleInputChange = this.handleArticleInputChange.bind(this);
+    this.handleRemoveArticle = this.handleRemoveArticle.bind(this);
     this.addInput = this.addInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitNewCollection = this.submitNewCollection.bind(this);
     this.state = {
       caseFileName: '',
-      articles: [{name: '', url: '', type: ''}],
+      articles: [{name: '', url: '', type: '', index: 0}],
       inputList: [],
       inputs: [],
       submitResult: null,
     }
+  }
+
+  componentWillMount() {
+    this.setState({
+      inputList: this.state.inputs.push(
+        <ArticleInput
+          index={1}
+          key={1}
+          handleArticleInputChange={this.handleArticleInputChange}
+          handleRemoveArticle={this.handleRemoveArticle}
+        />
+      )
+    })
   }
 
   // adds an input field to the page
@@ -27,11 +41,21 @@ class CreateCollection extends React.Component {
     this.setState({
       inputList: this.state.inputs.push(
         <ArticleInput
-          key={this.state.inputs.length}
+          key={this.state.inputs.length + 1}
           index={this.state.inputs.length + 1}
           handleArticleInputChange={this.handleArticleInputChange}
+          handleRemoveArticle={this.handleRemoveArticle}
         />
       )
+    });
+  }
+
+  handleRemoveArticle(index) {
+    const articlesState = this.state.articles.filter((article) => Number(article.index) !== index);
+    const inputsState = this.state.inputs.filter((input) => Number(input.key) !== index);
+    this.setState({
+      articles: articlesState,
+      inputs: inputsState,
     });
   }
 
@@ -47,6 +71,7 @@ class CreateCollection extends React.Component {
 
     // add the article data to the articleState object
     articleState[Number(index)][fieldName] = value;
+    articleState[Number(index)]["index"] = index;
 
     // set the new state
     this.setState({
@@ -94,7 +119,6 @@ class CreateCollection extends React.Component {
 
           <div className="section">
             <Header as="h2">Add Articles</Header>
-            <ArticleInput index={0} handleArticleInputChange={this.handleArticleInputChange} />
             {this.state.inputs}
             <button onClick={this.addInput} className="ui button primary tiny">
               <Icon name="plus"/> Add Another Article
