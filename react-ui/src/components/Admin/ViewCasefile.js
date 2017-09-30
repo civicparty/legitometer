@@ -1,32 +1,54 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
+
+import ArticleListItem from './ArticleListItem';
 
 class ViewCasefile extends React.Component {
   constructor() {
     super();
-    this.viewArticles = this.viewArticles.bind(this);
+    this.state = {
+      articles: [],
+    }
   }
 
+componentDidMount() {
+  console.log("heelo component");
+  let temp = this.state.articles.slice();
 
-viewArticles() {
-  // '/api/articles/casefile/:id'
-  // axios.get('/api/articles/casefile/' + casefileId, {
-  //   params: { id: casefileId },
-  // })
-  // .then((res) => {
-  //
-  // })
-  // .catch((err) => {
-  //   console.log("view casefile error", err);
-  // })
+  axios.get(`/api/articles/casefile/${this.props.match.params.id}`)
+    .then((res) => {
+      console.log("we win! what did we win? articles!", res.data); //array of arrays
+      for (var i = 0; i < res.data.length; i++) {
+        // for each array in the res.data array, save the headline, url, and type to this.state.articles
+        temp.push(res.data[i]);
+      }
+      this.setState({
+        articles: temp
+      })
+    })
+    .catch((err) => {
+      console.log("view casefile error", err);
+    })
 }
 
 render() {
   return(
     <div>
-      <p>this will be the thing</p>
+      <h2>casefile name</h2>
+      <Table celled>
+        <Table.Body>
+          {this.state.articles.map((article, i) => {
+            return (
+              <tr key={i}>
+                <td>{article[0]}</td>
+                <td>{article[1]}</td>
+                <td>{article[2]}</td>
+              </tr>
+            )
+          })}
+        </Table.Body>
+      </Table>
     </div>
   )
 }
