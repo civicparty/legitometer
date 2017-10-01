@@ -1,15 +1,6 @@
 import React from 'react';
 import { Form } from 'semantic-ui-react';
-
-const articleTypes = [
-  { key: 'reputable', text: 'Reputable', value: 'reputable'},
-  { key: 'opinion', text: 'Opinion', value: 'opinion'},
-  { key: 'satire', text: 'Satire', value: 'satire'},
-  { key: 'fake', text: 'Fake', value: 'fake'},
-  { key: 'sponsored_content', text: 'Sponsored Content', value: 'sponsored_content'},
-  { key: 'local', text: 'Local', value: 'local'},
-  { key: 'popular_blog', text: 'Popular/Blog', value: 'popular_blog'},
-]
+import articleTypes from '../../data/articleTypes';
 
 class ArticleInput extends React.Component {
   constructor(props) {

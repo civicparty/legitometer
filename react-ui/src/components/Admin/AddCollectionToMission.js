@@ -70,14 +70,14 @@ class AddCollectionToMission extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {Object.keys(this.state.collections).map((key, id) => {
+              {this.state.collections.map((collection) => {
                 return (
                   <CollectionItem
-                    name={this.state.collections[key][1]}
+                    name={collection.name}
                     activeCollectionId={this.state.collection_id}
-                    createdBy={this.state.collections[key][2]}
-                    id={id + 1}
-                    key={id}
+                    createdBy={collection.createdBy}
+                    id={collection.id}
+                    key={collection.id}
                     updateCollection={this.updateCollectionID}
                   />
                 )
