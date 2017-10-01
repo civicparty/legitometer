@@ -79,4 +79,21 @@ router.post('/api/add-casefile', function(req, res, next) {
   })
  });
 
+ router.delete('/api/delete-casefile/:id', (req, res, next) => {
+   Casefile.forge().where({id: req.params.id})
+     .fetch({require: true})
+     .then((casefile) => {
+       casefile.destroy()
+       .then(() => {
+         res.sendStatus(200);
+       })
+       .catch((err) => {
+         console.log("casefile delete error 1", err);
+       })
+     })
+     .catch((err) => {
+       console.log("casefile delete error 2", err);
+     });
+ })
+
 module.exports = router;

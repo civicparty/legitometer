@@ -105,6 +105,23 @@ router.get('/api/articles/review/:name', (req, res, next) => {
   })
 })
 
+router.delete('/api/delete-article/:id', (req, res, next) => {
+  Article.forge().where({id: req.params.id})
+    .fetch({require: true})
+    .then((article) => {
+      article.destroy()
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log("article delete error 1", err);
+      })
+    })
+    .catch((err) => {
+      console.log("article delete error 2", err);
+    });
+})
+
 // articles are POSTed in routes/casefiles.js
 
 module.exports = router;
