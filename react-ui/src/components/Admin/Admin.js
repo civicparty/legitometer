@@ -21,7 +21,7 @@ class Admin extends Component {
           <Route exact path="/admin/new-mission/" component={NewMission} />
           <Route path="/admin/mission/:id" component={Mission} />
           <Route path="/admin/collection/new" component={CreateCollection} />
-          <Route path="/admin/collection/:id" component={ViewCasefile} />
+          <Route path="/admin/casefile/:id" component={ViewCasefile} />
         </div>
       </Router>
     );
