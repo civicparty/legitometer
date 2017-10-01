@@ -36,7 +36,7 @@ class MissionListItem extends React.Component {
       <tr key={missionId}>
         <td className="strong">{missionName}</td>
         <td>
-          <Link to={`/admin/casefile/${casefileId}`}>
+          <Link to={`/admin/collection/${casefileId}/articles`}>
             {casefileName}
           </Link>
         </td>
