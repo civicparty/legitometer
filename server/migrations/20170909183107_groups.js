@@ -10,15 +10,3 @@ exports.up = knex =>
 
 exports.down = knex =>
   knex.schema.dropTable('groups')
-
-
-// REVIEWS TABLE
-// id
-// group_id
-// mission_id
-// answers (JSON)
-
-// GROUPS TABLE
-// id
-// group_name
-// name

@@ -46,8 +46,13 @@ componentDidMount() {
 render() {
   return(
     <div>
-      <h2>{this.state.casefile}</h2>
+      <h2>Casefile: {this.state.casefile}</h2>
       <Table celled>
+        <Table.Header>
+            <th>Headline</th>
+            <th>URL</th>
+            <th>Type</th>
+        </Table.Header>
         <Table.Body>
           {this.state.articles.map((article, i) => {
             return (
