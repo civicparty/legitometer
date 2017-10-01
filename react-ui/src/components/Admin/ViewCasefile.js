@@ -14,12 +14,10 @@ class ViewCasefile extends React.Component {
   }
 
 componentDidMount() {
-  console.log("heelo component");
   let temp = this.state.articles.slice();
 
   axios.get(`/api/articles/casefile/${this.props.match.params.id}`)
     .then((res) => {
-      console.log("we win! what did we win? articles!", res.data); //array of arrays
       for (var i = 0; i < res.data.length; i++) {
         // for each array in the res.data array, save the headline, url, and type to this.state.articles
         temp.push(res.data[i]);
@@ -29,10 +27,8 @@ componentDidMount() {
       })
     })
     .then(() => {
-      console.log("attempting to get casefile name");
       axios.get(`/api/casefile/${this.props.match.params.id}`)
         .then((res) => {
-          console.log("hiii", res);
             this.setState({ casefile: res.data})
         })
     })
