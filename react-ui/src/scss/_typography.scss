@@ -2,28 +2,29 @@
 
 @import "fonts";
 
-$font-primary: "ZillaSlab-Regular";
-$font-primary-alternate: "ZillaSlab-Highlight";
+$font-primary: "ZillaSlab-Regular", serif;
+$font-primary-alternate: "ZillaSlabHighlight-Regular", serif;
 $font-secondary: "Open Sans", sans-serif;
 
 $font-button: "LeagueGothic";
 $font-tip: "ZillaSlab-Italic";
 
 h1, .h1 {
-  font-family: $font-primary;
+  // font-family: $font-primary;
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 3.5rem;
   margin-bottom: .5rem;
-  line-height: 120%;
+  line-height: 4rem;
 }
 
 h2, .h2 {
-  font-family: $font-secondary;
-  font-size: 1.714rem;
+  // font-family: $font-primary;
+  font-size: 2.5rem;
 }
 
 h3, .h3 {
-  font-size: 1.28rem;
+  font-family: $font-secondary;
+  font-size: 1.5rem;
 }
 
 h4, .h4 {
@@ -33,6 +34,16 @@ h4, .h4 {
 p, .p {
   font-family: $font-primary;
   font-size: 1.4rem;
+}
+
+.header {
+  font-family: $font-primary-alternate;
+}
+
+.subheader {
+ font-family: $font-primary;
+ background: $white;
+ color: $black;
 }
 
 .tip {

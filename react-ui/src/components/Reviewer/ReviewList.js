@@ -14,9 +14,9 @@ class ReviewList extends React.Component {
     return(
       <div key={missionId}>
         <Link to={`/article/${missionId}/start`}>
-          <Button basic color="red">
+          <button className="button">
             {missionName}: {casefileName}
-          </Button>
+          </button>
         </Link>
       </div>
     )

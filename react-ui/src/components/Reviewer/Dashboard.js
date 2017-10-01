@@ -24,9 +24,10 @@ class StudentDashboard extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>Operation Legit-or-Not</h1>
-        <h2>Select Your Missions</h2>
+      <div style={{ textAlign: 'center' }}>
+        <h1 className="header">Mission: Information</h1>
+        <h2><span className="header text-center">Legit or Not</span></h2>
+        <h3 className="subheader">Select from Your Missions</h3>
         {this.state.missions.map((mission, i) => {
           return (
             <ReviewList

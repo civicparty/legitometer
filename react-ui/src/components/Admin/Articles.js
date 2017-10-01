@@ -65,7 +65,7 @@ class Collections extends Component {
 
     return (
       <div>
-        <h2>Edit {name} Collection</h2>
+        <h2>Edit {name} Collection Articles</h2>
         <Table celled>
           <Table.Header>
             <Table.Row>

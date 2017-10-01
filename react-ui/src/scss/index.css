@@ -69,25 +69,32 @@
   src: url("../fonts/web/ZillaSlabHighlight-Bold.woff") format("woff"); }
 
 h1, .h1 {
-  font-family: "ZillaSlab-Regular";
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 3.5rem;
   margin-bottom: .5rem;
-  line-height: 120%; }
+  line-height: 4rem; }
 
 h2, .h2 {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.714rem; }
+  font-size: 2.5rem; }
 
 h3, .h3 {
-  font-size: 1.28rem; }
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem; }
 
 h4, .h4 {
   font-size: 1rem; }
 
 p, .p {
-  font-family: "ZillaSlab-Regular";
+  font-family: "ZillaSlab-Regular", serif;
   font-size: 1.4rem; }
+
+.header {
+  font-family: "ZillaSlabHighlight-Regular", serif; }
+
+.subheader {
+  font-family: "ZillaSlab-Regular", serif;
+  background: #FFFFFF;
+  color: #171717; }
 
 .tip {
   color: #787878;
@@ -195,9 +202,6 @@ p, .p {
 .article-new-inputs:last-of-type {
   margin-bottom: 10px !important; }
 
-.header {
-  display: block; }
-
 .StudentForm-input {
   width: 200px; }
 
@@ -208,14 +212,14 @@ html, body {
   padding: 0; }
 
 body {
-  font-family: "ZillaSlab-Regular";
+  font-family: "ZillaSlab-Regular", serif;
   color: #171717; }
 
 #root {
   height: 100%; }
 
 p a {
-  font-family: "ZillaSlab-Regular";
+  font-family: "ZillaSlab-Regular", serif;
   color: #f512ff;
   border-bottom: 0px solid transparent;
   transition: all 0.1s ease-in-out;
