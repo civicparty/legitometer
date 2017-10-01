@@ -85,7 +85,7 @@ class NewMission extends React.Component {
 
     axios.patch('/api/update-mission', {
       name: this.state.name,
-      casefile_id: this.state.collection_id,
+      casefile_id: this.state.collection_id - 1,
       user_id: this.state.user_id,
     })
     .then((res) => { //TODO it doesn't seem to be getting here...
@@ -168,14 +168,14 @@ class NewMission extends React.Component {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {Object.keys(this.state.collections).map((key, id) => {
+                  {this.state.collections.map((collection) => {
                     return (
                       <CollectionItem
-                        name={this.state.collections[key][1]}
+                        name={collection.name}
                         activeCollectionId={this.state.collection_id}
-                        createdBy={this.state.collections[key][2]}
-                        id={id}
-                        key={id}
+                        createdBy={collection.createdBy}
+                        id={collection.id}
+                        key={collection.id}
                         updateCollection={this.updateCollectionID}
                       />
                     )

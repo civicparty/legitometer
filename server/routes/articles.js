@@ -29,8 +29,36 @@ router.get('/api/articles/:id', (req, res, next) => {
     })
 })
 
+router.put('/api/update-article/:id', (req, res, next) => {
+  Article.forge().where({id: req.params.id})
+    .fetch()
+    .then((article) => {
+      article.save({
+        article: {
+          url: req.body.url,
+          type: req.body.type,
+          headline: req.body.headline,
+        }
+      }, { patch: true })
+        .then((article) => {
+          res.status(200).json(article)
+        })
+        .catch((err) => {
+          console.log(err, err.message)
+        })
+    })
+    .catch(function (err) {
+      res.status(500).json({
+        error: true,
+        data: {
+          message: `POO: ${err.message}`
+        }
+      });
+    });
+})
+
 // get articles by casefile id
-router.get('/api/articles/casefile/:id', (req, res, next) => {
+router.get('/api/casefile/:id/articles', (req, res, next) => {
   console.log("getting articles by casefile id", req.params.id);
   // get all articles where casefile id is req.params.id
   Article.forge().where({casefile_id: req.params.id}).fetchAll()
@@ -39,7 +67,13 @@ router.get('/api/articles/casefile/:id', (req, res, next) => {
       let files = [];
       articles = articles.toJSON();
       for (var i = 0; i < articles.length; i++) {
-        files.push([articles[i].article.headline, articles[i].article.url, articles[i].article.type]);
+        files.push({
+          id: articles[i].id,
+          index: i,
+          url: articles[i].article.url,
+          type: articles[i].article.type,
+          headline: articles[i].article.headline,
+        });
       }
       res.send(files);
     })

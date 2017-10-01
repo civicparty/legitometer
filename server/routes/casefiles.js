@@ -14,10 +14,22 @@ router.get('/api/casefiles', (req, res, next) => {
       casefiles = casefiles.toJSON();
       for (var i = 0; i < casefiles.length; i++) {
         // get id, name, and createdBy from table
-        files.push([casefiles[i].id, casefiles[i].name, casefiles[i].createdBy]);
+        files.push({
+          id: casefiles[i].id,
+          name: casefiles[i].name,
+          createdBy: casefiles[i].createdBy,
+        });
       }
-      // console.log("send this", files);
+
       res.send(files);
+    })
+})
+
+router.get('/api/casefile/:id', (req, res, next) => {
+  Casefile.forge().where({id: req.params.id}).fetch()
+    .then((data) => {
+      file = data.toJSON();
+      res.send(file);
     })
 })
 
