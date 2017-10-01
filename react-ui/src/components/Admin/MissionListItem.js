@@ -7,7 +7,6 @@ class MissionListItem extends React.Component {
   constructor() {
     super();
     this.handleDelete = this.handleDelete.bind(this);
-
   }
 
   handleDelete() {
