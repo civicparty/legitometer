@@ -9,6 +9,7 @@ class ViewCasefile extends React.Component {
     super();
     this.state = {
       articles: [],
+      casefile: '',
     }
   }
 
@@ -27,15 +28,25 @@ componentDidMount() {
         articles: temp
       })
     })
+    .then(() => {
+      console.log("attempting to get casefile name");
+      axios.get(`/api/casefile/${this.props.match.params.id}`)
+        .then((res) => {
+          console.log("hiii", res);
+            this.setState({ casefile: res.data})
+        })
+    })
     .catch((err) => {
       console.log("view casefile error", err);
     })
+
+
 }
 
 render() {
   return(
     <div>
-      <h2>casefile name</h2>
+      <h2>{this.state.casefile}</h2>
       <Table celled>
         <Table.Body>
           {this.state.articles.map((article, i) => {
