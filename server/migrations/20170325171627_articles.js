@@ -9,7 +9,7 @@ exports.up = knex =>
 exports.down = knex =>
   knex.schema.dropTable('articles');
 
-  // {article} parts
-  // table.string('headline');
-  // table.string('url');
-  // table.string('type');
+  // JSON {article} parts
+  //  - string('headline');
+  //  - string('url');
+  //  - string('type');

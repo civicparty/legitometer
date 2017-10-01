@@ -12,16 +12,10 @@ class ArticleListItem extends React.Component {
 
   render() {
     return (
-      <tr key={this.props.id}>
-        <td className="strong">{this.props.headline}</td>
-        <td><a href={this.props.url}>{this.props.url}</a></td>
-        <td>{this.props.type}</td>
-        <td className="collapsing">
-          {/* TODO: User missionId here instead? */}
-          <Link to={`/admin/mission/${'missionName'}/edit`} className="ui button blue">
-            Edit
-          </Link>
-        </td>
+      <tr key={this.props.article.id}>
+        <td className="strong">{this.props.article.headline}</td>
+        <td><a href={this.props.url}>{this.props.article.url}</a></td>
+        <td>{this.props.article.type}</td>
       </tr>
     )
   }
