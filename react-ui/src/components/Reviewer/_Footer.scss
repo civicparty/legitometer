@@ -1,0 +1,17 @@
+.Footer {
+  background-color: #F7F7F7;
+  height: 60px;
+}
+
+.Footer__img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+}
+
+.Footer__title {
+  padding-left: 115px;
+  font-family: $font-primary;
+  margin-top: 17px;
+}

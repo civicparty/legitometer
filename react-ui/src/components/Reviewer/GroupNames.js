@@ -4,32 +4,53 @@ import Button from '../Shared/Button';
 import legitCatImage from '../../images/legit-cat.png';
 
 class GroupNames extends Component {
-  render() {
-    const bodyStyles = { marginBottom: '50px' }
-    const headerStyles = { position: 'absolute', top: '120px', left: '60%' }
-    const divStyles = {
-      position: 'relative',
-      flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
+  constructor(props) {
+    super(props)
+    this.state = {
+      names: ['', '']
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
+  handleNameChange(i, e) {
+    const { names } = this.state;
+    names[i] = e.target.value;
+
+    // If the last field has text, add another field to the end.
+    if (names[names.length - 1] !== '') names.push('');
+    this.setState({ names });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    // TODO: Submit names to server
+    debugger
+  }
+
+  render() {
     return (
-      <div className="text-center" style={divStyles}>
-        <div style={bodyStyles}>
-          <h1 style={headerStyles}>Legit-o-Meter</h1>
-          <img src={legitCatImage} alt="Legit Cat Welcomes You" />
-          <form>
-            <h1>Enter your group name: </h1><input type="text" name="groupname"></input>
-            <p>new lines will appear here to input individual names... Hoooooow?</p>
-            <Link to="/article/1">
-              <Button text="Let’s Go" />
-            </Link>
-          </form>
-        </div>
-
-
+      <div className="GroupNames">
+        <form onSubmit={this.handleSubmit}>
+          <h2>Who is on your team?</h2>
+          <p className="tip">Add the name of everyone on your team. Select Next once everyone has been added.</p>
+          <div className="GroupNames__field-set">
+            {
+              this.state.names.map((name, i) => {
+                return (
+                  <input type="text" name={`${name}_${i}`}
+                    className="GroupNames__input question--short"
+                    placeholder="Name"
+                    defaultValue={this.state.names[i]}
+                    onChange={this.handleNameChange.bind(this, i)}
+                  />
+                )
+              })
+            }
+          </div>
+          <button type="submit" className="button">
+            Next
+          </button>
+        </form>
       </div>
 
     );

@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Questions from './Questions';
 import ArticlePreview from './ArticlePreview';
 import GroupNames from './GroupNames';
-
+import Start from './Start';
 
 class Article extends Component {
   constructor(props) {
@@ -53,9 +53,10 @@ class Article extends Component {
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
-          <Route path="/article/0" exact component={GroupNames} />
-          <Route path="/article/1" exact render={() => <ArticlePreview {...previewProps} />} />
-          <Route path="/article/:article_id/question/:id" exact component={Questions} />
+          <Route exact path="/mission/:id/start" component={Start} />
+          <Route exact path="/mission/:id/team" component={GroupNames} />
+          <Route exact path="/mission/:id/article/1" render={() => <ArticlePreview {...previewProps} />} />
+          <Route exact path="/mission/:id/article/:article_id/question/:id" component={Questions} />
         </div>
         <Footer {...this.props} />
       </div>
