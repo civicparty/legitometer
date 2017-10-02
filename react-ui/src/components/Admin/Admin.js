@@ -9,7 +9,6 @@ import Dashboard from './Dashboard';
 import Mission from './Mission';
 import CreateCollection from './CreateCollection';
 import Articles from './Articles';
-import ViewCasefile from './ViewCasefile';
 class Admin extends Component {
 
   render() {
@@ -22,7 +21,6 @@ class Admin extends Component {
           <Route path="/admin/mission/:id" component={Mission} />
           <Route path="/admin/collection/new" component={CreateCollection} />
           <Route path="/admin/collection/:id/articles" component={Articles} />
-          <Route path="/admin/casefile/:id" component={ViewCasefile} />
         </div>
       </Router>
     );

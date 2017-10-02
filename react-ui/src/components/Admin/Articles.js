@@ -14,6 +14,7 @@ class Collections extends Component {
     this.getArticles = this.getArticles.bind(this);
     this.updateArticle = this.updateArticle.bind(this);
     this.toggleEditFields = this.toggleEditFields.bind(this);
+    this.deleteArticle = this.deleteArticle.bind(this);
   }
 
   getArticles() {
@@ -51,6 +52,12 @@ class Collections extends Component {
       this.forceUpdate();
     })
     .catch((err) => console.log(err))
+  }
+
+  deleteArticle(e, index) {
+      e.preventDefault;
+      console.log("deleting article", index);
+      
   }
 
   componentDidMount() {
@@ -98,6 +105,9 @@ class Collections extends Component {
                         <Table.Cell>
                           <Button primary onClick={(e) => this.toggleEditFields(e, index)}>
                             Edit
+                          </Button>
+                          <Button type="button" basic color="red" onClick={(e) => this.deleteArticle(e, index)}>
+                            Delete
                           </Button>
                         </Table.Cell>
                       </Table.Row>
