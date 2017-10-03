@@ -15,7 +15,9 @@ class Collections extends Component {
     this.updateArticle = this.updateArticle.bind(this);
     this.toggleEditFields = this.toggleEditFields.bind(this);
     this.deleteArticle = this.deleteArticle.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
+    this.handleRemoveArticle = this.handleRemoveArticle.bind(this);
+    this.updateCasefileName = this.updateCasefileName.bind(this);
+    this.deleteCasefile = this.deleteCasefile.bind(this);
   }
 
   getArticles() {
@@ -63,21 +65,45 @@ class Collections extends Component {
         .then((res) => {
           console.log("article deleted successfully", res);
           // remove from view
-          this.handleRemove(article_id);
+          this.handleRemoveArticle(article_id);
         })
         .catch((err) => {
           console.log("error deleting article", err);
         })
   }
 
-  handleRemove(id) {
+  handleRemoveArticle(id) {
     const updatedArticles = this.state.articles.filter((article) => {
       return article.id !== id
     })
     this.setState({ articles: updatedArticles });
-    // reload page?
     this.forceUpdate();
   }
+
+  updateCasefileName(id) {
+    // need to toggle edit input box - with another component???
+
+    // then save changes
+    console.log("updating casefile name for: ", id);
+    axios.put(`/api/update-casefile/${id}`, {
+        // name: name
+    })
+  }
+
+  deleteCasefile(id) {
+    console.log("deleting...", id);
+    axios.delete(`/api/delete-casefile/${id}`, {
+      params: {id: id}
+    })
+      .then((res) => {
+        console.log("casefile deleted!");
+        // Go to dashboard OR confirm delete and add a button to go to dashboard???
+      })
+      .catch((err) => {
+        console.log("casefile delete error", err);
+      })
+  }
+
 
   componentDidMount() {
     this.getArticles();
@@ -92,6 +118,8 @@ class Collections extends Component {
     return (
       <div>
         <h2>Edit {name} Collection</h2>
+        <Button primary onClick={() => this.updateCasefileName(this.state.collection.id)}>Edit Casefile Name</Button>
+        <Button basic color="red" onClick={() => this.deleteCasefile(this.state.collection.id)}>Delete Casefile</Button>
         <Table celled>
           <Table.Header>
             <Table.Row>

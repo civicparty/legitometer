@@ -80,6 +80,7 @@ router.post('/api/add-casefile', function(req, res, next) {
  });
 
  router.delete('/api/delete-casefile/:id', (req, res, next) => {
+   console.log("casefile delete route, deleting casefile: ", req.params.id);
    Casefile.forge().where({id: req.params.id})
      .fetch({require: true})
      .then((casefile) => {
