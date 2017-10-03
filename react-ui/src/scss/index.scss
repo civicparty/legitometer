@@ -13,8 +13,11 @@
 @import "buttons";
 @import "../components/Admin/NewGame";
 @import "../components/Admin/FormInput";
-@import "../components/Shared/header";
 @import "../components/Reviewer/StudentForm";
+@import "../components/Reviewer/Start";
+@import "../components/Reviewer/Footer";
+@import "../components/Reviewer/ProgressBar";
+@import "../components/Reviewer/GroupNames";
 
 html, body {
   width: 100%;

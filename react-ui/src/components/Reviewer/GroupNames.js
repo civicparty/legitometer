@@ -1,35 +1,68 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Button from '../Shared/Button';
 import legitCatImage from '../../images/legit-cat.png';
 
 class GroupNames extends Component {
-  render() {
-    const bodyStyles = { marginBottom: '50px' }
-    const headerStyles = { position: 'absolute', top: '120px', left: '60%' }
-    const divStyles = {
-      position: 'relative',
-      flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
+  constructor(props) {
+    super(props)
+    this.state = {
+      names: ['', '']
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
+  handleNameChange(i, e) {
+    const { names } = this.state;
+    names[i] = e.target.value;
+
+    // If the last field has text, add another field to the end.
+    if (names[names.length - 1] !== '') names.push('');
+    this.setState({ names });
+  }
+
+  handleSubmit(e) {
+    let thiz = this;
+    e.preventDefault();
+    debugger
+
+    axios.post('/api/add-group', {
+      names: this.state.names.join('// '), // this is hacky. We should submit names separately and associate to a group.
+      group_name: '', // in the future, we could let students name their team.
+      mission_id: this.props.match.params.id,
+    })
+    .then((res) => {
+      console.log(res)
+      thiz.setState({ submitGroup: true })
+    })
+    .catch((err) => console.log("error in adding group: ", err));
+  }
+
+  render() {
     return (
-      <div className="text-center" style={divStyles}>
-        <div style={bodyStyles}>
-          <h1 style={headerStyles}>Legit-o-Meter</h1>
-          <img src={legitCatImage} alt="Legit Cat Welcomes You" />
-          <form>
-            <h1>Enter your group name: </h1><input type="text" name="groupname"></input>
-            <p>new lines will appear here to input individual names... Hoooooow?</p>
-            <Link to="/article/1">
-              <Button text="Let’s Go" />
-            </Link>
-          </form>
-        </div>
-
-
+      <div className="GroupNames">
+        <form onSubmit={this.handleSubmit}>
+          <h2>Who is on your team?</h2>
+          <p className="tip">Add the name of everyone on your team. Select Next once everyone has been added.</p>
+          <div className="GroupNames__field-set">
+            {
+              this.state.names.map((name, i) => {
+                return (
+                  <input type="text" name={`${name}_${i}`} key={i}
+                    className="GroupNames__input question--short"
+                    placeholder="Name"
+                    defaultValue={this.state.names[i]}
+                    onChange={this.handleNameChange.bind(this, i)}
+                  />
+                )
+              })
+            }
+          </div>
+          <button type="submit" className="button">
+            Next
+          </button>
+        </form>
       </div>
 
     );

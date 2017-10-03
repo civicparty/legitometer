@@ -1,0 +1,20 @@
+.GroupNames {
+  text-align: center;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.GroupNames__input {
+  font-family: $font-primary;
+  display: block;
+}
+
+.GroupNames__field-set {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
