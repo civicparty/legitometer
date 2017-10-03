@@ -106,11 +106,14 @@ router.get('/api/articles/review/:name', (req, res, next) => {
 })
 
 router.delete('/api/delete-article/:id', (req, res, next) => {
+  console.log("article delete route, deleting: ", req.params.id);
   Article.forge().where({id: req.params.id})
     .fetch({require: true})
     .then((article) => {
+      console.log("deleteing article", article);
       article.destroy()
       .then(() => {
+        console.log("article successfully deleted");
         res.sendStatus(200);
       })
       .catch((err) => {
@@ -118,7 +121,7 @@ router.delete('/api/delete-article/:id', (req, res, next) => {
       })
     })
     .catch((err) => {
-      console.log("article delete error 2", err);
+      console.log("article delete error 2", err); //error is here
     });
 })
 
