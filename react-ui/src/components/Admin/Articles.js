@@ -15,6 +15,7 @@ class Collections extends Component {
     this.updateArticle = this.updateArticle.bind(this);
     this.toggleEditFields = this.toggleEditFields.bind(this);
     this.deleteArticle = this.deleteArticle.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   getArticles() {
@@ -54,10 +55,28 @@ class Collections extends Component {
     .catch((err) => console.log(err))
   }
 
-  deleteArticle(e, index) {
+  deleteArticle(e, article_id) {
       e.preventDefault;
-      console.log("deleting article", index);
-      
+      axios.delete('/api/delete-article/' + article_id, {
+        params: { id: article_id },
+      })
+        .then((res) => {
+          console.log("article deleted successfully", res);
+          // remove from view
+          this.handleRemove(article_id);
+        })
+        .catch((err) => {
+          console.log("error deleting article", err);
+        })
+  }
+
+  handleRemove(id) {
+    const updatedArticles = this.state.articles.filter((article) => {
+      return article.id !== id
+    })
+    this.setState({ articles: updatedArticles });
+    // reload page?
+    this.forceUpdate();
   }
 
   componentDidMount() {
@@ -106,7 +125,7 @@ class Collections extends Component {
                           <Button primary onClick={(e) => this.toggleEditFields(e, index)}>
                             Edit
                           </Button>
-                          <Button type="button" basic color="red" onClick={(e) => this.deleteArticle(e, index)}>
+                          <Button type="button" basic color="red" onClick={(e) => this.deleteArticle(e, article.id)}>
                             Delete
                           </Button>
                         </Table.Cell>
