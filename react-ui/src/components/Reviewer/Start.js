@@ -7,7 +7,7 @@ import legitCatImage from '../../images/legit-cat.png';
 class Start extends Component {
 
   render() {
-    const { id } = this.props.match.params;
+    const { id, casefile_id } = this.props.match.params;
 
     return (
       <div className="ReviewerStart">
@@ -17,7 +17,7 @@ class Start extends Component {
           <h2 className="subheader">You’ll read 3 different articles and figure out which ones are legit.</h2>
           <p className="tip">We'll ask you questions to help you determine the answer.</p>
         </div>
-        <Link to={`/mission/${id}/team`}>
+        <Link to={`/mission/${id}/casefile/${casefile_id}/team`}>
           <Button text="Let’s Get Started" />
         </Link>
       </div>

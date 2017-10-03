@@ -15,7 +15,7 @@ class Student extends Component {
     return (
       <div style={wrapperCss}>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/mission/:id" component={Mission} />
+        <Route path="/mission/:id/casefile/:casefile_id" component={Mission} />
         <Route path="/mstestteacher/1" component={StudentForm} />
         <Route path="/form" component={StudentForm} />
       </div>

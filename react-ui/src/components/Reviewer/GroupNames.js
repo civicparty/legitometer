@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../Shared/Button';
 import legitCatImage from '../../images/legit-cat.png';
@@ -25,7 +25,6 @@ class GroupNames extends Component {
   handleSubmit(e) {
     let thiz = this;
     e.preventDefault();
-    debugger
 
     axios.post('/api/add-group', {
       names: this.state.names.join('// '), // this is hacky. We should submit names separately and associate to a group.
@@ -36,12 +35,20 @@ class GroupNames extends Component {
       console.log(res)
       thiz.setState({ submitGroup: true })
     })
-    .catch((err) => console.log("error in adding group: ", err));
+    .catch((err) => {
+      console.log("error in adding group: ", err)
+      // TODO Remove: even when submit doesn't work, let's fake it for now.
+      thiz.setState({ submitGroup: true })
+    });
   }
 
   render() {
+    const { id, casefile_id } = this.props.match.params;
     return (
       <div className="GroupNames">
+        {this.state.submitGroup && (
+          <Redirect to={`/mission/${id}/casefile/${casefile_id}/article/preview`}/>
+        )}
         <form onSubmit={this.handleSubmit}>
           <h2>Who is on your team?</h2>
           <p className="tip">Add the name of everyone on your team. Select Next once everyone has been added.</p>
