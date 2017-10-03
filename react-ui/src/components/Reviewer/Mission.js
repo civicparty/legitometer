@@ -13,21 +13,31 @@ class Article extends Component {
     super(props);
     this.state = {
       headline: '',
-      url: ''
+      url: '',
+      article: {},
+      missionId: this.props.match.params.id,
+      casefileId: this.props.match.params.casefile_id,
     };
   }
 
-  componentWillMount() {
-    console.log("Requesting Articles from '/api/articles'");
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+  }
 
-    axios.get('/api/articles')
+  componentWillMount() {
+    const { casefile_id } = this.props.match.params;
+
+    axios.get(`/api/casefile/${casefile_id}/articles`)
       .then((res) => {
-        //const { headline, url } = res.data.data[27].article
-        const headline = res.data[27].article.headline;
-        const url = res.data[27].article.url;
+        const randomId = this.getRandomIntInclusive(0, res.data.length - 1)
+        console.log(res.data[randomId])
+
         this.setState({
-          headline: headline,
-          url: url
+          article: res.data[randomId],
+          headline: res.data[randomId].headline,
+          url: res.data[randomId].url,
         });
       })
       .catch((err) => {
@@ -53,10 +63,10 @@ class Article extends Component {
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
-          <Route exact path="/mission/:id/start" component={Start} />
-          <Route exact path="/mission/:id/team" component={GroupNames} />
-          <Route exact path="/mission/:id/article/1" render={() => <ArticlePreview {...previewProps} />} />
-          <Route exact path="/mission/:id/article/:article_id/question/:id" component={Questions} />
+          <Route exact path="/mission/:id/casefile/:casefile_id/start" component={Start} />
+          <Route exact path="/mission/:id/casefile/:casefile_id/team" component={GroupNames} />
+          <Route exact path="/mission/:id/casefile/:casefile_id/article/preview" render={() => <ArticlePreview {...previewProps} />} />
+          <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id" component={Questions} />
         </div>
         <Footer {...this.props} />
       </div>
