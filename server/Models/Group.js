@@ -12,7 +12,7 @@ const Group = bookshelf.Model.extend({
     return this.hasMany('Review')
   },
   mission: function() {
-    return this.belongsTo('Mission', 'mission_id');
+    return this.belongsTo('Mission');
   },
 });
 

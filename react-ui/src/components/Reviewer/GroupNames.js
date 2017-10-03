@@ -28,7 +28,7 @@ class GroupNames extends Component {
     debugger
 
     axios.post('/api/add-group', {
-      names: this.state.names,
+      names: this.state.names.join('// '), // this is hacky. We should submit names separately and associate to a group.
       group_name: '', // in the future, we could let students name their team.
       mission_id: this.props.match.params.id,
     })
