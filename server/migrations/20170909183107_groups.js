@@ -4,6 +4,7 @@ exports.up = knex =>
     table.increments('id');
     table.string('group_name');
     table.string('name');
+    table.integer('mission_id').references('mission.id').onDelete('CASCADE');
     table.timestamps(true, true);
   })
 

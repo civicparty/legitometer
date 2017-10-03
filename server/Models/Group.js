@@ -3,12 +3,16 @@
 const bookshelf = require('../db/knex');
 
 require('./Review');
+require('./Mission');
 
 const Group = bookshelf.Model.extend({
   tableName: 'groups',
   hasTimestamps: true,
   review: function() {
     return this.hasMany('Review')
+  },
+  mission: function() {
+    return this.belongsTo('Mission', 'mission_id');
   },
 });
 

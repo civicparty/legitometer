@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Button from '../Shared/Button';
 import legitCatImage from '../../images/legit-cat.png';
 
@@ -22,9 +23,20 @@ class GroupNames extends Component {
   }
 
   handleSubmit(e) {
+    let thiz = this;
     e.preventDefault();
-    // TODO: Submit names to server
     debugger
+
+    axios.post('/api/add-group', {
+      names: this.state.names,
+      group_name: '', // in the future, we could let students name their team.
+      mission_id: this.props.match.params.id,
+    })
+    .then((res) => {
+      console.log(res)
+      thiz.setState({ submitGroup: true })
+    })
+    .catch((err) => console.log("error in adding group: ", err));
   }
 
   render() {
@@ -37,7 +49,7 @@ class GroupNames extends Component {
             {
               this.state.names.map((name, i) => {
                 return (
-                  <input type="text" name={`${name}_${i}`}
+                  <input type="text" name={`${name}_${i}`} key={i}
                     className="GroupNames__input question--short"
                     placeholder="Name"
                     defaultValue={this.state.names[i]}
