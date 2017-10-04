@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Table, Input, Select } from 'semantic-ui-react';
 import UpdateArticle from './UpdateArticle';
+import { Redirect } from 'react-router-dom';
 
 class Collections extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Collections extends Component {
       articles: [],
       collection: {},
       isLoading: true,
+      isDeleted: null,
     }
     this.getArticles = this.getArticles.bind(this);
     this.updateArticle = this.updateArticle.bind(this);
@@ -92,24 +94,29 @@ class Collections extends Component {
 
   deleteCasefile(id) {
     console.log("deleting...", id);
+    let thiz = this;
+
     axios.delete(`/api/delete-casefile/${id}`, {
       params: {id: id}
     })
       .then((res) => {
         console.log("casefile deleted!");
         // Go to dashboard OR confirm delete and add a button to go to dashboard???
+        thiz.setState({ isDeleted: true });
+
       })
       .catch((err) => {
         console.log("casefile delete error", err);
       })
   }
 
-
   componentDidMount() {
     this.getArticles();
   }
 
   render() {
+    const { isDeleted } = this.state;
+
     if (this.state.isLoading) return false;
 
     console.log(this.state.articles);
@@ -164,6 +171,9 @@ class Collections extends Component {
               )}
           </Table.Body>
         </Table>
+        {isDeleted && (
+          <Redirect to={'/admin'}/>
+          )}
       </div>
     );
   }
