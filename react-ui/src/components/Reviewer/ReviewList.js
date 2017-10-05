@@ -9,14 +9,15 @@ class ReviewList extends React.Component {
       missionName,
       missionId,
       casefileName,
+      casefileId
     } = this.props.mission;
 
     return(
       <div key={missionId}>
-        <Link to={`/article/${missionId}/start`}>
-          <Button basic color="red">
+        <Link to={`/mission/${missionId}/casefile/${casefileId}/start`}>
+          <button className="button">
             {missionName}: {casefileName}
-          </Button>
+          </button>
         </Link>
       </div>
     )

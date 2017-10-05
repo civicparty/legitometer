@@ -41,9 +41,6 @@
 .strong {
   font-weight: bold; }
 
-.App.container {
-  padding: 40px; }
-
 @font-face {
   font-family: 'LeagueGothic';
   src: url("../fonts/web/LeagueGothic.woff") format("woff"); }
@@ -69,25 +66,32 @@
   src: url("../fonts/web/ZillaSlabHighlight-Bold.woff") format("woff"); }
 
 h1, .h1 {
-  font-family: "ZillaSlab-Regular";
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 3.5rem;
   margin-bottom: .5rem;
-  line-height: 120%; }
+  line-height: 4rem; }
 
 h2, .h2 {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.714rem; }
+  font-size: 2.5rem; }
 
 h3, .h3 {
-  font-size: 1.28rem; }
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem; }
 
 h4, .h4 {
   font-size: 1rem; }
 
 p, .p {
-  font-family: "ZillaSlab-Regular";
+  font-family: "ZillaSlab-Regular", serif;
   font-size: 1.4rem; }
+
+.header {
+  font-family: "ZillaSlabHighlight-Regular", serif; }
+
+.subheader {
+  font-family: "ZillaSlab-Regular", serif;
+  background: #FFFFFF;
+  color: #171717; }
 
 .tip {
   color: #787878;
@@ -106,6 +110,9 @@ p, .p {
 
 .flex {
   display: flex; }
+
+.flex1 {
+  flex: 1; }
 
 .flex-parent {
   display: flex;
@@ -195,11 +202,77 @@ p, .p {
 .article-new-inputs:last-of-type {
   margin-bottom: 10px !important; }
 
-.header {
-  display: block; }
-
 .StudentForm-input {
   width: 200px; }
+
+.ReviewerStart__header {
+  position: absolute;
+  top: 90px;
+  left: 57%; }
+
+.ReviewerStart__body {
+  margin-bottom: 50px; }
+
+.ReviewerStart {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center; }
+
+.Footer {
+  background-color: #F7F7F7;
+  height: 60px; }
+
+.Footer__img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0; }
+
+.Footer__title {
+  padding-left: 115px;
+  font-family: "ZillaSlab-Regular", serif;
+  margin-top: 17px; }
+
+.ProgressBar {
+  padding: 2px;
+  text-align: center; }
+
+.ProgressBar__full-bar {
+  border: 1px solid #EEEDF7;
+  border-radius: 3px;
+  padding: 3px;
+  width: 50%;
+  height: 20px;
+  margin: 20px 5px 20px 20px; }
+
+.ProgressBar__progress {
+  background-color: #82D1F5;
+  border-radius: 10px;
+  height: 12px; }
+
+.ProgressBar__text {
+  padding: 20px 0; }
+
+.GroupNames {
+  text-align: center;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 50px; }
+
+.GroupNames__input {
+  font-family: "ZillaSlab-Regular", serif;
+  display: block; }
+
+.GroupNames__field-set {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
 
 html, body {
   width: 100%;
@@ -208,14 +281,14 @@ html, body {
   padding: 0; }
 
 body {
-  font-family: "ZillaSlab-Regular";
+  font-family: "ZillaSlab-Regular", serif;
   color: #171717; }
 
 #root {
   height: 100%; }
 
 p a {
-  font-family: "ZillaSlab-Regular";
+  font-family: "ZillaSlab-Regular", serif;
   color: #f512ff;
   border-bottom: 0px solid transparent;
   transition: all 0.1s ease-in-out;

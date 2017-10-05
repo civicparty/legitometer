@@ -14,7 +14,7 @@ class Admin extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={{ width: '100%', height: '100%', padding: '40px' }}>
           <p>welcome Teacher</p>
           <Route exact path="/admin" component={Dashboard} />
           <Route exact path="/admin/new-mission/" component={NewMission} />

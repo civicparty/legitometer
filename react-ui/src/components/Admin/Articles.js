@@ -124,6 +124,7 @@ class Collections extends Component {
 
     return (
       <div>
+
         <h2>Edit {name} Collection</h2>
         <Button primary onClick={() => this.updateCasefileName(this.state.collection.id)}>Edit Casefile Name</Button>
         <Button basic color="red" onClick={() => this.deleteCasefile(this.state.collection.id)}>Delete Casefile</Button>
