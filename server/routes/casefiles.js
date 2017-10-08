@@ -79,6 +79,24 @@ router.post('/api/add-casefile', function(req, res, next) {
   })
  });
 
+ router.patch('/api/update-casefile', (req, res, next) => {
+   console.log("put route reached, putting: ", req.body);
+   Casefile.forge().where({id: req.body.id})
+    .fetch()
+    .then((casefile) => {
+      Casefile.forge().where({id: req.body.id})
+        .save({name: req.body.name}, {patch: true})
+        .then((response) => {
+          console.log("casefile updated successfully", response);
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          next(err);
+        })
+
+    })
+ });
+
  router.delete('/api/delete-casefile/:id', (req, res, next) => {
    console.log("casefile delete route, deleting casefile: ", req.params.id);
    Casefile.forge().where({id: req.params.id})
