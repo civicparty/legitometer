@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Table, Input, Select } from 'semantic-ui-react';
 import UpdateArticle from './UpdateArticle';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class Collections extends Component {
   constructor(props) {
@@ -210,6 +210,9 @@ class Collections extends Component {
         {isDeleted && (
           <Redirect to={'/admin'}/>
           )}
+          <Link to="/admin">
+            <Button secondary>Done Editing</Button>
+          </Link>
       </div>
     );
   }
