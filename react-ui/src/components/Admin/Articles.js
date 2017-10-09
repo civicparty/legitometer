@@ -12,12 +12,15 @@ class Collections extends Component {
       collection: {},
       isLoading: true,
       isDeleted: null,
+      editName: false,
     }
     this.getArticles = this.getArticles.bind(this);
     this.updateArticle = this.updateArticle.bind(this);
     this.toggleEditFields = this.toggleEditFields.bind(this);
     this.deleteArticle = this.deleteArticle.bind(this);
     this.handleRemoveArticle = this.handleRemoveArticle.bind(this);
+    this.toggleCasefileEditField = this.toggleCasefileEditField.bind(this);
+    this.saveNewName = this.saveNewName.bind(this);
     this.updateCasefileName = this.updateCasefileName.bind(this);
     this.deleteCasefile = this.deleteCasefile.bind(this);
   }
@@ -27,7 +30,7 @@ class Collections extends Component {
 
     axios.get(`/api/casefile/${id}`)
       .then((res) => {
-        console.log(res.data)
+        console.log("casefile", res.data)
         this.setState({ collection: res.data, isLoading: false })
       })
       .catch((err) => console.log(err))
@@ -82,28 +85,44 @@ class Collections extends Component {
     this.forceUpdate();
   }
 
-  updateCasefileName(id) {
-    // need to toggle edit input box - with another component???
+  toggleCasefileEditField(e) {
+    this.setState({editName: !this.state.editName});
+    this.forceUpdate();
+  }
 
-    // then save changes
-    console.log("updating casefile name for: ", id);
-    axios.put(`/api/update-casefile/${id}`, {
-        // name: name
+  saveNewName(e, id) {
+    e.preventDefault;
+    const newName = this.refs.input ? this.refs.input.value : this.state.collection.name;
+    let collection = this.state.collection;
+    collection.name = newName;
+    this.setState({
+      editName: !this.state.editName,
+      collection: collection,
+    })
+    this.updateCasefileName(id, newName);
+
+  }
+  updateCasefileName(id, newName) {
+    axios.patch('/api/update-casefile/', {
+      id: id,
+      name: newName
+    })
+    .then((res) => {
+      console.log("update casefile success", res);
+    })
+    .catch((err) => {
+      console.log("update casefile error", err);
     })
   }
 
   deleteCasefile(id) {
-    console.log("deleting...", id);
     let thiz = this;
-
     axios.delete(`/api/delete-casefile/${id}`, {
       params: {id: id}
     })
       .then((res) => {
         console.log("casefile deleted!");
-        // Go to dashboard OR confirm delete and add a button to go to dashboard???
         thiz.setState({ isDeleted: true });
-
       })
       .catch((err) => {
         console.log("casefile delete error", err);
@@ -119,14 +138,30 @@ class Collections extends Component {
 
     if (this.state.isLoading) return false;
 
-    console.log(this.state.articles);
     const { name } = this.state.collection;
+
+    let editCasefileName = (
+        <div className="flex">
+          <input ref="input"
+            type="text" placeholder="Enter new name of casefile"
+            defaultValue={name}
+            className="bump-right"
+          />
+        <button className="ui button primary" type="submit" onClick={(e) => this.saveNewName(e, this.state.collection.id)}>
+            Save
+          </button>
+        </div>
+    );
+    let displayCasefileName = (
+        <div className="flex">
+            Edit {name} Collection
+        </div>
+    );
 
     return (
       <div>
-
-        <h2>Edit {name} Collection</h2>
-        <Button primary onClick={() => this.updateCasefileName(this.state.collection.id)}>Edit Casefile Name</Button>
+        <h2>{ this.state.editName ? editCasefileName : displayCasefileName } </h2>
+        <Button primary onClick={(e) => this.toggleCasefileEditField(e)}>Edit Casefile Name</Button>
         <Button basic color="red" onClick={() => this.deleteCasefile(this.state.collection.id)}>Delete Casefile</Button>
         <Table celled>
           <Table.Header>
@@ -178,7 +213,6 @@ class Collections extends Component {
       </div>
     );
   }
-
 }
 
 export default Collections;

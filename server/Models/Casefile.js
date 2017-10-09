@@ -13,11 +13,11 @@ const Casefile = bookshelf.Model.extend({
     return this.hasMany('Article', 'id');
   },
   missions: function() {
-    return this.hasMany('Mission', 'id');
+    return this.hasMany('Mission', 'id'); //TODO I'm not sure this is right
   },
-  user: function() {
-    return this.belongsTo('User', 'id').through('Mission');
-  }, //yes?
+  // user: function() {
+  //   return this.belongsTo('User', 'id').through('Mission');
+  // }, //yes?
 });
 
 module.exports = bookshelf.model('Casefile', Casefile);

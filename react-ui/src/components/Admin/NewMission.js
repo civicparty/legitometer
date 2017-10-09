@@ -50,8 +50,6 @@ class NewMission extends React.Component {
     .catch((err) => {
       console.log("you are not going to space today (saveMission)", err);
     });
-
-
   }
 
   updateCollectionID(collection_id) {
@@ -61,7 +59,6 @@ class NewMission extends React.Component {
   updateTitle(e) {
     e.preventDefault();
     const newName = this.refs.input ? this.refs.input.value : this.state.name;
-
 
     this.setState({
       showEditTitle: !this.state.showEditTitle,
