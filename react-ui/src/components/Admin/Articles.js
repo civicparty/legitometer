@@ -86,39 +86,29 @@ class Collections extends Component {
   }
 
   toggleCasefileEditField(e) {
-    console.log("toggling");
-    // set casefile toggle boolean to true - will use to toggle the edit box
     this.setState({editName: !this.state.editName});
-    console.log("state: ", this.state.editName);
     this.forceUpdate();
   }
-
-  // TODO update this.collection.name before saving
 
   saveNewName(e, id) {
     e.preventDefault;
     const newName = this.refs.input ? this.refs.input.value : this.state.collection.name;
+    let collection = this.state.collection;
+    collection.name = newName;
     this.setState({
       editName: !this.state.editName,
-      name: newName,
+      collection: collection,
     })
     this.updateCasefileName(id, newName);
 
   }
   updateCasefileName(id, newName) {
-    // on 'SAVE' save the new casefile name
-    // TODO hook up PUT route
-
-    // then save changes
-    console.log("updating casefile name: ", id, newName);
-
     axios.patch('/api/update-casefile/', {
       id: id,
       name: newName
     })
     .then((res) => {
       console.log("update casefile success", res);
-      this.forceUpdate(); // TODO this bit isnt' working? have to refresh to display new name
     })
     .catch((err) => {
       console.log("update casefile error", err);
@@ -126,17 +116,13 @@ class Collections extends Component {
   }
 
   deleteCasefile(id) {
-    console.log("deleting...", id);
     let thiz = this;
-
     axios.delete(`/api/delete-casefile/${id}`, {
       params: {id: id}
     })
       .then((res) => {
         console.log("casefile deleted!");
-        // Go to dashboard OR confirm delete and add a button to go to dashboard???
         thiz.setState({ isDeleted: true });
-
       })
       .catch((err) => {
         console.log("casefile delete error", err);
@@ -153,7 +139,6 @@ class Collections extends Component {
     if (this.state.isLoading) return false;
 
     const { name } = this.state.collection;
-    const { casefile_id } = this.state.collection.id;
 
     let editCasefileName = (
         <div className="flex">
@@ -177,7 +162,7 @@ class Collections extends Component {
       <div>
         <h2>{ this.state.editName ? editCasefileName : displayCasefileName } </h2>
         <Button primary onClick={(e) => this.toggleCasefileEditField(e)}>Edit Casefile Name</Button>
-        <Button basic color="red" onClick={() => this.deleteCasefile(casefile_id)}>Delete Casefile</Button>
+        <Button basic color="red" onClick={() => this.deleteCasefile(this.state.collection.id)}>Delete Casefile</Button>
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -228,7 +213,6 @@ class Collections extends Component {
       </div>
     );
   }
-
 }
 
 export default Collections;
