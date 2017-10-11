@@ -23,27 +23,32 @@ class GroupNames extends Component {
   }
 
   handleSubmit(e) {
-    let thiz = this;
     e.preventDefault();
+    console.log(typeof this.state.names, this.state.names, this.props.match.params.id);
+    let thiz = this;
+    for (var i = 0; i < this.state.names.length; i++) {
+      console.log(this.state.names[i]);
+      axios.post('/api/add-group', {
+        names: this.state.names[i],
+        group_name: '', // in the future, we could let students name their team.
+        mission_id: this.props.match.params.id,
+      })
+      .then((res) => {
+        console.log("group added", res)
+        thiz.setState({ submitGroup: true })
+      })
+      .catch((err) => {
+        console.log("error in adding group: ", err)
+        // TODO Remove: even when submit doesn't work, let's fake it for now.
+        thiz.setState({ submitGroup: true })
+      });
+    }
 
-    axios.post('/api/add-group', {
-      names: this.state.names.join('// '), // this is hacky. We should submit names separately and associate to a group.
-      group_name: '', // in the future, we could let students name their team.
-      mission_id: this.props.match.params.id,
-    })
-    .then((res) => {
-      console.log(res)
-      thiz.setState({ submitGroup: true })
-    })
-    .catch((err) => {
-      console.log("error in adding group: ", err)
-      // TODO Remove: even when submit doesn't work, let's fake it for now.
-      thiz.setState({ submitGroup: true })
-    });
   }
 
   render() {
     const { id, casefile_id } = this.props.match.params;
+    console.log("submitgroup", this.state.submitGroup); //TODO WHY IS THIS UNDEFINED?
     return (
       <div className="GroupNames">
         {this.state.submitGroup && (

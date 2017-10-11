@@ -15,7 +15,7 @@ router.get('/api/groups', (req, res, next) => {
       groups = groups.toJSON();
       for (var i = 0; i < groups.length; i++) {
         // get id, name, and createdBy from table
-        files.push([groups[i].id, groups[i].mission_id, groups[i].group_name, groups[i].names]);
+        files.push([groups[i].id, groups[i].mission_id, groups[i].names]);
       }
       // console.log("send this", files);
       res.send(files);
@@ -23,29 +23,36 @@ router.get('/api/groups', (req, res, next) => {
 })
 
 router.post('/api/add-group', (req, res, next) => {
-  console.log("adding group", req.body);
+  console.log("adding group", req.body.names.length);
+  //  adding group { names: [ 'sadasdf', 'asdfasdf', '' ],
+  //  group_name: '',
+  //   mission_id: '1' }
   // when students are filling in the form, their group name and names will be saved to the DB here
   // mission id, group_name, each individual name
-  // for (var i = 0; i < req.body.names.length; i++) {
+
+  if (req.body.names[i] !== '') {
     bookshelf.knex.raw('SELECT setval(\'groups_id_seq\', (SELECT MAX(id) FROM groups)+1)')
     Group.forge({
       mission_id: req.body.mission_id,
-      group_name: req.body.group_name,
-      names: req.body.names,
-    })
+      name: req.body.names[i],
+      group_name: '',
+    })  
     .save()
     .then((group) => {
-      res.status(200).json(group)
+      console.log("new group added to database", group);
+      // res.status(200).json(group)
+      res.sendStatus(200);
     })
     .catch((err) => {
-      res.status(500).json({
-        error: true,
-        data: {
-          message: err.message
-        }
-      });
+      console.log("group post error", err);
+      // res.status(500).json({
+      //   error: true,
+      //   data: {
+      //     message: err.message
+      //   }
+      // });
     })
-  // }
+  }
 })
 
 module.exports = router;
