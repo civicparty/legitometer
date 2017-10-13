@@ -48,7 +48,6 @@ class GroupNames extends Component {
 
   render() {
     const { id, casefile_id } = this.props.match.params;
-    console.log("submitgroup", this.state.submitGroup); //TODO WHY IS THIS UNDEFINED?
     return (
       <div className="GroupNames">
         {this.state.submitGroup && (

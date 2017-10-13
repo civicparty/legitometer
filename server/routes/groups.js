@@ -24,11 +24,6 @@ router.get('/api/groups', (req, res, next) => {
 
 router.post('/api/add-group', (req, res, next) => {
   console.log("adding group", req.body.names);
-  //  adding group { names: [ 'sadasdf', 'asdfasdf', '' ],
-  //  group_name: '',
-  //   mission_id: '1' }
-  // when students are filling in the form, their group name and names will be saved to the DB here
-  // mission id, group_name, each individual name
 
   if (req.body.names !== '') {
     bookshelf.knex.raw('SELECT setval(\'groups_id_seq\', (SELECT MAX(id) FROM groups)+1)')
@@ -40,7 +35,7 @@ router.post('/api/add-group', (req, res, next) => {
     .save()
     .then((group) => {
       console.log("new group added to database", group);
-      // res.status(200).json(group)
+      // res.status(200).json(group) //these seemed to be causing errors..? it might have been something else though 
       res.sendStatus(200);
     })
     .catch((err) => {
