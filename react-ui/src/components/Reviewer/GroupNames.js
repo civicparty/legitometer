@@ -26,24 +26,21 @@ class GroupNames extends Component {
     e.preventDefault();
     console.log(typeof this.state.names, this.state.names, this.props.match.params.id);
     let thiz = this;
-    for (var i = 0; i < this.state.names.length; i++) {
-      console.log(this.state.names[i]);
-      axios.post('/api/add-group', {
-        names: this.state.names[i],
-        group_name: '', // in the future, we could let students name their team.
-        mission_id: this.props.match.params.id,
-      })
-      .then((res) => {
-        console.log("group added", res)
-        thiz.setState({ submitGroup: true })
-      })
-      .catch((err) => {
-        console.log("error in adding group: ", err)
-        // TODO Remove: even when submit doesn't work, let's fake it for now.
-        thiz.setState({ submitGroup: true })
-      });
-    }
-
+    console.log(this.state.names);
+    axios.post('/api/add-group', {
+      names: this.state.names,
+      // group_name: '', // in the future, we could let students name their team.
+      mission_id: this.props.match.params.id,
+    })
+    .then((res) => {
+      console.log("group added", res)
+      thiz.setState({ submitGroup: true })
+    })
+    .catch((err) => {
+      console.log("error in adding group: ", err)
+      // TODO Remove: even when submit doesn't work, let's fake it for now.
+      thiz.setState({ submitGroup: true })
+    });
   }
 
   // TODO

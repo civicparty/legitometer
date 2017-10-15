@@ -31,9 +31,9 @@ class Questions extends Component {
     .then((res) => {
       console.log('response posted', res)
       // TODO go to the next question
-      questionsLeft += 1;
-      this.setState({ submitResponse: true, questionsLeft: questionsLeft});
+      this.setState({ submitResponse: true});
       // TODO what happens when this gets to the end of the questions? --- it should change what the next page is.
+      // BUT HOW?
     })
     .catch((err) => {
       console.log('response error', err);

@@ -5,19 +5,12 @@ exports.seed = knex =>
     .then(() =>
     knex('groups').insert([
       {
-        group_name: 'Team 1',
-        name: 'Student1',
+        name: 'Team1',
         mission_id: 1,
       },
       {
-        group_name: 'Team 1',
-        name: 'Student2',
-        mission_id: 1,
-      },
-      {
-        group_name: 'Team 1',
-        name: 'Student3',
-        mission_id: 1,
+        name: 'Team2',
+        mission_id: 3,
       }
     ])
   )

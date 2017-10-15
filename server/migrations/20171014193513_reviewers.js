@@ -1,9 +1,9 @@
 
 exports.up = knex =>
-  knex.schema.createTable('groups', table => {
+  knex.schema.createTable('reviewers', table => {
     table.increments('id');
     table.string('name');
-    table.integer('mission_id').references('missions.id').onDelete('CASCADE');
+    table.integer('group_id').references('groups.id').onDelete('CASCADE');
     table.timestamps(true, true);
   })
 
