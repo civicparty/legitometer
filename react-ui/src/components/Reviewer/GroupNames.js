@@ -46,6 +46,9 @@ class GroupNames extends Component {
 
   }
 
+  // TODO
+  // Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the GroupNames component.
+
   render() {
     const { id, casefile_id } = this.props.match.params;
     return (

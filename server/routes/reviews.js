@@ -34,7 +34,20 @@ router.get('/api/reviews/:id', function(req, res, next) {
 router.post('/api/add-review', function(req, res, next) {
   console.log("made it to the review post route, here's the stuff: ", req.body);
   // each time 'next' is clicked, stuff from that page will be saved
-  // group_id, mission_id, {question id : answer}
+  // group_id, mission_id, {question: answer}
+  Review.forge({
+    group_id: req.body.groupid,
+    mission_id: req.body.missionid,
+    answers: {req.body.question: req.body.answer} //THIS WILL NOT WORK TO SUBMIT THEM ONE BY ONE
+  })
+  .save()
+  .then((review) => {
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    next(err);
+  })
+
 })
 
 module.exports = router;

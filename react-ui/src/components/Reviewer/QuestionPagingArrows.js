@@ -35,8 +35,12 @@ class QuestionPagingArrows extends Component {
       color: 'white',
     }, buttonCss)
 
-    const previousLink = `/article/1/${previousId}`
-    const nextLink = `/article/1/question/${nextId}`
+    // const previousLink = `/article/1/${previousId}`
+    // const nextLink = `/article/1/question/${nextId}`
+    // link is /mission/1/casefile/1/article/5/question/1
+    // TODO need mission id, casefile id, article id here...
+    const previousLink = `/mission/1/casefile/1/article/5/${previousId}`
+    const nextLink = `/mission/1/casefile/1/article/1/question/${nextId}`
 
     return (
       <div style={wrapperCss}>
