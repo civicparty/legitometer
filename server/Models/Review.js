@@ -5,6 +5,7 @@ const bookshelf = require('../db/knex');
 require('./Article');
 require('./User');
 require('./Group');
+require('./Response');
 
 const Review = bookshelf.Model.extend({
   tableName: 'reviews',
@@ -17,6 +18,9 @@ const Review = bookshelf.Model.extend({
   },
   group: function() {
     return this.belongsTo('Group');
+  }
+  response: function() {
+    return this.hasMany('Response');
   }
 });
 

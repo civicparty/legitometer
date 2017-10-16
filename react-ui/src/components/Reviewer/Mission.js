@@ -32,7 +32,7 @@ class Article extends Component {
     axios.get(`/api/casefile/${casefile_id}/articles`)
       .then((res) => {
         const randomId = this.getRandomIntInclusive(0, res.data.length - 1)
-        console.log(res.data[randomId])
+        console.log("random article", res.data[randomId])
 
         this.setState({
           article: res.data[randomId],
