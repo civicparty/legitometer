@@ -8,4 +8,4 @@ exports.up = knex =>
   })
 
 exports.down = knex =>
-  knex.schema.dropTable('groups')
+  knex.schema.dropTable('reviewers')

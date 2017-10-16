@@ -27,7 +27,6 @@ router.post('/api/add-group', (req, res, next) => {
   console.log("adding group", req.body.names);
   bookshelf.knex.raw('SELECT setval(\'groups_id_seq\', (SELECT MAX(id) FROM groups)+1)')
   bookshelf.knex.raw('SELECT setval(\'reviewers_id_seq\', (SELECT MAX(id) FROM reviewers)+1)')
-
   Group.forge({
     mission_id: req.body.mission_id,
     name: "group name placeholder",
@@ -35,7 +34,7 @@ router.post('/api/add-group', (req, res, next) => {
   .save()
   .then((group) => {
     console.log("new group added to database", group);
-    // TODO refactor so that it saves each name to a row and doesn't save the empty string
+    // TODO currently works but need to refactor so that it saves each name to a row and doesn't save the empty string
       for (var i = 0; i < req.body.names.length; i++) {
         if (req.body.names[i] !== '') {
         Reviewer.forge({
@@ -44,13 +43,10 @@ router.post('/api/add-group', (req, res, next) => {
         })
         .save()
       }
-      }
-
-
+    }
   })
   .then(() => {
     console.log("group/reviewer adding success");
-
     res.sendStatus(200);
     // res.status(200).json(group) //these seemed to be causing errors..? it might have been something else though
   })
