@@ -22,13 +22,13 @@ class Questions extends Component {
     e.preventDefault;
     let answer = this.refs.input ? this.refs.input.value : this.state.answer;
     let question = find(Number(this.props.match.params.id) - 1).questionText;
-    // TODO on initial submit save group_id (session?), mission_id to reviews table and get review.id back
+    // TODO on initial submit save group_id (session?), mission_id to reviews table and get review.id back - do this when the group is saved...
     // TODO how to distinguish intial submit? by question id?
     // TODO on every subsequent submit save review_id and question and answer to responses table
     // TODO hook up responses routes
     console.log("answer", answer);
     console.log("question", question);
-    axios.post('/api/add-review', {
+    axios.post('/api/add-response', {
       question: question,
       answer: answer,
     })

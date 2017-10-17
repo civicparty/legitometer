@@ -31,6 +31,7 @@ router.get('/api/reviews/:id', function(req, res, next) {
 
 })
 
+//NOT USED?
 router.post('/api/add-review', function(req, res, next) {
   console.log("made it to the review post route, here's the stuff: ", req.body);
   // on initial submit, save group_id and mission_id to reviews table, return review_id
