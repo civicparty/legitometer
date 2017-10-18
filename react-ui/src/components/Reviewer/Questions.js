@@ -21,14 +21,16 @@ class Questions extends Component {
   handleSubmit(e) {
     e.preventDefault;
     let answer = this.refs.input ? this.refs.input.value : this.state.answer;
+    console.log(this.name.value, this.refs.input);
     let question = find(Number(this.props.match.params.id) - 1).questionText;
-    // TODO on initial submit save group_id (session?), mission_id to reviews table and get review.id back - do this when the group is saved...
-    // TODO how to distinguish intial submit? by question id?
-    // TODO on every subsequent submit save review_id and question and answer to responses table
+    let review_id;
+    // TODO on question submits save review_id and question and answer to responses table
     // TODO hook up responses routes
-    console.log("answer", answer);
+    // TODO where is the review_id? how can we access it here?
+    console.log("answer", answer); // TODO this was coming back undefined so trying to stop the page from refreshing and find out what it is here
     console.log("question", question);
     axios.post('/api/add-response', {
+      // review_id: review_id, //this or group_id maybe is something that should be saved to the session?
       question: question,
       answer: answer,
     })
@@ -51,6 +53,7 @@ class Questions extends Component {
     const question = find(Number(match.params.id) - 1)
     const nextQuestion = question.id+1;
     console.log("next question id", nextQuestion, question);
+    // TODO why isn't the mission_id available?
     const casefile = match.params.casefile_id;
     const article = match.params.article_id;
     const submitResponse = this.state.submitResponse;

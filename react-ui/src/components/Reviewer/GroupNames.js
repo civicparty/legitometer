@@ -27,6 +27,8 @@ class GroupNames extends Component {
     console.log(typeof this.state.names, this.state.names, this.props.match.params.id);
     let thiz = this;
     console.log(this.state.names);
+    // save group to groups table, names to reviewers table, and review to review table
+    // TODO persist / find a way to access the review_id for all the questions
     axios.post('/api/add-group', {
       names: this.state.names,
       // group_name: '', // in the future, we could let students name their team.
