@@ -12,13 +12,11 @@ router.get('/api/reviews', function(req, res, next) {
     reviews = reviews.toJSON();
     for (var i = 0; i < reviews.length; i++) {
       // get id, name, and createdBy from table
-      files.push([reviews[i].id, reviews[i].mission_id, reviews[i].answers]);
+      files.push([reviews[i].group_id, reviews[i].mission_id]);
     }
     // table.increments('id');
-    // table.integer('user_id').references('users.id').onDelete('CASCADE');
+    // table.integer('group_id').references('groups.id').onDelete('CASCADE');
     // table.integer('mission_id').references('missions.id').onDelete('CASCADE');
-    // table.json('answers');
-    // console.log("send this", files);
     res.send(files);
   })
   .catch((err) => {
@@ -26,16 +24,22 @@ router.get('/api/reviews', function(req, res, next) {
   });
 });
 
-// get reviews by group id (or name?);
+// get reviews by group id
 router.get('/api/reviews/:id', function(req, res, next) {
-
+  Review.forge().where({group_id: req.params.id}).fetch()
+  .then((review) => {
+    console.log("fetched review", review);
+  })
+  .catch((err) => {
+    console.log("review by id error", err);
+  })
 })
 
-//NOT USED?
+//NOT USED - the new review is posted when the group is posted in GroupNames.js -> groups.js
 // router.post('/api/add-review', function(req, res, next) {
 //   console.log("made it to the review post route, here's the stuff: ", req.body);
 //   // on initial submit, save group_id and mission_id to reviews table, return review_id
-//   // TODO how to tell it is initial submit?
+//   // how to tell it is initial submit?
 //   Review.forge({
 //     group_id: req.body.groupid,
 //     mission_id: req.body.missionid,
@@ -52,7 +56,3 @@ router.get('/api/reviews/:id', function(req, res, next) {
 // })
 
 module.exports = router;
-
-// reviews table
-// table.integer('user_id').references('users.id')
-// table.integer('mission_id').references('missions.id')

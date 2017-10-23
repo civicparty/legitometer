@@ -10,27 +10,37 @@ class Questions extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateAnswer = this.updateAnswer.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       answer: '',
       submitResponse: false,
-      questionsLeft: 0, // TODO need to stop at the last question and go to the final page
+      questionsLeft: 0, // TODO need some way to stop at the last question and go to the final page
     };
+  }
+
+  updateAnswer(e) {
+    e.preventDefault;
+    const answer = this.refs.input ? this.refs.input.value : this.state.answer;
+    this.setState({
+      answer: answer,
+    })
+    this.handleSubmit(answer);
   }
 
   //submit question and answer to reviews route
   handleSubmit(e) {
     e.preventDefault;
-    let answer = this.refs.input.value;
+    let answer = this.state.answer;
     console.log(this.refs.input);
     let question = find(Number(this.props.match.params.id) - 1).questionText;
-    let review_id;
-    // TODO where is the review_id? how can we access it here?
-    console.log("answer", answer); // TODO this was coming back undefined so trying to stop the page from refreshing and find out what it is here
+    let review_id; - // TODO where is the review_id? how can we access it here? componentDidMount?
+    console.log("answer", answer); // TODO this is coming back undefined no matter how I try to get it
     console.log("question", question);
 
     // on question submits save review_id and question and answer to responses table
-    axios.post('/api/add-response', {
-      // review_id: review_id, //this or group_id maybe is something that should be saved to the session?
+    axios.patch(`/api/add-response/${review_id}`, {
+      // review_id: review_id,
       question: question,
       answer: answer,
     })
@@ -39,7 +49,7 @@ class Questions extends Component {
       // TODO go to the next question
       this.setState({ submitResponse: true});
       // TODO what happens when this gets to the end of the questions? --- it should change what the next page is.
-      // BUT HOW?
+      // BUT HOW? - switch statement? ie case "next" case "submit" etc
     })
     .catch((err) => {
       console.log('response error', err);
@@ -47,6 +57,9 @@ class Questions extends Component {
 
   }
 
+  handleChange(e) {
+    this.setState({answer: e.target.value})
+  }
   render() {
     console.log("props", this.props);
     const { match } = this.props
@@ -62,9 +75,9 @@ class Questions extends Component {
       <div className="text-center">
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <h1>{question.questionText}</h1>
-          <input type="text" className="question--short" ref={(input) => this.input = input}/>
+          <input type="text" className="question--short" defaultValue={this.state.answer} onChange={this.handleChange}/>
           <br></br><br></br>
-          <Button>Save and Continue</Button>
+          <Button onClick={(e) => this.updateAnswer(e)}>Save and Continue</Button>
         </form>
         {submitResponse && (
           <Redirect to={`/mission/1/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>

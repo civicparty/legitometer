@@ -9,6 +9,7 @@ const User = require('../Models/User');
 const Group = require('../Models/Group');
 const Reviewer = require('../Models/Reviewer');
 const Review = require('../Models/Review');
+const Response = require('../Models/Response');
 
 router.get('/api/groups', (req, res, next) => {
   Group.forge().fetchAll()
@@ -49,8 +50,16 @@ router.post('/api/add-group', (req, res, next) => {
     Review.forge({
       group_id: groupId,
       mission_id: req.body.mission_id
+    }) //TODO IT MAKES SENSE TO POST THE RESPONSES ROW HERE, TOO AND THEN PATCH ON ALL QUESTIONS!!!!
+    .save()
+    .then((review) => {
+      console.log("review", review.id);
+      // res.send(review.id);
+      Response.forge({
+        review_id: review.id,
+      })
+      .save()
     })
-    .save();
   })
   .then(() => {
     res.sendStatus(200);
