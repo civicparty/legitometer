@@ -42,7 +42,7 @@ class Questions extends Component {
     axios.patch(`/api/add-response/${review_id}`, {
       // review_id: review_id,
       question: question,
-      answer: answer,
+      response: answer,
     })
     .then((res) => {
       console.log('response posted', res)
