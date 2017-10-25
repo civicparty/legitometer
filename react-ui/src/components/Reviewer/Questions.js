@@ -21,16 +21,14 @@ class Questions extends Component {
   //submit question and answer to reviews route
   handleSubmit(e) {
     e.preventDefault;
-    let answer = this.state.answer;
-    console.log(this.refs.input);
-    let question = find(Number(this.props.match.params.id) - 1).questionText;
-    let review_id; // TODO where is the review_id? how can we access it here? componentDidMount?
-    console.log("answer", answer); // TODO this is coming back undefined no matter how I try to get it
-    console.log("question", question);
+
+    const answer = this.state.answer;
+    const question = find(Number(this.props.match.params.id) - 1).questionText;
+    const { reviewId } = this.props;
 
     // on question submits save review_id and question and answer to responses table
-    axios.patch(`/api/add-response/${review_id}`, {
-      // review_id: review_id,
+    axios.patch(`/api/add-response/${reviewId}`, {
+      review_id: reviewId,
       question: question,
       response: answer,
     })
@@ -44,7 +42,6 @@ class Questions extends Component {
     .catch((err) => {
       console.log('response error', err);
     })
-
   }
 
   handleInputChange(e) {
