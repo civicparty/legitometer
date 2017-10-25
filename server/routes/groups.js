@@ -36,8 +36,9 @@ router.post('/api/add-group', (req, res, next) => {
   .save()
   .then((group) => {
     groupId = group.id;
-      for (var i = 0; i < req.body.names.length; i++) {
-        if (req.body.names[i] !== '') {
+
+    for (var i = 0; i < req.body.names.length; i++) {
+      if (req.body.names[i] !== '') {
         Reviewer.forge({
           group_id: groupId,
           name: req.body.names[i]
