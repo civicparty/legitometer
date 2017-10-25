@@ -15,9 +15,11 @@ class Article extends Component {
       headline: '',
       url: '',
       article: {},
+      reviewId: '',
       missionId: this.props.match.params.id,
       casefileId: this.props.match.params.casefile_id,
     };
+    this.updateReviewId = this.updateReviewId.bind(this);
   }
 
   getRandomIntInclusive(min, max) {
@@ -45,6 +47,10 @@ class Article extends Component {
       })
   }
 
+  updateReviewId(reviewId) {
+    this.setState({ reviewId: reviewId });
+  }
+
   render() {
     const bodyStyles = {
       flexGrow: 1,
@@ -58,15 +64,21 @@ class Article extends Component {
       flexDirection: 'column',
     }
 
-    const previewProps = this.state
+    const missionState = this.state;
 
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
           <Route exact path="/mission/:id/casefile/:casefile_id/start" component={Start} />
-          <Route exact path="/mission/:id/casefile/:casefile_id/team" component={GroupNames} />
-          <Route exact path="/mission/:id/casefile/:casefile_id/article/preview" render={() => <ArticlePreview {...previewProps} />} />
-          <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id" component={Questions} />
+          <Route exact path="/mission/:id/casefile/:casefile_id/team"
+            render={() => <GroupNames updateReviewId={this.updateReviewId} {...this.props} />}
+          />
+          <Route exact path="/mission/:id/casefile/:casefile_id/article/preview"
+            render={() => <ArticlePreview {...missionState} />}
+          />
+          <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id"
+            render={() => <Questions {...missionState} {...this.props} />}
+          />
         </div>
         <Footer {...this.props} />
       </div>
