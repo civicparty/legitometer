@@ -10,22 +10,12 @@ class Questions extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateAnswer = this.updateAnswer.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       answer: '',
       submitResponse: false,
       questionsLeft: 0, // TODO need some way to stop at the last question and go to the final page
     };
-  }
-
-  updateAnswer(e) {
-    e.preventDefault;
-    const answer = this.refs.input ? this.refs.input.value : this.state.answer;
-    this.setState({
-      answer: answer,
-    })
-    this.handleSubmit(answer);
   }
 
   //submit question and answer to reviews route
@@ -34,7 +24,7 @@ class Questions extends Component {
     let answer = this.state.answer;
     console.log(this.refs.input);
     let question = find(Number(this.props.match.params.id) - 1).questionText;
-    let review_id; - // TODO where is the review_id? how can we access it here? componentDidMount?
+    let review_id; // TODO where is the review_id? how can we access it here? componentDidMount?
     console.log("answer", answer); // TODO this is coming back undefined no matter how I try to get it
     console.log("question", question);
 
@@ -57,9 +47,10 @@ class Questions extends Component {
 
   }
 
-  handleChange(e) {
-    this.setState({answer: e.target.value})
+  handleInputChange(e) {
+    this.setState({ answer: e.target.value })
   }
+
   render() {
     console.log("props", this.props);
     const { match } = this.props
@@ -71,13 +62,18 @@ class Questions extends Component {
     const article = match.params.article_id;
     const submitResponse = this.state.submitResponse;
     console.log("submitResponse", submitResponse);
+
     return (
       <div className="text-center">
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <h1>{question.questionText}</h1>
-          <input type="text" className="question--short" defaultValue={this.state.answer} onChange={this.handleChange}/>
-          <br></br><br></br>
-          <Button onClick={(e) => this.updateAnswer(e)}>Save and Continue</Button>
+          <input type="text" className="question--short"
+            defaultValue={this.state.answer}
+            onChange={this.handleInputChange}
+          />
+          <button className="button Questions__submit-button">
+            Save and Continue
+          </button>
         </form>
         {submitResponse && (
           <Redirect to={`/mission/1/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
