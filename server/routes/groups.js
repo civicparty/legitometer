@@ -55,16 +55,12 @@ router.post('/api/add-group', (req, res, next) => {
     .save()
     .then((review) => {
       console.log("review", review.id);
-      // res.send(review.id);
       Response.forge({
         review_id: review.id,
       })
       .save()
+      res.status(200).json(review)
     })
-  })
-  .then(() => {
-    res.sendStatus(200);
-    // res.status(200).json(group) //these seemed to be causing errors..? it might have been something else though
   })
   .catch((err) => {
     console.log("group post error", err);
