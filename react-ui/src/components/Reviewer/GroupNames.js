@@ -22,21 +22,25 @@ class GroupNames extends Component {
     this.setState({ names });
   }
 
+  handleUpdateReviewId(reviewId) {
+    this.props.updateReviewId(reviewId);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     console.log(typeof this.state.names, this.state.names, this.props.match.params.id);
     let thiz = this;
     console.log(this.state.names);
     // save group to groups table, names to reviewers table, and review to review table
-    // TODO persist / find a way to access the review_id for all the questions
     axios.post('/api/add-group', {
       names: this.state.names,
-      // group_name: '', // in the future, we could let students name their team.
       mission_id: this.props.match.params.id,
+      // group_name: '', // in the future, we could let students name their team.
     })
     .then((res) => {
       console.log("group added", res)
-      thiz.setState({ submitGroup: true })
+      this.handleUpdateReviewId(res.data.group_id);
+      thiz.setState({ submitGroup: true });
     })
     .catch((err) => {
       console.log("error in adding group: ", err)
@@ -44,9 +48,6 @@ class GroupNames extends Component {
       thiz.setState({ submitGroup: true })
     });
   }
-
-  // TODO
-  // Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the GroupNames component.
 
   render() {
     const { id, casefile_id } = this.props.match.params;
