@@ -152,6 +152,7 @@ p, .p {
   border: none;
   color: #FFFFFF;
   margin-top: 3rem;
+  cursor: pointer;
   background: #f512ff;
   transition: all 0.1s ease-in-out; }
   .button:hover {
@@ -169,6 +170,7 @@ p, .p {
     border: none;
     color: #FFFFFF;
     margin-top: 3rem;
+    cursor: pointer;
     background: #171717;
     transition: all 0.1s ease-in-out; }
     .button-dark:hover {
@@ -186,6 +188,7 @@ p, .p {
     border: none;
     color: #FFFFFF;
     margin-top: 3rem;
+    cursor: pointer;
     background: #FFFFFF;
     transition: all 0.1s ease-in-out;
     color: #171717;
