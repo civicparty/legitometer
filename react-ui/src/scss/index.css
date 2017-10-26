@@ -153,13 +153,13 @@ p, .p {
   color: #FFFFFF;
   margin-top: 3rem;
   cursor: pointer;
-  background: #f512ff;
+  background: #631b6a;
   transition: all 0.1s ease-in-out; }
   .button:hover {
-    background: #b700bf;
+    background: #2f0033;
     transition: all 0.2s ease-in-out; }
   .button:active {
-    background: #a300ab; }
+    background: #170618; }
   .button-dark {
     min-width: 2rem;
     padding: .8rem 1.6rem;
@@ -252,7 +252,7 @@ p, .p {
   margin: 20px 5px 20px 20px; }
 
 .ProgressBar__progress {
-  background-color: #82D1F5;
+  background-color: #44409A;
   border-radius: 10px;
   height: 12px; }
 
@@ -292,13 +292,13 @@ body {
 
 p a {
   font-family: "ZillaSlab-Regular", serif;
-  color: #f512ff;
+  color: #631b6a;
   border-bottom: 0px solid transparent;
   transition: all 0.1s ease-in-out;
   font-weight: 500; }
   p a:hover {
-    border-bottom: 1px solid #FA8CFF;
-    color: #f512ff;
+    border-bottom: 1px solid #BF33CC;
+    color: #631b6a;
     transition: all 0.2s ease-out; }
 
 .container {
