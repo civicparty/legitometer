@@ -5,7 +5,7 @@ const bookshelf = require('../db/knex');
 require('./Group');
 require('./Review');
 
-const Review = bookshelf.Model.extend({
+const Response = bookshelf.Model.extend({
   tableName: 'responses',
   hasTimestamps: true,
   review: function() {

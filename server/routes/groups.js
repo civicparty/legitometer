@@ -8,6 +8,8 @@ const Casefile = require('../Models/Casefile');
 const User = require('../Models/User');
 const Group = require('../Models/Group');
 const Reviewer = require('../Models/Reviewer');
+const Review = require('../Models/Review');
+const Response = require('../Models/Response');
 
 router.get('/api/groups', (req, res, next) => {
   Group.forge().fetchAll()
@@ -24,7 +26,7 @@ router.get('/api/groups', (req, res, next) => {
 })
 
 router.post('/api/add-group', (req, res, next) => {
-  console.log("adding group", req.body.names);
+  let groupId;
   bookshelf.knex.raw('SELECT setval(\'groups_id_seq\', (SELECT MAX(id) FROM groups)+1)')
   bookshelf.knex.raw('SELECT setval(\'reviewers_id_seq\', (SELECT MAX(id) FROM reviewers)+1)')
   Group.forge({
@@ -33,12 +35,12 @@ router.post('/api/add-group', (req, res, next) => {
   })
   .save()
   .then((group) => {
-    console.log("new group added to database", group);
-    // TODO currently works but need to refactor so that it saves each name to a row and doesn't save the empty string
-      for (var i = 0; i < req.body.names.length; i++) {
-        if (req.body.names[i] !== '') {
+    groupId = group.id;
+
+    for (var i = 0; i < req.body.names.length; i++) {
+      if (req.body.names[i] !== '') {
         Reviewer.forge({
-          group_id: group.id,
+          group_id: groupId,
           name: req.body.names[i]
         })
         .save()
@@ -46,9 +48,17 @@ router.post('/api/add-group', (req, res, next) => {
     }
   })
   .then(() => {
-    console.log("group/reviewer adding success");
-    res.sendStatus(200);
-    // res.status(200).json(group) //these seemed to be causing errors..? it might have been something else though
+    console.log("mission id", typeof req.body.mission_id); // TODO mission_id is a string here
+    Review.forge({
+      group_id: groupId,
+      mission_id: req.body.mission_id
+    })
+    .save()
+    .then((review) => {
+      console.log("review", review.id);
+      // send new review id back to front end
+      res.status(200).json(review);
+    })
   })
   .catch((err) => {
     console.log("group post error", err);

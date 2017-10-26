@@ -42,6 +42,7 @@ const articles = require('./routes/articles');
 const reviews = require('./routes/reviews');
 const users = require('./routes/users');
 const groups = require('./routes/groups');
+const responses = require('./routes/responses');
 
 // TODO
 // app.use('/games', gamesRouter);
@@ -53,6 +54,7 @@ app.use(articles);
 app.use(reviews);
 app.use(users);
 app.use(groups);
+app.use(responses);
 
 const PORT = process.env.PORT || 5000;
 
