@@ -48,7 +48,7 @@ To get setup:
   - `git push heroku master`
 2. Run db migration on heroku (if necessary)
   - `heroku run knex migrate:migrate --knexfile server/knexfile.js`
-  - _It might be necessary to Reset the database in the Heroku console. But this looses all the data_  
+  - _It might be necessary to Reset the database in the Heroku console. BUT this looses all the data_  
   - `heroku run knex migrate:rollback --knexfile server/knexfile.js`
 
 ## Entity Relationship
