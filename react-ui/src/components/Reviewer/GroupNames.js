@@ -38,8 +38,8 @@ class GroupNames extends Component {
       // group_name: '', // in the future, we could let students name their team.
     })
     .then((res) => {
-      console.log("group added", res)
-      this.handleUpdateReviewId(res.data.group_id);
+      console.log("group added", res);
+      this.handleUpdateReviewId(res.data.id);
       thiz.setState({ submitGroup: true });
     })
     .catch((err) => {

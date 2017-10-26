@@ -9,12 +9,14 @@ router.get('/api/response/:review_id', (req, res, next) => {
 
 })
 
-router.patch('/api/add-response/:review_id', (req, res, next) => {
+router.post('/api/add-response', (req, res, next) => {
   console.log("adding response", req.body.question, req.body.response, req.params.review_id);
   Response.forge({
+    review_id: req.body.reviewId,
     question: req.body.question,
+    questionType: req.body.questionType,
     response: req.body.response,
-  }).where({review_id: req.params.review_id})
+  })
   .save()
   .then((response) => {
     console.log("response success", response);

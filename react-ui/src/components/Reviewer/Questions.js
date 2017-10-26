@@ -24,12 +24,14 @@ class Questions extends Component {
 
     const answer = this.state.answer;
     const question = find(Number(this.props.match.params.id) - 1).questionText;
+    const questionType = 'question type from QuestionSet';
     const { reviewId } = this.props;
 
     // on question submits save review_id and question and answer to responses table
-    axios.patch(`/api/add-response/${reviewId}`, {
+    axios.post('/api/add-response', {
       review_id: reviewId,
       question: question,
+      questionType: questionType,
       response: answer,
     })
     .then((res) => {
@@ -52,7 +54,7 @@ class Questions extends Component {
     console.log("props", this.props);
     const { match } = this.props
     const question = find(Number(match.params.id) - 1)
-    const nextQuestion = question.id+1;
+    const nextQuestion = question.id+1; // TODO what happens when this gets to the last one?
     console.log("next question id", nextQuestion, question);
     // TODO why isn't the mission_id available?
     const casefile = match.params.casefile_id;

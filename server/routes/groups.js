@@ -48,18 +48,16 @@ router.post('/api/add-group', (req, res, next) => {
     }
   })
   .then(() => {
+    console.log("mission id", typeof req.body.mission_id); // TODO mission_id is a string here
     Review.forge({
       group_id: groupId,
       mission_id: req.body.mission_id
-    }) //TODO IT MAKES SENSE TO POST THE RESPONSES ROW HERE, TOO AND THEN PATCH ON ALL QUESTIONS!!!!
+    })
     .save()
     .then((review) => {
       console.log("review", review.id);
-      Response.forge({
-        review_id: review.id,
-      })
-      .save()
-      res.status(200).json(review)
+      // send new review id back to front end
+      res.status(200).json(review);
     })
   })
   .catch((err) => {
