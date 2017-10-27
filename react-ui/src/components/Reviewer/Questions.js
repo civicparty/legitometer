@@ -11,10 +11,10 @@ class Questions extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleUpdateQuestionId = this.handleUpdateQuestionId.bind(this);
     this.state = {
       answer: '',
       submitResponse: false,
-      questionsLeft: 0, // TODO need some way to stop at the last question and go to the final page
     };
   }
 
@@ -23,13 +23,12 @@ class Questions extends Component {
     e.preventDefault;
 
     const answer = this.state.answer;
-    const question = find(Number(this.props.match.params.id) - 1).questionText;
-    const questionType = 'question type from QuestionSet';
-    const { reviewId } = this.props;
+    const question = find(Number(this.props.match.params.id) - 1).questionText; //TODO...not this
+    const questionType = find(Number(this.props.match.params.id) - 1).questionType;
 
     // on question submits save review_id and question and answer to responses table
     axios.post('/api/add-response', {
-      review_id: reviewId,
+      review_id: this.props.reviewId,
       question: question,
       questionType: questionType,
       response: answer,
@@ -38,6 +37,8 @@ class Questions extends Component {
       console.log('response posted', res)
       // TODO go to the next question
       this.setState({ submitResponse: true});
+      let questionId = this.props.questionId + 1; // ...hmmm...no?
+      // this.handleUpdateQuestionId(questionId);
       // TODO what happens when this gets to the end of the questions? --- it should change what the next page is.
       // BUT HOW? - switch statement? ie case "next" case "submit" etc
     })
@@ -50,12 +51,24 @@ class Questions extends Component {
     this.setState({ answer: e.target.value })
   }
 
+  // handleUpdateQuestionId(questionId) {
+  //   console.log("updating question id", questionId);
+  //   this.props.updateQuestionId(questionId);
+  // }
+
   render() {
     console.log("props", this.props);
     const { match } = this.props
-    const question = find(Number(match.params.id) - 1)
-    const nextQuestion = question.id+1; // TODO what happens when this gets to the last one?
-    console.log("next question id", nextQuestion, question);
+    console.log(find(this.props.questionId));
+    // const question = find(Number(match.params.id) - 1)
+    let question;
+    if (this.props.questionId !== undefined) {
+      question = find(this.props.questionId);
+    } else {
+      question = match.params.nextQuestion;
+    }
+    console.log("question", question);
+    let nextQuestion = question.id + 1; // question is undefined here
     // TODO why isn't the mission_id available?
     const casefile = match.params.casefile_id;
     const article = match.params.article_id;

@@ -25,6 +25,9 @@ class GroupNames extends Component {
   handleUpdateReviewId(reviewId) {
     this.props.updateReviewId(reviewId);
   }
+  handleUpdateQuestionId(questionId) {
+    this.props.updateQuestionId(questionId);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -40,6 +43,7 @@ class GroupNames extends Component {
     .then((res) => {
       console.log("group added", res);
       this.handleUpdateReviewId(res.data.id);
+      this.handleUpdateQuestionId(0);
       thiz.setState({ submitGroup: true });
     })
     .catch((err) => {
