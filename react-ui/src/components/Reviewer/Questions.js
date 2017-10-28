@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import questionSet from '../../data/questionSet';
 import axios from 'axios';
-import { Button } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 const find = (id) => questionSet.find(p => p.id === id);
@@ -11,7 +11,6 @@ class Questions extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleUpdateQuestionId = this.handleUpdateQuestionId.bind(this);
     this.state = {
       answer: '',
       submitResponse: false,
@@ -21,11 +20,11 @@ class Questions extends Component {
   //submit question and answer to reviews route
   handleSubmit(e, nextQuestion, question) {
     e.preventDefault;
-    console.log("submitting, review id", this.props.reviewId);
     const answer = this.state.answer;
     const questionText = question.questionText;
     const questionType = question.type;
 
+    // TODO review_id is not being saved to db
     // on question submits save review_id and question and answer to responses table
     axios.post('/api/add-response', {
       review_id: this.props.reviewId,
@@ -37,8 +36,7 @@ class Questions extends Component {
       console.log('response posted', res)
       this.setState({ submitResponse: true});
 
-      // TODO update this.props.QuestionId here
-      //updateQuestionId is sent from parent component (Mission.js)
+      // TODO update this.props.QuestionId here so it will be available to the next question (updateQuestionId is sent from parent component (Mission.js))
       this.props.updateQuestionId(nextQuestion);
     })
     .catch((err) => {
@@ -50,26 +48,20 @@ class Questions extends Component {
     this.setState({ answer: e.target.value })
   }
 
-  // handleUpdateQuestionId(questionId) {
-  //   console.log("updating question id", questionId);
-  //   this.props.updateQuestionId(questionId);
-  // }
-
   render() {
     console.log("props", this.props); // TODO review id and question id are not sticking on redirect
     const { match } = this.props
-    // this.props.questionId should be 0 here - coming from GroupNames.js
     // const question = find(Number(match.params.id) - 1)
     let questionId = this.props.questionId;
     let question = find(questionId);
     let nextQuestion = questionId + 1;
-    console.log("question stuff", questionId, question, nextQuestion);
+    console.log("question stuff:", questionId, question, nextQuestion);
 
-    // TODO why isn't the mission_id available?
+    // set variables for next url
+    const mission = this.props.missionId;
     const casefile = match.params.casefile_id;
     const article = match.params.article_id;
     const submitResponse = this.state.submitResponse;
-    console.log("submitResponse", submitResponse);
 
     return (
       <div className="text-center">
@@ -84,7 +76,7 @@ class Questions extends Component {
           </button>
         </form>
         {submitResponse && (
-          <Redirect to={`/mission/1/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
+          <Redirect to={`/mission/${mission}/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
         )}
       </div>
     );

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Button from '../Shared/Button';
-import legitCatImage from '../../images/legit-cat.png';
+// import Button from '../Shared/Button';
+// import legitCatImage from '../../images/legit-cat.png';
 
 class GroupNames extends Component {
   constructor(props) {

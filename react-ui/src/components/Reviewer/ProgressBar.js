@@ -6,9 +6,9 @@ class ProgressBar extends Component {
     const { x, y } = this.props;
     const percentDone = x / y * 100;
 
-    const fullBarCss = {
-
-    }
+    // const fullBarCss = {
+    //
+    // }
 
     const progressBarCss = {
       width: percentDone > 5 ? `${percentDone}%` : '5%',

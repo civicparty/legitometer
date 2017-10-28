@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import GroupNames from './GroupNames';
+// import GroupNames from './GroupNames';
 import Dashboard from './Dashboard';
 import StudentForm from './StudentForm';
 import Mission from './Mission';
-import Questions from './Questions';
+// import Questions from './Questions';
 
 class Student extends Component {
 
