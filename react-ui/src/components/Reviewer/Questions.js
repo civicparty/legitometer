@@ -19,28 +19,27 @@ class Questions extends Component {
   }
 
   //submit question and answer to reviews route
-  handleSubmit(e) {
+  handleSubmit(e, nextQuestion, question) {
     e.preventDefault;
-
+    console.log("submitting, review id", this.props.reviewId);
     const answer = this.state.answer;
-    const question = find(Number(this.props.match.params.id) - 1).questionText; //TODO...not this
-    const questionType = find(Number(this.props.match.params.id) - 1).questionType;
+    const questionText = question.questionText;
+    const questionType = question.type;
 
     // on question submits save review_id and question and answer to responses table
     axios.post('/api/add-response', {
       review_id: this.props.reviewId,
-      question: question,
+      question: questionText,
       questionType: questionType,
       response: answer,
     })
     .then((res) => {
       console.log('response posted', res)
-      // TODO go to the next question
       this.setState({ submitResponse: true});
-      let questionId = this.props.questionId + 1; // ...hmmm...no?
-      // this.handleUpdateQuestionId(questionId);
-      // TODO what happens when this gets to the end of the questions? --- it should change what the next page is.
-      // BUT HOW? - switch statement? ie case "next" case "submit" etc
+
+      // TODO update this.props.QuestionId here
+      //updateQuestionId is sent from parent component (Mission.js)
+      this.props.updateQuestionId(nextQuestion);
     })
     .catch((err) => {
       console.log('response error', err);
@@ -57,18 +56,15 @@ class Questions extends Component {
   // }
 
   render() {
-    console.log("props", this.props);
+    console.log("props", this.props); // TODO review id and question id are not sticking on redirect
     const { match } = this.props
-    console.log(find(this.props.questionId));
+    // this.props.questionId should be 0 here - coming from GroupNames.js
     // const question = find(Number(match.params.id) - 1)
-    let question;
-    if (this.props.questionId !== undefined) {
-      question = find(this.props.questionId);
-    } else {
-      question = match.params.nextQuestion;
-    }
-    console.log("question", question);
-    let nextQuestion = question.id + 1; // question is undefined here
+    let questionId = this.props.questionId;
+    let question = find(questionId);
+    let nextQuestion = questionId + 1;
+    console.log("question stuff", questionId, question, nextQuestion);
+
     // TODO why isn't the mission_id available?
     const casefile = match.params.casefile_id;
     const article = match.params.article_id;
@@ -77,7 +73,7 @@ class Questions extends Component {
 
     return (
       <div className="text-center">
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <form onSubmit={(e) => this.handleSubmit(e, nextQuestion, question)}>
           <h1>{question.questionText}</h1>
           <input type="text" className="question--short"
             defaultValue={this.state.answer}

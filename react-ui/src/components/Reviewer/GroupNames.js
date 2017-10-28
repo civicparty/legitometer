@@ -26,6 +26,7 @@ class GroupNames extends Component {
     this.props.updateReviewId(reviewId);
   }
   handleUpdateQuestionId(questionId) {
+    console.log("updating questionId GroupNames.js", questionId);
     this.props.updateQuestionId(questionId);
   }
 

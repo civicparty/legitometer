@@ -54,6 +54,7 @@ class Article extends Component {
   }
 
   updateQuestionId(questionId) {
+    console.log("updating question id Mission.js", questionId);
     this.setState({ questionId: questionId });
   }
 
@@ -83,7 +84,7 @@ class Article extends Component {
             render={() => <ArticlePreview {...missionState} />}
           />
           <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id"
-            render={() => <Questions {...missionState} {...this.props} />}
+            render={() => <Questions updateQuestionId={this.updateQuestionId} {...missionState} {...this.props} />}
           />
         </div>
         <Footer {...this.props} />
