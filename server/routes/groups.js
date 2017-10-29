@@ -25,6 +25,22 @@ router.get('/api/groups', (req, res, next) => {
     })
 })
 
+// get all group members
+router.get('/api/groups/:id', (req, res, next) => {
+  Reviewer.forge().where({group_id: req.params.id}).fetchAll()
+  .then((members) => {
+    let group = [];
+    members = members.toJSON();
+    for (var i = 0; i < members.length; i++) {
+      group.push(members[i].name);
+    }
+    res.send(group);
+  })
+  .catch((err) => {
+    console.log("get group members error", err);
+  })
+})
+
 router.post('/api/add-group', (req, res, next) => {
   let groupId;
   bookshelf.knex.raw('SELECT setval(\'groups_id_seq\', (SELECT MAX(id) FROM groups)+1)')

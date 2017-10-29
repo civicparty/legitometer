@@ -32,7 +32,6 @@ router.get('/api/missions', (req, res, next) => {
     .then((missions) => {
       // convert data to JSON
       missions = missions.toJSON();
-
       // loop over data to get mission and casefile names & ids
       for (var i = 0; i < missions.length; i++) {
         missionsArray[i] = {
