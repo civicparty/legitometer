@@ -30,7 +30,6 @@ class Responses extends React.Component {
     let reviewid = this.props.match.params.review_id;
     return (
       <div>
-        <h1>responses! {reviewid}</h1>
           <Table celled>
             <Table.Header>
               <Table.Row>

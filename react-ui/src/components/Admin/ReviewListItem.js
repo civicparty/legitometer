@@ -13,17 +13,14 @@ class ReviewListItem extends React.Component {
 
   componentDidMount() {
     // get group names
-    console.log("component did mount, getting names for group:", this.props.group);
+    // console.log("component did mount, getting names for group:", this.props.group);
     axios.get(`/api/groups/${this.props.group}`)
     .then((members) => {
-      console.log("got group members!", members.data);
+      // console.log("got group members!", members.data);
       this.setState({ members: members.data });
     })
   }
   render() {
-    console.log("REVIEWLISTITEM props", this.props);
-    //{recipe.ingredient.join(",")}
-    console.log(this.state.members);
     let reviewid = this.props.id;
     let mems = this.state.members.join(", ");
     return (

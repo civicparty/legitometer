@@ -23,17 +23,6 @@ router.get('/api/reviews', (req, res, next) => {
   });
 });
 
-// get review by group id
-// router.get('/api/reviews/:group_id', (req, res, next) => {
-//   Review.forge().where({group_id: req.params.group_id}).fetch()
-//   .then((review) => {
-//     console.log("fetched review", review);
-//   })
-//   .catch((err) => {
-//     console.log("review by id error", err);
-//   })
-// })
-
 // get reviews by mission id
 router.get('/api/reviews/:mission_id', (req, res, next) => {
   let reviewsArray = [];
