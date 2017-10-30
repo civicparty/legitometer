@@ -23,8 +23,8 @@ class Admin extends Component {
           <Route path="/admin/mission/:id" component={Mission} />
           <Route path="/admin/collection/new" component={CreateCollection} />
           <Route path="/admin/collection/:id/articles" component={Articles} />
-          <Route path="/admin/mission/reviews/:mission_id" component={Reviews} />
-          <Route path="/admin/mission/reviews/:mission_id/:group_id" component={Responses} />
+          <Route path="/admin/reviews/:mission_id" component={Reviews} /> 
+          <Route path="/admin/reviews/:mission_id/:group_id" component={Responses} />
         </div>
       </Router>
     );

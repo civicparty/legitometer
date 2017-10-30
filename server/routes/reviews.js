@@ -24,18 +24,18 @@ router.get('/api/reviews', (req, res, next) => {
 });
 
 // get review by group id
-router.get('/api/reviews/:id', (req, res, next) => {
-  Review.forge().where({group_id: req.params.id}).fetch()
-  .then((review) => {
-    console.log("fetched review", review);
-  })
-  .catch((err) => {
-    console.log("review by id error", err);
-  })
-})
+// router.get('/api/reviews/:group_id', (req, res, next) => {
+//   Review.forge().where({group_id: req.params.group_id}).fetch()
+//   .then((review) => {
+//     console.log("fetched review", review);
+//   })
+//   .catch((err) => {
+//     console.log("review by id error", err);
+//   })
+// })
 
 // get reviews by mission id
-router.get('/api/reviews/mission/:mission_id', (req, res, next) => {
+router.get('/api/reviews/:mission_id', (req, res, next) => {
   let reviewsArray = [];
   console.log("in route", req.params.mission_id);
   // use withrelated
@@ -44,11 +44,9 @@ router.get('/api/reviews/mission/:mission_id', (req, res, next) => {
   .then((reviews) => {
     reviews = reviews.serialize();
     for (var i = 0; i < reviews.length; i++) {
-      reviewsArray[i] = {
-        "group_id": reviews[i].group_id,
-        "review_id": reviews[i].id
-      }
+      reviewsArray[i] = [reviews[i].group_id, reviews[i].id]
     }
+    console.log("array", reviewsArray);
     res.send(reviewsArray);
   })
   .catch((err) => {
