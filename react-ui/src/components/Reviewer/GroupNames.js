@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Button from '../Shared/Button';
-import legitCatImage from '../../images/legit-cat.png';
+// import Button from '../Shared/Button';
+// import legitCatImage from '../../images/legit-cat.png';
 
 class GroupNames extends Component {
   constructor(props) {
@@ -25,6 +25,10 @@ class GroupNames extends Component {
   handleUpdateReviewId(reviewId) {
     this.props.updateReviewId(reviewId);
   }
+  handleUpdateQuestionId(questionId) {
+    console.log("updating questionId GroupNames.js", questionId);
+    this.props.updateQuestionId(questionId);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -40,6 +44,7 @@ class GroupNames extends Component {
     .then((res) => {
       console.log("group added", res);
       this.handleUpdateReviewId(res.data.id);
+      this.handleUpdateQuestionId(0);
       thiz.setState({ submitGroup: true });
     })
     .catch((err) => {

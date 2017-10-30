@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import questionSet from '../../data/questionSet';
 import axios from 'axios';
-import { Button } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 const find = (id) => questionSet.find(p => p.id === id);
@@ -14,32 +14,37 @@ class Questions extends Component {
     this.state = {
       answer: '',
       submitResponse: false,
-      questionsLeft: 0, // TODO need some way to stop at the last question and go to the final page
     };
   }
 
   //submit question and answer to reviews route
-  handleSubmit(e) {
+  handleSubmit(e, nextQuestion, question) {
     e.preventDefault;
     const answer = this.state.answer;
+
+//     const questionText = question.questionText;
+//     const questionType = question.type;
+
     if (!answer) return false;
     const question = find(Number(this.props.match.params.id) - 1).questionText;
     const questionType = 'question type from QuestionSet';
     const { reviewId } = this.props;
 
+
+    // TODO review_id is not being saved to db
     // on question submits save review_id and question and answer to responses table
     axios.post('/api/add-response', {
-      review_id: reviewId,
-      question: question,
+      review_id: this.props.reviewId,
+      question: questionText,
       questionType: questionType,
       response: answer,
     })
     .then((res) => {
       console.log('response posted', res)
-      // TODO go to the next question
       this.setState({ submitResponse: true});
-      // TODO what happens when this gets to the end of the questions? --- it should change what the next page is.
-      // BUT HOW? - switch statement? ie case "next" case "submit" etc
+
+      // TODO update this.props.QuestionId here so it will be available to the next question (updateQuestionId is sent from parent component (Mission.js))
+      this.props.updateQuestionId(nextQuestion);
     })
     .catch((err) => {
       console.log('response error', err);
@@ -51,20 +56,23 @@ class Questions extends Component {
   }
 
   render() {
-    console.log("props", this.props);
+    console.log("props", this.props); // TODO review id and question id are not sticking on redirect
     const { match } = this.props
-    const question = find(Number(match.params.id) - 1)
-    const nextQuestion = question.id+1; // TODO what happens when this gets to the last one?
-    console.log("next question id", nextQuestion, question);
-    // TODO why isn't the mission_id available?
+    // const question = find(Number(match.params.id) - 1)
+    let questionId = this.props.questionId;
+    let question = find(questionId);
+    let nextQuestion = questionId + 1;
+    console.log("question stuff:", questionId, question, nextQuestion);
+
+    // set variables for next url
+    const mission = this.props.missionId;
     const casefile = match.params.casefile_id;
     const article = match.params.article_id;
     const submitResponse = this.state.submitResponse;
-    console.log("submitResponse", submitResponse);
 
     return (
       <div className="text-center">
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <form onSubmit={(e) => this.handleSubmit(e, nextQuestion, question)}>
           <h1>{question.questionText}</h1>
           <input type="text" className="question--short"
             defaultValue={this.state.answer}
@@ -86,7 +94,7 @@ class Questions extends Component {
 
         </form>
         {submitResponse && (
-          <Redirect to={`/mission/1/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
+          <Redirect to={`/mission/${mission}/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
         )}
       </div>
     );

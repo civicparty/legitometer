@@ -16,11 +16,14 @@ class Mission extends Component {
       url: '',
       article: {},
       reviewId: '',
+      questionId: '',
       articleId: 1,
+
       missionId: this.props.match.params.id,
       casefileId: this.props.match.params.casefile_id,
     };
     this.updateReviewId = this.updateReviewId.bind(this);
+    this.updateQuestionId = this.updateQuestionId.bind(this);
   }
 
   componentWillMount() {
@@ -43,6 +46,10 @@ class Mission extends Component {
   updateReviewId(reviewId) {
     this.setState({ reviewId: reviewId });
   }
+
+  updateQuestionId(questionId) {
+    console.log("updating question id Mission.js", questionId);
+    this.setState({ questionId: questionId });
 
   incrimentArticleId(articleId) {
     // TODO: call this at the end of the form.
@@ -69,13 +76,15 @@ class Mission extends Component {
         <div className="flex-column" style={bodyStyles}>
           <Route exact path="/mission/:id/casefile/:casefile_id/start" component={Start} />
           <Route exact path="/mission/:id/casefile/:casefile_id/team"
-            render={() => <GroupNames updateReviewId={this.updateReviewId} {...this.props} {...missionState} />}
+            render={() => <GroupNames updateReviewId={this.updateReviewId} updateQuestionId={this.updateQuestionId} {...this.props} {...missionState}/>}
           />
           <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/preview"
             render={() => <ArticlePreview {...missionState} {...this.props} />}
           />
           <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id"
+            //render={() => <Questions updateQuestionId={this.updateQuestionId} {...missionState} {...this.props} />}
             render={() => <Questions updateArticleId={this.incrimentArticleId} {...missionState} {...this.props} />}
+
           />
         </div>
         <Footer {...this.props} />

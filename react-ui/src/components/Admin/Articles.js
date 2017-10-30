@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Table, Input, Select } from 'semantic-ui-react';
+import { Button, Table } from 'semantic-ui-react';
+// import { Input, Select } from 'semantic-ui-react';
 import UpdateArticle from './UpdateArticle';
 import { Redirect, Link } from 'react-router-dom';
 

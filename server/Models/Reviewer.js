@@ -9,7 +9,7 @@ const Reviewer = bookshelf.Model.extend({
   tableName: 'reviewers',
   hasTimestamps: true,
   review: function() {
-    return this.hasMany('Review').through('Group') // Is this true?
+    return this.hasMany('Review')
   },
   group: function() {
     return this.belongsTo('Group')

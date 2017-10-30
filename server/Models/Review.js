@@ -6,6 +6,7 @@ require('./Article');
 require('./User');
 require('./Group');
 require('./Response');
+require('./Reviewer');
 
 const Review = bookshelf.Model.extend({
   tableName: 'reviews',
@@ -21,6 +22,9 @@ const Review = bookshelf.Model.extend({
   },
   response: function() {
     return this.hasMany('Response');
+  },
+  reviewer: function() {
+    return this.belongsTo('Reviewer');
   }
 });
 
