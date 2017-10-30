@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import questionSet from '../../data/questionSet';
 import axios from 'axios';
-// import { Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 const find = (id) => questionSet.find(p => p.id === id);
@@ -9,7 +8,7 @@ const find = (id) => questionSet.find(p => p.id === id);
 class Questions extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       answer: '',
@@ -18,12 +17,11 @@ class Questions extends Component {
   }
 
   //submit question and answer to reviews route
-  handleSubmit(e, nextQuestion, question) {
+  handleAnswerSubmit(e) {
     e.preventDefault;
     const answer = this.state.answer;
-
     if (!answer) return false;
-    const questionText = find(Number(this.props.match.params.id) - 1).questionText;
+    const questionText = find(Number(this.props.match.params.question_id)).questionText;
     const questionType = 'question type from QuestionSet';
     const { reviewId } = this.props;
 
@@ -41,7 +39,7 @@ class Questions extends Component {
       this.setState({ submitResponse: true});
 
       // TODO update this.props.QuestionId here so it will be available to the next question (updateQuestionId is sent from parent component (Mission.js))
-      this.props.updateQuestionId(nextQuestion);
+      this.props.updateQuestionId(this.props.match.params.question_id);
     })
     .catch((err) => {
       console.log('response error', err);
@@ -53,45 +51,40 @@ class Questions extends Component {
   }
 
   render() {
-    console.log("props", this.props); // TODO review id and question id are not sticking on redirect
-    const { match } = this.props
-    // const question = find(Number(match.params.id) - 1)
-    let questionId = this.props.questionId;
+    // TODO review id and question id are not sticking on redirect
+    let questionId = Number(this.props.match.params.question_id);
     let question = find(questionId);
     let nextQuestion = questionId + 1;
-    console.log("question stuff:", questionId, question, nextQuestion);
 
     // set variables for next url
-    const mission = this.props.missionId;
-    const casefile = match.params.casefile_id;
-    const article = match.params.article_id;
+    const mission_id = this.props.missionId;
     const submitResponse = this.state.submitResponse;
+    const { casefile_id, article_id } = this.props.match.params;
 
     return (
       <div className="text-center">
-        <form onSubmit={(e) => this.handleSubmit(e, nextQuestion, question)}>
-          <h1>{question.questionText}</h1>
-          <input type="text" className="question--short"
-            defaultValue={this.state.answer}
-            onChange={this.handleInputChange}
-          />
-          { this.state.answer
-            ?
-              <button className="button Questions__submit-button">
-                Save and Continue
-              </button>
+        <h1>{question.questionText}</h1>
+        <input type="text" className="question--short"
+          defaultValue={this.state.answer}
+          onChange={this.handleInputChange}
+        />
 
-            :
-              <div className="button-inactive Questions__submit-button"
-                onClick={(e) => alert('Type your answer before continuing.')}
-                style={{display: 'table', margin: '20px auto'}}
-              > Type in your answer
-              </div>
-          }
+        { this.state.answer
+          ?
+            <button className="button Questions__submit-button"
+              onClick={this.handleAnswerSubmit} >
+              Save and Continue
+            </button>
 
-        </form>
+          :
+            <div className="button-inactive Questions__submit-button-inactive"
+              onClick={(e) => alert('Type your answer before continuing.')} >
+              Type in your answer
+            </div>
+        }
+
         {submitResponse && (
-          <Redirect to={`/mission/${mission}/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
+          <Redirect to={`/mission/${mission_id}/casefile/${casefile_id}/article/${article_id}/question/${nextQuestion}`}/>
         )}
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
 import Footer from './Footer';
@@ -16,7 +16,7 @@ class Mission extends Component {
       url: '',
       article: {},
       reviewId: '',
-      questionId: '',
+      questionId: 1,
       articleId: 1,
 
       missionId: this.props.match.params.id,
@@ -75,6 +75,7 @@ class Mission extends Component {
     return (
       <div style={articleContainer}>
         <div className="flex-column" style={bodyStyles}>
+          <Switch>
           <Route exact path="/mission/:id/casefile/:casefile_id/start" component={Start} />
           <Route exact path="/mission/:id/casefile/:casefile_id/team"
             render={() => <GroupNames updateReviewId={this.updateReviewId} updateQuestionId={this.updateQuestionId} {...this.props} {...missionState}/>}
@@ -82,11 +83,15 @@ class Mission extends Component {
           <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/preview"
             render={() => <ArticlePreview {...missionState} {...this.props} />}
           />
-          <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id"
-            //render={() => <Questions updateQuestionId={this.updateQuestionId} {...missionState} {...this.props} />}
-            render={() => <Questions updateArticleId={this.incrimentArticleId} {...missionState} {...this.props} />}
-
+          <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:question_id"
+            render={(props) => {
+              return <Questions {...this.props} {...missionState} {...props}
+                updateArticleId={this.incrimentArticleId}
+                updateQuestionId={this.updateQuestionId}
+              />
+            }}
           />
+        </Switch> 
         </div>
         <Footer {...this.props} />
       </div>
