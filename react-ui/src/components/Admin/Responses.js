@@ -15,7 +15,7 @@ class Responses extends React.Component {
   render() {
     return (
       <div>
-        <h1>responses</h1>
+        <h1>responses {this.props.match.params}</h1>
       </div>
     )
   }

@@ -21,12 +21,19 @@ class ReviewListItem extends React.Component {
     })
   }
   render() {
-  console.log("REVIEWLISTITEM props", this.props);
-
+    console.log("REVIEWLISTITEM props", this.props);
+    //{recipe.ingredient.join(",")}
+    console.log(this.state.members);
+    let groupid = this.props.group;
+    let mems = this.state.members.join(", ");
     return (
       <div>
         <tr key={this.props.id}>
-          <td>group name / also is link - {this.state.members}</td>
+          <td>
+            <Link to={`/admin/responses/${groupid}`}>
+              {mems}
+            </Link>
+          </td>
         </tr>
       </div>
     )
@@ -35,10 +42,3 @@ class ReviewListItem extends React.Component {
 
 
 export default ReviewListItem;
-
-// <ReviewListItem
-//   review={review}
-//   group={review.group_id}
-//   id={review.review_id}
-//   key={review.review_id}
-// />

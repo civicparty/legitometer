@@ -75,7 +75,7 @@ class Reviews extends React.Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Mission {this.props.mission_id} Groups</Table.HeaderCell>
-  \          </Table.Row>
+            </Table.Row>
           </Table.Header>
           <Table.Body>
             { this.state.review.map((review, i) => {
