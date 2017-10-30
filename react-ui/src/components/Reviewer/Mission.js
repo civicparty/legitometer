@@ -50,6 +50,7 @@ class Mission extends Component {
   updateQuestionId(questionId) {
     console.log("updating question id Mission.js", questionId);
     this.setState({ questionId: questionId });
+  }
 
   incrimentArticleId(articleId) {
     // TODO: call this at the end of the form.

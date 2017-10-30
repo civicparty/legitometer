@@ -22,11 +22,8 @@ class Questions extends Component {
     e.preventDefault;
     const answer = this.state.answer;
 
-//     const questionText = question.questionText;
-//     const questionType = question.type;
-
     if (!answer) return false;
-    const question = find(Number(this.props.match.params.id) - 1).questionText;
+    const questionText = find(Number(this.props.match.params.id) - 1).questionText;
     const questionType = 'question type from QuestionSet';
     const { reviewId } = this.props;
 
