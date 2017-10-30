@@ -15,7 +15,7 @@ class ArticlePreview extends Component {
         <h1>Start by opening the article below</h1>
         <p className="tip">We’ll open it in a new window so you can refer back to it.</p>
         <p><a className="article" href={url} target="_blank">{headline}</a></p>
-        <Link to={`/mission/${missionId}/casefile/${casefileId}/article/${articleId}/question/0`}>
+        <Link to={`/mission/${missionId}/casefile/${casefileId}/article/${articleId}/question/1`}>
           <Button text="Done! I’m ready to go" />
         </Link>
       </div>

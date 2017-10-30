@@ -299,6 +299,9 @@ p, .p {
   display: block;
   text-align: center;
   margin: 20px auto; }
+  .Questions__submit-button-inactive {
+    display: table;
+    margin: 20px auto; }
 
 html, body {
   width: 100%;

@@ -3,4 +3,8 @@
   display: block;
   text-align: center;
   margin: 20px auto;
+  &-inactive {
+    display: table;
+    margin: 20px auto;
+  }
 }
