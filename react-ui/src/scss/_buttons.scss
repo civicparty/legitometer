@@ -8,6 +8,7 @@
   border        : none;
   color         : $white;
   margin-top: 3rem;
+  cursor: pointer;
 }
 
 .button {
@@ -24,5 +25,16 @@
     @include button-background($white);
     color           : $black;
     border        : 1px solid $black;
+  }
+
+  &-inactive {
+    @include button;
+    background: $gray-light;
+    transition: all 0.1s ease-in-out;
+    color: $black;
+    &:hover {
+      background: darken($gray-light, 16%);
+      transition: all 0.2s ease-in-out;
+    }
   }
 }

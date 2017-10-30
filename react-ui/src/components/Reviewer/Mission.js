@@ -8,7 +8,7 @@ import ArticlePreview from './ArticlePreview';
 import GroupNames from './GroupNames';
 import Start from './Start';
 
-class Article extends Component {
+class Mission extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +17,8 @@ class Article extends Component {
       article: {},
       reviewId: '',
       questionId: '',
+      articleId: 1,
+
       missionId: this.props.match.params.id,
       casefileId: this.props.match.params.casefile_id,
     };
@@ -24,24 +26,16 @@ class Article extends Component {
     this.updateQuestionId = this.updateQuestionId.bind(this);
   }
 
-  getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-  }
-
   componentWillMount() {
     const { casefile_id } = this.props.match.params;
+    const { articleId } = this.state;
 
     axios.get(`/api/casefile/${casefile_id}/articles`)
       .then((res) => {
-        const randomId = this.getRandomIntInclusive(0, res.data.length - 1)
-        console.log("random article", res.data[randomId])
-
         this.setState({
-          article: res.data[randomId],
-          headline: res.data[randomId].headline,
-          url: res.data[randomId].url,
+          article: res.data[articleId],
+          headline: res.data[articleId].headline,
+          url: res.data[articleId].url,
         });
       })
       .catch((err) => {
@@ -56,6 +50,10 @@ class Article extends Component {
   updateQuestionId(questionId) {
     console.log("updating question id Mission.js", questionId);
     this.setState({ questionId: questionId });
+
+  incrimentArticleId(articleId) {
+    // TODO: call this at the end of the form.
+    this.setState({ articleId: articleId + 1 });
   }
 
   render() {
@@ -78,13 +76,15 @@ class Article extends Component {
         <div className="flex-column" style={bodyStyles}>
           <Route exact path="/mission/:id/casefile/:casefile_id/start" component={Start} />
           <Route exact path="/mission/:id/casefile/:casefile_id/team"
-            render={() => <GroupNames updateReviewId={this.updateReviewId} updateQuestionId={this.updateQuestionId} {...this.props} />}
+            render={() => <GroupNames updateReviewId={this.updateReviewId} updateQuestionId={this.updateQuestionId} {...this.props} {...missionState}/>}
           />
-          <Route exact path="/mission/:id/casefile/:casefile_id/article/preview"
-            render={() => <ArticlePreview {...missionState} />}
+          <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/preview"
+            render={() => <ArticlePreview {...missionState} {...this.props} />}
           />
           <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id"
-            render={() => <Questions updateQuestionId={this.updateQuestionId} {...missionState} {...this.props} />}
+            //render={() => <Questions updateQuestionId={this.updateQuestionId} {...missionState} {...this.props} />}
+            render={() => <Questions updateArticleId={this.incrimentArticleId} {...missionState} {...this.props} />}
+
           />
         </div>
         <Footer {...this.props} />
@@ -94,4 +94,4 @@ class Article extends Component {
 
 }
 
-export default Article;
+export default Mission;

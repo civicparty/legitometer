@@ -2,15 +2,11 @@
 
 Legit-o-Meter is an interactive digital learning tool for students and teachers to evaluate the legitimacy of online news. This app is part of the [Fake the News](https://fakenews.open-austin.org/unit1/Feb_26_wireframes.html) Project funded by Mozilla Hive ATX.
 
-A staged version of the site is hosted at: test.missionfake.news
+A staged version of the site is hosted at: legitornot-test.herokuapp.com
 
 ## Roadmap
 
-**Current Status:** Our team is actively developing a working prototype led by @rallyjinx and supported by @mateoclarke.
-
-**Milestones:**
-
-- March 28, 2017: Galvanize Capstone Presentation
+**Current Status:** Our team is actively developing a working prototype led by @rallyjinx, @mateoclarke, and @seandellis.
 
 ## Contributing
 
@@ -37,7 +33,7 @@ To get setup:
    - `createdb legit-o-meterdb`
    - Migrate and Seed the database
    - `knex migrate:latest`
-   - `knex seed:run `
+   - `knex seed:run`
 
 4. Run both the front-end React client app and the back-end Node server
   - Node/Express Back-end Server
@@ -46,7 +42,16 @@ To get setup:
     - `cd react-ui`
     - `npm start`
 
- ## Entity Relationship
+## Deploy
+
+1. Publish `master` branch.
+  - `git push heroku master`
+2. Run db migration on heroku (if necessary)
+  - `heroku run knex migrate:migrate --knexfile server/knexfile.js`
+  - _It might be necessary to Reset the database in the Heroku console. BUT this looses all the data_  
+  - `heroku run knex migrate:rollback --knexfile server/knexfile.js`
+
+## Entity Relationship
 [Link to image of object_model](https://cloud.githubusercontent.com/assets/5697474/24621501/4915c122-1867-11e7-960f-3a37c635f47b.JPG)
 
 

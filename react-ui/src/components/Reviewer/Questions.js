@@ -21,8 +21,15 @@ class Questions extends Component {
   handleSubmit(e, nextQuestion, question) {
     e.preventDefault;
     const answer = this.state.answer;
-    const questionText = question.questionText;
-    const questionType = question.type;
+
+//     const questionText = question.questionText;
+//     const questionType = question.type;
+
+    if (!answer) return false;
+    const question = find(Number(this.props.match.params.id) - 1).questionText;
+    const questionType = 'question type from QuestionSet';
+    const { reviewId } = this.props;
+
 
     // TODO review_id is not being saved to db
     // on question submits save review_id and question and answer to responses table
@@ -71,9 +78,20 @@ class Questions extends Component {
             defaultValue={this.state.answer}
             onChange={this.handleInputChange}
           />
-          <button className="button Questions__submit-button">
-            Save and Continue
-          </button>
+          { this.state.answer
+            ?
+              <button className="button Questions__submit-button">
+                Save and Continue
+              </button>
+
+            :
+              <div className="button-inactive Questions__submit-button"
+                onClick={(e) => alert('Type your answer before continuing.')}
+                style={{display: 'table', margin: '20px auto'}}
+              > Type in your answer
+              </div>
+          }
+
         </form>
         {submitResponse && (
           <Redirect to={`/mission/${mission}/casefile/${casefile}/article/${article}/question/${nextQuestion}`}/>
