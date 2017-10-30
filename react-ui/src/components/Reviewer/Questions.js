@@ -13,6 +13,7 @@ class Questions extends Component {
     this.state = {
       answer: '',
       submitResponse: false,
+      currentQuestionId: Number(this.props.match.params.question_id),
     };
   }
 
@@ -21,25 +22,29 @@ class Questions extends Component {
     e.preventDefault;
     const answer = this.state.answer;
     if (!answer) return false;
-    const questionText = find(Number(this.props.match.params.question_id)).questionText;
-    const questionType = 'question type from QuestionSet';
-    const { reviewId } = this.props;
-
+    const questionId = this.props.match.params.question_id;
+    const question = find(Number(questionId));
+    const questionText = question.questionText;
+    const questionType = question.type;
 
     // TODO review_id is not being saved to db
     // on question submits save review_id and question and answer to responses table
     axios.post('/api/add-response', {
-      review_id: this.props.reviewId,
+      reviewId: this.props.reviewId,
       question: questionText,
+      questionId: questionId,
       questionType: questionType,
       response: answer,
     })
     .then((res) => {
       console.log('response posted', res)
-      this.setState({ submitResponse: true});
-
-      // TODO update this.props.QuestionId here so it will be available to the next question (updateQuestionId is sent from parent component (Mission.js))
-      this.props.updateQuestionId(this.props.match.params.question_id);
+      const submittedQuestionId = Number(res.data.data.questionId);
+      this.props.updateQuestionId(submittedQuestionId);
+      this.setState({
+        submitResponse: true,
+        answer: '',
+        currentQuestionId: this.state.currentQuestionId + 1,
+      });
     })
     .catch((err) => {
       console.log('response error', err);
@@ -47,7 +52,9 @@ class Questions extends Component {
   }
 
   handleInputChange(e) {
-    this.setState({ answer: e.target.value })
+    this.setState({
+      answer: e.target.value,
+    });
   }
 
   render() {
@@ -58,14 +65,15 @@ class Questions extends Component {
 
     // set variables for next url
     const mission_id = this.props.missionId;
-    const submitResponse = this.state.submitResponse;
-    const { casefile_id, article_id } = this.props.match.params;
+    const { submitResponse, currentQuestionId} = this.state;
+    const { casefile_id, article_id, question_id } = this.props.match.params;
+    const skipToNext = submitResponse && (currentQuestionId === Number(question_id) + 1);
 
     return (
       <div className="text-center">
         <h1>{question.questionText}</h1>
         <input type="text" className="question--short"
-          defaultValue={this.state.answer}
+          value={this.state.answer}
           onChange={this.handleInputChange}
         />
 
@@ -83,14 +91,12 @@ class Questions extends Component {
             </div>
         }
 
-        {submitResponse && (
+        { skipToNext &&
           <Redirect to={`/mission/${mission_id}/casefile/${casefile_id}/article/${article_id}/question/${nextQuestion}`}/>
-        )}
+        }
       </div>
     );
   }
 }
-
-// <Route exact path="/mission/:id/casefile/:casefile_id/article/:article_id/question/:id" component={Questions} />
 
 export default Questions;

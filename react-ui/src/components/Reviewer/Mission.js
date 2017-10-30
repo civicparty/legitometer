@@ -48,8 +48,7 @@ class Mission extends Component {
   }
 
   updateQuestionId(questionId) {
-    console.log("updating question id Mission.js", questionId);
-    this.setState({ questionId: questionId });
+    this.setState({ questionId: questionId + 1 });
   }
 
   incrimentArticleId(articleId) {

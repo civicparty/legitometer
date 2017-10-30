@@ -28,7 +28,7 @@ router.get('/api/response/:review_id', (req, res, next) => {
 
 // add question and answer from a group's review
 router.post('/api/add-response', (req, res, next) => {
-  console.log("adding response", req.body.question, req.body.response, req.params.review_id);
+  console.log("adding response", req.body.question, req.body.response, req.body.reviewId);
   Response.forge({
     review_id: req.body.reviewId,
     question: req.body.question,
@@ -38,6 +38,7 @@ router.post('/api/add-response', (req, res, next) => {
   .save()
   .then((response) => {
     console.log("response success", response);
+    res.status(200).json({ data: { response, questionId: req.body.questionId }});
   })
   .catch((err) => {
     console.log("response error", err);
