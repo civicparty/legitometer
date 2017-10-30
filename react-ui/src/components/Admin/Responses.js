@@ -34,7 +34,8 @@ class Responses extends React.Component {
           <Table celled>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Mission {this.props.mission_id} Groups</Table.HeaderCell>
+                <Table.HeaderCell>Question</Table.HeaderCell>
+                <Table.HeaderCell>Answer</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>

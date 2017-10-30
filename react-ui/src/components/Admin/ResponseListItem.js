@@ -31,7 +31,10 @@ class ResponseListItem extends React.Component {
       <div>
         <tr key={this.props.id}>
           <td>
-            {this.props.question} - {this.props.response}
+            {this.props.question}
+          </td>
+          <td>
+            {this.props.response}
           </td>
         </tr>
       </div>
