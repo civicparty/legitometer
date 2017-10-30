@@ -51,10 +51,11 @@ class GroupNames extends Component {
 
   render() {
     const { id, casefile_id } = this.props.match.params;
+    const { articleId } = this.props;
     return (
       <div className="GroupNames">
         {this.state.submitGroup && (
-          <Redirect to={`/mission/${id}/casefile/${casefile_id}/article/preview`}/>
+          <Redirect to={`/mission/${id}/casefile/${casefile_id}/article/${articleId}/preview`}/>
         )}
         <form onSubmit={this.handleSubmit}>
           <h2>Who is on your team?</h2>
