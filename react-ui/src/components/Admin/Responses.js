@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
-// import { Button } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
+import ResponseListItem from './ResponseListItem';
 
 class Responses extends React.Component {
   constructor() {
@@ -11,11 +12,46 @@ class Responses extends React.Component {
     };
   }
 
+  componentDidMount() {
+      // get responses with review_id
+      axios.get(`/api/response/${this.props.match.params.review_id}`)
+      .then((res) => {
+        console.log("responses response", res.data);
+        // why does this work for Dashboard.js / missions and not this?
+        this.setState({ responses: res.data });
+      })
+      .catch((err) => {
+        console.log("Responses.js error", err);
+      })
+  }
 
   render() {
+    console.log("yay repsonses", this.props, this.state.responses);
+    let reviewid = this.props.match.params.review_id;
     return (
       <div>
-        <h1>responses {this.props.match.params}</h1>
+        <h1>responses! {reviewid}</h1>
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Mission {this.props.mission_id} Groups</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              { this.state.responses.map((response, i) => {
+                console.log("aaaaaa", response);
+                return (
+                <ResponseListItem
+                  response={response.response}
+                  question={response.question}
+                  questionType={response.questionType}
+                  id={response.id}
+                  key={response.id}
+                />
+                )
+              })}
+            </Table.Body>
+          </Table>
       </div>
     )
   }

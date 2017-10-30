@@ -24,13 +24,13 @@ class ReviewListItem extends React.Component {
     console.log("REVIEWLISTITEM props", this.props);
     //{recipe.ingredient.join(",")}
     console.log(this.state.members);
-    let groupid = this.props.group;
+    let reviewid = this.props.id;
     let mems = this.state.members.join(", ");
     return (
       <div>
         <tr key={this.props.id}>
           <td>
-            <Link to={`/admin/responses/${groupid}`}>
+            <Link to={`/admin/responses/${reviewid}`}>
               {mems}
             </Link>
           </td>

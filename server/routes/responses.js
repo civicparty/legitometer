@@ -7,11 +7,21 @@ const Response = require('../Models/Response.js');
 // display all the responses for a group's review
 router.get('/api/response/:review_id', (req, res, next) => {
   console.log("getting responses for review:", req.params.review_id);
+  let responseArr = [];
   Response.forge().where({review_id: req.params.review_id}).fetchAll()
   .then((responses) => {
-    console.log("fetched responses", responses);
     responses = responses.toJSON();
-    res.send(responses);
+    for (var i = 0; i < responses.length; i++) {
+      responseArr[i] = {
+        "question": responses[i].question,
+        "questionType": responses[i].questionType,
+        "response": responses[i].response,
+      }
+    }
+  
+    console.log("fetched responses", responseArr);
+    //Objects are not valid as a React child (found: object with keys {id, review_id, question, questionType, response, created_at, updated_at}).
+    res.send(responseArr);
   })
   .catch((err) => {
     console.log("error fetching responses", err);
