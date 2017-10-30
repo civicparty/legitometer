@@ -14,6 +14,11 @@ class ReviewListItem extends React.Component {
   componentDidMount() {
     // get group names
     console.log("component did mount, getting names for group:", this.props.group);
+    axios.get(`/api/groups/${this.props.group}`)
+    .then((members) => {
+      console.log("got group members!", members.data);
+      this.setState({ members: members.data });
+    })
   }
   render() {
   console.log("REVIEWLISTITEM props", this.props);
@@ -21,7 +26,7 @@ class ReviewListItem extends React.Component {
     return (
       <div>
         <tr key={this.props.id}>
-          <td>group name / also is link</td>
+          <td>group name / also is link - {this.state.members}</td>
         </tr>
       </div>
     )

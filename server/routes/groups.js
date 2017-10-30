@@ -25,7 +25,7 @@ router.get('/api/groups', (req, res, next) => {
     })
 })
 
-// get all group members
+// get all group members 
 router.get('/api/groups/:id', (req, res, next) => {
   Reviewer.forge().where({group_id: req.params.id}).fetchAll()
   .then((members) => {
