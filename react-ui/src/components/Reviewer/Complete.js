@@ -11,7 +11,8 @@ class Complete extends React.Component {
   render() {
     return (
       <div>
-        <p>yay!</p>
+        <p>Yay! You're done!</p>
+        <p>Another article?</p>
       </div>
     )
   }

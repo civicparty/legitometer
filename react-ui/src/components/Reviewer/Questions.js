@@ -68,7 +68,7 @@ class Questions extends Component {
     const { casefile_id, article_id, question_id } = this.props.match.params;
     const skipToNext = submitResponse && (currentQuestionId === Number(question_id) + 1);
     console.log("skiptonext", skipToNext, currentQuestionId);
-    const done = submitResponse && (currentQuestionId === 20);
+    const done = submitResponse && (currentQuestionId > 20);
 
       // break;)
 
