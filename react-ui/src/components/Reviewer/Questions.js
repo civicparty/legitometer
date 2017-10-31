@@ -27,7 +27,6 @@ class Questions extends Component {
     const questionText = question.questionText;
     const questionType = question.type;
 
-    // TODO review_id is not being saved to db
     // on question submits save review_id and question and answer to responses table
     axios.post('/api/add-response', {
       reviewId: this.props.reviewId,

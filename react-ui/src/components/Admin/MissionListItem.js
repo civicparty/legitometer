@@ -49,7 +49,7 @@ class MissionListItem extends React.Component {
           <Button type="button" onClick={this.handleDelete} basic color="red">
             Delete
           </Button>
-          <Link to={`/admin/reviews/${missionId}`}>
+          <Link to={`/admin/reviews/${missionId}`} className="ui button purple">
             Review
           </Link>
         </td>
