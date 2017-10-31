@@ -7,6 +7,7 @@ import Questions from './Questions';
 import ArticlePreview from './ArticlePreview';
 import GroupNames from './GroupNames';
 import Start from './Start';
+import Complete from './Complete';
 
 class Mission extends Component {
   constructor(props) {
@@ -90,6 +91,7 @@ class Mission extends Component {
               />
             }}
           />
+          <Route exact path="/mission/complete" component={Complete}/>
         </Switch> 
         </div>
         <Footer {...this.props} />

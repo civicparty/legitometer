@@ -67,6 +67,10 @@ class Questions extends Component {
     const { submitResponse, currentQuestionId} = this.state;
     const { casefile_id, article_id, question_id } = this.props.match.params;
     const skipToNext = submitResponse && (currentQuestionId === Number(question_id) + 1);
+    console.log("skiptonext", skipToNext, currentQuestionId);
+    const done = submitResponse && (currentQuestionId === 20);
+
+      // break;)
 
     return (
       <div className="text-center">
@@ -90,8 +94,11 @@ class Questions extends Component {
             </div>
         }
 
-        { skipToNext &&
+        { skipToNext && !done &&
           <Redirect to={`/mission/${mission_id}/casefile/${casefile_id}/article/${article_id}/question/${nextQuestion}`}/>
+        }
+        { skipToNext && done &&
+          <Redirect to={`/mission/complete`}/>
         }
       </div>
     );
